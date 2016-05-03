@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+	<form id="uploadForm" enctype="multipart/form-data">
+		<input id="file1" type="file" name="file1"/>
+		<input id="file2" type="file" name="file2"/>
+		<input id="file3" type="file" name="file3"/>
+		<div onclick="upload()">shangchuan</div>
+	</form>
+	<script type="text/javascript">
+		function upload(){
+			var mydata = new FormData($('#uploadForm')[0]);
+
+			// 注意上面三个文件的id,name,以及下面的append函数中的参数，最好一样，以防出错
+			// 注意创建FormData对象的时候，必须把第一个文件当做参数传进去，其他两个文件必须用append函数添加
+			// 我也不知道为什么，我试出来就是这样，三个文件如果全部用append方式添加就会导致失败 =_=...
+
+			// 注意项目图标要作为第一个文件
+
+			mydata.append("file2",$('#uploadForm')[1]);
+			mydata.append("file3",$('#uploadForm')[2]);
+
+			// 下面随便传一些基本参数，即可以替换为项目的标题，简介之类的
+			mydata.append("mode",7);
+			mydata.append("water","seven");
+			mydata.append("proj","abcd");
+
+			$.ajax({
+				url:'/weshare/test/test.php',
+				type:'POST',
+				cache:false,
+				data:mydata,
+				processData:false,
+				contentType:false
+			}).done(function(res){
+
+			}).fail(function(res){
+
+			});
+		}
+	</script>
+</body>
+</html>
