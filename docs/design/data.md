@@ -3,62 +3,72 @@
 
 
 ## 一.　数据设计草稿 ##
+// 省略表示每张表默认的_id索引
 
 ### 1-1.　用户数据 ###
 <table>
     <tr>
         <td width="15%"><strong>字段名</strong></td>
-        <td width="15%"><strong>类型</strong></td>
-        <td width="25%"><strong>特性</strong></td>
         <td width="15%"><strong>备注</strong></td>
+        <td width="15%"><strong>索引</strong></td>
+        <td width="15%"><strong>类型</strong></td>
+        <td width="40%"><strong>说明</strong></td>
     </tr>
     <tr>
         <td width="15%">userid</td>
-        <td width="15%">varchar(16)</td>
-        <td width="25%">not null,unique</td>
-        <td width="15%">学号</td>
+        <td width="15%">用户名</td>
+        <td width="15">unique key</td>
+        <td width="15%">string</td>
+        <td width="40%">一般选择学号</td>
     </tr>
     <tr>
         <td width="15%">password</td>
-        <td width="15%">char(32)</td>
-        <td width="25%">not null</td>
-        <td width="15%">密文密码</td>
+        <td width="15%">密码</td>
+        <td width="15"></td>
+        <td width="15%">string</td>
+        <td width="40%">加密后的密文</td>
     </tr>
     <tr>
         <td width="15%">realname</td>
-        <td width="15%">varchar(16)</td>
-        <td width="25%">not null</td>
-        <td width="15%">真实名字</td>
+        <td width="15%">真实姓名</td>
+        <td width="15"></td>
+        <td width="15%">string</td>
+        <td width="40%">默认为""</td>
     </tr>
     <tr>
         <td width="15%">sex</td>
-        <td width="15%">tinyint(1)</td>
-        <td width="25%">unsigned,not null,default 0</td>
         <td width="15%">性别</td>
+        <td width="15"></td>
+        <td width="15%">integer</td>
+        <td width="40%">0表示未知，1表示男，2表示女，3表示秀吉。默认为0。</td>
     </tr>
     <tr>
         <td width="15%">department</td>
-        <td width="15%">varchar(32)</td>
-        <td width="25%">not null</td>
         <td width="15%">院系</td>
+        <td width="15"></td>
+        <td width="15%">string</td>
+        <td width="40%">默认为""</td>
     </tr>
     <tr>
         <td width="15%">registtime</td>
-        <td width="15%">int(11)</td>
-        <td width="25%">unsigned,not null</td>
         <td width="15%">注册时间</td>
+        <td width="15"></td>
+        <td width="15%">integer</td>
+        <td width="40%">unix时间戳</td>
     </tr>
     <tr>
         <td width="15%">historyscore</td>
-        <td width="15%">int(11)</td>
-        <td width="25%">unsigned,not null,default 0</td>
         <td width="15%">历史贡献度</td>
+        <td width="15"></td>
+        <td width="15%">integer</td>
+        <td width="40%">默认为0</td>
     </tr>
     <tr>
         <td width="15%">currentscore</td>
-        <td width="15%">int(11)</td>
-        <td width="25%">unsigned,not null,default 0</td>
         <td width="15%">近期贡献度</td>
+        <td width="15"></td>
+        <td width="15%">integer</td>
+        <td width="40%">默认为0</td>
     </tr>
 </table>
 <br/>
@@ -68,154 +78,148 @@
     <tr>
         <td width="15%"><strong>字段名</strong></td>
         <td width="15%"><strong>备注</strong></td>
-        <td width="50%"><strong>类型</strong></td>
+        <td width="15%"><strong>索引</strong></td>
+        <td width="15%"><strong>类型</strong></td>
+        <td width="40%"><strong>说明</strong></td>
     </tr>
     <tr>
         <td width="15%">projectname</td>
         <td width="15%">项目名称</td>
-        <td width="50%">string</td>
+        <td width="15%"></td>
+        <td width="15%">string</td>
+        <td width="40%"></td>
     </tr>
     <tr>
         <td width="15%">initiator</td>
-        <td width="15%">发起人的学号</td>
-        <td width="50%">string</td>
+        <td width="15%">发起人的用户名</td>
+        <td width="15%"></td>
+        <td width="15%">string</td>
+        <td width="40%"></td>
     </tr>
     <tr>
         <td width="15%">realname</td>
         <td width="15%">发起人的姓名</td>
-        <td width="50%">string</td>
+        <td width="15"></td>
+        <td width="15%">string</td>
+        <td width="40%"></td>
     </tr>
     <tr>
         <td width="15%">labels</td>
         <td width="15%">标签组</td>
-        <td width="50%">like ["label1","label2","label3"]</td>
+        <td width="15%"></td>
+        <td width="15%">string</td>
+        <td width="40%">like ["label1","label2","label3"...]，默认为[ ]</td>
     </tr>
     <tr>
         <td width="15%">icon</td>
         <td width="15%">项目图标的地址</td>
-        <td width="50%">string</td>
+        <td width="15%"></td>
+        <td width="15%">string</td>
+        <td width="40%">不是用户上传时的文件名，而是实际存储到服务端的图片地址，默认为null</td>
     </tr>
     <tr>
         <td width="15%">introduction</td>
         <td width="15%">项目简介</td>
-        <td width="50%">string</td>
+        <td width="15"></td>
+        <td width="15%">string</td>
+        <td width="40">默认为""</td>
     </tr>
     <tr>
         <td width="15%">docs</td>
-        <td width="15%">文档</td>
-        <td width="50%">
-            like [{"计划书.txt",1445599887,"xx.txt"},{...},...],其中"计划书.txt"是文档名,1445599887是该文档发布时间戳,"xx.txt"是实际存储的位置
+        <td width="15%">文件</td>
+        <td width="15%"></td>
+        <td width="15">an array of json</td>
+        <td width="40%">
+            like [{"计划书.txt",1445599887,"xx.txt"},{...},...],其中"计划书.txt"是文档名,1445599887是该文档发布时间戳,"xx.txt"是实际存储的位置。默认为[ ]
         </td>
     </tr>
     <tr>
         <td width="15%">advice</td>
         <td width="15%">建议</td>
-        <td width="50%">
-            like [{"71114336",1445599887,"balabala",false},{...},...],其中"71114336"是提建议者的学号,1445599887是该建议的时间,"balabala"是建议的内 容,false代表该条建议还没被采纳,若是true则表示已经被采纳
+        <td width="15%"></td>
+        <td widht="15%">an array of json</td>
+        <td width="40%">
+            like [{"71114336",1445599887,"balabala",false},{...},...],其中"71114336"是提建议者的学号,1445599887是该建议的时间,"balabala"是建议的内 容,false代表该条建议还没被采纳,若是true则表示已经被采纳。默认为[ ]
         </td>
     </tr>
-</table>
-<br/>
-
-### 1-3.　个人项目活跃数据 ###
-<table>
     <tr>
-        <td width="15%"><strong>字段名</strong></td>
-        <td width="15%"><strong>类型</strong></td>
-        <td width="25%"><strong>特性</strong></td>
-        <td width="15%"><strong>备注</strong></td>
-    </tr>
-    <tr>
-        <td width="15%">userid</td>
-        <td width="15%">varchar(16)</td>
-        <td width="25%">not null,Btree_key</td>
-        <td width="15%">用户id</td>
-    </tr>
-    <tr>
-        <td width="15%">date</td>
-        <td width="15%">int(11)</td>
-        <td width="25%">unsigned,not null</td>
-        <td width="15%">日期,形如20160502</td>
-    </tr>
-    <tr>
-        <td width="15%">contribution</td>
-        <td width="15%">tinyint(2)</td>
-        <td width="25%">unsigned,not null,default 1</td>
-        <td width="15%">该天更新次数</td>
+        <td width="15%">comments</td>
+        <td width="15%">评论</td>
+        <td width="15%"></td>
+        <td width="15%">an array of json</td>
+        <td width="40%">like [{1,0,"71114336",1445599887,"balabala"},{2,1,"09013125",1465433221,"xxx"}]。比如其中的第一个json对象，1是该条评论的id(每个项目的第一条评论的id默认是1)，0是该条评论的父评论的id(每个项目的第一条评论的父评论id默认为0)，"71114336"是评论者的用户名，1445599887是该条评论的时间戳，"balabala"是该条评论的内容。其中第二个json对象，2是它的id，1是它的父评论id(表示这条评论是第一条评论的评论，评论嵌套)。默认为[ ]</td>
     </tr>
 </table>
 <br/>
 
-### 1-4.　投票中的项目数据 ###
+### 1-3.　投票中的项目数据 ###
 <table>
     <tr>
         <td width="15%"><strong>字段名</strong></td>
-        <td width="15%"><strong>类型</strong></td>
-        <td width="25%"><strong>特性</strong></td>
         <td width="15%"><strong>备注</strong></td>
+        <td width="15%"><strong>索引</strong></td>
+        <td width="15%"><strong>类型</strong></td>
+        <td width="40%"><strong>说明</strong></td>
     </tr>
     <tr>
         <td width="15%">id</td>
-        <td width="15%">char(24)</td>
-        <td width="25%">not null,unique</td>
         <td width="15%">项目id</td>
+        <td width="15%">unique key</td>
+        <td width="15%">string</td>
+        <td width="40%">为项目表中自动生成的_id的值</td>
     </tr>
     <tr>
         <td width="15%">score</td>
-        <td width="15%">int(11)</td>
-        <td width="25%">unsigned,not null,default 0</td>
         <td width="15%">票数</td>
+        <td width="15%"></td>
+        <td width="15%">integer</td>
+        <td width="40%">默认为0</td>
     </tr>
 </table>
 <br/>
 
-### 1-5.　项目评论数据 ###
+### 1-4.　个人项目活跃数据 ###
 <table>
     <tr>
         <td width="15%"><strong>字段名</strong></td>
-        <td width="15%"><strong>类型</strong></td>
-        <td width="25%"><strong>特性</strong></td>
         <td width="15%"><strong>备注</strong></td>
-    </tr>
-    <tr>
-        <td width="15%">id</td>
-        <td width="15%">int(11)</td>
-        <td width="25%">unsigned,not null,auto_increment,primary_key</td>
-        <td width="15%">主键</td>
-    </tr>
-    <tr>
-        <td width="15%">projectid</td>
-        <td width="15%">char(24)</td>
-        <td width="25%">not null,Btree_key</td>
-        <td width="15%">项目id</td>
-    </tr>
-    <tr>
-        <td width="15%">parentid</td>
-        <td width="15%">int(11)</td>
-        <td width="25%">unsigned,not null,default 0</td>
-        <td width="15%">父评论的主键</td>
+        <td width="15%"><strong>索引</strong></td>
+        <td width="15%"><strong>类型</strong></td>
+        <td width="40%"><strong>说明</strong></td>
     </tr>
     <tr>
         <td width="15%">userid</td>
-        <td width="15%">varchar(16)</td>
-        <td width="25%">not null</td>
-        <td width="15%">评论者用户id</td>
+        <td width="15%">用户名</td>
+        <td width="15%">普通Btree-key</td>
+        <td width="15%">string</td>
+        <td width="40%"></td>
     </tr>
     <tr>
-        <td width="15%">commenttime</td>
-        <td width="15%">int(11)</td>
-        <td width="25%">unsigned,not null</td>
-        <td width="15%">评论时间戳</td>
+        <td width="15%">date</td>
+        <td width="15%">日期</td>
+        <td width="15%"></td>
+        <td width="15%">integer</td>
+        <td width="40%">形如20160513，是日期字符串的整数形式</td>
     </tr>
     <tr>
-        <td width="15%">content</td>
-        <td width="15%">varchar(512)</td>
-        <td width="25%">not null</td>
-        <td width="15%">评论内容</td>
+        <td width="15%">contribution</td>
+        <td width="15%">该天贡献</td>
+        <td width="15%"></td>
+        <td width="15%">integer</td>
+        <td width="40%">该天更新次数，默认为1(当插入的时候)</td>
     </tr>
 </table>
 <br/>
 
 
 ## 二.　数据目前结构 ##
+<br/>
+
+## 三. 数据库ER图 ##
+<br/>
+
+## 四. 数据分布式 ##
+<br/>
+
+## 五. 缓存设计 ##
 <br/>
