@@ -123,6 +123,11 @@
         <td width="15%">近期贡献度</td>
         <td width="50%">当response.result=true，该字段才存在</td>
     </tr>
+    <tr>
+        <td width="15%">response.info.token</td>
+        <td width="15%">下一次进行敏感操作时的令牌</td>
+        <td width="50%">当response.result=true，该字段才存在</td>
+    </tr>
 </table>
 <br/>
 
@@ -145,6 +150,11 @@
         <td width="15%">新密码</td>
         <td width="50%">明文是长度为6~18的字符串，只能数字字母下划线，请求的时候md5加密</td>
     </tr>
+    <tr>
+        <td width="15%">token</td>
+        <td width="15%">令牌</td>
+        <td width="50%">在上一次的xx请求成功后，会返回一个令牌，你需要记下它并在这里使用它</td>
+    </tr>
 </table>
 ### response: ###
 <table>
@@ -157,6 +167,11 @@
         <td width="15%">response.result</td>
         <td width="15%">结果状态</td>
         <td width="50%">0表示成功，1表示未登陆，2表示格式错误，3表示原密码错误</td>
+    </tr>
+    <tr>
+        <td width="15%">response.token</td>
+        <td width="15%">下一次进行敏感操作时的令牌</td>
+        <td width="50%">当response.result=true，该字段才存在</td>
     </tr>
 </table>
 <br/>
@@ -171,11 +186,6 @@
         <td width="50%">说明</td>
     </tr>
     <tr>
-        <td width="15%">realname</td>
-        <td width="15%">真实姓名</td>
-        <td width="50%">长度不超过16字节的字符串，不能为空</td>
-    </tr>
-    <tr>
         <td width="15%">sex</td>
         <td width="15%">性别</td>
         <td width="50%">0表示未知，1表示男，2表示女，3表示秀吉</td>
@@ -184,6 +194,11 @@
         <td width="15%">department</td>
         <td width="15%">院系</td>
         <td width="50%">长度不超过32字节的字符串，不能为空</td>
+    </tr>
+    <tr>
+        <td width="15%">token</td>
+        <td width="15%">令牌</td>
+        <td width="50%">在上一次的xx请求成功后，会返回一个令牌，你需要记下它并在这里使用它</td>
     </tr>
 </table>
 ### response: ###
@@ -197,6 +212,11 @@
         <td width="15%">response.result</td>
         <td width="15%">结果状态</td>
         <td width="50%">0表示成功，1表示未登陆，2表示参数格式错误</td>
+    </tr>
+    <tr>
+        <td width="15%">response.token</td>
+        <td width="15%">下一次进行敏感操作时的令牌</td>
+        <td width="50%">当response.result=true，该字段才存在</td>
     </tr>
 </table>
 <br/>
@@ -225,6 +245,11 @@
         <td width="15%">项目简介</td>
         <td width="50%">长度不超过1000字节（即500汉字）的字符串，不能为空</td>
     </tr>
+    <tr>
+        <td width="15%">token</td>
+        <td width="15%">令牌</td>
+        <td width="50%">在上一次的xx请求成功后，会返回一个令牌，你需要记下它并在这里使用它</td>
+    </tr>
 </table>
 // 附带传输的项目图标文件以及其他文档的一次性传参方法，参考testsubmit.html
 ### response: ###
@@ -238,6 +263,11 @@
         <td width="15%">response.result</td>
         <td width="15%">结果状态</td>
         <td width="50%">0表示成功，1表示未登陆，2表示项目名称或者简介为空了</td>
+    </tr>
+    <tr>
+        <td width="15%">response.token</td>
+        <td width="15%">下一次进行敏感操作时的令牌</td>
+        <td width="50%">当response.result=true，该字段才存在</td>
     </tr>
 </table>
 <br/>
