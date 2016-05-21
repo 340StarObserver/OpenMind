@@ -6,14 +6,20 @@
 // 省略表示每张表默认的_id索引
 
 ### 1-1.　用户数据 ###
-* 片键 ： { userid : 1 },unique
-* 索引 ： { userid : 1 },unique
+* 片键 ： { userhash : hashed }
+* 索引 ： { userhash : hashed }
 <table>
     <tr>
         <td width="15%"><strong>字段名</strong></td>
         <td width="15%"><strong>备注</strong></td>
         <td width="15%"><strong>类型</strong></td>
         <td width="55%"><strong>说明</strong></td>
+    </tr>
+    <tr>
+        <td width="15%">userhash</td>
+        <td width="15%">用户名的哈希值</td>
+        <td width="15%">string</td>
+        <td width="55%"></td>
     </tr>
     <tr>
         <td width="15%">userid</td>
@@ -31,7 +37,7 @@
         <td width="15%">realname</td>
         <td width="15%">真实姓名</td>
         <td width="15%">string</td>
-        <td width="55%">默认为""</td>
+        <td width="55%"></td>
     </tr>
     <tr>
         <td width="15%">sex</td>
@@ -69,6 +75,7 @@
 ### 1-2.　项目数据 ###
 * 片键 : { initiator : 1}
 * 索引 : { initiator : 1, _id : 1 }
+* 索引 : { initiator : 1, pubyear : 1, pubmonth : 1 }
 <table>
     <tr>
         <td width="15%"><strong>字段名</strong></td>
@@ -93,6 +100,24 @@
         <td width="15%">发起人的姓名</td>
         <td width="15%">string</td>
         <td width="55%"></td>
+    </tr>
+    <tr>
+        <td width="15%">pubyear</td>
+        <td width="15%">发布时间年份</td>
+        <td width="15%">integer</td>
+        <td width="55%"></td>
+    </tr>
+    <tr>
+        <td width="15%">pubmonth</td>
+        <td width="15%">发布时间月份</td>
+        <td width="15%">integer</td>
+        <td width="55%"></td>
+    </tr>
+    <tr>
+        <td width="15%">pubtime</td>
+        <td width="15%">发布时间</td>
+        <td width="15%">integer</td>
+        <td width="55%">unix时间戳</td>
     </tr>
     <tr>
         <td width="15%">labels</td>
@@ -138,8 +163,8 @@
 <br/>
 
 ### 1-3.　投票中的项目数据 ###
-* 片键 : { id : 1 },unique
-* 索引 : { id : 1 },unique
+* 片键 : { id : hashed }
+* 索引 : { id : hashed }
 <table>
     <tr>
         <td width="15%"><strong>字段名</strong></td>
@@ -163,8 +188,8 @@
 <br/>
 
 ### 1-4.　个人项目活跃数据 ###
-* 片键 : { userid : 1 }
-* 索引 : { userid : 1, date : 1 }
+* 片键 : { month : 1, userid : 1 }
+* 索引 : { month : 1, userid : 1, year : 1, day : 1 }
 <table>
     <tr>
         <td width="15%"><strong>字段名</strong></td>
@@ -179,10 +204,22 @@
         <td width="55%"></td>
     </tr>
     <tr>
-        <td width="15%">date</td>
-        <td width="15%">日期</td>
+        <td width="15%">year</td>
+        <td width="15%">年</td>
         <td width="15%">integer</td>
-        <td width="55%">形如20160513，是日期字符串的整数形式</td>
+        <td width="55%"></td>
+    </tr>
+    <tr>
+        <td width="15%">month</td>
+        <td width="15%">月</td>
+        <td width="15%">integer</td>
+        <td width="55%"></td>
+    </tr>
+    <tr>
+        <td width="15%">day</td>
+        <td width="15%">日</td>
+        <td width="15%">integer</td>
+        <td width="55%"></td>
     </tr>
     <tr>
         <td width="15%">contribution</td>
