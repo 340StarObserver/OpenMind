@@ -1,3 +1,3 @@
 # weshare
-a platform for students to release their ideas,projects,technology harvests  
+a platform for many students to release their ideas,projects,technology harvests  
 detail information wait to be writen...
