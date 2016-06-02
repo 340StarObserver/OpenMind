@@ -6,20 +6,14 @@
 // 省略表示每张表默认的_id索引
 
 ### 1-1.　用户数据 ###
-* 片键 ： { userhash : hashed }
-* 索引 ： { userhash : hashed }
+* 片键 ： { userid : hashed }
+* 索引 ： { userid : hashed }
 <table>
     <tr>
         <td width="15%"><strong>字段名</strong></td>
         <td width="15%"><strong>备注</strong></td>
         <td width="15%"><strong>类型</strong></td>
         <td width="55%"><strong>说明</strong></td>
-    </tr>
-    <tr>
-        <td width="15%">userhash</td>
-        <td width="15%">用户名的哈希值</td>
-        <td width="15%">string</td>
-        <td width="55%"></td>
     </tr>
     <tr>
         <td width="15%">userid</td>
@@ -73,9 +67,9 @@
 <br/>
 
 ### 1-2.　项目数据 ###
-* 片键 : { initiator : 1}
-* 索引 : { initiator : 1, _id : 1 }
-* 索引 : { initiator : 1, pubyear : 1, pubmonth : 1 }
+* 片键 : { shard : 1, author : 1}
+* 索引 : { shard : 1, author : 1, _id : 1 }
+* 索引 : { shard : 1, author : 1, pubyear : 1, pubmonth : 1 }
 <table>
     <tr>
         <td width="15%"><strong>字段名</strong></td>
@@ -90,7 +84,7 @@
         <td width="55%"></td>
     </tr>
     <tr>
-        <td width="15%">initiator</td>
+        <td width="15%">author</td>
         <td width="15%">发起人的用户名</td>
         <td width="15%">string</td>
         <td width="55%"></td>
@@ -100,6 +94,12 @@
         <td width="15%">发起人的姓名</td>
         <td width="15%">string</td>
         <td width="55%"></td>
+    </tr>
+    <tr>
+        <td width="15%">shard</td>
+        <td width="15%">片键的一部分( 人为定义的字段，为了数据均衡 )</td>
+        <td width="15%">integer</td>
+        <td width="55%">比如日期是2016-05-02，那么shard=(2+1)×(0+1)×(1+1)×(6+1)×05</td>
     </tr>
     <tr>
         <td width="15%">pubyear</td>
@@ -114,10 +114,10 @@
         <td width="55%"></td>
     </tr>
     <tr>
-        <td width="15%">pubtime</td>
-        <td width="15%">发布时间</td>
+        <td width="15%">pubday</td>
+        <td width="15%">发布时间几号</td>
         <td width="15%">integer</td>
-        <td width="55%">unix时间戳</td>
+        <td width="55%"></td>
     </tr>
     <tr>
         <td width="15%">labels</td>
@@ -188,8 +188,8 @@
 <br/>
 
 ### 1-4.　个人项目活跃数据 ###
-* 片键 : { month : 1, userid : 1 }
-* 索引 : { month : 1, userid : 1, year : 1, day : 1 }
+* 片键 : { shard : 1, userid : 1 }
+* 索引 : { shard : 1, userid : 1, year : 1, month : 1 }
 <table>
     <tr>
         <td width="15%"><strong>字段名</strong></td>
@@ -204,6 +204,12 @@
         <td width="55%"></td>
     </tr>
     <tr>
+        <td width="15%">shard</td>
+        <td width="15%">片键的一部分( 人为定义的字段，为了数据均衡 )</td>
+        <td width="15%">integer</td>
+        <td width="55%">比如日期是2016-05-02，那么shard=(2+1)×(0+1)×(1+1)×(6+1)×05</td>
+    </tr>
+    <tr>
         <td width="15%">year</td>
         <td width="15%">年</td>
         <td width="15%">integer</td>
@@ -216,16 +222,10 @@
         <td width="55%"></td>
     </tr>
     <tr>
-        <td width="15%">day</td>
-        <td width="15%">日</td>
-        <td width="15%">integer</td>
-        <td width="55%"></td>
-    </tr>
-    <tr>
-        <td width="15%">contribution</td>
-        <td width="15%">该天贡献</td>
-        <td width="15%">integer</td>
-        <td width="55%">该天更新次数，默认为1(当插入的时候)</td>
+        <td width="15%">contributions</td>
+        <td width="15%">该月贡献</td>
+        <td width="15%">an array of json</td>
+        <td width="55%">like [ { 1, 1 }, { 7, 3 } ]，其中每个json对象的第一个属性是几号，第二个属性是该天的贡献值。</td>
     </tr>
 </table>
 <br/>
