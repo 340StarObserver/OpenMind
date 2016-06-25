@@ -119,6 +119,12 @@
         <td width="55%">不是用户上传时的文件名，而是实际存储到服务端的图片地址，默认为null</td>
     </tr>
     <tr>
+        <td width="15%">link</td>
+        <td width="15%">可选项目链接</td>
+        <td width="15%">string</td>
+        <td width="55%">比方说链接到该项目的github的地址，默认为null</td>
+    </tr>
+    <tr>
         <td width="15%">introduction</td>
         <td width="15%">项目简介</td>
         <td width="15%">string</td>
