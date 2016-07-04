@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## weshare -- 学院学生项目发布与技术收获分享平台 ##
 <br/>
 
@@ -69,8 +68,3 @@
 
 ## 四. 部署说明 ##
 <br/>
-=======
-# weshare
-a platform for many students to release their ideas,projects,technology harvests  
-detail information wait to be writen...
->>>>>>> 7daa47a30de9bf78b025288320458cdea28b1702
