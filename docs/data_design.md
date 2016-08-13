@@ -144,7 +144,7 @@
         索引 ： { _id : 1 }  
         
         {  
-            "_id" : 对应project_info中的某个记录的_id,  
+            "_id"          : 对应project_info中的某个记录的_id,  
             
             "proj_name"    : 项目名称,  
             
@@ -165,5 +165,5 @@
             
             "introduction" : 项目简介,  
             
-            "score" : 票数（默认为0）  
+            "score"        : 票数（默认为0）  
         }  
