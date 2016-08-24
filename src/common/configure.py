@@ -3,7 +3,7 @@
 
 # Author 		: 	Lv Yang
 # Created 		: 	21 August 2016
-# Modified 		: 	21 August 2016
+# Modified 		: 	22 August 2016
 # Version 		: 	1.0
 
 """
@@ -21,7 +21,7 @@ def read(filename):
     the parameter is the path of file
     it returns a dictionary of pairs of <key,value>
     """
-    res = {'oss':{}}
+    res = {'oss':{},'mongo':{}}
     config = ConfigParser.ConfigParser()
     try:
         config.read(filename)
@@ -29,8 +29,12 @@ def read(filename):
         res['oss']['access_key'] = config.get('oss','access_key')
         res['oss']['end_point'] = config.get('oss','end_point')
         res['oss']['bucket_name'] = config.get('oss','bucket_name')
-        res['oss']['shared_dir']=config.get('oss','shared_dir')
-        res['oss']['static_dir']=config.get('oss','static_dir')
+        res['oss']['shared_dir'] = config.get('oss','shared_dir')
+        res['oss']['static_dir'] = config.get('oss','static_dir')
+        res['mongo']['host'] = config.get('mongo','host')
+        res['mongo']['db_name'] = config.get('mongo','db_name')
+        res['mongo']['db_user'] = config.get('mongo','db_user')
+        res['mongo']['db_pwd'] = config.get('mongo','db_pwd')
     except Exception,e:
         print "fail to read configuration from %s"%(filename)
         print str(e)
