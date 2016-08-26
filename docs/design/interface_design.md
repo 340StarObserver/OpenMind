@@ -82,7 +82,8 @@
         
         请求体  
         
-            请求体中有哪些数据，参见 docs/cs_require.md 中的第10项  
+            请求体中有哪些数据，参见 docs/require/cs_require.md 中的第10项，  
+            并结合 docs/design/data_design.md 中的 project_info  
             
             请求体如何构造，参见 test/upload.html  
             
@@ -245,7 +246,14 @@
                 
                 labels       : [ 标签1, 标签2, ... ],  
                 
-                link         : 链接,  
+                links        :  
+                [  
+                    { address : "bilibili.com", description : xxxx },  
+                    { address : "bilibili.com", description : xxxx }  
+                ]  
+                # 多个可选链接  
+                # address      为某个链接的地址  
+                # description  为这个链接的描述  
                 
                 introduction : 项目简介,  
                 
@@ -328,7 +336,12 @@
                         
                         labels       : [ 标签1, 标签2, ... ],  
                         
-                        link         : 链接,  
+                        links        :  
+                        [  
+                            { address : "bilibili.com", description : xxxx },  
+                            { address : "bilibili.com", description : xxxx }  
+                        ]  
+                        # 多个可选链接  
                         
                         introduction : 项目简介,  
                         
@@ -362,9 +375,8 @@
                 active_info :  
                 [  
                     {  
-                        year : 哪一年,  
-                        
                         month : 哪一月,  
+                        # 形如 201608  
                         
                         # 该年该月中各天的活跃度  
                         active :  
@@ -393,9 +405,10 @@
             {  
                 action_id  : 9,  
             
-                year       : 哪一年,  
+                month      : 哪一月,  
+                # 形如 201608  
                 
-                month      : 哪一月  
+                num        : 连同该月，要返回几个月的  
                 
                 # 客户端第一次默认是填今年今月  
                 # 然后可以向前向后翻  
@@ -482,7 +495,13 @@
                     
                     proj_name : 和哪一个项目相关(它的名称),  
                     
+                    action_id : 消息类型,  
+                    # 0  表示评论或回复  
+                    # 1  表示收藏  
+                    # 未完待续...  
+                    
                     content   : 这条消息的内容  
+                    # 当 action_id==0，此值才有实际意义  
                 },  
                 {  
                     另一条消息的...  
