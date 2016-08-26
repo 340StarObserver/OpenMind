@@ -57,19 +57,19 @@ def insert_user_info(mongo_client,db_name,total_size,batch_size):
     	'total_size' is the total number of documents you want to insert to user_info
     	'batch_size' is the batch number of documents you want to insert at one time
     """
-    print "111"
+    pass
 
 
 def insert_project_info(mongo_client,db_name,total_size,batch_size):
-    print "222"
+    pass
 
 
 def insert_active_info(mongo_client,db_name,total_size,batch_size):
-    print "333"
+    pass
 
 
 def insert_associate_info(mongo_client,db_name,total_size,batch_size):
-    print "444"
+    pass
 
 
 if __name__ == '__main__':
@@ -100,6 +100,7 @@ if __name__ == '__main__':
             conf['mongo']['db_name'],\
             conf['mongo']['db_user'],conf['mongo']['db_pwd'])
         my_handler(mongo_client,conf['mongo']['db_name'],total_size,batch_size)
+        print "all done"
     except Exception,e:
         print str(e)
     finally:

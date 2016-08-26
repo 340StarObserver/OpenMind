@@ -3,10 +3,10 @@
 
 ### 1-1. 用户数据 user_info ###
 
-        索引 ： { username : 1 }  
+        索引 ： { _id : 1 }  
 
         {  
-            "username"    : 用户名,  
+            "_id"         : 用户名,  
             
             "password"    : 加密后的密文,  
             
