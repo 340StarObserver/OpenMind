@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>OpenMind</title>
+
+	<!-- jquery -->
+	<script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+	
+	<!-- bootstrap -->
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- bootstrap-material-design -->
+	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap-material-design.css">
+    <script type="text/javascript" src="dist/js/material.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css">
+  	<script type="text/javascript" src="dist/js/ripples.min.js"></script>
+
+	<link rel="stylesheet" href="../css/home.css">
+	<link rel="stylesheet" href="../css/global.css">
+	<script type="text/javascript" src="../js/home.js"></script>
+
+</head>
+<body>
+	<!-- 导航栏 -->
+	<nav class="navbar">
+              <div class="navbar-header">
+                <img class="navbar-brand" src="../res/images/openmind-icon.png" alt="openmind-icon">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+				    <span class="icon-bar"></span>
+				    <span class="icon-bar"></span>
+				    <span class="icon-bar"></span>
+				</button>
+
+				 <a href="login.html" class="btn btn-raised btn-primary login-btn" >登录<div class="ripple-container"></div></a>
+
+              </div>
+              <div class="nav-list navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="javascript:void(0)">首页</a></li>
+                  <li><a href="javascript:void(0)">管理项目</a></li>
+                  
+                </ul>
+                <form class="navbar-form navbar-left">
+                  <div class="form-group is-empty">
+                    <input type="text" class="form-control col-md-8" placeholder="Search">
+                  </div>
+                </form>	
+            </div>
+    </nav>
+
+    <!-- 项目内容主体 -->
+    <article class="container"> 
+    	
+    </article>
+
+</body>
+<script>
+   $(function() {
+     $.material.init();
+   });
+</script>
+</html>

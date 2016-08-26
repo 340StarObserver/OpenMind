@@ -1,3 +1,33 @@
+body{
+	margin: 0;
+	font-family: 
+		"PingFang SC", "Microsoft YaHei", 
+		Helvetica, Arial, "Hiragino Sans GB", 
+		"Source Han Sans CN", sans-serif;
+	min-width: 300px;
+}
+
+.navbar{
+	background-color: rgba(0,0,0,.8);
+	padding: 10px 15px;
+}
+
+
+.navbar-header img{
+	display: block;
+	float: left;
+}
+
+.nav-list{
+	
+	margin: 0 0 0 20px;
+	line-height: 43px;
+}
+
+.nav-list-item>a{
+	color: white;
+}
+
 .clearfix::after{
 	content: "." ; 
 	display: block ;
@@ -6,7 +36,8 @@
 	visibility: hidden;
 }
 
-a{
+a,
+a:hover{
 	text-decoration: none;
 }
 
@@ -25,8 +56,14 @@ footer{
 	text-align: center;
 }
 
-
 .bottom-name{
 	color: teal;
 	margin-bottom: 10px;
+}
+
+
+@media screen and (max-width: 770px) {
+	.nav-list{
+		
+	}
 }

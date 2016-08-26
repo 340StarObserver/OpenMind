@@ -1,33 +1,9 @@
-body{
-	margin: 0;
-	font-family: 
-		"PingFang SC", "Microsoft YaHei", 
-		Helvetica, Arial, "Hiragino Sans GB", 
-		"Source Han Sans CN", sans-serif;
-}
-
 .navbar{
-	background-color: rgba(0,0,0,.8);
 	padding: 10px 15px 150px;
-}
-
-.navbar-header{
-	float: left;
-}
-
-.navbar-header img{
-	display: block;
-	
 }
 
 .nav-list{
 	float: left;
-	margin: 0 0 0 20px;
-	line-height: 43px;
-}
-
-.nav-list-item>a{
-	color: white;
 }
 
 #signin-toggle-btn{
@@ -38,7 +14,7 @@ body{
 
 article{
 	margin: -90px auto;
-	width: 90%px;
+	width: 90%;
 	max-width:710px; 
 }
 
@@ -58,7 +34,8 @@ article{
 }
 
 .form-group .form-control{
-	width: 300px;
+	width: 80%;
+	max-width: 300px;
 }
 
 .login-btn-wrapper,

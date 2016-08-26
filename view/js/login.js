@@ -10,40 +10,29 @@ $(document).ready(function() {
 		}
 
 		$(".signin-box").toggle();
-		$(".login-box").toggle();
-		
+		$(".login-box").toggle();		
 	});
 
+	 $(document).on('keyup',function(event){
+          if(event.keyCode === 13){
+            if( $(".signin-box").css('display') == "block" ){
+				
+				signin();
+			}else{
+				login();
+			}
+          }
+
+
+    });
+
+
 	$("#login-btn").click(function(event) {
-
-		var username = $("#login-username-input").val(),
-			password = $("#login-password-input").val();
-		//检查用户名和密码
-		if( !checkUsername(username) || !checkPassword(password)){
-			showWarningTips("请检查用户名和密码");
-			return false;
-		}
-
-		login(username,password);
+		login();
 	});
 
 	$("#signin-btn").click(function(event) {
-		if( ! confirmPassword() ){
-			showWarningTips("两次密码不一致");
-			return false;
-		}
-
-		var username = $(".signin-username-input").val(),
-			password = $(".signin-password-input").val(),
-			name = $("#signin-name-input").val(),
-			college = $("#signin-college-select").val();
-
-		if(! checkUsername(username) || !checkPassword(password) || (name=="") ){
-			showWarningTips("请检查用户名,姓名和密码");
-			return false;
-		}
-
-		signin(username,password,name,college);
+		signin();
 
 	});
 
@@ -88,7 +77,7 @@ $(document).ready(function() {
 		}
 		else{
 			$(this).parent().removeClass('has-error');
-			$(this).siblings('.control-label').html("确认新密码");
+			$(this).siblings('.control-label').html("确认密码");
 		}		
 	});
 
@@ -115,7 +104,7 @@ function checkPassword(password){
 	return false;
 }
 
-function login(){
+function loginPost(){
 
 	jQuery.ajax({
 	  url: '/path/to/file',
@@ -138,7 +127,7 @@ function login(){
 	
 }
 
-function signin(username, password, name, college){
+function signinPost(username, password, name, college){
 
 }
 
@@ -154,4 +143,34 @@ function hideWarningTips(){
 
 function confirmPassword(){
 	return ( $("#signin-password-input").val() == $("#signin-confirm-password-input").val() );
+}
+
+function login(){
+	var username = $("#login-username-input").val(),
+		password = $("#login-password-input").val();
+	//检查用户名和密码
+	if( !checkUsername(username) || !checkPassword(password)){
+		showWarningTips("请检查用户名和密码");
+		return false;
+	}
+	loginPost(username,password);
+}
+
+function signin(){
+	if( ! confirmPassword() ){
+			showWarningTips("两次密码不一致");
+			return false;
+	}
+
+	var username = $(".signin-username-input").val(),
+		password = $(".signin-password-input").val(),
+		name = $("#signin-name-input").val(),
+		college = $("#signin-college-select").val();
+
+	if(! checkUsername(username) || !checkPassword(password) || (name=="") ){
+		showWarningTips("请检查用户名,姓名和密码");
+		return false;
+	}
+
+	signinPost(username,password,name,college);
 }

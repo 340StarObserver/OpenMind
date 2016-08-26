@@ -1,0 +1,9 @@
+.nav-list-item{
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.login-btn{
+	float: right;
+}
+
