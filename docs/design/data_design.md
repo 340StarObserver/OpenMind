@@ -47,9 +47,14 @@
             # 标签们  
             # 默认为 [ ]  
             
-            "link"         : 可选链接,  
+            "links"         :  
+            [  
+                { "address" : "my.oschina/xxx/blog", "description" : "xxxxx" },  
+                { "address" : "github/xxx"         , "description" : "yyy"   }  
+            ]    
             # 可以链接到你的个人主页啊，博客啊，github啊之类的  
-            # 默认为""  
+            # address      表示某个链接的地址  
+            # description  表示这个链接的描述  
             
             "introduction" : 项目简介,  
             
@@ -97,14 +102,13 @@
 
 ### 1-3. 个人活跃数据 active_info ###
 
-        索引 ： { username : 1, year : 1, month : 1 }  
+        索引 ： { username : 1, month : -1 }  
         
         {  
             "username" : 用户的用户名,  
             
-            "year"     : 年份,  
-            
             "month"    : 月份,  
+            # 形如 201608  
             
             "active"   :  
             [  

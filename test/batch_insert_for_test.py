@@ -3,7 +3,7 @@
 
 # Author 		: 	Lv Yang
 # Created 		: 	24 August 2016
-# Modified 		: 	24 August 2016
+# Modified 		: 	26 August 2016
 # Version 		: 	1.0
 
 """
@@ -25,6 +25,8 @@ example :
 """
 
 import sys
+import random
+import time
 sys.path.append("../src/common")
 
 import configure
@@ -47,6 +49,18 @@ def help():
     print inform
 
 
+def rand_key(seed,length):
+    """
+    create a rand key like '1445599887abcde'
+    """
+    sa = []
+    i = 0
+    while i < length:
+        sa.append(random.choice(seed))
+        i+=1
+    return "%d%s"%(int(time.time()),''.join(sa))
+
+
 def insert_user_info(mongo_client,db_name,total_size,batch_size):
     """
     insert documents to collection 'user_info'
@@ -57,19 +71,111 @@ def insert_user_info(mongo_client,db_name,total_size,batch_size):
     	'total_size' is the total number of documents you want to insert to user_info
     	'batch_size' is the batch number of documents you want to insert at one time
     """
-    pass
+    i = 0
+    data = []
+    while i < total_size:
+        j = 0
+        while j < batch_size:
+            obj = {}
+            obj['_id'] = rand_key("abcdefghijkmnopqrstuvwxyz",16)
+            obj['password'] = "123456"
+            obj['realname'] = "lvyang"
+            obj['department'] = "software_engine"
+            obj['signup_time'] = "2016-08-26"
+            obj['projects'] = []
+            obj['vote_limit'] = 0
+            data.append(obj)
+            del obj
+            j+=1
+        mongo_client[db_name]['user_info'].insert_many(data)
+        i+=batch_size
+        del data[:]
+        print "this time insert : %d, total %d"%(batch_size,i)
 
 
 def insert_project_info(mongo_client,db_name,total_size,batch_size):
-    pass
+    """
+    insert documents to collection 'project_info'
+    """
+    i = 0
+    data = []
+    while i < total_size:
+        j = 0
+        while j < batch_size:
+            obj = {}
+            obj['proj_name'] = "a_test_project"
+            obj['own_usr'] = rand_key("abcdefghijkmnopqrstuvwxyz",16)
+            obj['own_name'] = "lvyang"
+            obj['pub_time'] = int(time.time()) + random.randint(-2000,2000)
+            obj['labels'] = []
+            obj['link'] = "bilibili.com"
+            obj['introduction'] = "a_test_introduction"
+            obj['shares'] = []
+            obj['comments'] = []
+            data.append(obj)
+            del obj
+            j+=1
+        mongo_client[db_name]['project_info'].insert_many(data)
+        i+=batch_size
+        del data[:]
+        print "this time insert : %d, total %d"%(batch_size,i)
 
 
 def insert_active_info(mongo_client,db_name,total_size,batch_size):
-    pass
+    """
+    insert documents to collection 'active_info'
+    """
+    i = 0
+    data = []
+    while i < total_size:
+        j = 0
+        while j < batch_size:
+            this_user = rand_key("abcdefghijkmnopqrstuvwxyz",16)
+            k = 0
+            while k < 12:
+                obj = {}
+                obj['username'] = this_user
+                obj['month'] = 201601 + k
+                obj['active'] = []
+                data.append(obj)
+                del obj
+                k+=1
+            j+=1
+        mongo_client[db_name]['active_info'].insert_many(data)
+        i = i + batch_size
+        del data[:]
+        print "this time insert : %d, total %d"%(batch_size,i)
 
 
 def insert_associate_info(mongo_client,db_name,total_size,batch_size):
-    pass
+    """
+    insert documents to collection 'associate_info'
+    """
+    i = 0
+    data = []
+    while i < total_size:
+        j = 0
+        while j < batch_size:
+            this_user = rand_key("abcdefghijkmnopqrstuvwxyz",16)
+            k = 0
+            while k < 100:
+                obj = {}
+                obj['username'] = this_user
+                obj['who_usr'] = rand_key("abcdefghijkmnopqrstuvwxyz",16)
+                obj['who_name'] = "lvyang"
+                obj['time'] = int(time.time()) + random.randint(-2000,2000)
+                obj['proj_id'] = rand_key("abcdefghijkmnopqrstuvwxyz",16)
+                obj['proj_name'] = "a_test_project"
+                obj['action_id'] = random.randint(0,3)
+                obj['content'] = "a_test_content"
+                data.append(obj)
+                del obj
+                k+=1
+            j+=1
+        mongo_client[db_name]['associate_info'].insert_many(data)
+        i = i + batch_size
+        del data[:]
+        print "this time insert : %d, total %d"%(batch_size,i)
 
 
 if __name__ == '__main__':
