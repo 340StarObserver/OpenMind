@@ -1,0 +1,32 @@
+.clearfix::after{
+	content: "." ; 
+	display: block ;
+	height: 0 ;
+	clear: both ;
+	visibility: hidden;
+}
+
+a{
+	text-decoration: none;
+}
+
+li{
+	list-style: none;
+}
+
+ul{
+	padding-left: 0;
+}
+
+footer{
+	width: 100%;
+	margin-top: 300px;
+	font-size: 15px;
+	text-align: center;
+}
+
+
+.bottom-name{
+	color: teal;
+	margin-bottom: 10px;
+}
