@@ -3,7 +3,7 @@
 
 ### 1-1. 用户数据 user_info ###
 
-        索引 ： { username : hashed }  
+        索引 ： { username : 1 }  
 
         {  
             "username"    : 用户名,  
@@ -135,7 +135,13 @@
             
             "proj_name" : 位于哪一个项目中（项目的名称）,  
             
+            "action_id" : 行为类型,  
+            # 0 表示评论或回复  
+            # 1 表示收藏  
+            # 未完待续...  
+            
             "content"   : 内容  
+            # 当 action_id != 0，该值没有意义，默认取空字符串  
         }  
 
 
