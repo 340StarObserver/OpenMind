@@ -20,6 +20,9 @@
                 
                 department : 院系  
             }  
+        
+        请求中附带一张图片，作为头像（限制jpg或png，200K以内，图片的键名为head）  
+        如何将图片和非图片数据一次性post，参见 test/upload.html  
 
         响应体  
 
@@ -69,6 +72,9 @@
                 department  : 我的院系,  
                 
                 signup_time : 我的注册时间（形如"2016-08-13"）,  
+                
+                head        : 我的头像链接,  
+                # 是一个url链接，指向oss中的一张图  
                 
                 token       : 下次敏感操作的令牌  
             }  
@@ -164,6 +170,9 @@
                     
                     own_name     : 发起人姓名,  
                     
+                    own_head     : 发起人的头像,  
+                    # 是一个url链接，指向oss中的一张图  
+                    
                     pub_time     : 发布时间戳,  
                     
                     labels       : [ 标签1, 标签2, ... ],  
@@ -199,6 +208,9 @@
                     own_usr      : 发起人用户名,  
                     
                     own_name     : 发起人姓名,  
+                    
+                    own_head     : 发起人的头像,  
+                    # 是一个url链接，指向oss中的一张图  
                     
                     pub_time     : 发布时间戳,  
                     
@@ -242,6 +254,9 @@
                 
                 own_name     : 发起人名字,  
                 
+                own_head     : 发起人的头像,  
+                # 是一个url链接，指向oss中的一张图  
+                
                 pub_time     : 发布时间戳,  
                 
                 labels       : [ 标签1, 标签2, ... ],  
@@ -271,6 +286,7 @@
                         parent_id : "0",  
                         username  : "seven",  
                         realname  : "LvYang",  
+                        head      : a url,  
                         time      : 1445599887,  
                         content   : "this is the first comment"  
                     },  
@@ -279,6 +295,7 @@
                         parent_id : "akfja3",  
                         username  : "leo",  
                         realname  : "QiLi",  
+                        head      : a url,  
                         time      : 1446633221,  
                         content   : "this is the second comment"  
                     }  
@@ -287,6 +304,7 @@
                 # parent_id   表示若此评论针对项目，则该值为"0"。若此评论针对评论，则该值为父评论的id  
                 # username    表示评论者的用户名  
                 # realname    表示评论者的真实姓名  
+                # head        表示评论者的头像链接  
                 # time        表示此评论的时间戳  
                 # content     表示此评论的内容  
                 # 这样一来，评论便可以实现嵌套  
@@ -332,6 +350,9 @@
                         
                         own_name     : 发起人名字,  
                         
+                        own_head     : 发起人头像,  
+                        # 是一个url链接，指向oss中的一张图  
+                        
                         pub_time     : 发布时间戳,  
                         
                         labels       : [ 标签1, 标签2, ... ],  
@@ -358,6 +379,7 @@
                                 parent_id : "0",  
                                 username  : "seven",  
                                 realname  : "LvYang",  
+                                head      : a url,  
                                 time      : 1445599887,  
                                 content   : "this is the first comment"  
                             },  
@@ -489,6 +511,9 @@
                     
                     who_name  : 对方的名字,  
                     
+                    who_head  : 对方的头像,  
+                    # 是一个url链接，指向oss中的一张图  
+                    
                     time      : 这条消息的时间戳,  
                     
                     proj_id   : 和哪一个项目相关(它的id),
@@ -532,6 +557,9 @@
                     own_usr      : 发起人的用户名,  
                     
                     own_name     : 发起人的名字,  
+                    
+                    own_head     : 发起人的头像,  
+                    # 是一个url链接，指向oss中的一张图  
                     
                     pub_time     : 1445599887,  
                     

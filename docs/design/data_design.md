@@ -12,6 +12,9 @@
             
             "realname"    : 真实姓名,  
             
+            "head"        : 头像,  
+            # 是一个url链接，指向oss中的一张图  
+            
             "department"  : 院系（默认为""）,  
             
             "signup_time" : "2016-08-10",  
@@ -39,6 +42,9 @@
             "own_usr"      : 发起人的用户名,  
             
             "own_name"     : 发起人的名字,  
+            
+            "own_head"     : 发起人的头像,  
+            # 是一个url链接，指向oss中的一张图   
             
             "pub_time"     : 1445599887,  
             # 发布时间的时间戳  
@@ -76,6 +82,7 @@
                     "parent_id" : "0",  
                     "username"  : "seven",  
                     "realname"  : "LvYang",  
+                    "head"      : a url,  
                     "time"      : 1445599887,  
                     "content"   : "this is the first comment"  
                 },  
@@ -84,6 +91,7 @@
                     "parent_id" : "akfja3",  
                     "username"  : "leo",  
                     "realname"  : "QiLi",  
+                    "head"      : a url,  
                     "time"      : 1446633221,  
                     "content"   : "this is the second comment"  
                 }  
@@ -94,6 +102,7 @@
             # parent_id   表示若此评论针对项目，则该值为"0"。若此评论针对评论，则该值为父评论的id  
             # username    表示评论者的用户名  
             # realname    表示评论者的真实姓名  
+            # head        表示评论者的头像链接地址  
             # time        表示此评论的时间戳  
             # content     表示此评论的内容  
             # 这样一来，评论便可以实现嵌套  
@@ -133,6 +142,9 @@
             
             "who_name"  : 对方的名字,  
             
+            "who_head"  : 对方的头像,  
+            # 是一个url链接，指向oss中的一张图  
+            
             "time"      : 何时（时间戳）,  
             
             "proj_id"   : 位于哪一个项目中（项目的_id）,  
@@ -161,6 +173,9 @@
             "own_usr"      : 发起人的用户名,  
             
             "own_name"     : 发起人的名字,  
+            
+            "own_head"     : 发起人的头像,  
+            # 是一个url链接，指向oss中的一张图  
             
             "pub_time"     : 1445599887,  
             # 发布时间的时间戳  
