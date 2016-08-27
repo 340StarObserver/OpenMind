@@ -55,10 +55,13 @@ def action():
         index = int(post_data['action_id'])
     except Exception,e:
         print str(e)
-    
+
     response = None
     if index>0 and index<=len(Shared_Handlers):
-        response = Shared_Handlers[index-1](post_data,post_files,usr_sessions,Shared_Conf)
+        try:
+            response = Shared_Handlers[index-1](post_data,post_files,usr_sessions,Shared_Conf)
+        except Exception,e:
+            print str(e)
     else:
         response = {'result':False,'reason':'action_id not valid'}
 

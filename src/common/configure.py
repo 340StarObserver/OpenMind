@@ -30,6 +30,7 @@ def read(filename):
         res['oss']['end_point'] = config.get('oss','end_point')
         res['oss']['bucket_name'] = config.get('oss','bucket_name')
         res['oss']['shared_dir'] = config.get('oss','shared_dir')
+        res['oss']['head_dir'] = config.get('oss','head_dir')
         res['oss']['static_dir'] = config.get('oss','static_dir')
         res['mongo']['host'] = config.get('mongo','host')
         res['mongo']['db_name'] = config.get('mongo','db_name')
