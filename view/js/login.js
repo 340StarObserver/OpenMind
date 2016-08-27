@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
 	$("#signup-toggle-btn").click(function(event) {
 
 		// 改变登录注册切换按钮的内容
@@ -14,16 +15,16 @@ $(document).ready(function() {
 		$(".login-box").toggle();		
 	});
 
-	 $(document).on('keyup',function(event){
+	$(document).on('keyup',function(event){
 	 	// 按下回车键事件
-          if(event.keyCode === 13){
-            if( $(".signup-box").css('display') === "block" ){
-				signup();
-			}else{
-				login();
-			}
-          }
-    });
+	 	if(event.keyCode === 13){
+	 		if( $(".signup-box").css('display') === "block" ){
+	 			signup();
+	 		}else{
+	 			login();
+	 		}
+	 	}
+	 });
 
 
 	$("#login-btn").click(function(event) {
@@ -91,11 +92,29 @@ $(document).ready(function() {
 			$(this).siblings('.control-label').html("姓名不能为空");
 		}
 	});
+
+	$("#signup-headIcon-input").change(function(event) {
+		var file = $("#signup-headIcon-input")[0].files[0];
+		
+		//不是图片格式
+		if( !isImage(file.type) ){
+			$(this).parent().parent().addClass('has-error');
+			$(this).parent().siblings('.control-label').html("头像图片格式错误");
+		}
+		else if( !isSizeValid(file.size)){ //图片太大
+			$(this).parent().parent().addClass('has-error');
+			$(this).parent().siblings('.control-label').html("头像(请勿超过200KB)");
+		}else{
+			$(this).parent().removeClass('has-error');
+			$(this).parent().siblings('.control-label').html("头像(请勿超过200KB)");
+		}
+	});
+
 });
 
 function checkUsername(username){
 	
-	 return false;
+	return false;
 }
 
 function checkPassword(password){
@@ -103,88 +122,91 @@ function checkPassword(password){
 	return false;
 }
 
-function loginPost(username,password){
-
-	jQuery.ajax({
-	  url: '/path/to/file',
-	  type: 'POST',
-	  dataType: 'json',
-	  data: {
-	  	action_id: 2,
-	  	username: username,
-	  	password: hex_md5(password) },
-	  beforeSend: function(){
-
-	  },
-	  success: function(data, textStatus, xhr) {
-	  	if(data["result"] == false){
-	  		var errorReason;
-	    	switch( data['reason'] ){
-	    		case 1:
-	    			errorReason = "用户名或密码格式错误";
-	    			break;
-	    		case 2:
-	    			errorReason = "用户名或密码错误";
-	    			break;
-	    		default:
-	    			errorReason = "信息错误";
-	    	}
-
-	    	//显示错误信息
-	    	showWarningTips(errorReason);
-	  	}
-	  	else{
-
-	  		// 保存cookie
-	  		setCookie("realname", data["realname"], 7);
-	  		setCookie("department", data["department"], 7);
-	  		setCookie("signup_time", data["signup_time"], 7);
-	  		setCookie("token", data["token"], 7);
-
-	  		//跳转页面
-	    	location.href="home.html";
-	  	}
-	    
-	  },
-	  error: function(xhr, textStatus, errorThrown) {
-	    showWarningTips(textStatus);
-	  }
-	});
-	
+function confirmPassword(){
+	return ( $("#signup-password-input").val() == $("#signup-confirm-password-input").val() );
 }
 
-function signupPost(username, password, name, college){
+function login(){
+	var username = $("#login-username-input").val(),
+	password = $("#login-password-input").val();
+	//检查用户名和密码
+	if( !checkUsername(username) || !checkPassword(password)){
+		showWarningTips("请检查用户名和密码");
+		return false;
+	}
+	var data = loginPost(username,password);
 
-	jQuery.ajax({
-	  url: '/path/to/file',
-	  type: 'POST',
-	  dataType: 'json',
-	  data: {
-	  	action_id: 1,
-	  	username: username,
-	  	password: hex_md5(password),
-	  	realname: name,
-	  	department: college},
-	  	
-	  beforeSend: function(){
+	if(data["result"] == false){
+		var errorReason;
+		switch( data['reason'] ){
+			case 1:
+				errorReason = "用户名或密码格式错误";
+				break;
+			case 2:
+				errorReason = "用户名或密码错误";
+				break;
+			default:
+				errorReason = "信息错误";
+		}
 
-	  },
-	  success: function(data, textStatus, xhr) {
-	    if( data['result'] == false ){
-	    	var errorReason;
-	    	switch( data['reason'] ){
-	    		case 1:
-	    			errorReason = "用户名或密码格式错误";
-	    			break;
-	    		case 2:
-	    			errorReason = "信息不完整";
-	    			break;
-	    		case 3:
-	    			errorReason = "用户名已经存在";
-	    			break;
-	    		default:
-	    			errorReason = "信息错误";
-	    	}
+	    //显示错误信息
+	    showWarningTips(errorReason);
+	}
+	else{
+
+	  	// 保存cookie, 期限为7天
+	  	setCookie("realname", data["realname"], 7);
+	  	setCookie("department", data["department"], 7);
+	  	setCookie("signup_time", data["signup_time"], 7);
+	  	setCookie("token", data["token"], 7);
+
+	  	//跳转页面
+	  	location.href="home.html";
+	}
+
+}
+
+function signup(){
+	if( ! confirmPassword() ){
+		showWarningTips("两次密码不一致");
+		return false;
+	}
+
+	
+
+	var username = $(".signup-username-input").val(),
+	password = $(".signup-password-input").val(),
+	name = $("#signup-name-input").val(),
+	college = $("#signup-college-select").val(),
+	headIcon = $("#signup-headIcon-input")[0].files[0];
+	
+	if( !isImage(headIcon.type) || !isSizeValid(headIcon.type)){
+		showWarningTips("请检查头像格式");
+		return false;
+	}
+
+	if(! checkUsername(username) || !checkPassword(password) || (name=="") ){
+		showWarningTips("请检查用户名,姓名和密码格式");
+		return false;
+	}
+
+	var data = signupPost(username,password,name,college);
+
+	if( data['result'] == false ){
+		var errorReason;
+		switch( data['reason'] ){
+			case 1:
+			errorReason = "用户名或密码格式错误";
+			break;
+			case 2:
+			errorReason = "信息不完整";
+			break;
+			case 3:
+			errorReason = "用户名已经存在";
+			break;
+			default:
+			errorReason = "信息错误";
+		}
 	    	//显示错误信息
 	    	showWarningTips(errorReason);
 	    }
@@ -196,54 +218,4 @@ function signupPost(username, password, name, college){
 	    		$("#login-password-input").val(password);
 	    	});
 	    }
-
-	  },
-	  error: function(xhr, textStatus, errorThrown) {
-	    showWarningTips(textStatus);
-	  }
-	});
-}
-
-function showWarningTips(tips){
-	$(".warning-tips .btn-warning").html(tips);
-	$(".warning-tips").fadeIn('fast');
-	setTimeout("hideWarningTips()",2000);
-}
-
-function hideWarningTips(){
-	$(".warning-tips").fadeOut('slow');
-}
-
-function confirmPassword(){
-	return ( $("#signup-password-input").val() == $("#signup-confirm-password-input").val() );
-}
-
-function login(){
-	var username = $("#login-username-input").val(),
-		password = $("#login-password-input").val();
-	//检查用户名和密码
-	if( !checkUsername(username) || !checkPassword(password)){
-		showWarningTips("请检查用户名和密码");
-		return false;
 	}
-	loginPost(username,password);
-}
-
-function signup(){
-	if( ! confirmPassword() ){
-			showWarningTips("两次密码不一致");
-			return false;
-	}
-
-	var username = $(".signup-username-input").val(),
-		password = $(".signup-password-input").val(),
-		name = $("#signup-name-input").val(),
-		college = $("#signup-college-select").val();
-
-	if(! checkUsername(username) || !checkPassword(password) || (name=="") ){
-		showWarningTips("请检查用户名,姓名和密码");
-		return false;
-	}
-
-	signupPost(username,password,name,college);
-}

@@ -13,13 +13,15 @@
     <script type="text/javascript" src="dist/js/material.min.js"></script>
   	<link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css">
   	<script type="text/javascript" src="dist/js/ripples.min.js"></script>
-
-  	<script type="text/javascript" src="../js/global.js"></script>
 	<link rel="stylesheet" href="../css/global.css">
 	<link rel="stylesheet" href="../css/login.css">
-	<script type="text/javascript" src="../js/login.js"></script>
+	
 	<script type="text/javascript" src="../js/md5.js"></script>
 	<script type="text/javascript" src="../js/cookie.js"></script>
+  	<script type="text/javascript" src="../js/global.js"></script>
+  	<script type="text/javascript" src="../js/post.js"></script>
+	<script type="text/javascript" src="../js/login.js"></script>
+	
 </head>
 
 <body>
@@ -69,7 +71,9 @@
 			<div class="title">
 				注册 OpenMind
 			</div>
-			<form class="form-horizontal">
+
+			<form class="form-horizontal signup-form">
+
           	<div class="form-group label-floating">
 			  <label class="control-label" for="focusedInput1">用户名</label>
 			  <input id="signup-username-input" class="form-control" type="text" maxlength="20">
@@ -122,6 +126,16 @@
                   </select>
                 </div>
              </div>
+			 
+			 <div class="form-group is-empty is-fileinput ">
+                <label for="inputFile" class="control-label">头像(请勿超过200KB)</label>
+
+                <div class="">
+                  <input type="text" readonly="" class="form-control"  placeholder="Browse...">
+                  
+                  <input type="file" id="signup-headIcon-input" multiple="">
+                </div>
+            </div>
 
           </form>
 

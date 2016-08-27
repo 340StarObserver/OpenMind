@@ -42,13 +42,3 @@ article{
 .signup-btn-wrapper{
 	margin-top: 30px;
 }
-
-.warning-tips{
-	display: none;
-	position: fixed;
-	top: 18px;
-	left: 0;
-	right: 0;
-	text-align: center;
-	z-index: 100;
-}
