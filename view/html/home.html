@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>OpenMind</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
+	<title>OpenMind</title>
+	
 	<!-- jquery -->
 	<script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
 	
@@ -16,44 +18,139 @@
     <script type="text/javascript" src="dist/js/material.min.js"></script>
   	<link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css">
   	<script type="text/javascript" src="dist/js/ripples.min.js"></script>
-
-	<link rel="stylesheet" href="../css/home.css">
 	<link rel="stylesheet" href="../css/global.css">
+	
+	<link rel="stylesheet" href="../css/home.css">
+	
+	<script type="text/javascript" src="../js/global.js"></script>
 	<script type="text/javascript" src="../js/home.js"></script>
+	<script type="text/javascript" src="../js/cookie.js"></script>
 
 </head>
 <body>
 	<!-- 导航栏 -->
 	<nav class="navbar">
-              <div class="navbar-header">
-                <img class="navbar-brand" src="../res/images/openmind-icon.png" alt="openmind-icon">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-				    <span class="icon-bar"></span>
-				    <span class="icon-bar"></span>
-				    <span class="icon-bar"></span>
-				</button>
+        <div class="navbar-header">
+            <img class="navbar-brand" src="../res/images/openmind-icon.png" alt="openmind-icon">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
 
-				 <a href="login.html" class="btn btn-raised btn-primary login-btn" >登录<div class="ripple-container"></div></a>
+			<!--  <a href="login.html" class="btn btn-raised btn-primary login-btn" >登录<div class="ripple-container"></div></a> -->
+        </div>
+        
+        <div class="warning-tips">
+			<a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
+		</div>
 
-              </div>
-              <div class="nav-list navbar-collapse collapse navbar-responsive-collapse">
-                <ul class="nav navbar-nav">
-                  <li class="active"><a href="javascript:void(0)">首页</a></li>
-                  <li><a href="javascript:void(0)">管理项目</a></li>
+        <div class="nav-list navbar-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+            <li class="active"><a href="javascript:void(0)">首页</a></li>
+            <li><a href="javascript:void(0)">管理项目</a></li>
                   
-                </ul>
-                <form class="navbar-form navbar-left">
-                  <div class="form-group is-empty">
-                    <input type="text" class="form-control col-md-8" placeholder="Search">
-                  </div>
-                </form>	
-            </div>
+        </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group is-empty">
+                	<input type="text" class="form-control col-md-8" placeholder="Search">
+                </div>
+            </form>	
+        </div>
     </nav>
 
     <!-- 项目内容主体 -->
     <article class="container"> 
-    	
+    	<div class="project-container well">
+    		<div class="project-title">
+    			<span class="browse-title">项目浏览</span>
+    			<span class="voting-project-toggle togglebutton">
+                    <label>
+                      <input type="checkbox" checked="false">查看正在投票的项目
+                    </label>
+                </span>
+    			
+    		</div>
+    		<ul class="project-list">
+    			<li class="panel panel-default project-list-item">
+    				<div class="panel-body">
+    					<div class="item-title-wrapper clearfix">
+    						<div class="item-left">
+    							<span class="item-name">Adobe Illustrator</span>
+    							<span class="project-label label label-info">Info</span>
+    							<span class="project-label label label-info">Info</span>
+    						</div>
+    						
+    						<div class="item-right">
+    							<span class="author">作者</span>
+    							<span class="create-time">
+    								2016-8-22
+    							</span>
+    						</div>
+
+    					</div>
+
+    					<div class="brief-intro">
+    						Adobe Illustrator是Adobe系统公司推出的基于矢量的图形制作软件Adobe Illustrator是Adobe
+    					</div>
+    				</div>
+    			</li>
+    			<li class="panel panel-default project-list-item">
+    				<div class="panel-body">
+    					<div class="item-title-wrapper clearfix">
+    						<div class="item-left">
+    							<span class="item-name">Adobe Illustrator</span>
+    							<span class="project-label label label-info">Info</span>
+    							<span class="project-label label label-info">Info</span>
+    						</div>
+    						
+    						<div class="item-right">
+    							<span class="author">作者</span>
+    							<span class="create-time">
+    								2016-8-22
+    							</span>
+    						</div>
+
+    					</div>
+
+    					<div class="brief-intro">
+    						Adobe Illustrator是Adobe系统公司推出的基于矢量的图形制作软件Adobe Illustrator是Adob
+    					</div>
+    				</div>
+    			</li>
+    			<li class="panel panel-default project-list-item">
+    				<div class="panel-body">
+    					<div class="item-title-wrapper clearfix">
+    						<div class="item-left">
+    							<span class="item-name">Adobe Illustrator</span>
+    							<span class="project-label label label-info">Info</span>
+    							<span class="project-label label label-info">Info</span>
+    						</div>
+    						
+    						<div class="item-right">
+    							<span class="author">作者</span>
+    							<span class="create-time">
+    								2016-8-22
+    							</span>
+    						</div>
+
+    					</div>
+
+    					<div class="brief-intro">
+    						Adobe Illustrator是Adobe系统公司推出的基于矢量的图形制作软件Adobe Illustrator是Adobe
+    					</div>
+    				</div>
+    			</li>
+    		</ul>
+    	</div>
     </article>
+	
+	<!-- 低栏部分 -->
+	<footer>
+		<div class="bottom-name">
+		<a href="index.html">OpenMind</a></div>
+		<div class="bottom-remark">2016 SouthEast University</div>
+	</footer>
 
 </body>
 <script>

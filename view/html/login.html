@@ -5,17 +5,21 @@
 	<title>OpenMind</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- jquery -->
-	<script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+	<!-- <script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min. js"></script> -->
+	<script type="text/javascript" src="../js/3rd/jquery-3.1.0.min.js"></script>
 
 	<!-- bootstrap-material-design -->
 	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap-material-design.css">
     <script type="text/javascript" src="dist/js/material.min.js"></script>
   	<link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css">
   	<script type="text/javascript" src="dist/js/ripples.min.js"></script>
+
+  	<script type="text/javascript" src="../js/global.js"></script>
 	<link rel="stylesheet" href="../css/global.css">
 	<link rel="stylesheet" href="../css/login.css">
 	<script type="text/javascript" src="../js/login.js"></script>
-
+	<script type="text/javascript" src="../js/md5.js"></script>
+	<script type="text/javascript" src="../js/cookie.js"></script>
 </head>
 
 <body>
@@ -35,7 +39,7 @@
 			></li>
 		</ul>
 		
-		<a href="javascript:void(0)" class="btn btn-raised btn-primary" id="signin-toggle-btn">注册<div class="ripple-container"></div></a>
+		<a href="javascript:void(0)" class="btn btn-raised btn-primary" id="signup-toggle-btn">注册<div class="ripple-container"></div></a>
 	</nav>
 
 	<!-- 登录框和注册框部分 -->
@@ -61,35 +65,35 @@
           </div>
         </div>
 
-		<div class="signin-box well">
+		<div class="signup-box well">
 			<div class="title">
 				注册 OpenMind
 			</div>
 			<form class="form-horizontal">
           	<div class="form-group label-floating">
 			  <label class="control-label" for="focusedInput1">用户名</label>
-			  <input id="signin-username-input" class="form-control" type="text" maxlength="20">
+			  <input id="signup-username-input" class="form-control" type="text" maxlength="20">
 			</div>
 
 			<div class="form-group label-floating">
 			  <label class="control-label" for="focusedInput1">密码</label>
-			  <input id="signin-password-input" class="form-control" type="password" maxlength="20">
+			  <input id="signup-password-input" class="form-control" type="password" maxlength="20">
 			</div>
 
 			<div class="form-group label-floating">
 			  <label class="control-label" for="focusedInput1">确认密码</label>
-			  <input id="signin-confirm-password-input" class="form-control" type="password" maxlength="20">
+			  <input id="signup-confirm-password-input" class="form-control" type="password" maxlength="20">
 			</div>
 			
 			<div class="form-group label-floating">
 			  <label class="control-label" for="focusedInput1">姓名</label>
-			  <input id="signin-name-input" class="form-control" type="text" maxlength="20">
+			  <input id="signup-name-input" class="form-control" type="text" maxlength="20">
 			</div>
 			<div class="form-group">
                 <label for="select" class="control-label">院系</label>
 	
                 <div>
-                  <select id="signin-college-select" class="form-control">
+                  <select id="signup-college-select" class="form-control">
                   	<option>建筑学院</option>
 					<option>机械工程学院</option>
 					<option>能源与环境学院</option>
@@ -121,7 +125,7 @@
 
           </form>
 
-          <div class="signin-btn-wrapper"><a href="javascript:void(0)" class="btn btn-raised btn-primary" id="signin-btn">注册</a>
+          <div class="signup-btn-wrapper"><a href="javascript:void(0)" class="btn btn-raised btn-primary" id="signup-btn">注册</a>
           </div>
 
 		</div>

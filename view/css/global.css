@@ -9,9 +9,12 @@ body{
 
 .navbar{
 	background-color: rgba(0,0,0,.8);
-	padding: 10px 15px;
+	padding: 0 15px;
 }
 
+.navbar .navbar-form{
+	margin: 0 auto;
+}
 
 .navbar-header img{
 	display: block;
@@ -19,7 +22,6 @@ body{
 }
 
 .nav-list{
-	
 	margin: 0 0 0 20px;
 	line-height: 43px;
 }
@@ -34,6 +36,17 @@ body{
 	height: 0 ;
 	clear: both ;
 	visibility: hidden;
+}
+
+.warning-tips{
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	z-index: 100;
+	pointer-events: none;
 }
 
 a,
@@ -61,9 +74,28 @@ footer{
 	margin-bottom: 10px;
 }
 
+.project-label{
+	border-radius: 2px;
+	font-size: 0.5em;
+}
 
-@media screen and (max-width: 770px) {
-	.nav-list{
-		
+@media screen and (max-width: 400px) {
+	body{
+		font-size: 8px;
+	}
+
+	.navbar{
+		padding: 0;
+		margin-bottom: 0;
+	}
+
+	.panel-body{
+		padding: 0;
+	}
+
+	article.container{
+		margin: 0;
+		padding: 0;
+		width: 100%;
 	}
 }

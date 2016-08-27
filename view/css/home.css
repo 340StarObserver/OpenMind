@@ -5,5 +5,55 @@
 
 .login-btn{
 	float: right;
+	margin: 7px auto;
 }
 
+article{
+	padding: 20px 15px;
+	max-width: 850px;
+}
+
+article.container>.project-container{
+	padding-bottom: 
+}
+
+.browse-title{
+	font-size: 2em;
+}
+
+.voting-project-toggle{
+	margin-left: 10px;
+}
+.voting-project-toggle>label{
+	font-size: 1em;
+}
+
+.project-list{
+	margin-top: 40px;
+}
+
+.project-list-item{
+	padding: 10px 5px;
+	margin-top: 40px;
+}
+
+.item-left{
+	float: left;
+}
+
+.item-left>.item-name{
+	font-size: 1.5em;
+}
+
+.item-right{
+	float: right;
+	line-height: 1.5;
+}
+
+.brief-intro{
+	margin-top: 10px;
+	padding: 5px 10px;
+	border-top: .5px solid rgba(0,0,0,.5);
+	font-size: 1.2em;
+	font-weight: 400;
+}
