@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>test index</title>
+	<script type="text/javascript" src="static/js/jquery.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		function func_regist(){
+			alert("regist");
+			$.post(
+				"/action",
+				{
+					action_id : 1
+				},
+				function(data,status){
+				}
+			);
+		}
+		func_regist();
+	</script>
+</body>
+</html>

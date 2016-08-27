@@ -3,7 +3,7 @@
 
 # Author 		: 	Lv Yang
 # Created 		: 	21 August 2016
-# Modified 		: 	21 August 2016
+# Modified 		: 	27 August 2016
 # Version 		: 	1.0
 
 """
@@ -25,6 +25,7 @@ def get_bucket_conn(access_id,access_key,end_point,bucket_name):
     """
     auth = oss2.Auth(access_id,access_key)
     bucket_conn = oss2.Bucket(auth,end_point,bucket_name)
+    del auth
     return bucket_conn
 
 
