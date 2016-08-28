@@ -1,0 +1,44 @@
+.navbar{
+	padding: 10px 15px 150px;
+}
+
+.nav-list{
+	float: left;
+}
+
+#signup-toggle-btn{
+	float: right;
+	margin: 0;
+	content: "123321";
+}
+
+article{
+	margin: -90px auto;
+	width: 90%;
+	max-width:710px; 
+}
+
+.container .login-box.well,
+.container .signup-box.well{
+	padding: 15px 60px 80px;
+}
+
+.signup-box{
+	display: none;
+}
+
+.login-box>.title,
+.signup-box>.title{
+	font-size: 30px;
+	margin: 10px auto;
+}
+
+.form-group .form-control{
+	width: 80%;
+	max-width: 300px;
+}
+
+.login-btn-wrapper,
+.signup-btn-wrapper{
+	margin-top: 30px;
+}

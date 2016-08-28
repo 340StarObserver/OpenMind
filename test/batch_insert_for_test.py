@@ -28,6 +28,7 @@ import sys
 import random
 import time
 sys.path.append("../src/common")
+sys.path.append("../src/model")
 
 import configure
 import mongo_conn

@@ -8,22 +8,22 @@
 		<input id="file1" type="file" name="file1"/>
 		<input id="file2" type="file" name="file2"/>
 		<input id="file3" type="file" name="file3"/>
-		<div onclick="upload()">shangchuan</div>
+		<div onclick="upload()">create project</div>
 	</form>
 	<script type="text/javascript">
 		function upload(){
-			alert("will upload");
-			var mydata = new FormData($('#uploadForm')[0]);
-			// 注意创建FormData对象的时候，必须把第一个文件当做参数传进去，其他两个文件必须用append函数添加
-			// 我也不知道为什么，我试出来就是这样，三个文件如果全部用append方式添加就会导致失败 =_=...
+			alert("will create a project");
 
-			mydata.append("file2",$('#uploadForm')[1]);
-			mydata.append("file3",$('#uploadForm')[2]);
-			// 继续追加一些文件
-			// 注意，第一个参数要填file2,file3。即与表单中的name对应
+			var mydata = new FormData();
+
+			// add some files
+			mydata.append("file1",$('#file1')[0].files[0]);
+			mydata.append("file2",$('#file2')[0].files[0]);
+			mydata.append("file3",$('#file3')[0].files[0]);
 
 			// 设置各文件依次的新名字，以逗号分隔
 			// 注意，这里各文件的新名字是上传的时候由用户起的新名字
+			// you can also use '/' in a file name like 'xxx/yyy/myfile.txt'
 			mydata.append("file_names","new_file_1.png,new_file_2.png,new_file_3.png");
 
 			// 下面设置请求的action_id
@@ -33,7 +33,7 @@
 			// 注意，标签是多个，以逗号隔开
 			mydata.append("proj_name","bilibili guichu make");
 			mydata.append("labels","label1,label2,label3");
-			mydata.append("link","bilibili.com");
+			mydata.append("links","[{'address':'a url','description':'xxx'},{'address':'a url','description':'yyy'}]");
 			mydata.append("introduction","xxxxx");
 			mydata.append("token","the token you get last time");
 

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="static/js/jquery.js"></script>
+</head>
+<body>
+	<form id="uploadForm" enctype="multipart/form-data">
+		<input id="file1" type="file" name="file1"/>
+		<input id="file2" type="file" name="file2"/>
+		<input id="file3" type="file" name="file3"/>
+		<input id="file4" type="file" name="file4"/>
+		<div onclick="send_regist()">regist</div>
+		<div onclick="send_login()">login</div>
+		<div onclick="send_logout()">logout</div>
+		<div onclick="send_create()">create</div>
+	</form>
+	<script type="text/javascript">
+
+		function send_regist(){
+			alert("will regist");
+
+			var mydata = new FormData();
+			mydata.append("head",$('#file1')[0].files[0]);
+			mydata.append("action_id",1);
+			mydata.append("username","seven");
+			mydata.append("password","ab2345678901234567890123456789ab");
+			mydata.append("realname","lvyang");
+			mydata.append("department","coding");
+			$.ajax({
+				url:'/action',
+				type:'POST',
+				cache:false,
+				data:mydata,
+				processData:false,
+				contentType:false
+			}).done(function(res){
+
+			}).fail(function(res){
+
+			});
+		}
+
+		function send_login(){
+			alert("will login");
+
+			var mydata = new FormData();
+			mydata.append("action_id",2);
+			mydata.append("username","seven");
+			mydata.append("password","ab2345678901234567890123456789ab");
+
+			$.ajax({
+				url:'/action',
+				type:'POST',
+				cache:false,
+				data:mydata,
+				processData:false,
+				contentType:false
+			}).done(function(res){
+
+			}).fail(function(res){
+
+			});
+		}
+
+		function send_logout(){
+			alert("will logout");
+
+			var mydata = new FormData();
+			mydata.append("action_id",3);
+			$.ajax({
+				url:'/action',
+				type:'POST',
+				cache:false,
+				data:mydata,
+				processData:false,
+				contentType:false
+			}).done(function(res){
+
+			}).fail(function(res){
+
+			});
+		}
+
+		function send_create(){
+			alert("will create a project");
+
+			var mydata = new FormData();
+
+			// add some files
+			mydata.append("file1",$('#file1')[0].files[0]);
+			mydata.append("file2",$('#file2')[0].files[0]);
+			mydata.append("file3",$('#file3')[0].files[0]);
+			mydata.append("file4",$('#file4')[0].files[0]);
+
+			// 设置各文件依次的新名字，以逗号分隔
+			// 注意，这里各文件的新名字是上传的时候由用户起的新名字
+			// you can also use '/' in a file name like 'xxx/yyy/myfile.txt'
+			mydata.append("file_names","new_file_1.png,new_file_2.png,new_file_3.png,new_file_4.png");
+
+			// 下面设置请求的action_id
+			mydata.append("action_id",4);
+
+			// 下面项目的项目名称，标签们，可选链接，项目简介，令牌token(用于认证)
+			// 注意，标签是多个，以逗号隔开
+			mydata.append("proj_name","bilibili guichu make");
+			mydata.append("labels","label1,label2,label3");
+			mydata.append("links",'[{"address":"a url","description":"xxx"},{"address":"a url","description":"yyy"}]');
+			mydata.append("introduction","xxxxx");
+			mydata.append("token","the token you get last time");
+
+			$.ajax({
+				url:'/action',
+				type:'POST',
+				cache:false,
+				data:mydata,
+				processData:false,
+				contentType:false
+			}).done(function(res){
+
+			}).fail(function(res){
+
+			});
+		}
+	</script>
+</body>
+</html>

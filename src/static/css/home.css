@@ -1,0 +1,78 @@
+.nav-list-item{
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.login-btn{
+	float: right;
+	margin: 7px auto;
+}
+
+article{
+	padding: 20px 15px;
+	max-width: 850px;
+}
+
+article.container>.project-container{
+	padding-bottom: 
+}
+
+.browse-title{
+	font-size: 2em;
+}
+
+.voting-project-toggle{
+	margin-left: 10px;
+}
+.voting-project-toggle>label{
+	font-size: 1em;
+}
+
+.project-list{
+	margin-top: 40px;
+}
+
+.project-list-item{
+	padding: 10px 5px;
+	margin-top: 40px;
+}
+
+.item-title-left{
+	float: left;
+}
+
+.project-name{
+	font-size: 1.5em;
+	color: #336699;
+}
+
+.item-title-right{
+	float: right;
+	color: #c2c2c2;
+}
+
+.brief-intro-wrapper{
+	margin-top: 10px;
+	padding: 5px 0;
+	border-top: .5px solid rgba(0,0,0,.5);
+	font-size: 1.2em;
+	font-weight: 400;
+}
+
+.author-info{
+	float: left;
+	width: 10%;
+	min-width: 20px;
+	max-width: 70px;
+	margin-right: 10px;
+	color: #666;
+}
+
+.author-icon{
+	display: block;
+	width: 100%;
+}
+
+.author-name{
+	text-align: center;
+}

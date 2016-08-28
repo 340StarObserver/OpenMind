@@ -18,10 +18,6 @@ each function returns a dict
 """
 
 import time
-import sys
-sys.path.append("../common")
-sys.path.append("../valid")
-sys.path.append("../handlers")
 
 import mongo_conn
 import oss

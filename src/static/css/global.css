@@ -1,0 +1,105 @@
+body{
+	margin: 0;
+	font-family: 
+		"PingFang SC", "Microsoft YaHei", 
+		Helvetica, Arial, "Hiragino Sans GB", 
+		"Source Han Sans CN", sans-serif;
+	min-width: 300px;
+}
+
+.navbar{
+	background-color: rgba(0,0,0,.8);
+	padding: 0 15px;
+}
+
+.navbar .navbar-form{
+	margin: 0 auto;
+}
+
+.navbar-header img{
+	display: block;
+	float: left;
+}
+
+.nav-list{
+	margin: 0 0 0 20px;
+	line-height: 43px;
+}
+
+.nav-list-item>a{
+	color: white;
+}
+
+.clearfix::after{
+	content: "." ; 
+	display: block ;
+	height: 0 ;
+	clear: both ;
+	visibility: hidden;
+}
+
+.warning-tips{
+	display: none;
+	position: fixed;
+	top: 10px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	z-index: 100;
+	pointer-events: none;
+}
+
+a,
+a:hover{
+	text-decoration: none;
+}
+
+li{
+	list-style: none;
+}
+
+ul{
+	padding-left: 0;
+}
+
+footer{
+	width: 100%;
+	margin-top: 300px;
+	font-size: 15px;
+	text-align: center;
+}
+
+.bottom-name{
+	color: teal;
+	margin-bottom: 10px;
+}
+
+.project-label{
+	border-radius: 2px;
+	font-size: 0.5em;
+}
+
+@media screen and (max-width: 400px) {
+	body{
+		font-size: 8px;
+	}
+
+	.navbar{
+		padding: 0;
+		margin-bottom: 0;
+	}
+
+	.panel-body{
+		padding: 0;
+	}
+
+	article.container{
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+
+	.nav-list{
+		margin-left: 0;
+	}
+}

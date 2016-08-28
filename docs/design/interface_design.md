@@ -111,8 +111,6 @@
             并结合 docs/design/data_design.md 中的 project_info  
             
             请求体如何构造，参见 test/upload.html  
-            
-            # upload.html中要填的数据不全，但给出了方法，故请结合cs_require.md  
 
         响应体  
 
@@ -343,6 +341,9 @@
             
                 token      : 令牌  
             }  
+        
+        响应头  
+            若是移动端，需要把响应头里的新的sessionid记录到单例网络配置对象中  
 
         响应体  
 
