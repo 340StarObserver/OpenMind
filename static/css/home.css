@@ -9,13 +9,12 @@
 }
 
 article{
+	margin-top: 100px;
 	padding: 20px 15px;
 	max-width: 850px;
 }
 
-article.container>.project-container{
-	padding-bottom: 
-}
+
 
 .browse-title{
 	font-size: 2em;
@@ -44,6 +43,15 @@ article.container>.project-container{
 .project-name{
 	font-size: 1.5em;
 	color: #336699;
+	cursor: pointer;
+}
+
+.project-label{
+	margin-left: 5px;
+	background-color: #03a9f4;
+	padding: 0 5px;
+	color: white;
+	font-size: .5em;
 }
 
 .item-title-right{

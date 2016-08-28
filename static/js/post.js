@@ -94,7 +94,6 @@ function getProjectBriefPost(){
 	    showWarningTips(textStatus);
 	  }
 	});
-	
 }
 
 

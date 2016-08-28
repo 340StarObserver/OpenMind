@@ -8,8 +8,16 @@ body{
 }
 
 .navbar{
-	background-color: rgba(0,0,0,.8);
+	background-color: #263238;
 	padding: 0 15px;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 100;
+}
+
+.navbar.shadow-bottom{
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,.50);
 }
 
 .navbar .navbar-form{
@@ -29,6 +37,7 @@ body{
 .nav-list-item>a{
 	color: white;
 }
+
 
 .clearfix::after{
 	content: "." ; 
@@ -75,9 +84,14 @@ footer{
 }
 
 .project-label{
+	margin-left: 5px;
+	padding: 0 5px;
 	border-radius: 2px;
-	font-size: 0.5em;
+	color: white;
+	background-color: #03a9f4;
+	font-size: .5em;
 }
+
 
 @media screen and (max-width: 400px) {
 	body{
@@ -94,7 +108,7 @@ footer{
 	}
 
 	article.container{
-		margin: 0;
+		margin: 50px 0 0;
 		padding: 0;
 		width: 100%;
 	}

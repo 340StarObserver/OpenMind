@@ -3,7 +3,34 @@ $(document).ready(function() {
 	$(".btn").click(function(event) {
 		$(this).blur();
 	});
+
+	// $("#next-btn").click(function(event) {
+	// 	$(this).blur();
+	// });
+
+	//回到顶部按钮点击事件 和 导航栏底部阴影添加事件
+	$(window).scroll(function() {
+		
+		if( $("body").scrollTop() == 0 ){
+			$("#returntop-btn").fadeOut();
+			$(".navbar").removeClass('shadow-bottom');
+		}
+		else{
+			$("#returntop-btn").fadeIn();
+			$(".navbar").addClass('shadow-bottom');
+		}
+	});
+
 });
+
+//滚动到顶部
+function scrollToTop(){
+	 var speed=200;
+     $("body").animate({ scrollTop: 0 }, speed);
+}
+
+
+
 
 //在顶部显示警告提示
 function showWarningTips(tips){
