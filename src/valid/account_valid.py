@@ -18,7 +18,7 @@ def valid_username(username):
     judge whether username is valid
     """
     n = len(username)
-    if n<8 or n>16:
+    if n<4 or n>16:
     	return False
     for c in username:
         if (c>='a' and c<='z') or (c>='A' and c<='Z') or (c>='0' and c<='9'):

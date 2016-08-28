@@ -27,6 +27,7 @@ Shared_Conf = configure.read("../conf/server.conf")
 Shared_Handlers = []
 Shared_Handlers.append(account_handlers.regist)
 Shared_Handlers.append(account_handlers.login)
+Shared_Handlers.append(account_handlers.logout)
 
 
 # create a server app
@@ -38,6 +39,18 @@ Server_App.secret_key = '\r\x9d1\xd1\xccW\x9e\xa6\x9a\x97[\xb1=\x93\x87\x15s<\xe
 @Server_App.route("/index",methods=['GET'])
 def index():
     return flask.render_template("index.html")
+
+
+# a test upload page
+@Server_App.route("/upload",methods=['GET'])
+def upload():
+    return flask.render_template("upload.html")
+
+
+# a test for sessions
+@Server_App.route("/test_session",methods=['GET'])
+def test_session():
+    return flask.jsonify(dict(flask.session))
 
 
 # define the interface

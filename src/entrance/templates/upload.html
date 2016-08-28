@@ -1,19 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script type="text/javascript" src="static/jquery.js"></script>
+	<script type="text/javascript" src="static/js/jquery.js"></script>
 </head>
 <body>
 	<form id="uploadForm" enctype="multipart/form-data">
 		<input id="file1" type="file" name="file1"/>
 		<input id="file2" type="file" name="file2"/>
 		<input id="file3" type="file" name="file3"/>
-		<div onclick="upload()">shangchuan</div>
+		<div onclick="upload2()">shangchuan</div>
 	</form>
 	<script type="text/javascript">
+
+		function upload2(){
+			console.log('before');
+
+			var fd = new FormData();
+			fd.append("head",$('#file1')[0].files[0]);
+			fd.append("action_id",1);
+			fd.append("username","baoshenjiushi6");
+			fd.append("password","66234567890123456789012345678966");
+			fd.append("realname","baoshen666");
+			fd.append("department","seu");
+
+			console.log("after");
+
+			jQuery.ajax({
+				url: '/action',
+				type: 'POST',
+				data: fd,
+				processData:false,
+				contentType:false,
+				complete: function(xhr, textStatus) {
+					//called when complete
+				},
+				success: function(data, textStatus, xhr) {
+					//called when successful
+				},
+				error: function(xhr, textStatus, errorThrown) {
+					//called when there is an error
+				}
+			});
+		}
+
 		function upload(){
 			alert("will upload");
 			var mydata = new FormData($('#uploadForm')[0]);
+
+			console.log( ($("#file1")[0]).files[0]);
+			console.log( $("#uploadForm")[0] );
+			console.log( $("#uploadForm")[1] );
+			console.log ( $("#uploadForm"));
 			// 注意创建FormData对象的时候，必须把第一个文件当做参数传进去，其他两个文件必须用append函数添加
 			// 我也不知道为什么，我试出来就是这样，三个文件如果全部用append方式添加就会导致失败 =_=...
 
@@ -27,7 +64,7 @@
 			mydata.append("file_names","new_file_1.png,new_file_2.png,new_file_3.png");
 
 			// 下面设置请求的action_id
-			mydata.append("action_id",4);
+			mydata.append("action_id",3);
 
 			// 下面项目的项目名称，标签们，可选链接，项目简介，令牌token(用于认证)
 			// 注意，标签是多个，以逗号隔开

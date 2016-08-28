@@ -80,7 +80,26 @@
             }  
 
 
-<strong>03. 新增一个项目</strong>  
+<strong>03. 注销</strong>
+
+        请求地址 : http://ip:port/action  
+        
+        请求方法 : POST  
+
+        请求体  
+
+            {  
+                action_id  : 3  
+            }  
+
+        响应体  
+
+            {  
+                result      : True  
+            }  
+
+
+<strong>04. 新增一个项目</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -111,7 +130,7 @@
             }  
 
 
-<strong>04. 在已有的项目上分享新的收获</strong>  
+<strong>05. 在已有的项目上分享新的收获</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -121,7 +140,7 @@
         
             和新增一个项目类似  
             
-            # 只不过action_id填4，且没有项目名称，标签们，可选链接，项目简介  
+            # 只不过action_id填5，且没有项目名称，标签们，可选链接，项目简介  
 
         响应体  
 
@@ -139,7 +158,7 @@
             }  
 
 
-<strong>05. 浏览所有项目的概要信息</strong>  
+<strong>06. 浏览所有项目的概要信息</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -148,7 +167,7 @@
         请求体  
 
             {  
-                action_id  : 5,  
+                action_id  : 6,  
             
                 time_max   : 时间戳  
                 # 服务端会返回发布时间小于该值的且距离当今最近的若干个项目的概要信息  
@@ -185,7 +204,7 @@
             ]  
 
 
-<strong>06. 浏览自己的所有项目的概要信息</strong>  
+<strong>07. 浏览自己的所有项目的概要信息</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -194,7 +213,7 @@
         请求体  
 
             {  
-                action_id  : 6  
+                action_id  : 7  
             }  
 
         响应体  
@@ -224,7 +243,7 @@
             ]  
 
 
-<strong>07. 浏览具体的一个项目的详细信息</strong>  
+<strong>08. 浏览具体的一个项目的详细信息</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -233,7 +252,7 @@
         请求体  
         
             {  
-                action_id  : 7,  
+                action_id  : 8,  
                 
                 proj_id    : 项目id  
             }  
@@ -311,7 +330,7 @@
             }  
 
 
-<strong>08. 同步数据</strong>  
+<strong>09. 同步数据</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -320,7 +339,7 @@
         请求体  
 
             {  
-                action_id  : 8,  
+                action_id  : 9,  
             
                 token      : 令牌  
             }  
@@ -416,7 +435,7 @@
             }  
 
 
-<strong>09. 查看我的活跃记录</strong>  
+<strong>10. 查看我的活跃记录</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -425,7 +444,7 @@
         请求体  
 
             {  
-                action_id  : 9,  
+                action_id  : 10,  
             
                 month      : 哪一月,  
                 # 形如 201608  
@@ -447,7 +466,7 @@
             ]  
 
 
-<strong>10. 发表评论和建议</strong>  
+<strong>11. 发表评论和建议</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -456,7 +475,7 @@
         请求体  
 
             {  
-                action_id  : 10,  
+                action_id  : 11,  
             
                 proj_id    : 项目id,  
                 
@@ -484,7 +503,7 @@
             }  
 
 
-<strong>11. 查看与我相关的消息</strong>  
+<strong>12. 查看与我相关的消息</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -493,7 +512,7 @@
         请求体  
 
             {  
-                action_id  : 11,  
+                action_id  : 12,  
             
                 time_max   : 时间戳  
                 # 服务端会返回消息时间小于该值的且距离当今最近的若干消息  
@@ -534,7 +553,7 @@
             ]  
 
 
-<strong>12. 查看投票栏</strong>  
+<strong>13. 查看投票栏</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -543,7 +562,7 @@
         请求体  
 
             {  
-                action_id  : 12  
+                action_id  : 13  
             }  
 
         响应体  
@@ -577,7 +596,7 @@
             ]  
 
 
-<strong>13. 为喜爱的项目投票</strong>  
+<strong>14. 为喜爱的项目投票</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -586,7 +605,7 @@
         请求体  
 
             {  
-                action_id  : 13,  
+                action_id  : 14,  
             
                 proj_id    : 项目id  
             }  
