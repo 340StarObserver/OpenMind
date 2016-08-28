@@ -1,6 +1,6 @@
 //1. 注册的post请求
 function signupPost(username, password, name, college, headIcon){
-	var formData = new FormData(); 
+	var formData = new FormData(); //写入头像
 	
 	formData.append('head', headIcon);
 	formData.append("action_id", 1);
@@ -10,7 +10,7 @@ function signupPost(username, password, name, college, headIcon){
 	formData.append("department", college);
 
 	jQuery.ajax({
-	  url: '/action', 
+	  url: '/action',
 	  type: 'POST',
 	  data: formData,
 	  processData:false,
@@ -51,6 +51,7 @@ function loginPost(username,password){
 	});
 	
 }
+
 
 
 //存储所有项目的概要信息,每个元素对应一页的信息
