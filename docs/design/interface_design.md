@@ -12,9 +12,9 @@
             {  
                 action_id  : 1,  
             
-                username   : 用户名,  
+                username   : 用户名,  3-15位 字母，数字
                 
-                password   : 密码密文,  
+                password   : 密码密文,  6-16位 字母，数字
                 
                 realname   : 真实名字,  
                 

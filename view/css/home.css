@@ -37,23 +37,41 @@ article.container>.project-container{
 	margin-top: 40px;
 }
 
-.item-left{
+.item-title-left{
 	float: left;
 }
 
-.item-left>.item-name{
+.project-name{
 	font-size: 1.5em;
+	color: ;
 }
 
 .item-right{
 	float: right;
-	line-height: 1.5;
+	/*line-height: 1.5;*/
 }
 
-.brief-intro{
+.brief-intro-wrapper{
 	margin-top: 10px;
-	padding: 5px 10px;
+	padding: 5px 0;
 	border-top: .5px solid rgba(0,0,0,.5);
 	font-size: 1.2em;
 	font-weight: 400;
+}
+
+.author-info{
+	float: left;
+	width: 10%;
+	max-width: 70px;
+	margin-right: 10px;
+}
+
+.author-icon{
+	display: block;
+	width: 100%;
+}
+
+.author-name{
+	text-align: center;
+	font-size: 1em;
 }

@@ -1,7 +1,8 @@
 //1. 注册的post请求
 function signupPost(username, password, name, college, headIcon){
-	var formData = new FormData( headIcon ); //写入头像
+	var formData = new FormData(); //写入头像
 	
+	formData.append('head', headIcon);
 	formData.append("action_id", 1);
 	formData.append("username", username);
 	formData.append("password", hex_md5(password));
@@ -9,31 +10,31 @@ function signupPost(username, password, name, college, headIcon){
 	formData.append("department", college);
 
 	jQuery.ajax({
-	  url: '/path/to/file',
+	  url: '/action',
 	  type: 'POST',
-	  dataType: 'json',
 	  data: formData,
-	  	
+	  processData:false,
+	  contentType:false,
+
 	  beforeSend: function(){
 
 	  },
 	  success: function(data, textStatus, xhr) {
-
-	  	return data;
-	    
-
+	  	dealSignupReturn(data);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);
 	  }
 	});
+
+	dealSignupReturn(data, username, password);
 }
 
 //2.登录的post请求
 function loginPost(username,password){
 
 	jQuery.ajax({
-	  url: '/path/to/file',
+	  url: '/action',
 	  type: 'POST',
 	  dataType: 'json',
 	  data: {
@@ -44,7 +45,7 @@ function loginPost(username,password){
 
 	  },
 	  success: function(data, textStatus, xhr) {
-	  	return data;
+	  	dealLoginReturn(data, username);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);
@@ -88,7 +89,7 @@ function getProjectBriefPost(){
 
 	  },
 	  success: function(data, textStatus, xhr) {
-	  	return data;
+	  	dealProjectBriefReturn(data);
 	    
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
@@ -110,7 +111,7 @@ function newProjectPost(){
 	    //called when complete
 	  },
 	  success: function(data, textStatus, xhr) {
-	    //called when successful
+	    dealNewProjectReturn(data);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    //called when there is an error
@@ -120,7 +121,7 @@ function newProjectPost(){
 }
 
 //浏览自己的所有项目的概要信息
-function getAllOwnProjectPost(){
+function getOwnProjPost(){
 	jQuery.ajax({
 	  url: '/path/to/file',
 	  type: 'POST',
@@ -132,7 +133,7 @@ function getAllOwnProjectPost(){
 	    //called when complete
 	  },
 	  success: function(data, textStatus, xhr) {
-	    return data;
+	    dealGetOwnProjReturn(data);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    //called when there is an error
@@ -142,7 +143,7 @@ function getAllOwnProjectPost(){
 }
 
 //07. 浏览一个项目的详细信息的post请求
-function getProjectDetail(id){
+function getProjDetail(id){
 	jQuery.ajax({
 	  url: '/path/to/file',
 	  type: 'POST',
@@ -154,7 +155,7 @@ function getProjectDetail(id){
 	    
 	  },
 	  success: function(data, textStatus, xhr) {
-	    return data;
+	    dealProjDetailReturn(data);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    //called when there is an error
@@ -164,7 +165,7 @@ function getProjectDetail(id){
 }
 
 //09. 查看我的活跃记录的post请求
-function getAcitveDegreePost(month, num){
+function getActiveDegreePost(month, num){
 	jQuery.ajax({
 	  url: '/path/to/file',
 	  type: 'POST',
@@ -177,7 +178,7 @@ function getAcitveDegreePost(month, num){
 	    //called when complete
 	  },
 	  success: function(data, textStatus, xhr) {
-	    return data;
+	    dealActiveDegreeReturn(data);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);
@@ -203,7 +204,7 @@ function commentPost(proj_id, proj_name, own_usr, parent_id, content){
 	    
 	  },
 	  success: function(data, textStatus, xhr) {
-	    //called when successful
+	    dealCommentReturn(data);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);
@@ -235,7 +236,7 @@ function getNewsPost(){
 
 	  },
 	  success: function(data, textStatus, xhr) {
-	  	return data;
+	  	dealNewsReturn(data);
 	    
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
@@ -245,7 +246,7 @@ function getNewsPost(){
 }
 
 //12. 查看投票栏
-function getVotingProjectsPost(){
+function getVotingProjPost(){
 	jQuery.ajax({
 	  url: '/path/to/file',
 	  type: 'POST',
@@ -257,7 +258,7 @@ function getVotingProjectsPost(){
 	    //called when complete
 	  },
 	  success: function(data, textStatus, xhr) {
-	    return data;
+	    dealVotingProjReturn(data);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);
@@ -267,7 +268,7 @@ function getVotingProjectsPost(){
 }
 
 //13. 为喜爱的项目投票
-function voteForProjectPost(id){
+function voteForProjPost(id){
 	jQuery.ajax({
 	  url: '/path/to/file',
 	  type: 'POST',
@@ -280,7 +281,7 @@ function voteForProjectPost(id){
 	    //called when complete
 	  },
 	  success: function(data, textStatus, xhr) {
-	    return data;
+	    dealVoteReturn(data);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);
