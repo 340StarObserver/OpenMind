@@ -13,6 +13,7 @@
 		<div onclick="send_login()">login</div>
 		<div onclick="send_logout()">logout</div>
 		<div onclick="send_create()">create</div>
+		<div onclick="send_share()">share</div>
 	</form>
 	<script type="text/javascript">
 
@@ -106,6 +107,33 @@
 			mydata.append("labels","label1,label2,label3");
 			mydata.append("links",'[{"address":"a url","description":"xxx"},{"address":"a url","description":"yyy"}]');
 			mydata.append("introduction","xxxxx");
+			mydata.append("token","the token you get last time");
+
+			$.ajax({
+				url:'/action',
+				type:'POST',
+				cache:false,
+				data:mydata,
+				processData:false,
+				contentType:false
+			}).done(function(res){
+
+			}).fail(function(res){
+
+			});
+		}
+
+		function send_share(){
+			alert("will share new files into a project");
+
+			var mydata = new FormData();
+
+			mydata.append("file1",$('#file1')[0].files[0]);
+			mydata.append("file2",$('#file2')[0].files[0]);
+
+			mydata.append("file_names","yingsi.txt,yingji.txt");
+			mydata.append("action_id",5);
+			mydata.append("proj_id","57c2cc55421aa955d588a246")
 			mydata.append("token","the token you get last time");
 
 			$.ajax({
