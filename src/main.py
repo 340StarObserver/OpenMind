@@ -39,6 +39,7 @@ Shared_Handlers.append(visit_handlers.visit_all_projects)
 Shared_Handlers.append(visit_handlers.visit_my_projects)
 Shared_Handlers.append(visit_handlers.visit_one_project)
 Shared_Handlers.append(personal_handlers.sync_info)
+Shared_Handlers.append(personal_handlers.look_active)
 
 
 # create a server app

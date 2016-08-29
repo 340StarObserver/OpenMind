@@ -85,3 +85,8 @@ def sync_info(post_data,post_files,usr_sessions,server_conf):
 
     # return result
     return response
+
+
+# deal with requests of looking my active data
+def look_active(post_data,post_files,usr_sessions,server_conf):
+    pass
