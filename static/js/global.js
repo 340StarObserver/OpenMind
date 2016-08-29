@@ -30,8 +30,6 @@ function scrollToTop(){
 }
 
 
-
-
 //在顶部显示警告提示
 function showWarningTips(tips){
 	$(".warning-tips .btn-warning").html(tips);
@@ -54,6 +52,41 @@ function isImage(fileType){
     return (fileType.match('^image')!=null);
 }
 
+//图片文件大小是否符合标准
 function isSizeValid(fileSize){
 	return ((fileSize/1024)<200);
 }
+
+function dealLogoutReturn(data){
+	clearCookie();
+	
+}
+
+//解析URL函数
+function parseURL(url) { 
+	var a = document.createElement('a'); 
+	a.href = url; 
+	return { 
+	source: url, 
+	protocol: a.protocol.replace(':',''), 
+	host: a.hostname, 
+	port: a.port, 
+	query: a.search, 
+	params: (function(){ 
+	var ret = {}, 
+	seg = a.search.replace(/^\?/,'').split('&'), 
+	len = seg.length, i = 0, s; 
+	for (;i<len;i++) { 
+	if (!seg[i]) { continue; } 
+	s = seg[i].split('='); 
+	ret[s[0]] = s[1]; 
+	} 
+	return ret; 
+	})(), 
+	file: (a.pathname.match(/\/([^\/?#]+)$/i) || [,''])[1], 
+	hash: a.hash.replace('#',''), 
+	path: a.pathname.replace(/^([^\/])/,'/$1'), 
+	relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [,''])[1], 
+	segments: a.pathname.replace(/^\//,'').split('/') 
+	}; 
+} 

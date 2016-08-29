@@ -1,6 +1,7 @@
 .navbar{
-	padding: 10px 15px 150px;
+	/*padding: 5px 10px;*/
 }
+
 
 .nav-list{
 	float: left;
@@ -8,13 +9,19 @@
 
 #signup-toggle-btn{
 	float: right;
-	margin: 0;
-	content: "123321";
+
+}
+
+.navbar-header img{
+	float: left;
+	display: block;
+}
+
+.navbar-header{
+	float: left;
 }
 
 article{
-	margin: -90px auto;
-	width: 90%;
 	max-width:710px; 
 }
 

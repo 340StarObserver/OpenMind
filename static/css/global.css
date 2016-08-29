@@ -7,13 +7,20 @@ body{
 	min-width: 300px;
 }
 
+article{
+	margin: 100px auto;
+	max-width: 850px;
+}
+
 .navbar{
 	background-color: #263238;
 	padding: 0 15px;
 	position: fixed;
-	width: 100%;
+	left: 0;
+	right: 0;
 	top: 0;
 	z-index: 100;
+	font-size: 1em;
 }
 
 .navbar.shadow-bottom{
@@ -38,13 +45,19 @@ body{
 	color: white;
 }
 
+.navbar-username{
+	float: right;
+}
 
-.clearfix::after{
-	content: "." ; 
-	display: block ;
-	height: 0 ;
-	clear: both ;
-	visibility: hidden;
+.login-btn{
+	float: right;
+	
+}
+
+.project-name{
+	font-size: 1.5em;
+	color: #336699;
+	cursor: pointer;
 }
 
 .warning-tips{
@@ -56,6 +69,23 @@ body{
 	text-align: center;
 	z-index: 100;
 	pointer-events: none;
+}
+
+.clearfix::after{
+	content: "." ; 
+	display: block ;
+	height: 0 ;
+	clear: both ;
+	visibility: hidden;
+}
+
+.tooltip{
+	display: none;
+	position: absolute;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: white;
+	background-color: rgba(153,153,153,.8); 
 }
 
 a,
@@ -92,6 +122,11 @@ footer{
 	font-size: .5em;
 }
 
+@media screen and (max-width: 770px){
+	.navbar-username{
+		float: none;
+	}
+}
 
 @media screen and (max-width: 400px) {
 	body{

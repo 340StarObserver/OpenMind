@@ -5,16 +5,8 @@
 
 .login-btn{
 	float: right;
-	margin: 7px auto;
+	/*margin: 7px auto;*/
 }
-
-article{
-	margin-top: 100px;
-	padding: 20px 15px;
-	max-width: 850px;
-}
-
-
 
 .browse-title{
 	font-size: 2em;
@@ -40,15 +32,17 @@ article{
 	float: left;
 }
 
-.project-name{
-	font-size: 1.5em;
-	color: #336699;
-	cursor: pointer;
+i.fa{
+	font-size: 1.8em;
+}
+
+.item-title-left>.fa{
+	margin-right: 5px;
 }
 
 .project-label{
 	margin-left: 5px;
-	background-color: #03a9f4;
+	background-color: #99cccc;
 	padding: 0 5px;
 	color: white;
 	font-size: .5em;

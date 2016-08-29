@@ -52,7 +52,23 @@ function loginPost(username,password){
 	
 }
 
-
+//3.注销post
+function logoutPost(){
+	jQuery.ajax({
+	  url: '/action',
+	  type: 'POST',
+	  dataType: 'json',
+	  data: {
+	  	action_id: 3},
+	  success: function(data, textStatus, xhr) {
+	    dealLogoutReturn();
+	  },
+	  error: function(xhr, textStatus, errorThrown) {
+	    showWarningTips(textStatus);
+	  }
+	});
+	
+}
 
 //存储所有项目的概要信息,每个元素对应一页的信息
 var projectBrief=new Array();
@@ -117,6 +133,7 @@ function newProjectPost(){
 	
 }
 
+var ownProjBrief = [];
 //浏览自己的所有项目的概要信息
 function getOwnProjPost(){
 	jQuery.ajax({
@@ -130,7 +147,7 @@ function getOwnProjPost(){
 	    //called when complete
 	  },
 	  success: function(data, textStatus, xhr) {
-	    dealGetOwnProjReturn(data);
+	    dealOwnProjReturn(data);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    //called when there is an error
@@ -142,7 +159,7 @@ function getOwnProjPost(){
 //07. 浏览一个项目的详细信息的post请求
 function getProjDetail(id){
 	jQuery.ajax({
-	  url: '/path/to/file',
+	  url: '/action',
 	  type: 'POST',
 	  dataType: 'json',
 	  data: {
@@ -242,7 +259,8 @@ function getNewsPost(){
 	});
 }
 
-//12. 查看投票栏
+var votingProject = [];
+//12. 查看投票中的项目
 function getVotingProjPost(){
 	jQuery.ajax({
 	  url: '/path/to/file',
