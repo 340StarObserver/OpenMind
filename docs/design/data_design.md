@@ -80,32 +80,53 @@
                 {  
                     "id"        : "akfja3",  
                     "parent_id" : "0",  
-                    "username"  : "seven",  
-                    "realname"  : "LvYang",  
-                    "head"      : a url,  
+                    
+                    "send_usr"  : "seven",  
+                    "send_name" : "LvYang",  
+                    "send_head" : a url,  
+                    
+                    "recv_usr"  : "xxxx",  
+                    "recv_name" : "yyyy",  
+                    
                     "time"      : 1445599887,  
                     "content"   : "this is the first comment"  
                 },  
                 {  
                     "id"        : "fa3gad",  
                     "parent_id" : "akfja3",  
-                    "username"  : "leo",  
-                    "realname"  : "QiLi",  
-                    "head"      : a url,  
+                    
+                    "send_usr"  : "leo",  
+                    "send_name" : "shangjun",  
+                    "send_head" : a url,  
+                    
+                    "recv_usr"  : "xxxx",  
+                    "recv_name" : "yyyy",  
+                    
                     "time"      : 1446633221,  
                     "content"   : "this is the second comment"  
                 }  
             ]  
-            # 默认为 [ ]  
-            # 评论们与建议们，每个元素都是一个json对象，其中 :  
+            
+            # 评论们与建议们，默认为 [ ]，每个元素都是一个json对象，其中 :  
+            
             # id          表示此评论的id，由评论者的用户名和时间戳的联合哈希（以此保证唯一性）计算得到  
-            # parent_id   表示若此评论针对项目，则该值为"0"。若此评论针对评论，则该值为父评论的id  
-            # username    表示评论者的用户名  
-            # realname    表示评论者的真实姓名  
-            # head        表示评论者的头像链接地址  
+            # parent_id   表示父评论的id  
+                          if 你这条评论是要针对这个项目，则parent_id填"0"  
+                          if 你这条评论是要针对某条评论 :  
+                              if 那条评论的parent_id是"0"，则你的这条评论的parent_id填那条评论的id  
+                              else（即那条评论的parent_id不是"0"），则你的这条评论的parent_id天那条评论的parent_id  
+            
+            # send_usr    表示评论者（你）的用户名  
+            # send_name   表示评论者（你）的真实姓名  
+            # send_head   表示评论者（你）的头像链接地址  
+            
+            # recv_usr    表示对方的用户名（若你这条评论针对这个项目，则该值填""）  
+            # recv_name   表示对方的真实姓名（若你这条评论针对这个项目，则该值填""）  
+            
             # time        表示此评论的时间戳  
             # content     表示此评论的内容  
-            # 这样一来，评论便可以实现嵌套  
+            
+            # 这样一来，评论便可以实现嵌套，且为了显示方便，只嵌套最多两层  
         }  
 
 
@@ -187,7 +208,7 @@
             # 标签们  
             # 默认为 [ ]  
             
-            "link"         : 可选链接,  
+            "links"        : 可选链接,  
             # 可以链接到你的个人主页啊，博客啊，github啊之类的  
             # 默认为""  
             

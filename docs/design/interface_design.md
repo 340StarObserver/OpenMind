@@ -176,6 +176,9 @@
 
             {  
                 action_id  : 6,  
+                
+                page_size  : 你最多想要获取几条数据,  
+                # 为了让各设备显示得正好，所以让客户端设备自己来决定要显示多少条合适  
             
                 time_max   : 时间戳  
                 # 服务端会返回发布时间小于该值的且距离当今最近的若干个项目的概要信息  
@@ -306,35 +309,58 @@
                 ],  
                 # 关于该项目，分享的文件们  
                 
-                comments     :  
+                "comments"     :  
                 [  
                     {  
-                        id        : "akfja3",  
-                        parent_id : "0",  
-                        username  : "seven",  
-                        realname  : "LvYang",  
-                        head      : a url,  
-                        time      : 1445599887,  
-                        content   : "this is the first comment"  
+                        "id"        : "akfja3",  
+                        "parent_id" : "0",  
+                    
+                        "send_usr"  : "seven",  
+                        "send_name" : "LvYang",  
+                        "send_head" : a url,  
+                    
+                        "recv_usr"  : "xxxx",  
+                        "recv_name" : "yyyy",  
+                    
+                        "time"      : 1445599887,  
+                        "content"   : "this is the first comment"  
                     },  
                     {  
-                        id        : "fa3gad",  
-                        parent_id : "akfja3",  
-                        username  : "leo",  
-                        realname  : "QiLi",  
-                        head      : a url,  
-                        time      : 1446633221,  
-                        content   : "this is the second comment"  
+                        "id"        : "fa3gad",  
+                        "parent_id" : "akfja3",  
+                    
+                        "send_usr"  : "leo",  
+                        "send_name" : "shangjun",  
+                        "send_head" : a url,  
+                    
+                        "recv_usr"  : "xxxx",  
+                        "recv_name" : "yyyy",  
+                    
+                        "time"      : 1446633221,  
+                        "content"   : "this is the second comment"  
                     }  
                 ]  
+            
+                # 评论们与建议们，默认为 [ ]，每个元素都是一个json对象，其中 :  
+            
                 # id          表示此评论的id，由评论者的用户名和时间戳的联合哈希（以此保证唯一性）计算得到  
-                # parent_id   表示若此评论针对项目，则该值为"0"。若此评论针对评论，则该值为父评论的id  
-                # username    表示评论者的用户名  
-                # realname    表示评论者的真实姓名  
-                # head        表示评论者的头像链接  
+                # parent_id   表示父评论的id  
+                              if 你这条评论是要针对这个项目，则parent_id填"0"  
+                              if 你这条评论是要针对某条评论 :  
+                                  if 那条评论的parent_id是"0"，则你的这条评论的parent_id填那条评论的id  
+                                  else（即那条评论的parent_id不是"0"），则你的这条评论的parent_id天那条评论的parent_id  
+            
+                # send_usr    表示评论者（你）的用户名  
+                # send_name   表示评论者（你）的真实姓名  
+                # send_head   表示评论者（你）的头像链接地址  
+            
+                # recv_usr    表示对方的用户名（若你这条评论针对这个项目，则该值填""）  
+                # recv_name   表示对方的真实姓名（若你这条评论针对这个项目，则该值填""）  
+            
                 # time        表示此评论的时间戳  
                 # content     表示此评论的内容  
-                # 这样一来，评论便可以实现嵌套  
+            
+                # 这样一来，评论便可以实现嵌套，且为了显示方便，只嵌套最多两层  
             }  
 
 
@@ -403,20 +429,7 @@
                         ],  
                         
                         comments     :  
-                        [  
-                            {  
-                                id        : "akfja3",  
-                                parent_id : "0",  
-                                username  : "seven",  
-                                realname  : "LvYang",  
-                                head      : a url,  
-                                time      : 1445599887,  
-                                content   : "this is the first comment"  
-                            },  
-                            {  
-                                另一条评论的...  
-                            }  
-                        ]  
+                        # 全部评论，形式请参见 docs/design/data_design.md  
                     },  
                     {  
                         另一个项目的...  
@@ -494,9 +507,13 @@
                 
                 own_usr    : 项目所有者的用户名，  
                 
+                own_name   : 项目所有者的姓名,  
+                
                 parent_id  : 父评论的id,  
                 # 若针对项目而评论，该值填"0"  
-                # 若针对评论而评论，该值填那条评论的id  
+                # 若针对评论而评论 :  
+                #    if 那条评论的parent_id为"0"，则这条评论的parent_id填那条评论的id  
+                #    if 那条评论的parent_id不为"0"，则这条评论的parent_id填那条评论的parent_id  
                 
                 content    : 我要发表的评论内容  
             }  
@@ -524,6 +541,9 @@
 
             {  
                 action_id  : 12,  
+                
+                page_size  : 最多取多少条数据,  
+                # 为了让各设备显示得刚好，所以由客户端设备自行决定该值的取值  
             
                 time_max   : 时间戳  
                 # 服务端会返回消息时间小于该值的且距离当今最近的若干消息  

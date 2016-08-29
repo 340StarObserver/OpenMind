@@ -21,7 +21,7 @@ def read(filename):
     the parameter is the path of file
     it returns a dictionary of pairs of <key,value>
     """
-    res = {'oss':{},'mongo':{},'rand':{}}
+    res = {'oss':{},'mongo':{},'rand':{},'active':{}}
     config = ConfigParser.ConfigParser()
     try:
         config.read(filename)
@@ -39,6 +39,10 @@ def read(filename):
         res['rand']['key_seed'] = config.get('rand','key_seed')
         res['rand']['key_length'] = config.get('rand','key_length')
         res['rand']['token_range'] = int(config.get('rand','token_range'))
+        res['active']['create_inc'] = int(config.get('active','create_inc'))
+        res['active']['enrich_inc'] = int(config.get('active','enrich_inc'))
+        res['active']['vote_inc'] = int(config.get('active','vote_inc'))
+        res['active']['comment_inc'] = int(config.get('active','comment_inc'))
     except Exception,e:
         print "fail to read configuration from %s"%(filename)
         print str(e)

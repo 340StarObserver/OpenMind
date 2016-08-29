@@ -93,7 +93,9 @@ def create_project(post_data,post_files,usr_sessions,server_conf):
     update_factor_1 = {'_id':usr_sessions['id']}
     update_factor_2 = {'$push':{'projects':str(project_data['_id'])}}
     mongo_client[db_name]['user_info'].update_one(update_factor_1,update_factor_2)
-    active_manager.increase_active(mongo_client,db_name,usr_sessions['id'],this_month,this_day,10)
+    active_manager.increase_active(mongo_client,db_name,usr_sessions['id'],\
+        this_month,this_day,\
+        server_conf['active']['create_inc'])
 
     # delete some objects
     del time_stamp
@@ -170,7 +172,9 @@ def enrich_project(post_data,post_files,usr_sessions,server_conf):
     update_factor_1 = {'_id':ObjectId(post_data['proj_id']),'own_usr':usr_sessions['id']}
     update_factor_2 = {'$pushAll':{'shares':new_shares}}
     mongo_client[db_name]['project_info'].update_one(update_factor_1,update_factor_2)
-    active_manager.increase_active(mongo_client,db_name,usr_sessions['id'],this_month,this_day,4)
+    active_manager.increase_active(mongo_client,db_name,usr_sessions['id'],\
+        this_month,this_day,\
+        server_conf['active']['enrich_inc'])
 
     # delete some objects
     del time_stamp
