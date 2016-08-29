@@ -41,9 +41,9 @@ def increase_active(mongo_client,db_name,username,month,day,degree_inc):
     w = False
     while i < n:
         if active_data['active'][i]['day'] == day:
-        	active_data['active'][i]['degree']+=degree_inc
-        	w=True
-        	break
+            active_data['active'][i]['degree']+=degree_inc
+            w=True
+            break
         i+=1
     if w is False:
         active_data['active'].append({'day':day,'degree':degree_inc})

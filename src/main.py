@@ -22,6 +22,7 @@ import configure
 import account_handlers
 import share_handlers
 import visit_handlers
+import personal_handlers
 
 # read server configuration
 Shared_Conf = configure.read("conf/server.conf")
@@ -37,6 +38,7 @@ Shared_Handlers.append(share_handlers.enrich_project)
 Shared_Handlers.append(visit_handlers.visit_all_projects)
 Shared_Handlers.append(visit_handlers.visit_my_projects)
 Shared_Handlers.append(visit_handlers.visit_one_project)
+Shared_Handlers.append(personal_handlers.sync_info)
 
 
 # create a server app

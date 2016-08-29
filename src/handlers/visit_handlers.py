@@ -43,9 +43,9 @@ def visit_all_projects(post_data,post_files,usr_sessions,server_conf):
 
         # modify each project's id
         for proj in data:
-        	proj['_id'] = str(proj['_id'])
-        	response.append(proj)
-        	del proj
+            proj['_id'] = str(proj['_id'])
+            response.append(proj)
+            del proj
 
         # delete some objects
         del db_name
@@ -82,12 +82,12 @@ def visit_my_projects(post_data,post_files,usr_sessions,server_conf):
         n = len(user_data['projects'])
         i = 0
         while i<n:
-        	query_factor_1['_id'] = ObjectId(user_data['projects'][i])
-        	proj = mongo_client[db_name]['project_info'].find_one(query_factor_1,query_factor_3)
-        	proj['_id'] = str(proj['_id'])
-        	response.append(proj)
-        	i+=1
-        	del proj
+            query_factor_1['_id'] = ObjectId(user_data['projects'][i])
+            proj = mongo_client[db_name]['project_info'].find_one(query_factor_1,query_factor_3)
+            proj['_id'] = str(proj['_id'])
+            response.append(proj)
+            i+=1
+            del proj
 
     # delete some objects
     del db_name

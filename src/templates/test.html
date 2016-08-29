@@ -14,9 +14,11 @@
 		<div onclick="send_logout()">logout</div>
 		<div onclick="send_create()">create</div>
 		<div onclick="send_share()">share</div>
-		<div onclick="send_visit_all()">visit_all</div>
+		<div onclick="send_sync()">sync</div>
 	</form>
 	<script type="text/javascript">
+
+		var cur_token = null;
 
 		function send_regist(){
 			alert("will regist");
@@ -58,7 +60,7 @@
 				processData:false,
 				contentType:false
 			}).done(function(res){
-
+				cur_token=res.token;
 			}).fail(function(res){
 
 			});
@@ -151,14 +153,13 @@
 			});
 		}
 
-		function send_visit_all(){
-			alert("will visit all");
+		function send_sync(){
+			alert("will sync");
 
 			var mydata = new FormData();
 
-			mydata.append("action_id",6);
-			mydata.append("time_max",1485599887)
-			mydata.append("page_size",3);
+			mydata.append("action_id",9);
+			mydata.append("token",cur_token);
 
 			$.ajax({
 				url:'/action',

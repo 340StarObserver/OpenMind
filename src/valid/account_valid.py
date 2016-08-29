@@ -19,12 +19,12 @@ def valid_username(username):
     """
     n = len(username)
     if n<4 or n>16:
-    	return False
+        return False
     for c in username:
         if (c>='a' and c<='z') or (c>='A' and c<='Z') or (c>='0' and c<='9'):
-        	pass
+            pass
         else:
-        	return False
+            return False
     return True
 
 
@@ -36,9 +36,9 @@ def valid_password(password):
         return False
     for c in password:
         if (c>='0' and c<='9') or (c>='a' and c<='f'):
-        	pass
+            pass
         else:
-        	return False
+            return False
     return True
 
 
