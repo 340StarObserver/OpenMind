@@ -14,6 +14,7 @@
 		<div onclick="send_logout()">logout</div>
 		<div onclick="send_create()">create</div>
 		<div onclick="send_share()">share</div>
+		<div onclick="send_visit_all()">visit_all</div>
 	</form>
 	<script type="text/javascript">
 
@@ -135,6 +136,29 @@
 			mydata.append("action_id",5);
 			mydata.append("proj_id","57c2cc55421aa955d588a246")
 			mydata.append("token","the token you get last time");
+
+			$.ajax({
+				url:'/action',
+				type:'POST',
+				cache:false,
+				data:mydata,
+				processData:false,
+				contentType:false
+			}).done(function(res){
+
+			}).fail(function(res){
+
+			});
+		}
+
+		function send_visit_all(){
+			alert("will visit all");
+
+			var mydata = new FormData();
+
+			mydata.append("action_id",6);
+			mydata.append("time_max",1485599887)
+			mydata.append("page_size",3);
 
 			$.ajax({
 				url:'/action',

@@ -31,11 +31,11 @@ import rand
 # deal with request of create a project
 def create_project(post_data,post_files,usr_sessions,server_conf):
     # when not login
-    if usr_sessions['id'] is None:
+    if  'id' not in usr_sessions:
         return {'result':False,'reason':1}
 
     # when token is wrong
-    if post_data['token'] != usr_sessions['token']:
+    if  'token' not in usr_sessions or int(post_data['token']) != usr_sessions['token']:
         return {'result':False,'reason':2}
 
     # prepare timestamp and timestr
@@ -123,11 +123,11 @@ def create_project(post_data,post_files,usr_sessions,server_conf):
 # deal with request of enrich a project
 def enrich_project(post_data,post_files,usr_sessions,server_conf):
     # when not login
-    if usr_sessions['id'] is None:
+    if  'id' not in usr_sessions:
         return {'result':False,'reason':1}
 
     # when token is wrong
-    if post_data['token'] != usr_sessions['token']:
+    if  'token' not in usr_sessions or int(post_data['token']) != usr_sessions['token']:
         return {'result':False,'reason':2}
 
     # prepare timestamp and timestr

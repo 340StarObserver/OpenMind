@@ -21,6 +21,7 @@ import flask
 import configure
 import account_handlers
 import share_handlers
+import visit_handlers
 
 # read server configuration
 Shared_Conf = configure.read("conf/server.conf")
@@ -33,6 +34,9 @@ Shared_Handlers.append(account_handlers.login)
 Shared_Handlers.append(account_handlers.logout)
 Shared_Handlers.append(share_handlers.create_project)
 Shared_Handlers.append(share_handlers.enrich_project)
+Shared_Handlers.append(visit_handlers.visit_all_projects)
+Shared_Handlers.append(visit_handlers.visit_my_projects)
+Shared_Handlers.append(visit_handlers.visit_one_project)
 
 
 # create a server app
