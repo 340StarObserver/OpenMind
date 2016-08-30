@@ -1,6 +1,11 @@
 ## 接口设计 ##
 
 
+对所有请求都是适用 :  
+
+        若响应体是 { result : false, reason : -1 }  则表示action_id错误  
+        若响应体是 { result : false, reason : -2 }  则表示发生异常  
+
 <strong>01. 创建新用户</strong>  
 
         请求地址 : http://ip:port/action  
