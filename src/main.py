@@ -32,6 +32,7 @@ Shared_Conf = configure.read("conf/server.conf")
 Shared_Handlers = []
 Shared_Handlers.append(account_handlers.regist)
 Shared_Handlers.append(account_handlers.login)
+Shared_Handlers.append(account_handlers.sethead)
 Shared_Handlers.append(account_handlers.logout)
 Shared_Handlers.append(share_handlers.create_project)
 Shared_Handlers.append(share_handlers.enrich_project)
@@ -69,6 +70,12 @@ def index():
 @Server_App.route("/home",methods=['GET'])
 def home():
     return flask.render_template("home.html")
+
+
+# detail page
+@Server_App.route("/detail",methods=['GET'])
+def detail():
+    return flask.render_template("detail.html")
 
 
 # a test for sessions

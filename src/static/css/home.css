@@ -5,16 +5,7 @@
 
 .login-btn{
 	float: right;
-	margin: 7px auto;
-}
-
-article{
-	padding: 20px 15px;
-	max-width: 850px;
-}
-
-article.container>.project-container{
-	padding-bottom: 
+	/*margin: 7px auto;*/
 }
 
 .browse-title{
@@ -41,9 +32,20 @@ article.container>.project-container{
 	float: left;
 }
 
-.project-name{
-	font-size: 1.5em;
-	color: #336699;
+i.fa{
+	font-size: 1.8em;
+}
+
+.item-title-left>.fa{
+	margin-right: 5px;
+}
+
+.project-label{
+	margin-left: 5px;
+	background-color: #99cccc;
+	padding: 0 5px;
+	color: white;
+	font-size: .5em;
 }
 
 .item-title-right{
@@ -57,6 +59,7 @@ article.container>.project-container{
 	border-top: .5px solid rgba(0,0,0,.5);
 	font-size: 1.2em;
 	font-weight: 400;
+	word-break: break-all;
 }
 
 .author-info{
@@ -75,4 +78,5 @@ article.container>.project-container{
 
 .author-name{
 	text-align: center;
+	font-size: .5em;
 }

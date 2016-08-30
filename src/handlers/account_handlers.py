@@ -37,18 +37,11 @@ def regist(post_data,post_files,usr_sessions,server_conf):
     password = post_data['password']
     realname = post_data['realname']
     department = post_data['department']
-    head_bin = post_files['head'].read()
 
     # connect to mongo
     db_name = server_conf['mongo']['db_name']
     mongo_client = mongo_conn.get_conn(server_conf['mongo']['host'],db_name,\
         server_conf['mongo']['db_user'],server_conf['mongo']['db_pwd'])
-
-    # connect to oss
-    oss_bucket_client = oss.get_bucket_conn(server_conf['oss']['access_id'],\
-        server_conf['oss']['access_key'],\
-        server_conf['oss']['end_point'],\
-        server_conf['oss']['bucket_name'])
 
     # check whether all data exist
     if isinstance(username,unicode) and isinstance(password,unicode) and \
@@ -62,23 +55,17 @@ def regist(post_data,post_files,usr_sessions,server_conf):
                 time_stamp = int(time.time())
                 time_array = time.localtime(time_stamp)
                 time_str = time.strftime("%Y%m%d",time_array)
-                rand_str = "%d%s"%(time_stamp,rand.rand_key(server_conf['rand']['key_seed'],server_conf['rand']['key_length']))
-                head_name = "%s/%s/%s.jpg"%(server_conf['oss']['head_dir'],time_str,rand_str)
-                head_url = "%s/%s"%(server_conf['oss']['static_dir'],head_name)
 
                 # create a dict of this user's personal info
                 usr_data = {}
                 usr_data['_id'] = username
                 usr_data['password'] = password
                 usr_data['realname'] = realname
-                usr_data['head'] = head_url
+                usr_data['head'] = server_conf['user']['default_head']
                 usr_data['department'] = department
                 usr_data['signup_time'] = time_str
                 usr_data['projects'] = []
                 usr_data['vote_limit'] = 0
-
-                # push head image into oss
-                oss.add_object(oss_bucket_client,head_name,head_bin)
 
                 # insert personal info to collection 'user_info'
                 mongo_client[db_name]['user_info'].insert_one(usr_data)
@@ -88,9 +75,6 @@ def regist(post_data,post_files,usr_sessions,server_conf):
                 del time_stamp
                 del time_array
                 del time_str
-                del rand_str
-                del head_name
-                del head_url
                 del usr_data
             else:
                 response = {'result':False,'reason':3}
@@ -107,10 +91,8 @@ def regist(post_data,post_files,usr_sessions,server_conf):
     del password
     del realname
     del department
-    del head_bin
     del db_name
     del mongo_client
-    del oss_bucket_client
 
     # return result
     return response
@@ -164,6 +146,68 @@ def login(post_data,post_files,usr_sessions,server_conf):
 
     # return result
     return response
+
+
+# deal with requests of setting a new head
+def sethead(post_data,post_files,usr_sessions,server_conf):
+    # when not login
+    if  'id' not in usr_sessions:
+        return {'result':False,'reason':1}
+
+    # when token is wrong
+    if  'token' not in usr_sessions or int(post_data['token']) != usr_sessions['token']:
+        return {'result':False,'reason':2}
+
+    # prepare timestamp and timestr
+    time_stamp = int(time.time())
+    time_array = time.localtime(time_stamp)
+    time_str = time.strftime("%Y%m%d",time_array)
+
+    # connect to mongo
+    db_name = server_conf['mongo']['db_name']
+    mongo_client = mongo_conn.get_conn(server_conf['mongo']['host'],db_name,\
+        server_conf['mongo']['db_user'],server_conf['mongo']['db_pwd'])
+
+    # connect to oss
+    oss_bucket_client = oss.get_bucket_conn(server_conf['oss']['access_id'],\
+        server_conf['oss']['access_key'],\
+        server_conf['oss']['end_point'],\
+        server_conf['oss']['bucket_name'])
+
+    # push head image to oss
+    rand_str = "%d%s"%(time_stamp,rand.rand_key(server_conf['rand']['key_seed'],server_conf['rand']['key_length']))
+    head_name = "%s/%s/%s.jpg"%(server_conf['oss']['head_dir'],time_str,rand_str)
+    head_url = "%s/%s"%(server_conf['oss']['static_dir'],head_name)
+    head_bin = post_files['head'].read()
+    oss.add_object(oss_bucket_client,head_name,head_bin)
+
+    # update head url in mongodb
+    update_factor_1 = {'_id':usr_sessions['id']}
+    update_factor_2 = {'$set':{'head':head_url}}
+    mongo_client[db_name]['user_info'].update_one(update_factor_1,update_factor_2)
+
+    # create a new token
+    new_token = rand.rand_token(server_conf['rand']['token_range'])
+    usr_sessions['token'] = new_token
+
+    # delete some objects
+    mongo_client.close()
+    del time_stamp
+    del time_array
+    del time_str
+    del db_name
+    del mongo_client
+    del oss_bucket_client
+    del rand_str
+    del head_name
+    del head_url
+    del head_bin
+    del update_factor_1
+    del update_factor_2
+
+    # return result
+    return {'result':True,'token':new_token}
+
 
 
 # deal with logout request

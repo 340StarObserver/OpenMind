@@ -3,7 +3,7 @@
 
 # Author 		: 	Lv Yang
 # Created 		: 	21 August 2016
-# Modified 		: 	28 August 2016
+# Modified 		: 	30 August 2016
 # Version 		: 	1.0
 
 """
@@ -21,7 +21,7 @@ def read(filename):
     the parameter is the path of file
     it returns a dictionary of pairs of <key,value>
     """
-    res = {'oss':{},'mongo':{},'rand':{},'active':{}}
+    res = {'oss':{},'mongo':{},'rand':{},'active':{},'user':{}}
     config = ConfigParser.ConfigParser()
     try:
         config.read(filename)
@@ -43,6 +43,7 @@ def read(filename):
         res['active']['enrich_inc'] = int(config.get('active','enrich_inc'))
         res['active']['vote_inc'] = int(config.get('active','vote_inc'))
         res['active']['comment_inc'] = int(config.get('active','comment_inc'))
+        res['user']['default_head'] = config.get('user','default_head')
     except Exception,e:
         print "fail to read configuration from %s"%(filename)
         print str(e)
