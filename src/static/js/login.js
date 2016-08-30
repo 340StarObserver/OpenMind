@@ -144,7 +144,7 @@ function signup(){
 	college = $("#signup-college-select").val();
 	//headIcon = $("#signup-headIcon-input")[0].files[0];
 	
-	if( username=="" || password=="" || confirmPassword=="" || name=="" || headIcon == null){
+	if( username=="" || password=="" || confirmPassword=="" || name==""){
 		showWarningTips("请填写完整信息");
 		return false;
 	}

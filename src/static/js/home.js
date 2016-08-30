@@ -150,10 +150,8 @@ var votingExample = [
 ];
 
 $(document).ready(function() {
-	init();
 
-	//dealVotingProjReturn( votingExample );
-	//console.log( votingProject );
+	init();
 
 	$(".voting-project-toggle").click(function(event) {
 		console.log ( $("#a").attr('checked') );
@@ -165,16 +163,16 @@ $(document).ready(function() {
 			return false;
 		
 		scrollToTop();
+		updateProjectPage( projectBrief[--currentPage] );
+
 		enableBtn("#next-btn");
 
-		if( --currentPage == 0 ){
+		if( currentPage == 0 ){
 			//上一页按钮失效
 			disableBtn('#prev-btn');
 		}
 
 		console.log("从当前存储中选择上一页");
-
-		updateProjectPage( projectBrief[currentPage] );
 	});
 
 	
@@ -187,10 +185,10 @@ $(document).ready(function() {
 		enableBtn("#voting-next-btn");
 
 		if( --currentVotingPage == 0){
-			disableBtn("#voting-prev-btn");
+			disableBtn("voting-prev-btn");
 		}
 
-		console.log("选择正在投票的上一页");
+		console.log("从当前存储中选择正在投票的上一页");
 
 		updateProjectPage( votingProject[currentVotingPage] );
 
@@ -211,17 +209,17 @@ $(document).ready(function() {
 
 			//发post请求
 			//dealProjBriefReturn( example[0] );
-			getProjectBriefPost();
+			getProjBriefPost();
 		}
 		else{
 			console.log("从当前存储中选择下一页");
-
 			//从当前存储中选择下一页
 			updateProjectPage( projectBrief[++currentPage] );
 			//前一页有效
 			enableBtn("#prev-btn");
-			if( currentPage == projectBrief.length-1)
-				disableBtn("#next-btn");
+			// if ( currentPage == projectBrief.length-1 ) {
+			// 	disableBtn("prev-btn");
+			// }
 		}
 		
 	});
@@ -239,12 +237,14 @@ $(document).ready(function() {
 		}
 
 		updateProjectPage( votingProject[currentVotingPage] );
-
+		// if ( currentVotingPage == projectBrief.length-1 ) {
+		// 		disableBtn("voting-next-btn");
+		// }
 	});
 
 	$(document).on('click', '.project-name', function(event) {
 		var id = $(this).attr('id');
-		location.href = "/detail?id="+id;
+		location.href = "detail.html?id="+id;
 	});
 
 });
@@ -253,7 +253,7 @@ $(document).ready(function() {
 function init(){
 
 	//获取第一页概要信息
-	getProjectBriefPost();
+	getProjBriefPostFirst();
 	
 	//dealProjBriefReturn( example[0] );
 	
@@ -261,12 +261,11 @@ function init(){
 	//getVotingProjPost();
 
 	//使上一页按钮失效
-	// disableBtn("#prev-btn");
-	// disableBtn("#voting-prev-btn");
+	disableBtn('#prev-btn');
+	disableBtn('#voting-prev-btn');
 
-	// currentPage = 0;
-	// currentVotingPage = 0;
-
+	currentPage = 0;
+	currentVotingPage = 0;
 
 	//查看是否有cookie
 	if( getCookie("token") != null ){
@@ -286,6 +285,7 @@ function init(){
 		
 	}
 
+	
 }
 
 function updateProjectPage(data){
@@ -306,11 +306,11 @@ function updateProjectPage(data){
 function dealProjBriefReturn(data){
 
 	if( data.length <5 ){
-		    //项目数小于5时，下一页按钮失效
-			disableBtn("#next-btn");
-			//返回的data为空
-			if (data.length == 0)
-				return false;
+		//项目数小于5时，下一页按钮失效
+		disableBtn("#next-btn");
+		//返回的data为空
+		if (data.length == 0)
+			return false;
 	}
 
 	/* 有项目概要信息可以更新*/
@@ -320,15 +320,6 @@ function dealProjBriefReturn(data){
 	enableBtn("#prev-btn");
 	currentPage++;
 
-	if( projectBrief.length == 0){
-		//使上一页按钮失效
-		disableBtn("#prev-btn");
-		disableBtn("#voting-prev-btn");
-
-		currentPage = 0;
-		currentVotingPage = 0;
-	}
-	
 	// //post请求下一页
 	// if( projectBrief.length-1 < currentPage+1){
 	// 	currentPage++;
@@ -344,12 +335,36 @@ function dealProjBriefReturn(data){
 	updateProjectPage(data);
 }
 
+function dealProjBriefReturnFirst(data){
+	if( data.length <5 ){
+		//项目数小于5时，下一页按钮失效
+		disableBtn("#next-btn");
+		//返回的data为空
+		if (data.length == 0){
+			//TODO 提示暂无项目
+
+			return false;
+		}
+	}
+
+	/* 有项目概要信息可以更新*/
+	console.log( "need to update first time:"+data );
+
+	// currentPage=0;
+	// disableBtn("#prev-btn");
+
+	//将新获得的项目概要信息json数组储存
+	projectBrief.push(data);
+	//更新页面
+	updateProjectPage(data);
+}
+
 //获取每个项目简要信息生成的html
 function getProjectItemHtml(id, proj_name, own_username, own_name, own_head,
 							pub_time, labels, introduction){
-
+	
 	if( own_head == "0"){
-		own_head = "static/res/image/icon.png" ;  
+		own_head = "../static/res/image/icon.png";
 	}
 
 	var html='<li class="panel panel-default project-list-item">'+
@@ -396,15 +411,14 @@ function dealVotingProjReturn(data){
 
 	//添加余下的
 	votingProject.push( projects );
-	
+
+	disableBtn("#voting-prev-btn");
 }
 
 function enableBtn(selector){
-	console.log("enable"+selector);
 	$(selector).removeClass('disabled');
 }
 
 function disableBtn(selector){
-	console.log("disable"+selector);
 	$(selector).addClass('disabled');
 }   			    					

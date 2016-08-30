@@ -3,7 +3,7 @@
 
 # Author 		: 	Lv Yang
 # Created 		: 	29 August 2016
-# Modified 		: 	29 August 2016
+# Modified 		: 	30 August 2016
 # Version 		: 	1.0
 
 """
@@ -89,4 +89,37 @@ def sync_info(post_data,post_files,usr_sessions,server_conf):
 
 # deal with requests of looking my active data
 def look_active(post_data,post_files,usr_sessions,server_conf):
-    pass
+    # declare response
+    response = []
+
+    # accept parameters from client
+    month = int(post_data['month'])
+    num = int(post_data['num'])
+
+    # check valid
+    if 'id' not in usr_sessions or month<=0 or num<=0:
+        return response
+
+    # connect to mongo
+    db_name = server_conf['mongo']['db_name']
+    mongo_client = mongo_conn.get_conn(server_conf['mongo']['host'],db_name,\
+        server_conf['mongo']['db_user'],server_conf['mongo']['db_pwd'])
+
+    # do query
+    query_factor_1 = {'username':usr_sessions['id'],'month':{'$lte':month}}
+    query_factor_2 = {'_id':0,'month':1,'active':1}
+    data = mongo_client[db_name]['active_info'].find(query_factor_1,query_factor_2).limit(num)
+    for month_active in data:
+        response.append(month_active)
+        del month_active
+
+    # delete some objects
+    mongo_client.close()
+    del db_name
+    del mongo_client
+    del query_factor_1
+    del query_factor_2
+    del data
+
+    # return result
+    return response

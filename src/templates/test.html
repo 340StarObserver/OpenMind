@@ -16,6 +16,7 @@
 		<div onclick="send_create()">create</div>
 		<div onclick="send_share()">share</div>
 		<div onclick="send_sync()">sync</div>
+		<div onclick="send_lookActive()">lookActive</div>
 	</form>
 	<script type="text/javascript">
 
@@ -50,7 +51,7 @@
 			var mydata = new FormData();
 			mydata.append("action_id",2);
 			mydata.append("username","seven");
-			mydata.append("password","ab2345678901234567890123456789ab");
+			mydata.append("password","e10adc3949ba59abbe56e057f20f883e");
 
 			$.ajax({
 				url:'/action',
@@ -192,6 +193,28 @@
 				contentType:false
 			}).done(function(res){
 				cur_token=res.token;
+			}).fail(function(res){
+
+			});
+		}
+
+		function send_lookActive(){
+			alert("will look active");
+
+			var mydata = new FormData();
+			mydata.append("action_id",11);
+			mydata.append("month",201608);
+			mydata.append("num",3);
+
+			$.ajax({
+				url:'/action',
+				type:'POST',
+				cache:false,
+				data:mydata,
+				processData:false,
+				contentType:false
+			}).done(function(res){
+				
 			}).fail(function(res){
 
 			});

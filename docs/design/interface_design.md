@@ -545,12 +545,16 @@
                 action_id  : 12,  
             
                 proj_id    : 项目id,  
-                
                 proj_name  : 项目名称,  
                 
                 own_usr    : 项目所有者的用户名，  
-                
                 own_name   : 项目所有者的姓名,  
+                
+                recv_usr   : 消息接收者的用户名,  
+                recv_name  : 消息接受者的姓名,  
+                # 若这条评论是针对项目的，则recv_usr和own_usr相同，recv_name和own_name相同  
+                # 若这条评论是针对评论的，则recv_usr是那条评论的用户的用户名，recv_name是那条评论的用户的姓名  
+                # （项目所有者肯定会接收到这条消息，但当这条评论是针对评论的时候，那条评论的用户也会接收到消息）  
                 
                 parent_id  : 父评论的id,  
                 # 若针对项目而评论，该值填"0"  
