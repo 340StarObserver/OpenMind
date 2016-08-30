@@ -141,10 +141,10 @@ function signup(){
 	password = $("#signup-password-input").val(),
 	confirmPassword = $("#signup-confirm-password-input").val(),
 	name = $("#signup-name-input").val(),
-	college = $("#signup-college-select").val(),
-	headIcon = $("#signup-headIcon-input")[0].files[0];
+	college = $("#signup-college-select").val();
+	//headIcon = $("#signup-headIcon-input")[0].files[0];
 	
-	if( username=="" || password=="" || confirmPassword=="" || name=="" || headIcon == null){
+	if( username=="" || password=="" || confirmPassword=="" || name==""){
 		showWarningTips("请填写完整信息");
 		return false;
 	}
@@ -159,13 +159,14 @@ function signup(){
 			return false;
 	}
 
-	if( !isImage(headIcon.type) || !isSizeValid(headIcon.size)){
+	// if( !isImage(headIcon.type) || !isSizeValid(headIcon.size)){
 			
-			showWarningTips("请检查头像格式");
-			return false;
-	}
+	// 		showWarningTips("请检查头像格式");
+	// 		return false;
+	// }
 
-	signupPost(username,password,name,college, headIcon);
+	signupPost(username,password,name,college);
+	// signupPost(username,password,name,college, headIcon);
 
 }
 

@@ -64,10 +64,7 @@ i.fa{
 
 .author-info{
 	float: left;
-	width: 10%;
-	min-width: 20px;
-	max-width: 70px;
-	margin-right: 10px;
+	width: 70px;
 	color: #666;
 }
 
@@ -79,4 +76,22 @@ i.fa{
 .author-name{
 	text-align: center;
 	font-size: .5em;
+}
+
+.brief-intro{
+	margin-left: 75px;
+}
+
+#vote-btn{
+	font-size: .8em;
+	background-color: #ededed;
+	color: #336699;
+	border-radius: 8px;
+	margin: 0;
+	padding: 5px 8px;
+}
+
+#vote-btn.disabled{
+	opacity: .5;
+	pointer-events: none;
 }

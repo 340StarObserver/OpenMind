@@ -20,9 +20,6 @@
                 
                 department : 院系  
             }  
-        
-        请求中附带一张图片，作为头像（限制jpg或png，200K以内，图片的键名为head）  
-        如何将图片和非图片数据一次性post，参见 test/upload.html  
 
         响应体  
 
@@ -80,7 +77,38 @@
             }  
 
 
-<strong>03. 注销</strong>
+<strong>03. 设置头像</strong>  
+
+        请求地址 : http://ip:port/action  
+        
+        请求方法 : POST  
+        
+        请求体  
+        
+            请求中附带一张图片，作为头像（限制jpg或png，200K以内，图片的键名为head）  
+            如何将图片和非图片数据一次性post，参见 test/upload.html  
+            
+            另外要把之前获得的token放在请求体中一并发送  
+            
+            action_id 取 3，放在请求体中一并发送  
+        
+        响应体  
+        
+            {  
+                result     : 成功与否,  
+                # true or false  
+                
+                reason     : 失败原因  
+                # 仅当 result == false，此值才有  
+                # reason   : 1   表示未登陆  
+                # reason   : 2   表示token错误  
+                
+                token      : 新的token  
+                # 仅当 result == true，此值才有  
+            }  
+
+
+<strong>04. 注销</strong>
 
         请求地址 : http://ip:port/action  
         
@@ -89,7 +117,7 @@
         请求体  
 
             {  
-                action_id  : 3  
+                action_id  : 4  
             }  
 
         响应体  
@@ -99,7 +127,7 @@
             }  
 
 
-<strong>04. 新增一个项目</strong>  
+<strong>05. 新增一个项目</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -111,34 +139,8 @@
             并结合 docs/design/data_design.md 中的 project_info  
             
             请求体如何构造，参见 test/upload.html  
-
-        响应体  
-
-            {  
-                result     : 成功与否,  
-                # true or false  
-                
-                reason     : 失败原因  
-                # 仅当 result == false，此值才有  
-                # reason   : 1   表示未登陆  
-                # reason   : 2   表示令牌错误  
-                
-                token      : 新的令牌  
-                # 仅当 result == true，此值才有  
-            }  
-
-
-<strong>05. 在已有的项目上分享新的收获</strong>  
-
-        请求地址 : http://ip:port/action  
-        
-        请求方法 : POST  
-        
-        请求体  
-        
-            和新增一个项目类似  
             
-            # 只不过action_id填5，且没有项目名称，标签们，可选链接，项目简介  
+            action_id 取 5  
 
         响应体  
 
@@ -156,16 +158,57 @@
             }  
 
 
-<strong>06. 浏览所有项目的概要信息</strong>  
+<strong>06. 在已有的项目上分享新的收获</strong>  
 
         请求地址 : http://ip:port/action  
         
         请求方法 : POST  
-
+        
         请求体  
-
+        
             {  
                 action_id  : 6,  
+                
+                proj_id    : 项目的id,  
+                
+                file_names : "xx.txt,yy.md,zz.cpp",  
+                # 多个文件的文件名，以逗号隔开  
+                # 注意，是用户希望存到云端后的名字，并非本地原来的名字  
+                # 注意，文件名可以是有多层目录的  
+                # 注意，这多个文件的键名依次是 file1,file2,file3,...  
+                
+                token      : 之前获得的令牌  
+            }  
+
+        响应体  
+
+            {  
+                result     : 成功与否,  
+                # true or false  
+                
+                reason     : 失败原因  
+                # 仅当 result == false，此值才有  
+                # reason   : 1   表示未登陆  
+                # reason   : 2   表示令牌错误  
+                
+                token      : 新的令牌  
+                # 仅当 result == true，此值才有  
+            }  
+
+
+<strong>07. 浏览所有项目的概要信息</strong>  
+
+        请求地址 : http://ip:port/action  
+        
+        请求方法 : POST  
+
+        请求体  
+
+            {  
+                action_id  : 7,  
+                
+                page_size  : 你最多想要获取几条数据,  
+                # 为了让各设备显示得正好，所以让客户端设备自己来决定要显示多少条合适  
             
                 time_max   : 时间戳  
                 # 服务端会返回发布时间小于该值的且距离当今最近的若干个项目的概要信息  
@@ -202,7 +245,7 @@
             ]  
 
 
-<strong>07. 浏览自己的所有项目的概要信息</strong>  
+<strong>08. 浏览自己的所有项目的概要信息</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -211,7 +254,7 @@
         请求体  
 
             {  
-                action_id  : 7  
+                action_id  : 8  
             }  
 
         响应体  
@@ -233,7 +276,7 @@
                     
                     labels       : [ 标签1, 标签2, ... ],  
                     
-                    introduction : 项目简介  不超过120字	
+                    introduction : 项目简介  
                 },  
                 {  
                     另一个项目的...  
@@ -241,7 +284,7 @@
             ]  
 
 
-<strong>08. 浏览具体的一个项目的详细信息</strong>  
+<strong>09. 浏览具体的一个项目的详细信息</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -250,7 +293,7 @@
         请求体  
         
             {  
-                action_id  : 8,  
+                action_id  : 9,  
                 
                 proj_id    : 项目id  
             }  
@@ -296,39 +339,62 @@
                 ],  
                 # 关于该项目，分享的文件们  
                 
-                comments     :  
+                "comments"     :  
                 [  
                     {  
-                        id        : "akfja3",  
-                        parent_id : "0",  
-                        username  : "seven",  
-                        realname  : "LvYang",  
-                        head      : a url,  
-                        time      : 1445599887,  
-                        content   : "this is the first comment"  
+                        "id"        : "akfja3",  
+                        "parent_id" : "0",  
+                    
+                        "send_usr"  : "seven",  
+                        "send_name" : "LvYang",  
+                        "send_head" : a url,  
+                    
+                        "recv_usr"  : "xxxx",  
+                        "recv_name" : "yyyy",  
+                    
+                        "time"      : 1445599887,  
+                        "content"   : "this is the first comment"  
                     },  
                     {  
-                        id        : "fa3gad",  
-                        parent_id : "akfja3",  
-                        username  : "leo",  
-                        realname  : "QiLi",  
-                        head      : a url,  
-                        time      : 1446633221,  
-                        content   : "this is the second comment"  
+                        "id"        : "fa3gad",  
+                        "parent_id" : "akfja3",  
+                    
+                        "send_usr"  : "leo",  
+                        "send_name" : "shangjun",  
+                        "send_head" : a url,  
+                    
+                        "recv_usr"  : "xxxx",  
+                        "recv_name" : "yyyy",  
+                    
+                        "time"      : 1446633221,  
+                        "content"   : "this is the second comment"  
                     }  
                 ]  
+            
+                # 评论们与建议们，默认为 [ ]，每个元素都是一个json对象，其中 :  
+            
                 # id          表示此评论的id，由评论者的用户名和时间戳的联合哈希（以此保证唯一性）计算得到  
-                # parent_id   表示若此评论针对项目，则该值为"0"。若此评论针对评论，则该值为父评论的id  
-                # username    表示评论者的用户名  
-                # realname    表示评论者的真实姓名  
-                # head        表示评论者的头像链接  
+                # parent_id   表示父评论的id  
+                              if 你这条评论是要针对这个项目，则parent_id填"0"  
+                              if 你这条评论是要针对某条评论 :  
+                                  if 那条评论的parent_id是"0"，则你的这条评论的parent_id填那条评论的id  
+                                  else（即那条评论的parent_id不是"0"），则你的这条评论的parent_id天那条评论的parent_id  
+            
+                # send_usr    表示评论者（你）的用户名  
+                # send_name   表示评论者（你）的真实姓名  
+                # send_head   表示评论者（你）的头像链接地址  
+            
+                # recv_usr    表示对方的用户名（若你这条评论针对这个项目，则该值填""）  
+                # recv_name   表示对方的真实姓名（若你这条评论针对这个项目，则该值填""）  
+            
                 # time        表示此评论的时间戳  
                 # content     表示此评论的内容  
-                # 这样一来，评论便可以实现嵌套  
+            
+                # 这样一来，评论便可以实现嵌套，且为了显示方便，只嵌套最多两层  
             }  
 
 
-<strong>09. 同步数据</strong>  
+<strong>10. 同步数据</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -337,10 +403,13 @@
         请求体  
 
             {  
-                action_id  : 9,  
+                action_id  : 10,  
             
                 token      : 令牌  
             }  
+        
+        响应头  
+            若是移动端，需要把响应头里的新的sessionid记录到单例网络配置对象中  
 
         响应体  
 
@@ -390,20 +459,7 @@
                         ],  
                         
                         comments     :  
-                        [  
-                            {  
-                                id        : "akfja3",  
-                                parent_id : "0",  
-                                username  : "seven",  
-                                realname  : "LvYang",  
-                                head      : a url,  
-                                time      : 1445599887,  
-                                content   : "this is the first comment"  
-                            },  
-                            {  
-                                另一条评论的...  
-                            }  
-                        ]  
+                        # 全部评论，形式请参见 docs/design/data_design.md  
                     },  
                     {  
                         另一个项目的...  
@@ -433,7 +489,7 @@
             }  
 
 
-<strong>10. 查看我的活跃记录</strong>  
+<strong>11. 查看我的活跃记录</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -442,7 +498,7 @@
         请求体  
 
             {  
-                action_id  : 10,  
+                action_id  : 11,  
             
                 month      : 哪一月,  
                 # 形如 201608  
@@ -456,15 +512,23 @@
         响应体  
 
             [  
-                { day : 1, degree : 4 },  
-                
-                { day : 17, degree : 2 }  
-                
-                # 该年该月里每一天的活跃度  
+                {  
+                    month  : 月份,  
+                    
+                    active :  
+                    [  
+                        { day : 1,  degree : 10 },  
+                        { day : 29, degree : 6 }  
+                    ]  
+                    # 该月的活跃数据  
+                },  
+                {  
+                    另一个月的...  
+                }  
             ]  
 
 
-<strong>11. 发表评论和建议</strong>  
+<strong>12. 发表评论和建议</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -473,7 +537,7 @@
         请求体  
 
             {  
-                action_id  : 11,  
+                action_id  : 12,  
             
                 proj_id    : 项目id,  
                 
@@ -481,9 +545,13 @@
                 
                 own_usr    : 项目所有者的用户名，  
                 
+                own_name   : 项目所有者的姓名,  
+                
                 parent_id  : 父评论的id,  
                 # 若针对项目而评论，该值填"0"  
-                # 若针对评论而评论，该值填那条评论的id  
+                # 若针对评论而评论 :  
+                #    if 那条评论的parent_id为"0"，则这条评论的parent_id填那条评论的id  
+                #    if 那条评论的parent_id不为"0"，则这条评论的parent_id填那条评论的parent_id  
                 
                 content    : 我要发表的评论内容  
             }  
@@ -501,7 +569,7 @@
             }  
 
 
-<strong>12. 查看与我相关的消息</strong>  
+<strong>13. 查看与我相关的消息</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -510,7 +578,10 @@
         请求体  
 
             {  
-                action_id  : 12,  
+                action_id  : 13,  
+                
+                page_size  : 最多取多少条数据,  
+                # 为了让各设备显示得刚好，所以由客户端设备自行决定该值的取值  
             
                 time_max   : 时间戳  
                 # 服务端会返回消息时间小于该值的且距离当今最近的若干消息  
@@ -551,7 +622,7 @@
             ]  
 
 
-<strong>13. 查看投票栏</strong>  
+<strong>14. 查看投票栏</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -560,7 +631,7 @@
         请求体  
 
             {  
-                action_id  : 13  
+                action_id  : 14  
             }  
 
         响应体  
@@ -594,7 +665,7 @@
             ]  
 
 
-<strong>14. 为喜爱的项目投票</strong>  
+<strong>15. 为喜爱的项目投票</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -603,7 +674,7 @@
         请求体  
 
             {  
-                action_id  : 14,  
+                action_id  : 15,  
             
                 proj_id    : 项目id  
             }  
