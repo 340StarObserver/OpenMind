@@ -106,9 +106,9 @@ def action():
             response = Shared_Handlers[index-1](post_data,post_files,usr_sessions,Shared_Conf)
         except Exception,e:
             print str(e)
-            response = {'result':False,'reason':'Exception'}
+            response = {'result':False,'reason':-2}
     else:
-        response = {'result':False,'reason':'action_id not valid'}
+        response = {'result':False,'reason':-1}
 
     del post_data
     del post_files

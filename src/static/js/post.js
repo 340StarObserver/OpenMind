@@ -1,8 +1,10 @@
 //1. 注册的post请求
-function signupPost(username, password, name, college, headIcon){
+function signupPost(username, password, name, college){
+
+	//, headIcon){
 	var formData = new FormData(); //写入头像
 	
-	formData.append('head', headIcon);
+	// formData.append('head', headIcon);
 	formData.append("action_id", 1);
 	formData.append("username", username);
 	formData.append("password", hex_md5(password));
@@ -59,7 +61,7 @@ function logoutPost(){
 	  type: 'POST',
 	  dataType: 'json',
 	  data: {
-	  	action_id: 3
+	  	action_id: 4
 	  },
 	  success: function(data, textStatus, xhr) {
 	    dealLogoutReturn();
@@ -88,6 +90,7 @@ function getProjectBriefPost(){
 	  dataType: 'json',
 	  data: {
 	  	action_id: 7,
+	  	page_size: 5,
 	  	time_max: timestamp
 	  },
 	  beforeSend: function(){

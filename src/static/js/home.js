@@ -187,7 +187,7 @@ $(document).ready(function() {
 		enableBtn("#voting-next-btn");
 
 		if( --currentVotingPage == 0){
-			disableBtn("voting-prev-btn");
+			disableBtn("#voting-prev-btn");
 		}
 
 		console.log("选择正在投票的上一页");
@@ -215,10 +215,13 @@ $(document).ready(function() {
 		}
 		else{
 			console.log("从当前存储中选择下一页");
+
 			//从当前存储中选择下一页
 			updateProjectPage( projectBrief[++currentPage] );
 			//前一页有效
 			enableBtn("#prev-btn");
+			if( currentPage == projectBrief.length-1)
+				disableBtn("#next-btn");
 		}
 		
 	});
@@ -258,11 +261,11 @@ function init(){
 	//getVotingProjPost();
 
 	//使上一页按钮失效
-	disableBtn('#prev-btn');
-	disableBtn('#voting-prev-btn');
+	// disableBtn("#prev-btn");
+	// disableBtn("#voting-prev-btn");
 
-	currentPage = 0;
-	currentVotingPage = 0;
+	// currentPage = 0;
+	// currentVotingPage = 0;
 
 
 	//查看是否有cookie
@@ -283,7 +286,6 @@ function init(){
 		
 	}
 
-	
 }
 
 function updateProjectPage(data){
@@ -318,6 +320,15 @@ function dealProjBriefReturn(data){
 	enableBtn("#prev-btn");
 	currentPage++;
 
+	if( projectBrief.length == 0){
+		//使上一页按钮失效
+		disableBtn("#prev-btn");
+		disableBtn("#voting-prev-btn");
+
+		currentPage = 0;
+		currentVotingPage = 0;
+	}
+	
 	// //post请求下一页
 	// if( projectBrief.length-1 < currentPage+1){
 	// 	currentPage++;
@@ -336,6 +347,11 @@ function dealProjBriefReturn(data){
 //获取每个项目简要信息生成的html
 function getProjectItemHtml(id, proj_name, own_username, own_name, own_head,
 							pub_time, labels, introduction){
+
+	if( own_head == "0"){
+		own_head = "static/res/image/icon.png" ;  
+	}
+
 	var html='<li class="panel panel-default project-list-item">'+
 				'<div class="panel-body">'+
 				    '<div class="item-title-wrapper clearfix">'+
@@ -384,9 +400,11 @@ function dealVotingProjReturn(data){
 }
 
 function enableBtn(selector){
+	console.log("enable"+selector);
 	$(selector).removeClass('disabled');
 }
 
 function disableBtn(selector){
+	console.log("disable"+selector);
 	$(selector).addClass('disabled');
 }   			    					

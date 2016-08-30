@@ -45,7 +45,9 @@ def regist(post_data,post_files,usr_sessions,server_conf):
 
     # check whether all data exist
     if isinstance(username,unicode) and isinstance(password,unicode) and \
-        isinstance(realname,unicode) and isinstance(department,unicode):
+        isinstance(realname,unicode) and isinstance(department,unicode) and \
+        len(username)>0 and len(password)>0 and \
+        len(realname)>0 and len(department)>0:
         # check whether all data is valid
         if valid_username(username) and valid_password(password) and \
             valid_name_or_department(realname) and valid_name_or_department(department):
@@ -109,6 +111,7 @@ def login(post_data,post_files,usr_sessions,server_conf):
 
     # check valid
     if isinstance(username,unicode) and isinstance(password,unicode) and \
+        len(username)>0 and len(password)>0 and \
         valid_username(username) and valid_password(password):
         # connect to mongo
         db_name = server_conf['mongo']['db_name']
@@ -117,9 +120,9 @@ def login(post_data,post_files,usr_sessions,server_conf):
 
         # search the user
         query_factor_1 = {'_id':username}
-        query_factor_2 = {'_id':0,'realname':1,'department':1,'signup_time':1,'head':1}
+        query_factor_2 = {'_id':0,'password':1,'realname':1,'department':1,'signup_time':1,'head':1}
         user_data = mongo_client[db_name]['user_info'].find_one(query_factor_1,query_factor_2)
-        if user_data is None:
+        if user_data is None or user_data['password']!=password:
             response = {'result':False,'reason':2}
         else:
             token = rand.rand_token(server_conf['rand']['token_range'])
@@ -129,6 +132,7 @@ def login(post_data,post_files,usr_sessions,server_conf):
             usr_sessions['token'] = token
             user_data['result'] = True
             user_data['token'] = token
+            user_data.pop('password',None)
             response = user_data
 
         # delete some objects
