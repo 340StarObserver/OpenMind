@@ -2,9 +2,8 @@ var currentPage ;
 var currentVotingPage ;
 //存储所有项目的概要信息,每个元素对应一页的信息
 var projectBrief=[];
-
-//
 var votingProject = [];
+
 
 var example =[
 	[{
@@ -149,12 +148,23 @@ var votingExample = [
 	}
 ];
 
+var t = 0;
+
 $(document).ready(function() {
 
 	init();
 
 	$(".voting-project-toggle").click(function(event) {
-		console.log ( $("#a").attr('checked') );
+		t++;
+		if( t == 2 ){
+			t=0;
+			updateProjectPage( votingProject[currentVotingPage] );
+			console.log ( "show voting projects" );
+		}
+		else{
+			updateProjectPage( votingProject[currentVotingPage] );
+		}
+		// return false;
 	});
 
 	$("#prev-btn").click(function(event) {
