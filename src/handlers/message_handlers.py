@@ -28,17 +28,6 @@ def send_comment(post_data,post_files,usr_sessions,server_conf):
     if  'id' not in usr_sessions:
         return {'result':False,'reason':1}
 
-    # prepare necessary parameters
-    proj_id = post_data['proj_id']
-    proj_name = post_data['proj_name']
-    own_usr = post_data['own_usr']
-    own_name = post_data['own_name']
-    parent_id = post_data['parent_id']
-    content = post_data['content']
-    send_usr = usr_sessions['id']
-    send_name = usr_sessions['name']
-    send_head = usr_sessions['head']
-
     # prepare timestamp and timestr
     time_stamp = int(time.time())
     time_array = time.localtime(time_stamp)
@@ -48,11 +37,12 @@ def send_comment(post_data,post_files,usr_sessions,server_conf):
 
     # construct a comment
     one_comment = {}
-    one_comment['id'] = "%d%s"%(time_stamp,send_usr)
-    one_comment['parent_id'] = parent_id
-    one_comment['send_usr'] = send_usr
-    one_comment['send_name'] = send_name
-    one_comment['send_head'] = send_head
+    one_comment['id'] = "%d%s"%(time_stamp,usr_sessions['id'])
+    one_comment['parent_id'] = post_data['parent_id']
+    one_comment['send_usr'] = usr_sessions['id']
+    one_comment['send_name'] = usr_sessions['name']
+    one_comment['send_head'] = usr_sessions['head']
+    
 
     # connect to mongo
     db_name = server_conf['mongo']['db_name']

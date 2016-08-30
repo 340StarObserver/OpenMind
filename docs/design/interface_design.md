@@ -448,23 +448,7 @@
                         
                         labels       : [ 标签1, 标签2, ... ],  
                         
-                        links        :  
-                        [  
-                            { address : "bilibili.com", description : xxxx },  
-                            { address : "bilibili.com", description : xxxx }  
-                        ]  
-                        # 多个可选链接  
-                        
-                        introduction : 项目简介,  
-                        
-                        shares       :  
-                        [  
-                            { name : 分享文件名, time : 该文件分享的时间戳, url : 该文件的url },  
-                            { name : 分享文件名, time : 该文件分享的时间戳, url : 该文件的url }  
-                        ],  
-                        
-                        comments     :  
-                        # 全部评论，形式请参见 docs/design/data_design.md  
+                        introduction : 项目简介  
                     },  
                     {  
                         另一个项目的...  
