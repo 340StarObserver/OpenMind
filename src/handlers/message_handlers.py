@@ -107,3 +107,41 @@ def send_comment(post_data,post_files,usr_sessions,server_conf):
 
     # return result
     return response
+
+
+# deal with requests of receiving messages about me
+def receive_messages(post_data,post_files,usr_sessions,server_conf):
+    # declare response
+    response = []
+
+    # when not login
+    if  'id' not in usr_sessions:
+        return response
+
+    # accept parameters from client
+    page_size = int(post_data['page_size'])
+    time_max = int(post_data['time_max'])
+
+    # connect to mongo
+    db_name = server_conf['mongo']['db_name']
+    mongo_client = mongo_conn.get_conn(server_conf['mongo']['host'],db_name,\
+        server_conf['mongo']['db_user'],server_conf['mongo']['db_pwd'])
+
+    # get messages
+    query_factor_1 = {'username':usr_sessions['id'],'time':{'$lt':time_max}}
+    query_factor_2 = {'_id':0,'username':0}
+    data = mongo_client[db_name]['associate_info'].find(query_factor_1,query_factor_2).limit(page_size)
+    for msg in data:
+        response.append(msg)
+        del msg
+
+    # delete some objects
+    mongo_client.close()
+    del mongo_client
+    del db_name
+    del query_factor_1
+    del query_factor_2
+    del data
+
+    # return response
+    return response

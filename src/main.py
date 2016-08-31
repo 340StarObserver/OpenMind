@@ -43,6 +43,7 @@ Shared_Handlers.append(visit_handlers.visit_one_project)
 Shared_Handlers.append(personal_handlers.sync_info)
 Shared_Handlers.append(personal_handlers.look_active)
 Shared_Handlers.append(message_handlers.send_comment)
+Shared_Handlers.append(message_handlers.receive_messages)
 
 
 # create a server app
@@ -89,19 +90,23 @@ def session():
 # define the interface
 @Server_App.route("/action",methods=['POST'])
 def action():
+    # get global arguments
     global Shared_Conf
     global Shared_Handlers
 
+    # get Post_Data, Post_Files, Sessions
     post_data = flask.request.form
     post_files = flask.request.files
     usr_sessions = flask.session
 
+    # get action_id
     index = 0
     try:
         index = int(post_data['action_id'])
     except Exception,e:
         print str(e)
 
+    # get response by calling the corresponding handler
     response = None
     if index>0 and index<=len(Shared_Handlers):
         try:
@@ -112,8 +117,11 @@ def action():
     else:
         response = {'result':False,'reason':-1}
 
+    # delete objects
     del post_data
     del post_files
+
+    # return response
     return flask.jsonify(response)
 
 
