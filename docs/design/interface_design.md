@@ -646,7 +646,14 @@
                     
                     labels       : [ 标签1, 标签2, ... ],  
                     
-                    link         : 链接,  
+                    links        :  
+                    [  
+                        { address : "bilibili.com", description : xxxx },  
+                        { address : "bilibili.com", description : xxxx }  
+                    ]  
+                    # 多个可选链接  
+                    # address      为某个链接的地址  
+                    # description  为这个链接的描述  
                     
                     introduction : 项目简介,  
                     
