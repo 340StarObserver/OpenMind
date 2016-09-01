@@ -97,8 +97,8 @@ article{
 	font-family: "FontAwesome";
 }
 
-a,
-a:hover{
+a{
+/*a,a:hover{*/
 	text-decoration: none;
 }
 

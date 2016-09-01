@@ -19,11 +19,11 @@ var example = {
 
 $(document).ready(function() {
 
-	var tree = new Tree();
-	tree.add( "docs/data/a.jpg", 1445599887, "");
-	tree.add( "docs/b.jpg", 1445599887, "");
-	tree.add( "res/image/a.jpg", 1445599887, "");
-	console.log( tree.root_node );
+	// var tree = new Tree();
+	// tree.add( "docs/data/a.jpg", 1445599887, "");
+	// tree.add( "docs/b.jpg", 1445599887, "");
+	// tree.add( "res/image/a.jpg", 1445599887, "");
+	// console.log( tree.root_node );
 
 	showProjDetail( example );
 
@@ -127,48 +127,3 @@ var exampleFiles = [
 	}
 
 	];
-
-
-function Tree(){
-	this.root_node = new Node();
-
-	this.add = function(path, time, url){
-		var paths = path.split("/");
-		var string = "";
-		var point = this.root_node;
-
-		for(var i=0; i<paths.length; i++){
-			string += "/"+paths[i];
-			var flag = false;
-			for(var j=0; j< (point.child).length; j++){
-				if( string == (point.child)[j].path ){
-					point = (point.child)[j];
-					flag = true;
-					break;
-				}
-			}
-
-			if( flag == false){
-				var node = new Node();
-				node.path = string;
-				(point.child).push( node );
-				point = node;
-			}
-
-			if( i == (paths.length-1) ){
-				point.leaf = true;
-				point.url = url;
-				point.time = time;
-			}
-
-		}
-	}
-}
-
-function Node(){
-	
-	this.child = new Array();
-	this.path = "";
-	this.leaf = false;
-	this.url="";
-}

@@ -94,17 +94,17 @@ function parseURL(url) {
 function Tree(){
 	this.root_node = new Node();
 
-	this.add = function(path, time, url){
+	this.add = function(path, leaf, time, url){
 		var paths = path.split("/");
 		var string = "";
-		var point = this.root_node;
+		var pointer = this.root_node;
 
 		for(var i=0; i<paths.length; i++){
 			string += "/"+paths[i];
 			var flag = false;
-			for(var j=0; j< (point.child).length; j++){
-				if( string == (point.child)[j].path ){
-					point = (point.child)[j];
+			for(var j=0; j< (pointer.child).length; j++){
+				if( string == (pointer.child)[j].path ){
+					pointer = (pointer.child)[j];
 					flag = true;
 					break;
 				}
@@ -113,17 +113,53 @@ function Tree(){
 			if( flag == false){
 				var node = new Node();
 				node.path = string;
-				(point.child).push( node );
-				point = node;
+				(pointer.child).push( node );
+				pointer = node;
 			}
 
-			if( i == (paths.length-1) ){
-				point.leaf = true;
-				point.url = url;
-				point.time = time;
+			if( leaf == true && i == (paths.length-1) ){
+				pointer.leaf = true;
+				pointer.url = url;
+				pointer.time = time;
 			}
 
 		}
+	}
+
+	this.find = function(path){
+
+		if( path == ''){
+			return this.root_node;
+		}
+
+		var paths   = path.split("/");
+		var string  = '';
+		var pointer = this.root_node;
+		
+		for (var i = 0; i < paths.length; i++) {
+			string += "/"+paths[i];
+			console.log("string "+string)
+			var flag = false;
+			for (var j = 0; j < pointer.child.length; j++) {
+				if( string == (pointer.child)[j].path ){
+					pointer = (pointer.child)[j];
+					flag = true;
+					break;
+				}
+			}
+
+			if( flag == false){
+				console.log("cannot find "+path);
+				return null;
+
+			}
+
+			if( i == paths.length-1){
+				return pointer;
+			}
+
+		}
+
 	}
 }
 

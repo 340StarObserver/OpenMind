@@ -57,3 +57,7 @@
 .file-list>li:nth-child(even){
 	background-color: #fafafa;
 }
+
+.catalog-root{
+	padding: 5px 10px;
+}
