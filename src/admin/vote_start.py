@@ -49,8 +49,8 @@ def show_project(proj_dict):
         'proj_dict' is a dict
     for example :
         proj_dict = {
-            '_id'              : ObjectId("57c4f2b4421aa91c99ce262c"),
-            'proj_name'   : 'xxx',
+            '_id'               : ObjectId("57c4f2b4421aa91c99ce262c"),
+            'proj_name'    : 'xxx',
             'own_usr'       : 'seven',
             'own_name'   : 'lvyang',
             'own_head'    : 'path/yy.jpg',
@@ -118,6 +118,10 @@ def entrance(confpath):
                     insert_projects.append(this_page_projs[one_id-1])
             # insert the chosen projects into collection 'vote_info'
             mongo_client[db_name]['vote_info'].insert_many(insert_projects)
+
+            # delete some objects
+            del this_page_projs
+            del input_ids
         except Exception,e:
             print str(e)
         i+=page_size
@@ -128,6 +132,8 @@ def entrance(confpath):
     # delete some objects
     mongo_client.close()
     del mongo_client
+    del conf
+    del db_name
 
 
 if __name__ == '__main__':
