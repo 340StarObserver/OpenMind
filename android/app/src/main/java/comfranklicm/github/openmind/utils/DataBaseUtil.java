@@ -12,50 +12,33 @@ import java.util.List;
  * 数据库部分封装,数据库单例
  */
 public class DataBaseUtil extends SQLiteOpenHelper{
-    /**
-     *
-     * @param context
-     *            上下文
-     * @param name
-     *            数据库名
-     * @param factory
-     *            可选的数据库游标工厂类，当查询(query)被提交时，该对象会被调用来实例化一个游标。默认为null。
-     * @param version
-     *            数据库版本号
-     */
 
-    private String dataBaseName;
+
+    private static final String dataBaseName="opemmind.db";
     private List<String>tableList;
-    private int Version;
+    private static  final int Version=1;
     private Context context;
     //为了实现每次使用该类时不创建新的对象而创建的静态对象
     private static DataBaseUtil DataBaseUtilInstance;
     //构造方法私有化
-    private DataBaseUtil(Context context, String name, CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    /**
+     * @param context 上下文
+     */
+    private DataBaseUtil(Context context) {
+        super(context, dataBaseName, null, Version);
     }
     //实例化一次
-    public synchronized static DataBaseUtil getInstance(Context context,String name, CursorFactory factory, int version)
+    public synchronized static DataBaseUtil getInstance(Context context)
     {
         if (null == DataBaseUtilInstance) {
-            DataBaseUtilInstance = new DataBaseUtil(context,name,factory,version);
+            DataBaseUtilInstance = new DataBaseUtil(context);
         }
         return DataBaseUtilInstance;
     }
     @Override
     public void onCreate(SQLiteDatabase db) {// 覆写onCreate方法，当数据库创建时就用SQL命令创建一个表
         // 创建一个t_users表，id主键，自动增长，字符类型的username和pass;
-      /*  if (sql!=null) {db.execSQL(sql);}
-        else if (sqllist!=null){
-            for(int i=0;i<sqllist.size();i++)
-            {
-                db.execSQL(sqllist.get(i));
-            }
-        }
-        else {
-            Log.d(tag,"sql语句不得为空");
-        }*/
-        db.execSQL("create table if not exists User(username varchar(200) primary key,password varchar(200),realname varchar(200),department varchar(200),signuptime varchar(200),projects varchar(200),vote_limit integer(15) )");
+        db.execSQL("create table if not exists User(id integer primary key autoincrement,username varchar(200),password varchar(200),realname varchar(200),department varchar(200),signuptime varchar(200),projects varchar(200),vote_limit integer(15))");
         db.execSQL("create table if not exists ProjectInfo(id integer primary key,proj_name varchar(200),own_name varchar(200),pub_time varchar(200),labels varchar(200),links varchar(200),introduction varchar(200),shares varchar(200),comments varchar(200))");
         db.execSQL("create table if not exists ActiveInfo(username varchar(200) primary key,month varchar(200),active varchar(200) )");
         //"create table t_users(id integer primary key autoincrement,username varchar(200),pass varchar(200) )"
@@ -67,18 +50,14 @@ public class DataBaseUtil extends SQLiteOpenHelper{
     }
     /**
      * 删除数据库
-     * @param context
-     * @return
+     * @param context 上下文
+     * @return 返回是否成功
      */
     public boolean deleteDatabase(Context context) {
-        return context.deleteDatabase("openmind.db");
+        return context.deleteDatabase(dataBaseName);
     }
     public String getDataBaseName() {
         return dataBaseName;
-    }
-
-    public void setDataBaseName(String dataBaseName) {
-        this.dataBaseName = dataBaseName;
     }
 
     public List<String> getTableList() {
@@ -91,10 +70,6 @@ public class DataBaseUtil extends SQLiteOpenHelper{
 
     public int getVersion() {
         return Version;
-    }
-
-    public void setVersion(int version) {
-        Version = version;
     }
 
     public Context getContext() {

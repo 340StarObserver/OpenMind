@@ -1,6 +1,7 @@
 package comfranklicm.github.openmind.JsonParsing;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class JsonParser {
                             default:error="其他错误";break;                        }
                        User.getInstance().setRegisterError(error);
                     }
-                }catch (Exception e)
+                }catch (JSONException e)
                 {
                     e.printStackTrace();
                 }
@@ -64,6 +65,7 @@ public class JsonParser {
                         User.getInstance().setRegisterTime(jarr.getString("signup_time"));
                         User.getInstance().setPictureLink(jarr.getString("head"));
                         NetUtil.getInstance().setToken("token");
+                        User.getInstance().setIsLogin(true);
                     }
                     else
                     {
@@ -74,7 +76,7 @@ public class JsonParser {
                             default:error="其他错误";break;                        }
                         User.getInstance().setLoginError(error);
                     }
-                }catch (Exception e)
+                }catch (JSONException e)
                 {
                     e.printStackTrace();
                 }
@@ -85,7 +87,7 @@ public class JsonParser {
                 try {
                     JSONObject jarr=new JSONObject(strResult);
                     User.getInstance().setLogoutResult(jarr.getString("result"));
-                }catch (Exception e)
+                }catch (JSONException e)
                 {
                     e.printStackTrace();
                 }
@@ -120,7 +122,7 @@ public class JsonParser {
                                {
                                    projectInfo.setLabel2(jsonArray1.getString(j));
                                }
-                           }catch (Exception e)
+                           }catch (JSONException e)
                            {
                                e.printStackTrace();
                            }
@@ -129,7 +131,7 @@ public class JsonParser {
                        projectInfo.setLabellist(stringList);
                        User.getInstance().allinfos.add(projectInfo);
                    }
-               }catch (Exception e)
+               }catch (JSONException e)
                {
                  e.printStackTrace();
                }
@@ -168,7 +170,7 @@ public class JsonParser {
                         projectInfo.setLabellist(stringList);
                         User.getInstance().owninfos.add(projectInfo);
                     }
-                }catch (Exception e)
+                }catch (JSONException e)
                 {
                     e.printStackTrace();
                 }
@@ -259,7 +261,7 @@ public class JsonParser {
                     {
 
                     }
-                }catch (Exception e) {
+                }catch (JSONException e) {
                     e.printStackTrace();
                 }
                 break;
@@ -275,7 +277,7 @@ public class JsonParser {
                        JSONArray jsonArray=new JSONArray(jarr.getString("projects"));
                        try {
                            User.getInstance().owninfos.clear();
-                       }catch (Exception e)
+                       }catch (NullPointerException e)
                        {
                            e.printStackTrace();
                        }
@@ -360,7 +362,7 @@ public class JsonParser {
                        JSONArray jsonArray1=new JSONArray(jarr.getString("active_info"));
                        try {
                            User.getInstance().ownactives.clear();
-                       }catch (Exception e)
+                       }catch (NullPointerException e)
                        {
                            e.printStackTrace();
                        }
@@ -394,7 +396,7 @@ public class JsonParser {
                        }
                        User.getInstance().setSynchronousError(error);
                    }
-               }catch (Exception e)
+               }catch (JSONException e)
                {
                    e.printStackTrace();
                }
@@ -424,7 +426,7 @@ public class JsonParser {
                          activeInfo.setActiveList(activeList);
                          User.getInstance().ownactives.add(activeInfo);
                      }
-                 }catch (Exception e)
+                 }catch (JSONException e)
                  {
                      e.printStackTrace();
                  }
@@ -449,7 +451,7 @@ public class JsonParser {
                             default:error="其他错误";break;                        }
                         User.getInstance().setCommentError(error);
                     }
-                }catch (Exception e)
+                }catch (JSONException e)
                 {
                     e.printStackTrace();
                 }
@@ -476,7 +478,7 @@ public class JsonParser {
                       }
                       User.getInstance().aboutMeList.add(aboutMe);
                   }
-              }catch (Exception e)
+              }catch (JSONException e)
               {
                   e.printStackTrace();
               }
@@ -527,7 +529,7 @@ public class JsonParser {
                         projectInfo.setLinkList(linkList);
                         User.getInstance().owninfos.add(projectInfo);
                     }
-                }catch (Exception e)
+                }catch (JSONException e)
                 {
                     e.printStackTrace();
                 }
@@ -555,7 +557,7 @@ public class JsonParser {
                         }
                         User.getInstance().setVoteError(error);
                     }
-                }catch (Exception e)
+                }catch (JSONException e)
                 {
                     e.printStackTrace();
                 }

@@ -1,6 +1,8 @@
 package comfranklicm.github.openmind;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -14,6 +16,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.SQLDataException;
+
+import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
+import comfranklicm.github.openmind.JsonParsing.JsonParser;
+import comfranklicm.github.openmind.JsonParsing.LoginJsonParser;
+import comfranklicm.github.openmind.JsonParsing.ViewAllProjectsJsonParser;
+import comfranklicm.github.openmind.JsonParsing.ViewVoteProjectsJsonParser;
+import comfranklicm.github.openmind.utils.DataBaseUtil;
+import comfranklicm.github.openmind.utils.MD5;
 import comfranklicm.github.openmind.utils.NetUtil;
 import comfranklicm.github.openmind.utils.ProjectInfo;
 import comfranklicm.github.openmind.utils.User;
@@ -44,6 +55,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+        User.getInstance().addAllJsonParse();
         NetUtil.getInstance().setIpAddress("192.168.252.6");
         NetUtil.getInstance().setPort("8081");
 		fManager = getSupportFragmentManager();
@@ -75,6 +87,85 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
     }
    public void initdatas()
    {
+       DataBaseUtil dataBaseUtil=DataBaseUtil.getInstance(this);
+       SQLiteDatabase database=dataBaseUtil.getWritableDatabase();
+       Cursor localCursor = database.rawQuery("select username,password,realname,department,signuptime from User" +
+               " where id=?", new String[]{"1"});
+       if(localCursor.getCount()>0)
+       {
+
+           localCursor.moveToFirst();
+           int userNameColumnIndex=localCursor.getColumnIndex("username");
+           User.getInstance().setUserName(localCursor.getString(userNameColumnIndex));
+           int passwordColumnIndex=localCursor.getColumnIndex("password");
+           User.getInstance().setPassWord(localCursor.getString(passwordColumnIndex));
+           int realNameColumnIndex=localCursor.getColumnIndex("realname");
+           User.getInstance().setRealName(localCursor.getString(realNameColumnIndex));
+           int departmentColumnIndex=localCursor.getColumnIndex("department");
+           User.getInstance().setDepartment(localCursor.getString(departmentColumnIndex));
+           int signuptimeColumnIndex=localCursor.getColumnIndex("signuptime");
+           User.getInstance().setRegisterTime(localCursor.getString(signuptimeColumnIndex));
+           HttpPostRunnable runnable=new HttpPostRunnable();
+           if (NetUtil.isNetworkConnectionActive(this))
+           {
+               Toast.makeText(this,"请检查网络连接",Toast.LENGTH_LONG).show();
+           /*runnable.setActionId(2);
+           runnable.setUsername(User.getInstance().getUserName());
+           runnable.setPassword(MD5.getMD5Str(User.getInstance().getPassWord()));
+           Thread t=new Thread(runnable);
+           t.start();
+           try{
+               t.join();
+           }catch (InterruptedException e)
+           {
+               e.printStackTrace();
+           }*/
+           runnable.setStrResult("{\"result\":\"true\",\"realname\":\"李昌懋\",\"department\":\"软件学院\",\"signup_time\":\"2016-08-13\",\"head\":\"img/img.jpg\",\"token\":\"233\"}");
+           try {
+               ((LoginJsonParser) User.getInstance().baseJsonParsers.get(1)).LoginJsonParsing(runnable.getStrResult());
+           }catch (Exception e)
+           {
+               Toast.makeText(this,"连接服务器失败",Toast.LENGTH_LONG).show();
+           }
+               //JsonParser.ParseJson(2, runnable.getStrResult());
+           if(User.getInstance().isLogin())
+           {
+
+           }
+           else
+           {
+
+           }
+           }
+           else {
+               Toast.makeText(this,"请检查网络连接",Toast.LENGTH_LONG).show();
+           }
+       }
+       localCursor.close();
+       /*HttpPostRunnable runnable = new HttpPostRunnable();
+                        /*runnable.setActionId(7);
+                        runnable.setPageSize("10");
+                        runnable.setTime_max("" + System.currentTimeMillis() / 1000L);
+                        Thread thread=new Thread(runnable);
+                        thread.start();
+                        try {
+                            thread.join();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+       runnable.setStrResult("");
+       ((ViewAllProjectsJsonParser)User.getInstance().baseJsonParsers.get(6)).ViewAllProjectsJsonParsing(runnable.getStrResult());
+       HttpPostRunnable runnable1=new HttpPostRunnable();
+                  /*runnable1.setActionId(14);
+                  Thread thread1=new Thread(runnable1);
+                  thread1.start();
+       try {
+           thread1.join();
+       } catch (InterruptedException e) {
+           e.printStackTrace();
+       }
+       runnable1.setStrResult("");
+       ((ViewVoteProjectsJsonParser)User.getInstance().baseJsonParsers.get(13)).ViewVoteProjectsJsonParsing(runnable1.getStrResult());*/
        for (int i=0;i<5;i++)
        {
            ProjectInfo projectInfo=new ProjectInfo();

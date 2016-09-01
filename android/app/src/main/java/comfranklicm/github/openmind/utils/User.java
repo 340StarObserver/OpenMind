@@ -3,6 +3,20 @@ package comfranklicm.github.openmind.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import comfranklicm.github.openmind.JsonParsing.BaseJsonParser;
+import comfranklicm.github.openmind.JsonParsing.CommentJsonParser;
+import comfranklicm.github.openmind.JsonParsing.LoginJsonParser;
+import comfranklicm.github.openmind.JsonParsing.LogoutJsonParser;
+import comfranklicm.github.openmind.JsonParsing.RegisterJsonParser;
+import comfranklicm.github.openmind.JsonParsing.SynchronousDataJsonParser;
+import comfranklicm.github.openmind.JsonParsing.ViewAboutMeJsonParser;
+import comfranklicm.github.openmind.JsonParsing.ViewActiveDataJsonParser;
+import comfranklicm.github.openmind.JsonParsing.ViewAllProjectsJsonParser;
+import comfranklicm.github.openmind.JsonParsing.ViewOwnProjectsJsonParser;
+import comfranklicm.github.openmind.JsonParsing.ViewProjectDetailJsonParser;
+import comfranklicm.github.openmind.JsonParsing.ViewVoteProjectsJsonParser;
+import comfranklicm.github.openmind.JsonParsing.VoteJsonParser;
+
 /**
  * 用户信息封装，User单例
  */
@@ -18,6 +32,7 @@ public class User {
     public List<ProjectInfo>owninfos=new ArrayList<ProjectInfo>();
     public List<ActiveInfo>ownactives=new ArrayList<ActiveInfo>();
     public List<AboutMe>aboutMeList=new ArrayList<AboutMe>();
+    public List<BaseJsonParser>baseJsonParsers=new ArrayList<BaseJsonParser>();
     private boolean isLogin=false;
     private String pictureLink;
 
@@ -36,6 +51,7 @@ public class User {
     private String voteResult;
     private String voteError;
     private Integer pageNumber;
+    private String  minimumTime;
     //为了实现每次使用该类时不创建新的对象而创建的静态对象
     private static User userInstance;
 
@@ -226,6 +242,32 @@ public class User {
 
     public void setPageNumber(Integer pageNumber) {
         this.pageNumber = pageNumber;
+    }
+
+    public String getMinimumTime() {
+        return minimumTime;
+    }
+
+    public void setMinimumTime(String minimumTime) {
+        this.minimumTime = minimumTime;
+    }
+
+    public void addAllJsonParse() {
+      baseJsonParsers.add(new RegisterJsonParser());
+      baseJsonParsers.add(new LoginJsonParser());
+        baseJsonParsers.add(null);
+        baseJsonParsers.add(new LogoutJsonParser());
+        baseJsonParsers.add(null);
+        baseJsonParsers.add(null);
+        baseJsonParsers.add(new ViewAllProjectsJsonParser());
+        baseJsonParsers.add(new ViewOwnProjectsJsonParser());
+        baseJsonParsers.add(new ViewProjectDetailJsonParser());
+        baseJsonParsers.add(new SynchronousDataJsonParser());
+        baseJsonParsers.add(new ViewActiveDataJsonParser());
+        baseJsonParsers.add(new CommentJsonParser());
+        baseJsonParsers.add(new ViewAboutMeJsonParser());
+        baseJsonParsers.add(new ViewVoteProjectsJsonParser());
+        baseJsonParsers.add(new VoteJsonParser());
     }
 }
 

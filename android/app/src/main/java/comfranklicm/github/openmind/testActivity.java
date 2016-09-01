@@ -111,8 +111,8 @@ public class testActivity extends Activity {
             }
         });//设置可以被java截获的js事件。
         webView.loadUrl("file:///android_asset/html/menu1.html");
-       final DataBaseUtil dataBaseUtil=DataBaseUtil.getInstance(this,"openmind.db",null,1);
-        dataBaseUtil.deleteDatabase(this);
+       final DataBaseUtil dataBaseUtil=DataBaseUtil.getInstance(this);
+        //dataBaseUtil.deleteDatabase(this);
         for(int i=0;i<5;i++)
         {
             final int d=i;
@@ -126,6 +126,7 @@ public class testActivity extends Activity {
                                 arrayOfObject[0] = "username" + 1;
                                 arrayOfObject[1] = "password" + 3;
                                 SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
+                                Log.d("writedb",writedb.toString());
                                 Log.d("table", "" + d);
                                 writedb.execSQL("insert into User(username,password) values(?,?)", arrayOfObject);
                             } catch (Exception e) {
@@ -143,6 +144,7 @@ public class testActivity extends Activity {
                                 arrayOfObject[0] = "username" + 2;
                                 arrayOfObject[1] = "password" + 4;
                                 SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
+                                Log.d("writedb",writedb.toString());
                                 Log.d("table", "" + d);
                                 writedb.execSQL("insert into User(username,password) values(?,?)", arrayOfObject);
                             } catch (Exception e) {
@@ -161,6 +163,7 @@ public class testActivity extends Activity {
                                     arrayOfObject[1] = "realname" + 5;
                                     arrayOfObject[2] = "username" + 1;
                                     SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
+                                    Log.d("writedb",writedb.toString());
                                     Log.d("table", "" + d);
                                     writedb.execSQL("update User set password=?,realname=?  where username=?", arrayOfObject);
                                 } catch (Exception e) {
@@ -180,6 +183,7 @@ public class testActivity extends Activity {
                                     arrayOfObject[1] = "realname" + 1;
                                     arrayOfObject[2] = "username" + 1;
                                     SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
+                                    Log.d("writedb",writedb.toString());
                                     Log.d("table", "" + d);
                                     writedb.execSQL("update User set password=?,realname=?  where username=?", arrayOfObject);
                                 } catch (Exception e) {
@@ -203,7 +207,9 @@ public class testActivity extends Activity {
                 " where username=?" , new String[]{"username1"});
         localCursor.moveToFirst();
         Log.d("password", localCursor.getString(0));
-        Log.d("realname",localCursor.getString(1));
+        Log.d("realname", localCursor.getString(1));
+       //boolean d= dataBaseUtil.deleteDatabase(this);
+        //;Log.d("databaseDeleteResult:",""+d);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
