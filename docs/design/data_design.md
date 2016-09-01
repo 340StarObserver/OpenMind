@@ -214,6 +214,21 @@
             
             "introduction" : 项目简介,  
             
-            "score"        : 票数（默认为0）  
+            "score"        : 票数（默认为0）,  
+            
+            "alive"        : 是否处于投票状态  
+            # true  表示还处于投票状态  
+            # false 表示已经结束了  
         }  
 
+
+### 1-6. 投票中记录 vote_record ###
+
+        索引 : { username : 1, proj_id : 1 }  
+        
+        {  
+            "username" : 投票者的用户名,  
+            
+            "proj_id"  : 投票者投了哪个项目（它的id）  
+        }  
+        

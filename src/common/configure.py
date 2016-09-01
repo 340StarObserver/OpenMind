@@ -3,7 +3,7 @@
 
 # Author 		: 	Lv Yang
 # Created 		: 	21 August 2016
-# Modified 		: 	30 August 2016
+# Modified 		: 	01 September 2016
 # Version 		: 	1.0
 
 """
@@ -44,6 +44,8 @@ def read(filename):
         res['active']['vote_inc'] = int(config.get('active','vote_inc'))
         res['active']['comment_inc'] = int(config.get('active','comment_inc'))
         res['user']['default_head'] = config.get('user','default_head')
+        res['user']['default_vote_max'] = int(config.get('user','default_vote_max'))
+        res['user']['vote_set_batch'] = int(config.get('user','vote_set_batch'))
     except Exception,e:
         print "fail to read configuration from %s"%(filename)
         print str(e)
