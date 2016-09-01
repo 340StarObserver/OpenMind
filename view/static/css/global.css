@@ -7,9 +7,24 @@ body{
 	min-width: 300px;
 }
 
+article{
+	margin: 100px auto;
+	max-width: 850px;
+}
+
 .navbar{
-	background-color: rgba(0,0,0,.8);
+	background-color: #263238;
 	padding: 0 15px;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 100;
+	font-size: 1em;
+}
+
+.navbar.shadow-bottom{
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,.50);
 }
 
 .navbar .navbar-form{
@@ -30,12 +45,19 @@ body{
 	color: white;
 }
 
-.clearfix::after{
-	content: "." ; 
-	display: block ;
-	height: 0 ;
-	clear: both ;
-	visibility: hidden;
+.navbar-username{
+	float: right;
+}
+
+.login-btn{
+	float: right;
+	
+}
+
+.project-name{
+	font-size: 1.5em;
+	color: #336699;
+	cursor: pointer;
 }
 
 .warning-tips{
@@ -47,6 +69,32 @@ body{
 	text-align: center;
 	z-index: 100;
 	pointer-events: none;
+}
+
+.clearfix::after{
+	content: "." ; 
+	display: block ;
+	height: 0 ;
+	clear: both ;
+	visibility: hidden;
+}
+
+.tooltip{
+	display: none;
+	position: absolute;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: white;
+	background-color: rgba(153,153,153,.8); 
+}
+
+.title-wrapper{
+	font-size: 1.8em;
+	margin-bottom: 10px;
+}
+
+.title-wrapper::before{
+	font-family: "FontAwesome";
 }
 
 a,
@@ -75,8 +123,18 @@ footer{
 }
 
 .project-label{
+	margin-left: 5px;
+	padding: 0 5px;
 	border-radius: 2px;
-	font-size: 0.5em;
+	color: white;
+	background-color: #03a9f4;
+	font-size: .5em;
+}
+
+@media screen and (max-width: 770px){
+	.navbar-username{
+		float: none;
+	}
 }
 
 @media screen and (max-width: 400px) {
@@ -94,7 +152,7 @@ footer{
 	}
 
 	article.container{
-		margin: 0;
+		margin: 50px 0 0;
 		padding: 0;
 		width: 100%;
 	}

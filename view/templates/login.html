@@ -4,45 +4,46 @@
 	<meta charset="UTF-8">
 	<title>OpenMind</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <!-- jquery -->
-	<!-- <script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min. js"></script> -->
-	<script type="text/javascript" src="../js/3rd/jquery-3.1.0.min.js"></script>
-
-	<!-- bootstrap-material-design -->
-	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap-material-design.css">
-    <script type="text/javascript" src="dist/js/material.min.js"></script>
-  	<link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css">
-  	<script type="text/javascript" src="dist/js/ripples.min.js"></script>
-	<link rel="stylesheet" href="../css/global.css">
-	<link rel="stylesheet" href="../css/login.css">
+  <!-- jquery -->
+	<script type="text/javascript" src="../static/js/3rd/jquery.js"></script>
 	
-	<script type="text/javascript" src="../js/md5.js"></script>
-	<script type="text/javascript" src="../js/cookie.js"></script>
-  	<script type="text/javascript" src="../js/global.js"></script>
-  	<script type="text/javascript" src="../js/post.js"></script>
-	<script type="text/javascript" src="../js/login.js"></script>
+	<!-- bootstrap-material-design -->
+	<link rel="stylesheet" type="text/css" href="../static/css/3rd/bootstrap-material-design.css">
+    <script type="text/javascript" src="../static/js/3rd/material.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="../static/css/3rd/ripples.min.css">
+  	<script type="text/javascript" src="../static/js/3rd/ripples.min.js"></script>
+
+	<link rel="stylesheet" href="../static/css/global.css">
+	<link rel="stylesheet" href="../static/css/login.css">
+	
+	<script type="text/javascript" src="../static/js/md5.js"></script>
+	<script type="text/javascript" src="../static/js/cookie.js"></script>
+  	<script type="text/javascript" src="../static/js/global.js"></script>
+  	<script type="text/javascript" src="../static/js/post.js"></script>
+	<script type="text/javascript" src="../static/js/login.js"></script>
 	
 </head>
 
 <body>
 	<!-- 导航栏 -->
 	<nav role="navigation" class="navbar clearfix">
-		<div class="navbar-header">
-			<img src="../res/images/openmind-icon.png" alt="openmind-icon">
+		<div class="navbar-header clearfix">
+			<img src="../static/res/image/openmind-icon.png" alt="openmind-icon">
 		</div>
 		
 		<div class="warning-tips">
 			<a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
 		</div>
 
-		<ul class="nav-list collapse-list">
+		<ul class="nav-list">
 			<li class="nav-list-item home">
-				<a href="index.html" data-toggle="tab" aria-expanded="true">首页</div></a
-			></li>
+				<a href="home.html" data-toggle="tab" aria-expanded="true">首页</a>
+			</li>
 		</ul>
 		
 		<a href="javascript:void(0)" class="btn btn-raised btn-primary" id="signup-toggle-btn">注册<div class="ripple-container"></div></a>
 	</nav>
+	
 
 	<!-- 登录框和注册框部分 -->
 	<article class="container">
@@ -148,7 +149,7 @@
 	<!-- 低栏部分 -->
 	<footer>
 		<div class="bottom-name">
-		<a href="index.html">OpenMind</a></div>
+		<a href="/index">OpenMind</a></div>
 		<div class="bottom-remark">2016 SouthEast University</div>
 	</footer>
 </body>

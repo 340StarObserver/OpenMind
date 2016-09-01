@@ -5,16 +5,7 @@
 
 .login-btn{
 	float: right;
-	margin: 7px auto;
-}
-
-article{
-	padding: 20px 15px;
-	max-width: 850px;
-}
-
-article.container>.project-container{
-	padding-bottom: 
+	/*margin: 7px auto;*/
 }
 
 .browse-title{
@@ -41,9 +32,20 @@ article.container>.project-container{
 	float: left;
 }
 
-.project-name{
-	font-size: 1.5em;
-	color: #336699;
+i.fa{
+	font-size: 1.8em;
+}
+
+.item-title-left>.fa{
+	margin-right: 5px;
+}
+
+.project-label{
+	margin-left: 5px;
+	background-color: #99cccc;
+	padding: 0 5px;
+	color: white;
+	font-size: .5em;
 }
 
 .item-title-right{
@@ -62,19 +64,35 @@ article.container>.project-container{
 
 .author-info{
 	float: left;
-	width: 10%;
-	min-width: 20px;
-	max-width: 70px;
-	margin-right: 10px;
+	width: 70px;
 	color: #666;
 }
 
 .author-icon{
 	display: block;
 	width: 100%;
+	border-radius: 100%;
 }
 
 .author-name{
 	text-align: center;
 	font-size: .5em;
+}
+
+.brief-intro{
+	margin-left: 75px;
+}
+
+#vote-btn{
+	font-size: .8em;
+	background-color: #ededed;
+	color: #336699;
+	border-radius: 8px;
+	margin: 0;
+	padding: 5px 8px;
+}
+
+#vote-btn.disabled{
+	opacity: .5;
+	pointer-events: none;
 }

@@ -1,0 +1,59 @@
+.title-wrapper::before{
+	content: "\f067";
+}
+
+.title-wrapper{
+	border-bottom: 1px solid #bbb;
+}
+
+.project-form-container{
+	padding: 20px 100px;
+
+}
+
+.title{
+	font-size: 1.5em;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.file-catalog{
+	float: left;
+	margin-bottom: 0
+}
+
+.file-btn-group{
+	float: right;
+}
+
+#new-directory-btn,
+#new-file-btn{
+	margin-top: 0;
+}
+
+#new-directory-btn::before,
+#new-file-btn::before{
+	font-family: "FontAwesome";
+}
+
+#new-directory-btn::before{
+	content: "\f067"
+}
+
+#new-file-btn::before{
+	content: "\f093"
+}
+
+.file-list>li{
+	padding: 8px;
+	color: blue;
+}
+
+.file-list>li:nth-child(odd){
+	background-color: #deeffa;
+	
+}
+
+.file-list>li:nth-child(even){
+	background-color: #fafafa;
+}
