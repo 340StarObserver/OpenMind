@@ -122,6 +122,9 @@ def entrance(confpath):
             print str(e)
         i+=page_size
 
+    # set all users' vote_limit to the max limit
+    votelimit_manager.set_all(mongo_client,db_name,conf['user']['default_vote_max'],conf['user']['vote_set_batch'])
+
     # delete some objects
     mongo_client.close()
     del mongo_client
