@@ -1,9 +1,8 @@
-var token = getCookie('token');
-console.log( token );
-if( token == null){
-	location.href = 'home.html';
-}
-
+// var token = getCookie('token');
+// console.log( token );
+// if( token == null){
+// 	location.href = 'home.html';
+// }
 
 var tree = new Tree();
 var parent;  //当前节点的父节点
@@ -11,8 +10,7 @@ var pointer = tree.root_node; //指向当前节点
 var url = "";  		//当前文件目录的url
 var files = []; 	//filename:file
 var labels= []; 	//name of label
-var links = []; 	//remark : content of remark
-
+var links = []; 	
 
 $(document).ready(function() {
 
@@ -107,6 +105,8 @@ $(document).ready(function() {
 
 		$('.modal').fadeOut('fast');
 		showFileList();
+		console.log( tree.root_node );
+		console.log( pointer.child );
 	});
 
 	$(document).on('click', '.catalog-root', function(event) {
@@ -238,7 +238,6 @@ $(document).ready(function() {
 
 		newProjectPost(name, files_name_string, file_array, labels_string, links_jsonstring, intro, token);
 
-		
 	});
 	
 });
@@ -276,6 +275,8 @@ function addDirectory(name){
 
 	//更新目录结构
 	showFileList();
+
+	console.log( tree.root_node );
 }
 
 function showFileList(){
@@ -364,14 +365,9 @@ function addLink(remark, url){
 	$('.links-container').append(html);
 }
 
-function clearInput(id){
-	$(id).val('');
-}
-
 function dealNewProjectReturn(data){
 	if( data['result'] == true ){
-		setCookie("token", token, 7);
-		alert('发布成功');
+		setCookie("token", data['token'], 7);
 
 	}else{
 		var errorReason;
@@ -385,7 +381,8 @@ function dealNewProjectReturn(data){
 			default:
 			errorReason = "信息错误";
 		}
-	    	//显示错误信息
-	    	showWarningTips(errorReason);
+	    
+	    //显示错误信息
+	    showWarningTips(errorReason);
 	}
 }

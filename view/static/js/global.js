@@ -1,8 +1,10 @@
 $(document).ready(function() {
 	//取消.btn点击后的自动获取焦点
-	$(".btn").click(function(event) {
-		$(this).blur();
+	$(document).on('click', '.btn', function(event) {
+		$(this).blur();	
 	});
+
+	
 
 	// $("#next-btn").click(function(event) {
 	// 	$(this).blur();
@@ -43,7 +45,7 @@ function hideWarningTips(){
 }
 
 //时间戳转yyyy-mm-dd;
-function dataFormat(nS) {     
+function dateFormat(nS) {     
    return new Date(parseInt(nS*1000)).toLocaleString().split(" ")[0].replace(/\//g,"-");
 }
 
@@ -52,11 +54,12 @@ function isImage(fileType){
     return (fileType.match('^image')!=null);
 }
 
-//图片文件大小是否符合标准
+//文件大小是否符合标准
 function isSizeValid(fileSize){
 	return ((fileSize/1024)<200);
 }
 
+//注销
 function dealLogoutReturn(data){
 	clearCookie();
 	
@@ -91,6 +94,10 @@ function parseURL(url) {
 	}; 
 }
 
+function clearInput(selector){
+	$(selector).val('');
+}
+
 function Tree(){
 	this.root_node = new Node();
 
@@ -99,6 +106,8 @@ function Tree(){
 		var string = "";
 		var pointer = this.root_node;
 
+		console.log( tree.root_node );
+		
 		for(var i=0; i<paths.length; i++){
 			string += "/"+paths[i];
 			var flag = false;
@@ -118,7 +127,7 @@ function Tree(){
 			}
 
 			if( leaf == true && i == (paths.length-1) ){
-				pointer.leaf = true;
+				pointer.leaf = leaf;
 				pointer.url = url;
 				pointer.time = time;
 			}
@@ -138,7 +147,7 @@ function Tree(){
 		
 		for (var i = 0; i < paths.length; i++) {
 			string += "/"+paths[i];
-			console.log("string "+string)
+			console.log("string "+string);
 			var flag = false;
 			for (var j = 0; j < pointer.child.length; j++) {
 				if( string == (pointer.child)[j].path ){
@@ -158,6 +167,43 @@ function Tree(){
 				return pointer;
 			}
 
+		}
+
+	}
+
+	//删除
+	this.delete = function(path){
+		var paths   = path.split("/");
+		var string  = '';
+		var pointer = this.root_node;
+		var parent = '';
+
+		for (var i = 0; i < pointer.child.length; i++) {
+			string += "/"+paths[i];
+			console.log("string "+string);
+
+			var flag = false;
+			var j;
+
+			for ( j = 0; j < pointer.child.length; j++) {
+				if( string == (pointer.child)[j].path ){
+					parent = pointer;
+					pointer = (pointer.child)[j];
+					flag = true;
+					break;
+				}
+			}
+
+			if( flag == false){
+				console.log("cannot find "+path);
+				return false;
+
+			}
+
+			if( i == paths.length-1 ){
+				(parent.child).splice(j,1);
+				return true;
+			}
 		}
 
 	}

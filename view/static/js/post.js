@@ -110,7 +110,7 @@ function newProjectPost(name,  files_name_string, files, labels_string, links, i
 		formData.append( "file"+(i+1), files[i]);
 	}
 
-	formData.append("file_name", files_name_string);
+	formData.append("file_names", files_name_string);
 	formData.append("labels", labels_string);
 	formData.append("links", links);
 	formData.append("introduction", intro);
@@ -119,10 +119,10 @@ function newProjectPost(name,  files_name_string, files, labels_string, links, i
 	jQuery.ajax({
 	  url: '/action',
 	  type: 'POST',
-	  dataType: 'xml/html/script/json/jsonp',
-	  data: {
-	  	
-	  },
+	  data: formData,
+	  processData: false,
+	  contentType: false,
+
 	  beforeSend: function() {
 	    
 	  },
@@ -252,7 +252,8 @@ function getOwnProjPost(){
 }
 
 //9. 浏览一个项目的详细信息的post请求
-function getProjDetail(id){
+function getProjDetailPost(id){
+	
 	jQuery.ajax({
 	  url: '/action',
 	  type: 'POST',
@@ -260,6 +261,7 @@ function getProjDetail(id){
 	  data: {
 	  	action_id: 9,
 	  	proj_id: id},
+
 	  beforeSend: function() {
 	    
 	  },
@@ -319,7 +321,7 @@ function getActiveDegreePost(month, num){
 }
 
 //12. 发表评论和建议的post请求
-function commentPost(proj_id, proj_name, own_usr, parent_id, content){
+function commentPost(proj_id, proj_name, own_usr, own_name, recv_usr, recv_name, parent_id, content){
 	jQuery.ajax({
 	  url: '/action',
 	  type: 'POST',
@@ -329,13 +331,17 @@ function commentPost(proj_id, proj_name, own_usr, parent_id, content){
 	  	proj_id: proj_id,
 	  	proj_name: proj_name,
 	  	own_usr: own_usr,
-	  	parent_id: parent_id},
+	  	own_name: own_name,
+	  	recv_usr: recv_usr,
+	  	recv_name: recv_name,
+	  	parent_id: parent_id,
+	  	content: content },
 
 	  beforeSend: function() {
 	    
 	  },
 	  success: function(data, textStatus, xhr) {
-	    dealCommentReturn(data);
+	    dealCommentReturn(data, parent_id, content);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);

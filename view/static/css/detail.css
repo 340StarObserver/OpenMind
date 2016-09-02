@@ -41,6 +41,8 @@
 	text-indent: 2em;
 	line-height: 1.6;
 	font-size: 1.2em;
+	white-space: pre-wrap;
+	word-break: break-all;
 }
 
 .project-intro-container,
@@ -69,14 +71,6 @@
 	padding-left: 10px;
 }
 
-.title-wrapper{
-	font-size: 1.8em;
-	margin-bottom: 10px;
-}
-
-.title-wrapper::before{
-	font-family: "FontAwesome";
-}
 
 .project-intro-wrapper>.title-wrapper::before{
 	content: "\f129";
@@ -164,11 +158,11 @@
 
 .comment-content{
 	word-break: break-all;
+	padding-left: 2em;
 }
 
 .title-right>.comment-content{
 	padding: 10px 0 10px 20px;
-	text-indent: 2em;
 }
 
 .item-follow{

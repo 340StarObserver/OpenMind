@@ -379,7 +379,7 @@ function getProjectItemHtml(project){
 				'<div class="panel-body">'+
 				    '<div class="item-title-wrapper clearfix">'+
 				    '<div class="item-title-left">'+'<i class="fa fa-star" aria-hidden="true"></i>'+
-				    	'<span class="project-name" id='+ project["id"] +'>'+ project['proj_name'] +'</span>';
+				    	'<span class="project-name" id='+ project["_id"] +'>'+ project['proj_name'] +'</span>';
 	
 	var labels = project['labels'];
 	//循环添加label
@@ -393,7 +393,7 @@ function getProjectItemHtml(project){
                             '<div class="author-info">'+
                                 '<img class="author-icon" src="'+ project['own_head'] +'" alt="author-icon">'+
                                 '<div class="author-name">'+ project['own_username'] +'</div></div>'+
-                            '<div class="brief-intro">'+ project['introduction'] +'</div></div></div></li>';
+                            '<div class="brief-intro"><pre>'+ project['introduction'] +'</pre></div></div></div></li>';
     
     return html;
 }

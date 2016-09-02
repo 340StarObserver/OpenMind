@@ -448,23 +448,7 @@
                         
                         labels       : [ 标签1, 标签2, ... ],  
                         
-                        links        :  
-                        [  
-                            { address : "bilibili.com", description : xxxx },  
-                            { address : "bilibili.com", description : xxxx }  
-                        ]  
-                        # 多个可选链接  
-                        
-                        introduction : 项目简介,  
-                        
-                        shares       :  
-                        [  
-                            { name : 分享文件名, time : 该文件分享的时间戳, url : 该文件的url },  
-                            { name : 分享文件名, time : 该文件分享的时间戳, url : 该文件的url }  
-                        ],  
-                        
-                        comments     :  
-                        # 全部评论，形式请参见 docs/design/data_design.md  
+                        introduction : 项目简介  
                     },  
                     {  
                         另一个项目的...  
@@ -545,12 +529,16 @@
                 action_id  : 12,  
             
                 proj_id    : 项目id,  
-                
                 proj_name  : 项目名称,  
                 
                 own_usr    : 项目所有者的用户名，  
-                
                 own_name   : 项目所有者的姓名,  
+                
+                recv_usr   : 消息接收者的用户名,  
+                recv_name  : 消息接受者的姓名,  
+                # 若这条评论是针对项目的，则recv_usr和own_usr相同，recv_name和own_name相同  
+                # 若这条评论是针对评论的，则recv_usr是那条评论的用户的用户名，recv_name是那条评论的用户的姓名  
+                # （项目所有者肯定会接收到这条消息，但当这条评论是针对评论的时候，那条评论的用户也会接收到消息）  
                 
                 parent_id  : 父评论的id,  
                 # 若针对项目而评论，该值填"0"  
@@ -562,7 +550,7 @@
             }  
 
         响应体  
-
+	
             {  
                 result     : 成功与否,  
                 # true or false  
@@ -658,11 +646,20 @@
                     
                     labels       : [ 标签1, 标签2, ... ],  
                     
-                    link         : 链接,  
+                    links        :  
+                    [  
+                        { address : "bilibili.com", description : xxxx },  
+                        { address : "bilibili.com", description : xxxx }  
+                    ]  
+                    # 多个可选链接  
+                    # address      为某个链接的地址  
+                    # description  为这个链接的描述  
                     
                     introduction : 项目简介,  
                     
-                    score        : 票数  
+                    score        : 票数,  
+                    
+                    alive        : 是否还处于投票状态  
                 },  
                 {  
                     另一个在投票的项目的...  
@@ -693,7 +690,7 @@
                 reason     : 失败原因  
                 # 仅当 result == false，此值才有  
                 # reason   : 1   表示未登陆  
-                # reason   : 2   表示你的投票次数用完了  
-                # reason   : 3   表示此时投票已经结束了  
-                # reason   : 4   表示不存在该项目  
+                # reason   : 2   表示你已经投过该项目了  
+                # reason   : 3   表示该项目此时不处于投票状态  
+                # reason   : 4   表示你的投票权利用光了  
             }  
