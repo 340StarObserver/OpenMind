@@ -1,22 +1,21 @@
+var token = getCookie('token');
+console.log( token );
+if( token == null){
+	location.href = 'home.html';
+}
+
+
 var tree = new Tree();
 var parent;  //当前节点的父节点
 var pointer = tree.root_node; //指向当前节点
-var url = "";  //当前文件目录的url
-var files = [];
+var url = "";  		//当前文件目录的url
+var files = []; 	//filename:file
+var labels= []; 	//name of label
+var links = []; 	//remark : content of remark
+
 
 $(document).ready(function() {
 
-	tree.add("docs/a.jpg", true, 1, '');
-	tree.add("b", true, 1, '');
-	tree.add("res/image/k.txt", true, 1, '');
-	tree.add("res/kk/j", true, 1, '');
-	tree.add("res/image/x/mm/k.txt", true, 1, '');
-	
-	pointer = tree.find("docs");
-	addDirectory("new");
-
-	console.log( pointer );
-	// showFileList();
 	changeFileConstruct('');
 
 	$("#new-directory-btn").click(function(event) {
@@ -26,21 +25,52 @@ $(document).ready(function() {
 
 	$("#new-file-btn").click(function(event) {
 		$(".modal.new-file-dialog").fadeIn('slow');
+		$("#file-input").val('');
+		$("#file-name-input").val('');
+
 	});
 
 	$(document).on('click', '.modal .close-btn', function(event) {
+		$("#directory-name-input").val('');
 		$(".modal").fadeOut('fast');
 	});
 
 	$(document).on('click', '.modal.new-directory-dialog .confirm-btn', function(event) {
 		//文件夹名字不为空
-		var name = $("#directory-name-input") ;
+		var name = $("#directory-name-input").val() ;
+		console.log(name);
 		if( name == '' ){
 			showWarningTips("请输入文件夹名字");
 			return false;
 		}
 
+		//重复文件夹名字
+		var nodes = pointer.child;
+		for (var i = 0; i < nodes.length; i++) {
+			var paths = (nodes[i].path).split('/') ;
+			if( name == paths[ paths.length-1] ){
+				showWarningTips("重复名字");
+				return false;
+			}
+
+		}
+
 		addDirectory(name);
+
+		$('.modal').fadeOut('fast');
+	});
+
+	$(document).on('change', '#file-input', function(event) {
+		console.log("fiile input change");
+		var file = $("#file-input")[0].files[0];
+		if( file == null){
+			$(this).addClass('has-error');
+			return false;
+		}
+		var input = $("#file-name-input");
+		if( input.val() == ''){
+			input.val(file.name);
+		}
 
 	});
 
@@ -48,9 +78,35 @@ $(document).ready(function() {
 		var filename = $("#file-name-input").val();
 		//检查文件是否为空
 		var file = $("#file-input")[0].files[0] ;	
+		console.log(file);
 
-		//如果文件名和文件都不为空
-		// addFile(filename, file);
+		if( file == null){
+			showWarningTips("请选择文件");
+			return false;
+		}
+
+		if( filename == ''){
+			showWarningTips( 请输入文件名字 );
+			return false;
+		}
+
+		//重复名字
+		var nodes = pointer.child;
+		for (var i = 0; i < nodes.length; i++) {
+			var paths = (nodes[i].path).split('/') ;
+			if( filename == paths[ paths.length-1] ){
+				showWarningTips("重复名字");
+				return false;
+			}
+			
+		}
+
+		console.log(file);
+		//符合要求
+		addFile(filename, file);
+
+		$('.modal').fadeOut('fast');
+		showFileList();
 	});
 
 	$(document).on('click', '.catalog-root', function(event) {
@@ -69,32 +125,10 @@ $(document).ready(function() {
 			path += '/'+ ( $(".file-catalog>li").eq(i).text() );
 		}
 
-
-		
 		console.log( path );
 		path = path.substring(4, path.length);
 		console.log(path);
 		changeFileConstruct( path );
-
-		// var direcotry = $(this).text();
-		// var paths = (pointer.path).split("/");
-		// paths.shift();
-
-		// var path="";
-
-		// for (var i = 0; i < paths.length; i++) {
-		// 	path += '/'+paths[i];
-		// 	if( paths[i] == direcotry ){
-		// 		break;
-		// 	}
-		// }
-
-		// path = path.substring(1, path.length);
-		
-		// changeFileConstruct( path );
-
-		// var path = getCatalogPath();
-		// console.log ( $(".file-catalog").children()[0] );
 	});
 
 	$(document).on('click', '.file-item', function(event) {
@@ -107,21 +141,131 @@ $(document).ready(function() {
 		changeFileConstruct(path);
 
 	});
+
+	$("#label-confirm-btn").click(function(event) {
+		
+		var label = $("#label-input").val();
+		
+		if( label == '' ){
+			showWarningTips('请输入标签');
+			return false;
+		}
+
+
+		addLabel(label);
+		//存入数组
+		labels.push(label);
+		clearInput('#label-input');
+
+		//TODO最多输入5个标签
+	});
+
+	$('#link-confirm-btn').click(function(event) {
+		var remark = $("#remark-input").val();
+		var url = $("#url-input").val();
+		if( remark=='' || url==''){
+			showWarningTips("请填写完成链接信息");
+			return false;
+		}
+
+		//检查是否链接重复
+		for (var i = 0; i < links.length; i++) {
+			if( remark == links[i].remark || url == links[i].url ){
+				return false;
+			}
+		}
+
+		
+
+		clearInput('#url-input');
+		clearInput('#remark-input');
+
+		links.push({
+			'address' : url,
+			'description': remark
+		});
+
+		addLink(remark, url);
+		console.log( links.length );
+
+	});
+
+	//TODO 删除标签
+
+	//TODO 删除链接
+
+	$("#publish-btn").click(function(event) {
+		var token = getCookie('token');
+
+		if( token== null ){
+			return false;
+		}
+
+		var name = $("#name-input").val();
+		var intro = $("#intro-input").val();
+		//TODO 检查各项输入合法性
+
+		var files_name_string = '',
+			labels_string = '',
+			file_array=[];
+		
+		if( files.length != 0){
+			
+			for (var i = 0; i < files.length; i++) {
+				files_name_string += files[i]["name"]+",";
+				file_array.push( files[i]["file"] );
+			}
+
+			files_name_string = files_name_string.substring(0, files_name_string.length-1);
+		}
+
+		if(labels.length != 0){
+			for (var i = 0; i < labels.length; i++) {
+				labels_string += labels[i]+',';
+			}
+
+			labels_string = labels_string.substring(0, labels_string.length-1);
+		}
+
+		var links_jsonstring = JSON.stringify( links );
+		
+		console.log( 'name' + name);
+		console.log('intro' + intro);
+		console.log("links "+links_jsonstring);
+		console.log("labels_string "+labels_string);
+		console.log("files_string "+ files_name_string );
+		console.log("file_array" + file_array );
+
+		newProjectPost(name, files_name_string, file_array, labels_string, links_jsonstring, intro, token);
+
+		
+	});
 	
 });
 
-function addFile(path, file){
+function addFile(filename, file){
+	var path = pointer.path+'/'+filename;
+	path = path.substring(1, path.length);
+
+	console.log(path);
+
 	//添加到树结构
 	var timestamp = new Date().getTime();
 	tree.add(path, true, timestamp );
 
+	console.log( file );
+
 	//添加到内存
+	console.log(files );
+
 	files.push({
 		"name" : path,
 		"file" : file
 	});
-	
-	console.log(files);
+
+	console.log( files );
+	console.log( files.length );
+
 }
 
 function addDirectory(name){
@@ -142,8 +286,9 @@ function showFileList(){
 		var names = (nodes[i].path).split("/");
 		var name = names[ names.length-1 ];
 
-		// if( nodes[i].leaf == false )
-			html += getFileItemHtml(name);
+		// if( nodes[i].leaf == false )  //如果是文件夹
+		// else // 如果是文件
+		html += getFileItemHtml(name);
 
 		console.log("add item: "+name);
 	}
@@ -204,4 +349,43 @@ function changeCatalog(path){
 	$(".file-catalog").html(html);
 	// $(".file-catalog").prepend( <li class> )
 	$(".file-catalog>li:last-child").addClass('active');
+}
+
+function addLabel(label){
+	var html = '<li class="project-label">'+ label +'</div>';
+	$('.labels-container').append(html);
+}
+
+function addLink(remark, url){
+	var html = '<li class="project-link">'+
+							'<span class="link-remark">'+ remark +'</span>'+
+							'<span class="link-url">'+ url + '</span>'+
+						'</li>';
+	$('.links-container').append(html);
+}
+
+function clearInput(id){
+	$(id).val('');
+}
+
+function dealNewProjectReturn(data){
+	if( data['result'] == true ){
+		setCookie("token", token, 7);
+		alert('发布成功');
+
+	}else{
+		var errorReason;
+		switch( data['reason'] ){
+			case 1:
+				errorReason = "未登录";
+				break;
+			case 2:
+				errorReason = "令牌错误";
+				break;
+			default:
+			errorReason = "信息错误";
+		}
+	    	//显示错误信息
+	    	showWarningTips(errorReason);
+	}
 }

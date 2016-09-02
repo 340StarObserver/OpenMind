@@ -67,7 +67,7 @@ article{
 	left: 0;
 	right: 0;
 	text-align: center;
-	z-index: 100;
+	z-index: 9999;
 	pointer-events: none;
 }
 
@@ -97,6 +97,10 @@ article{
 	font-family: "FontAwesome";
 }
 
+.modal-dialog{
+	margin-top: 100px;
+}
+
 a{
 /*a,a:hover{*/
 	text-decoration: none;
@@ -120,15 +124,6 @@ footer{
 .bottom-name{
 	color: teal;
 	margin-bottom: 10px;
-}
-
-.project-label{
-	margin-left: 5px;
-	padding: 0 5px;
-	border-radius: 2px;
-	color: white;
-	background-color: #03a9f4;
-	font-size: .5em;
 }
 
 @media screen and (max-width: 770px){
