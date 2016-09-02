@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
+        android:clickable="false"
         app:cardCornerRadius="4dp"
         app:cardElevation="5dp"
         app:cardPreventCornerOverlap="false" >

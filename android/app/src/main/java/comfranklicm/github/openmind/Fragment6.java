@@ -54,7 +54,27 @@ public class Fragment6 extends Fragment {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            //runnable.setStrResult("");
+//                            runnable.setStrResult(" [  \n" +
+//                                    "\" +\n" +
+//                                    "                                \"            {  \\n\" +\n" +
+//                                    "                                \"                month  : 201608,\\n\" +\n" +
+//                                    "                                \"\\n\" +\n" +
+//                                    "                                \"                active :  \\n\" +\n" +
+//                                    "                                \"                [  \\n\" +\n" +
+//                                    "                                \"                    { day : 1,  degree : 10 },  \\n\" +\n" +
+//                                    "                                \"                    { day : 29, degree : 6 }  \\n\" +\n" +
+//                                    "                                \"                ]  \\n\" +\n" +
+//                                    "                                \"               \\n\" +\n" +
+//                                    "                                \"            },  \\n\" +\n" +
+//                                    "                                \"            {  \\n\" +\n" +
+//                                    "                                \"              month  : 201609,\\n\" +\n" +
+//                                    "                                \"              active :  \\n\" +\n" +
+//                                    "                                \"                [  \\n\" +\n" +
+//                                    "                                \"                    { day : 1,  degree : 10 },  \\n\" +\n" +
+//                                    "                                \"                    { day : 29, degree : 6 }  \\n\" +\n" +
+//                                    "                                \"                ]  \\n\" +\n" +
+//                                    "                                \"            }  \\n\" +\n" +
+//                                    "                                \"        ]");
                             JsonParser.ParseJson(8, runnable.getStrResult());
                             try {
                                 DataBaseUtil dataBaseUtil = DataBaseUtil.getInstance(getActivity());

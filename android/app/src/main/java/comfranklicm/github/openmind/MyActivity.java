@@ -67,7 +67,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         User.getInstance().setMyActivity(this);
         //User.getInstance().setAllView(this.getCurrentFocus());
         User.getInstance().addAllJsonParse();
-        NetUtil.getInstance().setIpAddress("192.168.252.6");
+        NetUtil.getInstance().setIpAddress("192.168.252.6w");
         NetUtil.getInstance().setPort("8081");
 		fManager = getSupportFragmentManager();
         Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
@@ -213,7 +213,94 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
            } catch (InterruptedException e) {
                e.printStackTrace();
            }
-
+//             runnable.setStrResult("[\n" +
+//                     "            {  \n" +
+//                     "                _id          : fsdfsdfsdf,  \n" +
+//                     "\n" +
+//                     "                proj_name    : sdafsadfsd,  \n" +
+//                     "\n" +
+//                     "                own_usr      : sdfsadfasdf,  \n" +
+//                     "\n" +
+//                     "                own_name     : dsfafdsafsdf,  \n" +
+//                     "\n" +
+//                     "                own_head     : sadfsdafsdfsdf,                \n" +
+//                     "\n" +
+//                     "                pub_time     : 发布时间戳,  \n" +
+//                     "\n" +
+//                     "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                     "\n" +
+//                     "                introduction : 项目简介  \n" +
+//                     "            },  \n" +
+//                     "            {  \n" +
+//                     "                 _id          : sdgfdagsd,  \n" +
+//                     "\n" +
+//                     "                proj_name    : esfadsf,  \n" +
+//                     "\n" +
+//                     "                own_usr      : 发起人用户名,  \n" +
+//                     "\n" +
+//                     "                own_name     : 发起人姓名,  \n" +
+//                     "\n" +
+//                     "                own_head     : 发起人的头像,  \n" +
+//                     "\n" +
+//                     "                pub_time     : 发布时间戳,  \n" +
+//                     "\n" +
+//                     "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                     "\n" +
+//                     "                introduction : 项目简介  \n" +
+//                     "            },\n" +
+//                     "           {\n" +
+//                     "                _id          : safdsdaga,  \n" +
+//                     "\n" +
+//                     "                proj_name    : sdafsdaf,  \n" +
+//                     "\n" +
+//                     "                own_usr      : 发起人用户名,  \n" +
+//                     "\n" +
+//                     "                own_name     : 发起人姓名,  \n" +
+//                     "\n" +
+//                     "                own_head     : sdafsdafsdf,  \n" +
+//                     "      \n" +
+//                     "\n" +
+//                     "                pub_time     : 发布时间戳,  \n" +
+//                     "\n" +
+//                     "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                     "\n" +
+//                     "                introduction : 项目简介  \n" +
+//                     "            },\n" +
+//                     "                {\n" +
+//                     "                 _id          : sdafadfgsd,  \n" +
+//                     "\n" +
+//                     "                proj_name    : 项目名称,  \n" +
+//                     "\n" +
+//                     "                own_usr      : 发起人用户名,  \n" +
+//                     "\n" +
+//                     "                own_name     : 发起人姓名,  \n" +
+//                     "\n" +
+//                     "                own_head     : 发起人的头像,   \n" +
+//                     "\n" +
+//                     "                pub_time     : 发布时间戳,  \n" +
+//                     "\n" +
+//                     "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                     "\n" +
+//                     "                introduction : 项目简介  \n" +
+//                     "             },\n" +
+//                     "              {\n" +
+//                     "                _id          : sdafhujkd,  \n" +
+//                     "\n" +
+//                     "                proj_name    : 项目名称,  \n" +
+//                     "\n" +
+//                     "                own_usr      : 发起人用户名,  \n" +
+//                     "\n" +
+//                     "                own_name     : 发起人姓名,  \n" +
+//                     "\n" +
+//                     "                own_head     : 发起人的头像,                  \n" +
+//                     "\n" +
+//                     "                pub_time     : 发布时间戳,  \n" +
+//                     "\n" +
+//                     "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                     "\n" +
+//                     "                introduction : 项目简介  \n" +
+//                     "              }            \n" +
+//                     "]  ");
            try {
                ((ViewAllProjectsJsonParser) User.getInstance().baseJsonParsers.get(6)).ViewAllProjectsJsonParsing(runnable.getStrResult());
            } catch (NullPointerException e) {
@@ -228,6 +315,52 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
            } catch (InterruptedException e) {
                e.printStackTrace();
            }
+//           String str="[  \n" +
+//                   "            {  \n" +
+//                   "                _id          : 项目id,  \n" +
+//                   "\n" +
+//                   "                proj_name    : 项目名称,  \n" +
+//                   "\n" +
+//                   "                own_usr      : 发起人的用户名,  \n" +
+//                   "\n" +
+//                   "                own_name     : 发起人的名字,  \n" +
+//                   "\n" +
+//                   "                own_head     : 发起人的头像,  \n" +
+//                   "                # 是一个url链接，指向oss中的一张图  \n" +
+//                   "\n" +
+//                   "                pub_time     : 1445599887,  \n" +
+//                   "\n" +
+//                   "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                   "\n" +
+//                   "                links         : [{address:dfadf,description:fdadjflaj},{address:dfafdjlafij,description:fjdajdkfl}],\n" +
+//                   "\n" +
+//                   "                introduction : 项目简介,  \n" +
+//                   "\n" +
+//                   "                score        : 票数  \n" +
+//                   "            },  \n" +
+//                   "           {  \n" +
+//                   "                _id          : 项目id,  \n" +
+//                   "\n" +
+//                   "                proj_name    : 项目名称,  \n" +
+//                   "\n" +
+//                   "                own_usr      : 发起人的用户名,  \n" +
+//                   "\n" +
+//                   "                own_name     : 发起人的名字,  \n" +
+//                   "\n" +
+//                   "                own_head     : 发起人的头像,  \n" +
+//                   "                # 是一个url链接，指向oss中的一张图  \n" +
+//                   "\n" +
+//                   "                pub_time     : 1445599887,  \n" +
+//                   "\n" +
+//                   "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                   "\n" +
+//                   "                links         : [{address:dfadf,description:fdadjflaj},{address:dfafdjlafij,description:fjdajdkfl}],  \n" +
+//                   "\n" +
+//                   "                introduction : 项目简介,  \n" +
+//                   "\n" +
+//                   "                score        : 票数  \n" +
+//                   "            }\n" +
+//                   "]  ";
            try {
                ((ViewVoteProjectsJsonParser) User.getInstance().baseJsonParsers.get(13)).ViewVoteProjectsJsonParsing(runnable1.getStrResult());
            } catch (NullPointerException e) {

@@ -102,7 +102,7 @@ public class HttpPostRunnable implements Runnable{
                  * 注销
                  */
                 case 4:{
-                    NameValuePair pair1 = new BasicNameValuePair("action_id","3");
+                    NameValuePair pair1 = new BasicNameValuePair("action_id","4");
                     pairList.add(pair1);
                     break;
                 }

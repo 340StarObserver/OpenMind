@@ -70,6 +70,27 @@ public class Fragment4 extends Fragment {
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
+//                                runnable.setStrResult("   [  \n" +
+//                                        "            {  \n" +
+//                                        "                _id          : 项目id,  \n" +
+//                                        "\n" +
+//                                        "                proj_name    : 项目名称,  \n" +
+//                                        "\n" +
+//                                        "                own_usr      : 发起人用户名,  \n" +
+//                                        "\n" +
+//                                        "                own_name     : 发起人姓名,  \n" +
+//                                        "\n" +
+//                                        "                own_head     : 发起人的头像,  \n" +
+//                                        "                # 是一个url链接，指向oss中的一张图  \n" +
+//                                        "\n" +
+//                                        "                pub_time     : 发布时间戳,  \n" +
+//                                        "\n" +
+//                                        "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                                        "\n" +
+//                                        "                introduction : 项目简介  \n" +
+//                                        "            },  \n" +
+//                                        "      \n" +
+//                                        "        ]  ");
                                 JsonParser.ParseJson(7, runnable.getStrResult());
                                 adapter.notifyDataSetChanged();
                                 num = num + 5;
@@ -113,7 +134,94 @@ public class Fragment4 extends Fragment {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            //runnable.setStrResult("");
+//                            runnable.setStrResult("[\n" +
+//                                    "            {  \n" +
+//                                    "                _id          : fsdfsdfsdf,  \n" +
+//                                    "\n" +
+//                                    "                proj_name    : sdafsadfsd,  \n" +
+//                                    "\n" +
+//                                    "                own_usr      : sdfsadfasdf,  \n" +
+//                                    "\n" +
+//                                    "                own_name     : dsfafdsafsdf,  \n" +
+//                                    "\n" +
+//                                    "                own_head     : sadfsdafsdfsdf,                \n" +
+//                                    "\n" +
+//                                    "                pub_time     : 发布时间戳,  \n" +
+//                                    "\n" +
+//                                    "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                                    "\n" +
+//                                    "                introduction : 项目简介  \n" +
+//                                    "            },  \n" +
+//                                    "            {  \n" +
+//                                    "                 _id          : sdgfdagsd,  \n" +
+//                                    "\n" +
+//                                    "                proj_name    : esfadsf,  \n" +
+//                                    "\n" +
+//                                    "                own_usr      : 发起人用户名,  \n" +
+//                                    "\n" +
+//                                    "                own_name     : 发起人姓名,  \n" +
+//                                    "\n" +
+//                                    "                own_head     : 发起人的头像,  \n" +
+//                                    "\n" +
+//                                    "                pub_time     : 发布时间戳,  \n" +
+//                                    "\n" +
+//                                    "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                                    "\n" +
+//                                    "                introduction : 项目简介  \n" +
+//                                    "            },\n" +
+//                                    "           {\n" +
+//                                    "                _id          : safdsdaga,  \n" +
+//                                    "\n" +
+//                                    "                proj_name    : sdafsdaf,  \n" +
+//                                    "\n" +
+//                                    "                own_usr      : 发起人用户名,  \n" +
+//                                    "\n" +
+//                                    "                own_name     : 发起人姓名,  \n" +
+//                                    "\n" +
+//                                    "                own_head     : sdafsdafsdf,  \n" +
+//                                    "      \n" +
+//                                    "\n" +
+//                                    "                pub_time     : 发布时间戳,  \n" +
+//                                    "\n" +
+//                                    "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                                    "\n" +
+//                                    "                introduction : 项目简介  \n" +
+//                                    "            },\n" +
+//                                    "                {\n" +
+//                                    "                 _id          : sdafadfgsd,  \n" +
+//                                    "\n" +
+//                                    "                proj_name    : 项目名称,  \n" +
+//                                    "\n" +
+//                                    "                own_usr      : 发起人用户名,  \n" +
+//                                    "\n" +
+//                                    "                own_name     : 发起人姓名,  \n" +
+//                                    "\n" +
+//                                    "                own_head     : 发起人的头像,   \n" +
+//                                    "\n" +
+//                                    "                pub_time     : 发布时间戳,  \n" +
+//                                    "\n" +
+//                                    "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                                    "\n" +
+//                                    "                introduction : 项目简介  \n" +
+//                                    "             },\n" +
+//                                    "              {\n" +
+//                                    "                _id          : sdafhujkd,  \n" +
+//                                    "\n" +
+//                                    "                proj_name    : 项目名称,  \n" +
+//                                    "\n" +
+//                                    "                own_usr      : 发起人用户名,  \n" +
+//                                    "\n" +
+//                                    "                own_name     : 发起人姓名,  \n" +
+//                                    "\n" +
+//                                    "                own_head     : 发起人的头像,                  \n" +
+//                                    "\n" +
+//                                    "                pub_time     : 发布时间戳,  \n" +
+//                                    "\n" +
+//                                    "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                                    "\n" +
+//                                    "                introduction : 项目简介  \n" +
+//                                    "              }            \n" +
+//                                    "]  ");
                             JsonParser.ParseJson(7, runnable.getStrResult());
                        /* for (int i = 0; i < 5; i++) {
                             ProjectInfo projectInfo = new ProjectInfo();

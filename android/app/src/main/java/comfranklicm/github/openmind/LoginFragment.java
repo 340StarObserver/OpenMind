@@ -57,20 +57,20 @@ public class LoginFragment extends Fragment {
                 if (NetUtil.isNetworkConnectionActive(getActivity())) {
                 if (isUserNameValid(userName.getText().toString())&&isPassWordValid(passWord.getText().toString())) {
                     HttpPostRunnable runnable = new HttpPostRunnable();
-//                    runnable.setActionId(2);
-//                    runnable.setUsername(userName.getText().toString());
-//                    runnable.setPassword(MD5.getMD5Str(passWord.getText().toString()));
-//                    Thread t=new Thread(runnable);
-//                    t.start();
-//                    try
-//                    {
-//                        t.join();
-//                    }
-//                    catch (Exception e)
-//                    {
-//                        e.printStackTrace();
-//                    }
-                    runnable.setStrResult("{\"result\":\"true\",\"realname\":\"李昌懋\",\"department\":\"软件学院\",\"signup_time\":\"2016-08-13\",\"head\":\"img/img.jpg\",\"token\":\"233\"}");
+                    runnable.setActionId(2);
+                    runnable.setUsername(userName.getText().toString());
+                    runnable.setPassword(MD5.getMD5Str(passWord.getText().toString()));
+                    Thread t=new Thread(runnable);
+                    t.start();
+                    try
+                    {
+                        t.join();
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                    //runnable.setStrResult("{\"result\":\"true\",\"realname\":\"李昌懋\",\"department\":\"软件学院\",\"signup_time\":\"2016-08-13\",\"head\":\"img/img.jpg\",\"token\":\"233\"}");
                     JsonParser.ParseJson(2,runnable.getStrResult());
                     if (User.getInstance().getLoginResult().equals("true"))
                     {
@@ -94,15 +94,32 @@ public class LoginFragment extends Fragment {
                             e.printStackTrace();
                         }
                         HttpPostRunnable httpPostRunnable=new HttpPostRunnable();
-//                        httpPostRunnable.setActionId(8);
-//                        Thread thread=new Thread(httpPostRunnable);
-//                        thread.start();
-//                        try {
-//                            thread.join();
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-
+                        httpPostRunnable.setActionId(8);
+                        Thread thread=new Thread(httpPostRunnable);
+                        thread.start();
+                        try {
+                            thread.join();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+//                        httpPostRunnable.setStrResult("[  \n" +
+//                                "            {  \n" +
+//                                "                _id          : 项目id,  \n" +
+//                                "\n" +
+//                                "                proj_name    : 项目名称,  \n" +
+//                                "\n" +
+//                                "                own_usr      : 发起人用户名,  \n" +
+//                                "\n" +
+//                                "                own_name     : 发起人姓名,  \n" +
+//                                "\n" +
+//                                "                own_head     : 发起人的头像,  \n" +
+//                                 "                pub_time     : 发布时间戳,  \n" +
+//                                "\n" +
+//                                "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                                "\n" +
+//                                "                introduction : 项目简介  \n" +
+//                                "            }\n" +
+//                                "        ]  ");
                         try {
 
                             ((ViewOwnProjectsJsonParser) User.getInstance().baseJsonParsers.get(7)).ViewOwnProjectsJsonParsing(httpPostRunnable.getStrResult());
@@ -150,6 +167,26 @@ public class LoginFragment extends Fragment {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+//                        httpPostRunnable1.setStrResult("  [  \n" +
+//                                "            {  \n" +
+//                                "                month  : 201608,\n" +
+//                                "\n" +
+//                                "                active :  \n" +
+//                                "                [  \n" +
+//                                "                    { day : 1,  degree : 10 },  \n" +
+//                                "                    { day : 29, degree : 6 }  \n" +
+//                                "                ]  \n" +
+//                                "               \n" +
+//                                "            },  \n" +
+//                                "            {  \n" +
+//                                "              month  : 201609,\n" +
+//                                "              active :  \n" +
+//                                "                [  \n" +
+//                                "                    { day : 1,  degree : 10 },  \n" +
+//                                "                    { day : 29, degree : 6 }  \n" +
+//                                "                ]  \n" +
+//                                "            }  \n" +
+//                                "        ]  ");
                         ((ViewActiveDataJsonParser)User.getInstance().baseJsonParsers.get(10)).ViewActiveDataJsonParsing(httpPostRunnable1.getStrResult());
                          try {
                              SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();

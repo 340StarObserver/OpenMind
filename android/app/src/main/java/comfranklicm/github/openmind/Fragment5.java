@@ -52,7 +52,53 @@ public class Fragment5 extends Fragment {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            //runnable.setStrResult("");
+                            //runnable.setStrResult(
+//                            String str="[  \n" +
+//                                    "            {  \n" +
+//                                    "                _id          : 项目id,  \n" +
+//                                    "\n" +
+//                                    "                proj_name    : 项目名称,  \n" +
+//                                    "\n" +
+//                                    "                own_usr      : 发起人的用户名,  \n" +
+//                                    "\n" +
+//                                    "                own_name     : 发起人的名字,  \n" +
+//                                    "\n" +
+//                                    "                own_head     : 发起人的头像,  \n" +
+//                                    "                # 是一个url链接，指向oss中的一张图  \n" +
+//                                    "\n" +
+//                                    "                pub_time     : 1445599887,  \n" +
+//                                    "\n" +
+//                                    "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                                    "\n" +
+//                                    "                links         : [{address:dfadf,description:fdadjflaj},{address:dfafdjlafij,description:fjdajdkfl}],\n" +
+//                                    "\n" +
+//                                    "                introduction : 项目简介,  \n" +
+//                                    "\n" +
+//                                    "                score        : 票数  \n" +
+//                                    "            },  \n" +
+//                                    "           {  \n" +
+//                                    "                _id          : 项目id,  \n" +
+//                                    "\n" +
+//                                    "                proj_name    : 项目名称,  \n" +
+//                                    "\n" +
+//                                    "                own_usr      : 发起人的用户名,  \n" +
+//                                    "\n" +
+//                                    "                own_name     : 发起人的名字,  \n" +
+//                                    "\n" +
+//                                    "                own_head     : 发起人的头像,  \n" +
+//                                    "                # 是一个url链接，指向oss中的一张图  \n" +
+//                                    "\n" +
+//                                    "                pub_time     : 1445599887,  \n" +
+//                                    "\n" +
+//                                    "                labels       : [ 标签1, 标签2, ... ],  \n" +
+//                                    "\n" +
+//                                    "                links         : [{address:dfadf,description:fdadjflaj},{address:dfafdjlafij,description:fjdajdkfl}],  \n" +
+//                                    "\n" +
+//                                    "                introduction : 项目简介,  \n" +
+//                                    "\n" +
+//                                    "                score        : 票数  \n" +
+//                                    "            }\n" +
+//                                    "]  ";
                             JsonParser.ParseJson(14, runnable.getStrResult());
                       /*  for (int i = 0; i < 5; i++) {
                             ProjectInfo projectInfo = new ProjectInfo();

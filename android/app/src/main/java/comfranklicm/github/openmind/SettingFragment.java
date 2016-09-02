@@ -55,7 +55,7 @@ public class SettingFragment extends Fragment {
         fa_moon_o=(TextView)view.findViewById(R.id.fa_moon_o);
         fa_moon_o.setTypeface(FontManager.getTypeface(getContext(), FontManager.FONTAWESOME));
         logoutButton=(Button)view.findViewById(R.id.button);
-        if(!User.getInstance().isLastLogin()) {
+        if(!User.getInstance().isLastLogin()&&!User.getInstance().isLogin()) {
             synchron_btn.setVisibility(View.GONE);
             dashed_line1.setVisibility(View.GONE);
             logoutButton.setVisibility(View.GONE);
@@ -73,10 +73,12 @@ public class SettingFragment extends Fragment {
                     {
                         e.printStackTrace();
                     }
+                    //runnable.setStrResult("{result:true}");
                     JsonParser.ParseJson(4,runnable.getStrResult());
                     if (User.getInstance().getLogoutResult().equals("true"))
                     {
                         User.getInstance().setIsLogin(false);
+                        User.getInstance().setIsLastLogin(false);
                         DataBaseUtil.getInstance(getActivity()).deleteDatabase(getActivity());
                         MyActivity activity=(MyActivity)getActivity();
                         activity.setChioceItem(2);
@@ -92,7 +94,7 @@ public class SettingFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     DataBaseUtil.getInstance(getActivity()).deleteDatabase(getActivity());
-                    Toast.makeText(getActivity(),"已清除本地数据",Toast.LENGTH_LONG);
+                    Toast.makeText(getActivity(),"已清除本地数据",Toast.LENGTH_LONG).show();
                 }
             });
         }
