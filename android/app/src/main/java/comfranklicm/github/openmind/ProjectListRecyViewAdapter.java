@@ -80,6 +80,13 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                     ((ProjectViewHolder) holder).Label2.setText(User.getInstance().allinfos.get(j).getLabel2());
                     ((ProjectViewHolder) holder).textView1.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
                     ((ProjectViewHolder) holder).textView2.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
+                    ((ProjectViewHolder) holder).cardView.setOnClickListener(new View.OnClickListener() {//add by lyy 2016.9.1
+                        @Override
+                        public void onClick(View v) {
+                            User.getInstance().setCurrentProject(User.getInstance().allinfos.get(j));
+                            User.getInstance().getMyActivity().transactiontoProjectDetail();
+                        }
+                    });
                     break;
                 }
                 //投票中项目

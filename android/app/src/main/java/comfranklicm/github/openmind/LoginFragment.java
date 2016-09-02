@@ -1,5 +1,6 @@
 package comfranklicm.github.openmind;
 
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.apache.http.protocol.HTTP;
+
+import java.sql.SQLDataException;
 
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.JsonParser;
@@ -79,9 +82,12 @@ public class LoginFragment extends Fragment {
                             SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
                             Log.d("writedb", writedb.toString());
                             writedb.execSQL("insert into User(username,password,realname,department,signuptime) values(?,?,?,?,?)", arrayOfObject);
-                        } catch (Exception e) {
+                            writedb.close();
+                        } catch (SQLException e) {
                             e.printStackTrace();
                         }
+
+
                         HttpPostRunnable httpPostRunnable=new HttpPostRunnable();
                         httpPostRunnable.setActionId(8);
                         Thread thread=new Thread(httpPostRunnable);
@@ -92,6 +98,19 @@ public class LoginFragment extends Fragment {
                             e.printStackTrace();
                         }
                         ((ViewOwnProjectsJsonParser)User.getInstance().baseJsonParsers.get(7)).ViewOwnProjectsJsonParsing(httpPostRunnable.getStrResult());
+                        try {
+                            Object[] arrayOfObject = new Object[5];
+                            arrayOfObject[0] = User.getInstance().getUserName();
+                            arrayOfObject[1] = User.getInstance().getPassWord();
+                            arrayOfObject[2] = User.getInstance().getRealName();
+                            arrayOfObject[3] = User.getInstance().getDepartment();
+                            arrayOfObject[4] = User.getInstance().getRegisterTime();
+                            SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
+                        }catch (SQLException e)
+                        {
+                            e.printStackTrace();
+                        }
+
                         HttpPostRunnable httpPostRunnable1=new HttpPostRunnable();
                         httpPostRunnable1.setActionId(11);
                         httpPostRunnable1.setNum("12");
@@ -112,6 +131,9 @@ public class LoginFragment extends Fragment {
                             e.printStackTrace();
                         }
                         ((ViewActiveDataJsonParser)User.getInstance().baseJsonParsers.get(10)).ViewActiveDataJsonParsing(httpPostRunnable1.getStrResult());
+                         
+
+
 
                         activity.setChioceItem(User.getInstance().getPageNumber());
                     }else {

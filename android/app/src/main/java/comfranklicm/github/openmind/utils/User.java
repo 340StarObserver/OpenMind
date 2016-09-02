@@ -16,6 +16,7 @@ import comfranklicm.github.openmind.JsonParsing.ViewOwnProjectsJsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewProjectDetailJsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewVoteProjectsJsonParser;
 import comfranklicm.github.openmind.JsonParsing.VoteJsonParser;
+import comfranklicm.github.openmind.MyActivity;
 
 /**
  * 用户信息封装，User单例
@@ -35,7 +36,7 @@ public class User {
     public List<BaseJsonParser>baseJsonParsers=new ArrayList<BaseJsonParser>();
     private boolean isLogin=false;
     private String pictureLink;
-
+    private MyActivity myActivity;//add by lyy 2016.9.1
 
     private String loginResult;
     private String registerResult;
@@ -269,5 +270,12 @@ public class User {
         baseJsonParsers.add(new ViewVoteProjectsJsonParser());
         baseJsonParsers.add(new VoteJsonParser());
     }
+    public MyActivity getMyActivity() {
+        return myActivity;
+    }//add by lyy 2016.9.1
+
+    public void setMyActivity(MyActivity myActivity) {
+        this.myActivity = myActivity;
+    }//add by lyy 2016.9.1
 }
 

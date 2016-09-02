@@ -38,6 +38,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
 	private LoginFragment fg7;
     private RegisterFragment fg8;
     private SettingFragment fg9;
+    private ProjectDetailFragment fg10;
 	private RelativeLayout course_layout;
 	private RelativeLayout found_layout;
 	private RelativeLayout settings_layout;
@@ -55,6 +56,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+        User.getInstance().setMyActivity(this);
         User.getInstance().addAllJsonParse();
         NetUtil.getInstance().setIpAddress("192.168.252.6");
         NetUtil.getInstance().setPort("8081");
@@ -333,6 +335,14 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         hideFragments(transaction);
         fg9 = new SettingFragment();
         transaction.add(R.id.content, fg9);
+        transaction.commit();
+    }
+    public void transactiontoProjectDetail()//add by lyy 2016.8.31 切换到项目详情界面
+    {
+        final FragmentTransaction transaction = fManager.beginTransaction();
+        hideFragments(transaction);
+        fg10 = new ProjectDetailFragment();
+        transaction.add(R.id.content, fg10);
         transaction.commit();
     }
 }
