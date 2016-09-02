@@ -3,7 +3,7 @@
 
 # Author 		: 	Lv Yang
 # Created 		: 	01 September 2016
-# Modified 		: 	01 September 2016
+# Modified 		: 	02 September 2016
 # Version 		: 	1.0
 
 """
@@ -97,6 +97,7 @@ def entrance(confpath):
     page_size = 3
     insert_projects = []
     i = 0
+    total_chosen = 0
     while i < proj_total_num:
         del insert_projects[:]
         this_page_projs = batch_get_projects(mongo_client,db_name,i,page_size)
@@ -116,6 +117,7 @@ def entrance(confpath):
                     this_page_projs[one_id-1]['score'] = 0
                     this_page_projs[one_id-1]['alive'] = True
                     insert_projects.append(this_page_projs[one_id-1])
+                    total_chosen+=1
             # insert the chosen projects into collection 'vote_info'
             mongo_client[db_name]['vote_info'].insert_many(insert_projects)
 
@@ -127,7 +129,8 @@ def entrance(confpath):
         i+=page_size
 
     # set all users' vote_limit to the max limit
-    votelimit_manager.set_all(mongo_client,db_name,conf['user']['default_vote_max'],conf['user']['vote_set_batch'])
+    vote_max = int((total_chosen+1)*conf['user']['default_vote_max'])
+    votelimit_manager.set_all(mongo_client,db_name,vote_max,conf['user']['vote_set_batch'])
 
     # delete some objects
     mongo_client.close()
