@@ -1,5 +1,7 @@
 package comfranklicm.github.openmind.utils;
 
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,7 @@ public class User {
     private boolean isLogin=false;
     private String pictureLink;
     private MyActivity myActivity;//add by lyy 2016.9.1
-
+    private View allView;
     private String loginResult;
     private String registerResult;
     private String loginError;
@@ -53,9 +55,10 @@ public class User {
     private String voteError;
     private Integer pageNumber;
     private String  minimumTime;
+    private boolean isLastLogin=false;
     //为了实现每次使用该类时不创建新的对象而创建的静态对象
     private static User userInstance;
-
+    private Integer returnCount=0;
     //构造方法私有化
     private User(){}
 
@@ -254,8 +257,8 @@ public class User {
     }
 
     public void addAllJsonParse() {
-      baseJsonParsers.add(new RegisterJsonParser());
-      baseJsonParsers.add(new LoginJsonParser());
+        baseJsonParsers.add(new RegisterJsonParser());
+        baseJsonParsers.add(new LoginJsonParser());
         baseJsonParsers.add(null);
         baseJsonParsers.add(new LogoutJsonParser());
         baseJsonParsers.add(null);
@@ -277,5 +280,29 @@ public class User {
     public void setMyActivity(MyActivity myActivity) {
         this.myActivity = myActivity;
     }//add by lyy 2016.9.1
+
+    public boolean isLastLogin() {
+        return isLastLogin;
+    }
+
+    public void setIsLastLogin(boolean isLastLogin) {
+        this.isLastLogin = isLastLogin;
+    }
+
+    public View getAllView() {
+        return allView;
+    }
+
+    public void setAllView(View allView) {
+        this.allView = allView;
+    }
+
+    public Integer getReturnCount() {
+        return returnCount;
+    }
+
+    public void setReturnCount(Integer returnCount) {
+        this.returnCount = returnCount;
+    }
 }
 

@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,13 +17,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLDataException;
+import java.util.ArrayList;
+import java.util.List;
 
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.JsonParser;
 import comfranklicm.github.openmind.JsonParsing.LoginJsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewAllProjectsJsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewVoteProjectsJsonParser;
+import comfranklicm.github.openmind.utils.Active;
 import comfranklicm.github.openmind.utils.DataBaseUtil;
 import comfranklicm.github.openmind.utils.MD5;
 import comfranklicm.github.openmind.utils.NetUtil;
@@ -57,6 +65,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         User.getInstance().setMyActivity(this);
+        //User.getInstance().setAllView(this.getCurrentFocus());
         User.getInstance().addAllJsonParse();
         NetUtil.getInstance().setIpAddress("192.168.252.6");
         NetUtil.getInstance().setPort("8081");
@@ -95,7 +104,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
                " where id=?", new String[]{"1"});
        if(localCursor.getCount()>0)
        {
-
+           User.getInstance().setIsLastLogin(true);
            localCursor.moveToFirst();
            int userNameColumnIndex=localCursor.getColumnIndex("username");
            User.getInstance().setUserName(localCursor.getString(userNameColumnIndex));
@@ -108,10 +117,11 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
            int signuptimeColumnIndex=localCursor.getColumnIndex("signuptime");
            User.getInstance().setRegisterTime(localCursor.getString(signuptimeColumnIndex));
            HttpPostRunnable runnable=new HttpPostRunnable();
+
            if (NetUtil.isNetworkConnectionActive(this))
            {
-               Toast.makeText(this,"请检查网络连接",Toast.LENGTH_LONG).show();
-           /*runnable.setActionId(2);
+           Toast.makeText(this,"请检查网络连接",Toast.LENGTH_LONG).show();
+           runnable.setActionId(2);
            runnable.setUsername(User.getInstance().getUserName());
            runnable.setPassword(MD5.getMD5Str(User.getInstance().getPassWord()));
            Thread t=new Thread(runnable);
@@ -121,7 +131,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
            }catch (InterruptedException e)
            {
                e.printStackTrace();
-           }*/
+           }
            runnable.setStrResult("{\"result\":\"true\",\"realname\":\"李昌懋\",\"department\":\"软件学院\",\"signup_time\":\"2016-08-13\",\"head\":\"img/img.jpg\",\"token\":\"233\"}");
            try {
                ((LoginJsonParser) User.getInstance().baseJsonParsers.get(1)).LoginJsonParsing(runnable.getStrResult());
@@ -130,45 +140,103 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
                Toast.makeText(this,"连接服务器失败",Toast.LENGTH_LONG).show();
            }
                //JsonParser.ParseJson(2, runnable.getStrResult());
-           if(User.getInstance().isLogin())
-           {
-
-           }
-           else
-           {
-
-           }
            }
            else {
                Toast.makeText(this,"请检查网络连接",Toast.LENGTH_LONG).show();
            }
        }
        localCursor.close();
-       /*HttpPostRunnable runnable = new HttpPostRunnable();
-                        /*runnable.setActionId(7);
-                        runnable.setPageSize("10");
-                        runnable.setTime_max("" + System.currentTimeMillis() / 1000L);
-                        Thread thread=new Thread(runnable);
-                        thread.start();
-                        try {
-                            thread.join();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-       runnable.setStrResult("");
-       ((ViewAllProjectsJsonParser)User.getInstance().baseJsonParsers.get(6)).ViewAllProjectsJsonParsing(runnable.getStrResult());
-       HttpPostRunnable runnable1=new HttpPostRunnable();
-                  /*runnable1.setActionId(14);
-                  Thread thread1=new Thread(runnable1);
-                  thread1.start();
-       try {
-           thread1.join();
-       } catch (InterruptedException e) {
-           e.printStackTrace();
+       if (User.getInstance().isLastLogin())
+       {
+           Cursor cursor=database.rawQuery("select * from ProjectInfo where 1=?",new String[]{"1"});
+           int i=0;
+            while (cursor.moveToNext())
+            {
+                int idColumnIndex=cursor.getColumnIndex("id");
+                int nameColumnIndex=cursor.getColumnIndex("proj_name");
+                int ownUserColumnIndex=cursor.getColumnIndex("own_usr");
+                int ownNameColumnIndex=cursor.getColumnIndex("own_name");
+                int ownHeadColumnIndex=cursor.getColumnIndex("own_head");
+                int pubTimeColumnIndex=cursor.getColumnIndex("pub_time");
+                int label1ColumnIndex=cursor.getColumnIndex("label1");
+                int label2ColumnIndex=cursor.getColumnIndex("label2");
+                int introductionColumnIndex=cursor.getColumnIndex("introduction");
+                User.getInstance().owninfos.get(i).setProjectId(cursor.getString(idColumnIndex));
+                User.getInstance().owninfos.get(i).setProjectName(cursor.getString(nameColumnIndex));
+                User.getInstance().owninfos.get(i).setOwnUser(cursor.getString(ownUserColumnIndex));
+                User.getInstance().owninfos.get(i).setOwnName(cursor.getString(ownNameColumnIndex));
+                User.getInstance().owninfos.get(i).setOwn_head(cursor.getString(ownHeadColumnIndex));
+                User.getInstance().owninfos.get(i).setPubTime(cursor.getString(pubTimeColumnIndex));
+                User.getInstance().owninfos.get(i).setLabel1(cursor.getString(label1ColumnIndex));
+                User.getInstance().owninfos.get(i).setLabel2(cursor.getString(label2ColumnIndex));
+                User.getInstance().owninfos.get(i).setIntroduction(cursor.getString(introductionColumnIndex));
+            }
+           cursor.close();
+
+           Cursor cursor1=database.rawQuery("select * from ActiveInfo where 1=?", new String[]{"1"});
+           int j=0;
+           while (cursor1.moveToNext())
+           {
+               int monthColumnIndex=cursor1.getColumnIndex("month");
+               int activeColumnIndex=cursor1.getColumnIndex("active");
+               User.getInstance().ownactives.get(i).setMonth(cursor1.getString(monthColumnIndex));
+               User.getInstance().ownactives.get(i).setActive(cursor1.getString(activeColumnIndex));
+               try {
+                   JSONArray jsonArray=new JSONArray("["+cursor1.getString(activeColumnIndex)+"]");
+                   List<Active>activeList=new ArrayList<Active>();
+                   for (int k=0;k<jsonArray.length();k++)
+                   {
+                       JSONObject jsonObject=(JSONObject)jsonArray.get(k);
+                       Active active=new Active();
+                       active.setDay(jsonObject.getString("day"));
+                       active.setDegree(jsonObject.getString("degree"));
+                       activeList.add(active);
+                   }
+                   User.getInstance().ownactives.get(j).setActiveList(activeList);
+               } catch (JSONException e) {
+                   e.printStackTrace();
+               }
+               j++;
+           }
+           cursor1.close();
        }
-       runnable1.setStrResult("");
-       ((ViewVoteProjectsJsonParser)User.getInstance().baseJsonParsers.get(13)).ViewVoteProjectsJsonParsing(runnable1.getStrResult());*/
-       for (int i=0;i<5;i++)
+       database.close();
+       if (NetUtil.isNetworkConnectionActive(this)) {
+           HttpPostRunnable runnable = new HttpPostRunnable();
+           runnable.setActionId(7);
+           runnable.setPageSize("5");
+           runnable.setTime_max("" + System.currentTimeMillis() / 1000L);
+           Thread thread = new Thread(runnable);
+           thread.start();
+           try {
+               thread.join();
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+
+           try {
+               ((ViewAllProjectsJsonParser) User.getInstance().baseJsonParsers.get(6)).ViewAllProjectsJsonParsing(runnable.getStrResult());
+           } catch (NullPointerException e) {
+               e.printStackTrace();
+           }
+           HttpPostRunnable runnable1 = new HttpPostRunnable();
+           runnable1.setActionId(14);
+           Thread thread1 = new Thread(runnable1);
+           thread1.start();
+           try {
+               thread1.join();
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+           try {
+               ((ViewVoteProjectsJsonParser) User.getInstance().baseJsonParsers.get(13)).ViewVoteProjectsJsonParsing(runnable1.getStrResult());
+           } catch (NullPointerException e) {
+               e.printStackTrace();
+           }
+       }else {
+           Toast.makeText(this,"网络连接失败，请检查网络",Toast.LENGTH_LONG).show();
+       }
+     /*  for (int i=0;i<5;i++)
        {
            ProjectInfo projectInfo=new ProjectInfo();
            projectInfo.setProjectName("allprojectname"+i);
@@ -200,7 +268,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
            projectInfo.setLabel1("ownlabel" + i + 1);
            projectInfo.setLabel2("ownlabel" + i + 2);
            User.getInstance().owninfos.add(projectInfo);
-       }
+       }*/
    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -254,7 +322,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
 			found_text.setTextColor(blue);
 			found_layout.setBackgroundResource(R.drawable.ic_tabbar_bg_click);
             User.getInstance().setPageNumber(1);
-            if (User.getInstance().isLogin()) {
+            if (User.getInstance().isLastLogin()||User.getInstance().isLogin()) {
                 if (fg2 == null) {
                     fg2 = new Fragment2();
                     transaction.add(R.id.content, fg2);
@@ -298,6 +366,9 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         }
         if (fg9!=null){
             transaction.hide(fg9);
+        }
+        if (fg10!=null){
+            transaction.hide(fg10);
         }
     }
 

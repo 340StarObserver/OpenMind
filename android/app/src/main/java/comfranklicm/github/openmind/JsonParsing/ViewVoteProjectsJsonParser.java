@@ -59,7 +59,7 @@ public class ViewVoteProjectsJsonParser extends BaseJsonParser{
                     linkList.add(link);
                 }
                 projectInfo.setLinkList(linkList);
-                User.getInstance().owninfos.add(projectInfo);
+                User.getInstance().voteinfos.add(projectInfo);
             }
         }catch (JSONException e)
         {

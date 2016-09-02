@@ -14,6 +14,7 @@ import org.w3c.dom.Text;
 
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.JsonParser;
+import comfranklicm.github.openmind.utils.DataBaseUtil;
 import comfranklicm.github.openmind.utils.User;
 /*add by lyy 2016.8.31
   设置页面的fragment
@@ -54,7 +55,7 @@ public class SettingFragment extends Fragment {
         fa_moon_o=(TextView)view.findViewById(R.id.fa_moon_o);
         fa_moon_o.setTypeface(FontManager.getTypeface(getContext(), FontManager.FONTAWESOME));
         logoutButton=(Button)view.findViewById(R.id.button);
-        if(!User.getInstance().isLogin()) {
+        if(!User.getInstance().isLastLogin()) {
             synchron_btn.setVisibility(View.GONE);
             dashed_line1.setVisibility(View.GONE);
             logoutButton.setVisibility(View.GONE);
@@ -63,7 +64,7 @@ public class SettingFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     HttpPostRunnable runnable=new HttpPostRunnable();
-                    /*runnable.setActionId(4);
+                    runnable.setActionId(4);
                     Thread thread=new Thread(runnable);
                     thread.start();
                     try{
@@ -71,12 +72,12 @@ public class SettingFragment extends Fragment {
                     }catch (InterruptedException e)
                     {
                         e.printStackTrace();
-                    }*/
-                    runnable.setStrResult("{result:true}");
+                    }
                     JsonParser.ParseJson(4,runnable.getStrResult());
                     if (User.getInstance().getLogoutResult().equals("true"))
                     {
                         User.getInstance().setIsLogin(false);
+                        DataBaseUtil.getInstance(getActivity()).deleteDatabase(getActivity());
                         MyActivity activity=(MyActivity)getActivity();
                         activity.setChioceItem(2);
                         Toast.makeText(getContext(),"登出成功",Toast.LENGTH_LONG).show();
@@ -85,6 +86,13 @@ public class SettingFragment extends Fragment {
                     {
                         Toast.makeText(getContext(),"登出失败",Toast.LENGTH_LONG).show();
                     }
+                }
+            });
+            deleteall_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DataBaseUtil.getInstance(getActivity()).deleteDatabase(getActivity());
+                    Toast.makeText(getActivity(),"已清除本地数据",Toast.LENGTH_LONG);
                 }
             });
         }

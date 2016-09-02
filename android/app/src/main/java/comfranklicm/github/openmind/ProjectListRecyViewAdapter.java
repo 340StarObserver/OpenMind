@@ -31,7 +31,7 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private int load_more_status=0;
     public ProjectListRecyViewAdapter(Context context,int type){
          this.context=context;
-        this.type=type;
+         this.type=type;
     }
 
     static class ProjectViewHolder extends RecyclerView.ViewHolder{
@@ -58,7 +58,7 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
             textView2=(TextView)itemView.findViewById(R.id.fa_user);
         }
     }
-    public static class FootViewHolder extends  RecyclerView.ViewHolder{
+    static class FootViewHolder extends  RecyclerView.ViewHolder{
         private TextView foot_view_item_tv;
         public FootViewHolder(View view) {
             super(view);
@@ -68,10 +68,11 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final int j=position;
-        if(holder instanceof ProjectViewHolder) {
+
             switch (type) {
                 //全部项目
                 case 0: {
+                    if(holder instanceof ProjectViewHolder) {
                     ((ProjectViewHolder) holder).text_writer.setText(User.getInstance().allinfos.get(j).getOwnUser());
                     ((ProjectViewHolder) holder).text_date.setText(User.getInstance().allinfos.get(j).getPubTime());
                     ((ProjectViewHolder) holder).cardviewitem_title.setText(User.getInstance().allinfos.get(j).getProjectName());
@@ -86,7 +87,21 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                             User.getInstance().setCurrentProject(User.getInstance().allinfos.get(j));
                             User.getInstance().getMyActivity().transactiontoProjectDetail();
                         }
-                    });
+                    });}
+                    else if(holder instanceof FootViewHolder){
+                        FootViewHolder footViewHolder=(FootViewHolder)holder;
+                        switch (load_more_status){
+                            case PULLUP_LOAD_MORE:
+                                footViewHolder.foot_view_item_tv.setText("上拉加载更多...");
+                                break;
+                            case LOADING_MORE:
+                                footViewHolder.foot_view_item_tv.setText("正在加载更多数据...");
+                                break;
+                            default:
+                                footViewHolder.foot_view_item_tv.setText("已经没有更多数据了");
+                                break;
+                        }
+                    }
                     break;
                 }
                 //投票中项目
@@ -116,20 +131,6 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 default:
                     break;
             }
-        }else if(holder instanceof FootViewHolder){
-            FootViewHolder footViewHolder=(FootViewHolder)holder;
-            switch (load_more_status){
-                case PULLUP_LOAD_MORE:
-                    footViewHolder.foot_view_item_tv.setText("上拉加载更多...");
-                    break;
-                case LOADING_MORE:
-                    footViewHolder.foot_view_item_tv.setText("正在加载更多数据...");
-                    break;
-                default:
-                    footViewHolder.foot_view_item_tv.setText("已经没有更多数据了");
-                    break;
-            }
-        }
     }
 
     @Override
@@ -141,6 +142,17 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
             } else if (viewType == TYPE_FOOTER) {
                 View foot_view = LayoutInflater.from(context).inflate(R.layout.recycler_load_more_layout, parent, false);
                 FootViewHolder footViewHolder = new FootViewHolder(foot_view);
+                switch (load_more_status){
+                    case PULLUP_LOAD_MORE:
+                        footViewHolder.foot_view_item_tv.setText("上拉加载更多...");
+                        break;
+                    case LOADING_MORE:
+                        footViewHolder.foot_view_item_tv.setText("正在加载更多数据...");
+                        break;
+                    default:
+                        footViewHolder.foot_view_item_tv.setText("已经没有更多数据了");
+                        break;
+                }
                 return footViewHolder;
             }
         return null;

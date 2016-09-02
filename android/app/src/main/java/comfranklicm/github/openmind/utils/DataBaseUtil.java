@@ -39,8 +39,8 @@ public class DataBaseUtil extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {// 覆写onCreate方法，当数据库创建时就用SQL命令创建一个表
         // 创建一个t_users表，id主键，自动增长，字符类型的username和pass;
         db.execSQL("create table if not exists User(id integer primary key autoincrement,username varchar(200),password varchar(200),realname varchar(200),department varchar(200),signuptime varchar(200),projects varchar(200),vote_limit integer(15))");
-        db.execSQL("create table if not exists ProjectInfo(id integer primary key,proj_name varchar(200),own_name varchar(200),pub_time varchar(200),labels varchar(200),links varchar(200),introduction varchar(200),shares varchar(200),comments varchar(200))");
-        db.execSQL("create table if not exists ActiveInfo(username varchar(200) primary key,month varchar(200),active varchar(200) )");
+        db.execSQL("create table if not exists ProjectInfo(id varchar(200) primary key,proj_name varchar(200),own_usr varchar(200),own_name varchar(200),own_head varchar(200),pub_time varchar(200),label1 varchar(200),label2 varchar(200),introduction varchar(200))");
+        db.execSQL("create table if not exists ActiveInfo(id integer primary key autoincrement,month varchar(200),active varchar(3500))");
         //"create table t_users(id integer primary key autoincrement,username varchar(200),pass varchar(200) )"
     }
     @Override

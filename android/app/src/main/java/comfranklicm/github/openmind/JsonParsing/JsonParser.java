@@ -131,6 +131,9 @@ public class JsonParser {
                        projectInfo.setLabellist(stringList);
                        User.getInstance().allinfos.add(projectInfo);
                    }
+                   JSONObject jarr=(JSONObject)jsonArray.get(jsonArray.length()-1);
+                   User.getInstance().setMinimumTime(jarr.getString("pub_time"));
+                   User.getInstance().setReturnCount(jsonArray.length());
                }catch (JSONException e)
                {
                  e.printStackTrace();
@@ -527,7 +530,7 @@ public class JsonParser {
                             linkList.add(link);
                         }
                         projectInfo.setLinkList(linkList);
-                        User.getInstance().owninfos.add(projectInfo);
+                        User.getInstance().voteinfos.add(projectInfo);
                     }
                 }catch (JSONException e)
                 {

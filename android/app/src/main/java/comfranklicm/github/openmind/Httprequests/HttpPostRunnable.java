@@ -110,7 +110,7 @@ public class HttpPostRunnable implements Runnable{
                  * 浏览所有项目的概要信息
                  */
                 case 7:{
-                    NameValuePair pair1 = new BasicNameValuePair("action_id","6");
+                    NameValuePair pair1 = new BasicNameValuePair("action_id","7");
                     NameValuePair pair2 = new BasicNameValuePair("page_size",pageSize);
                     NameValuePair pair3 = new BasicNameValuePair("time_max",time_max);
                     pairList.add(pair1);
@@ -122,7 +122,7 @@ public class HttpPostRunnable implements Runnable{
                  * 浏览自己的所有项目的概要信息
                  */
                 case 8:{
-                    NameValuePair pair1 = new BasicNameValuePair("action_id","7");
+                    NameValuePair pair1 = new BasicNameValuePair("action_id","8");
                     pairList.add(pair1);
                     break;
                 }
@@ -130,7 +130,7 @@ public class HttpPostRunnable implements Runnable{
                  * 浏览具体的一个项目的详细信息
                  */
                 case 9:{
-                    NameValuePair pair1 = new BasicNameValuePair("action_id","8");
+                    NameValuePair pair1 = new BasicNameValuePair("action_id","9");
                     NameValuePair pair2 = new BasicNameValuePair("proj_id",projectId);
                     pairList.add(pair1);
                     pairList.add(pair2);
@@ -140,7 +140,7 @@ public class HttpPostRunnable implements Runnable{
                  *同步数据
                  */
                 case 10:{
-                    NameValuePair pair1 = new BasicNameValuePair("action_id","9");
+                    NameValuePair pair1 = new BasicNameValuePair("action_id","10");
                     NameValuePair pair2 = new BasicNameValuePair("token",token);
                     pairList.add(pair1);
                     pairList.add(pair2);
@@ -150,7 +150,7 @@ public class HttpPostRunnable implements Runnable{
                  * 查看我的活跃记录
                  */
                 case 11:{
-                    NameValuePair pair1 = new BasicNameValuePair("action_id","10");
+                    NameValuePair pair1 = new BasicNameValuePair("action_id","11");
                     NameValuePair pair2 = new BasicNameValuePair("month",month);
                     NameValuePair pair3 = new BasicNameValuePair("num",num);
                     pairList.add(pair1);
@@ -162,7 +162,7 @@ public class HttpPostRunnable implements Runnable{
                  *  发表评论和建议
                  */
                 case 12:{
-                    NameValuePair pair1 = new BasicNameValuePair("action_id","11");
+                    NameValuePair pair1 = new BasicNameValuePair("action_id","12");
                     NameValuePair pair2 = new BasicNameValuePair("proj_id",projectId);
                     NameValuePair pair3 = new BasicNameValuePair("proj_name",projectName);
                     NameValuePair pair4 = new BasicNameValuePair("own_usr",projectOwnerUser);
@@ -182,7 +182,7 @@ public class HttpPostRunnable implements Runnable{
                  * 查看与我相关的消息
                  */
                 case 13:{
-                    NameValuePair pair1 = new BasicNameValuePair("action_id","12");
+                    NameValuePair pair1 = new BasicNameValuePair("action_id","13");
                     NameValuePair pair2 = new BasicNameValuePair("page_size",pageSize);
                     NameValuePair pair3 = new BasicNameValuePair("time_max",time_max);
                     pairList.add(pair1);
@@ -194,7 +194,7 @@ public class HttpPostRunnable implements Runnable{
                  * 查看投票栏
                  */
                 case 14:{
-                    NameValuePair pair1 = new BasicNameValuePair("action_id","13");
+                    NameValuePair pair1 = new BasicNameValuePair("action_id","14");
                     pairList.add(pair1);
                     break;
                 }
@@ -202,7 +202,7 @@ public class HttpPostRunnable implements Runnable{
                  * 为喜爱的项目投票
                  */
                 case 15:{
-                    NameValuePair pair1 = new BasicNameValuePair("action_id","14");
+                    NameValuePair pair1 = new BasicNameValuePair("action_id","15");
                     NameValuePair pair2 = new BasicNameValuePair("proj_id",projectId);
                     pairList.add(pair1);
                     pairList.add(pair2);
