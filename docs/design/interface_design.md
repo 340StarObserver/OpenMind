@@ -657,7 +657,9 @@
                     
                     introduction : 项目简介,  
                     
-                    score        : 票数  
+                    score        : 票数,  
+                    
+                    alive        : 是否还处于投票状态  
                 },  
                 {  
                     另一个在投票的项目的...  
@@ -688,7 +690,7 @@
                 reason     : 失败原因  
                 # 仅当 result == false，此值才有  
                 # reason   : 1   表示未登陆  
-                # reason   : 2   表示你的投票次数用完了  
-                # reason   : 3   表示此时投票已经结束了  
-                # reason   : 4   表示不存在该项目  
+                # reason   : 2   表示你已经投过该项目了  
+                # reason   : 3   表示该项目此时不处于投票状态  
+                # reason   : 4   表示你的投票权利用光了  
             }  

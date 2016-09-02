@@ -3,7 +3,7 @@
 
 # Author 		: 	Lv Yang
 # Created 		: 	27 August 2016
-# Modified 		: 	28 August 2016
+# Modified 		: 	02 September 2016
 # Version 		: 	1.0
 
 """
@@ -24,6 +24,7 @@ import share_handlers
 import visit_handlers
 import personal_handlers
 import message_handlers
+import vote_handlers
 
 # read server configuration
 Shared_Conf = configure.read("conf/server.conf")
@@ -44,6 +45,8 @@ Shared_Handlers.append(personal_handlers.sync_info)
 Shared_Handlers.append(personal_handlers.look_active)
 Shared_Handlers.append(message_handlers.send_comment)
 Shared_Handlers.append(message_handlers.receive_messages)
+Shared_Handlers.append(vote_handlers.get_projects_in_vote)
+Shared_Handlers.append(vote_handlers.vote_project)
 
 
 # create a server app
