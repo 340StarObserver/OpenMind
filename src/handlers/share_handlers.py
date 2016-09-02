@@ -53,7 +53,11 @@ def create_project(post_data,post_files,usr_sessions,server_conf):
     project_data['own_head'] = usr_sessions['head']
     project_data['pub_time'] = time_stamp
     project_data['introduction'] = post_data['introduction']
-    project_data['labels'] = post_data['labels'].split(',')
+
+    project_data['labels'] = []
+    if len(post_data['labels']) > 0:
+        project_data['labels'] = post_data['labels'].split(',')
+
     project_data['links'] = json.loads(post_data['links'])
     project_data['shares'] = []
     project_data['comments'] = []
@@ -70,7 +74,9 @@ def create_project(post_data,post_files,usr_sessions,server_conf):
         server_conf['oss']['bucket_name'])
 
     # deal with each file
-    file_names = post_data['file_names'].split(',')
+    file_names = []
+    if len(post_data['file_names']) > 0:
+        file_names = post_data['file_names'].split(',')
     i=1
     for one_file_name in file_names:
         base_name = os.path.basename(one_file_name)
@@ -149,7 +155,9 @@ def enrich_project(post_data,post_files,usr_sessions,server_conf):
         server_conf['oss']['bucket_name'])
 
     # deal with each file
-    file_names = post_data['file_names'].split(',')
+    file_names = []
+    if len(post_data['file_names']) > 0:
+        file_names = post_data['file_names'].split(',')
     i=1
     new_shares = []
     for one_file_name in file_names:

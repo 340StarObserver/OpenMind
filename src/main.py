@@ -84,6 +84,12 @@ def detail():
     return flask.render_template("detail.html")
 
 
+# newproj page
+@Server_App.route("/newproj",methods=['GET'])
+def newproj():
+    return flask.render_template("newproj.html")
+
+
 # a test for sessions
 @Server_App.route("/session",methods=['GET'])
 def session():

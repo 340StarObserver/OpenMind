@@ -2,9 +2,8 @@ var currentPage ;
 var currentVotingPage ;
 //存储所有项目的概要信息,每个元素对应一页的信息
 var projectBrief=[];
-
-//
 var votingProject = [];
+
 
 var example =[
 	[{
@@ -149,12 +148,23 @@ var votingExample = [
 	}
 ];
 
+var t = 0;
+
 $(document).ready(function() {
 
 	init();
 
 	$(".voting-project-toggle").click(function(event) {
-		console.log ( $("#a").attr('checked') );
+		t++;
+		if( t == 2 ){
+			t=0;
+			updateProjectPage( votingProject[currentVotingPage] );
+			console.log ( "show voting projects" );
+		}
+		else{
+			updateProjectPage( votingProject[currentVotingPage] );
+		}
+		// return false;
 	});
 
 	$("#prev-btn").click(function(event) {
@@ -189,9 +199,7 @@ $(document).ready(function() {
 		}
 
 		console.log("从当前存储中选择正在投票的上一页");
-
 		updateProjectPage( votingProject[currentVotingPage] );
-
 
 	});
 
@@ -214,12 +222,14 @@ $(document).ready(function() {
 		else{
 			console.log("从当前存储中选择下一页");
 			//从当前存储中选择下一页
-			updateProjectPage( projectBrief[++currentPage] );
+			var data = projectBrief[ ++currentPage ];
+			updateProjectPage( data );
 			//前一页有效
 			enableBtn("#prev-btn");
-			// if ( currentPage == projectBrief.length-1 ) {
-			// 	disableBtn("prev-btn");
-			// }
+
+			//如果当前更新的项目数小于5,下一页按钮失效
+			if ( data.length < 5 )
+				disableBtn("#next-btn");
 		}
 		
 	});
@@ -228,23 +238,20 @@ $(document).ready(function() {
 		if( $(this).hasClass('disabled') )
 			return false;
 
-		// if( votingProject.length-1 < currentVotingPage+1 )
-		// 	return false;
-		
 		scrollToTop();
-		if(votingProject.length-1 == ++currentVotingPage ){
-			disableBtn("#voting-prev-btn");
+		
+		var data = votingProject[ ++currentVotingPage ];
+		updateProjectPage( data );
+
+		if(votingProject.length-1 == currentVotingPage ){
+			disableBtn("#voting-next-btn");
 		}
 
-		updateProjectPage( votingProject[currentVotingPage] );
-		// if ( currentVotingPage == projectBrief.length-1 ) {
-		// 		disableBtn("voting-next-btn");
-		// }
 	});
 
 	$(document).on('click', '.project-name', function(event) {
 		var id = $(this).attr('id');
-		location.href = "detail.html?id="+id;
+		location.href = "/detail?id="+id;
 	});
 
 });
@@ -293,9 +300,11 @@ function updateProjectPage(data){
 	var html="";
 	//解析包含多个项目简要信息的json数组
 	for (var i = 0; i < data.length; i++) {
-		html += getProjectItemHtml(data[i]["_id"], data[i]["proj_name"], 
-			data[i]["own_usr"], data[i]["own_name"], data[i]["own_head"],
-			data[i]["pub_time"], data[i]["labels"], data[i]["introduction"]);
+		html += getProjectItemHtml( data[i] );
+
+		// html += getProjectItemHtml(data[i]["_id"], data[i]["proj_name"], 
+		// 	data[i]["own_usr"], data[i]["own_name"], data[i]["own_head"],
+		// 	data[i]["pub_time"], data[i]["labels"], data[i]["introduction"]);
 		
 	}
 
@@ -360,31 +369,31 @@ function dealProjBriefReturnFirst(data){
 }
 
 //获取每个项目简要信息生成的html
-function getProjectItemHtml(id, proj_name, own_username, own_name, own_head,
-							pub_time, labels, introduction){
-	
-	if( own_head == "0"){
-		own_head = "../static/res/image/icon.png";
+function getProjectItemHtml(project){
+
+	if( project['own_head'] == "0"){
+		project['own_head'] = "static/res/image/icon.png";
 	}
 
 	var html='<li class="panel panel-default project-list-item">'+
 				'<div class="panel-body">'+
 				    '<div class="item-title-wrapper clearfix">'+
 				    '<div class="item-title-left">'+'<i class="fa fa-star" aria-hidden="true"></i>'+
-				    	'<span class="project-name" id='+id+'>'+proj_name+'</span>';
+				    	'<span class="project-name" id='+ project["id"] +'>'+ project['proj_name'] +'</span>';
 	
+	var labels = project['labels'];
 	//循环添加label
 	for (var i = 0; i < labels.length; i++) {
 		html += '<span class="project-label">'+ labels[i] +'</span>';
 	}
 	
 	html += '</div><div class="item-title-right">'+
-    			'<span class="create-time">'+ dataFormat( pub_time )+'</span>'+
+    			'<span class="create-time">'+ dataFormat( project['pub_time'] )+'</span>'+
     			'</div></div><div class="brief-intro-wrapper clearfix">'+
                             '<div class="author-info">'+
-                                '<img class="author-icon" src="'+ own_head +'" alt="author-icon">'+
-                                '<div class="author-name">'+own_username+'</div></div>'+
-                            '<div class="brief-intro">'+introduction+'</div></div></div></li>';
+                                '<img class="author-icon" src="'+ project['own_head'] +'" alt="author-icon">'+
+                                '<div class="author-name">'+ project['own_username'] +'</div></div>'+
+                            '<div class="brief-intro"><pre>'+ project['introduction'] +'</pre></div></div></div></li>';
     
     return html;
 }

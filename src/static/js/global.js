@@ -89,4 +89,84 @@ function parseURL(url) {
 	relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [,''])[1], 
 	segments: a.pathname.replace(/^\//,'').split('/') 
 	}; 
-} 
+}
+
+function Tree(){
+	this.root_node = new Node();
+
+	this.add = function(path, leaf, time, url){
+		var paths = path.split("/");
+		var string = "";
+		var pointer = this.root_node;
+
+		for(var i=0; i<paths.length; i++){
+			string += "/"+paths[i];
+			var flag = false;
+			for(var j=0; j< (pointer.child).length; j++){
+				if( string == (pointer.child)[j].path ){
+					pointer = (pointer.child)[j];
+					flag = true;
+					break;
+				}
+			}
+
+			if( flag == false){
+				var node = new Node();
+				node.path = string;
+				(pointer.child).push( node );
+				pointer = node;
+			}
+
+			if( leaf == true && i == (paths.length-1) ){
+				pointer.leaf = true;
+				pointer.url = url;
+				pointer.time = time;
+			}
+
+		}
+	}
+
+	this.find = function(path){
+
+		if( path == ''){
+			return this.root_node;
+		}
+
+		var paths   = path.split("/");
+		var string  = '';
+		var pointer = this.root_node;
+		
+		for (var i = 0; i < paths.length; i++) {
+			string += "/"+paths[i];
+			console.log("string "+string)
+			var flag = false;
+			for (var j = 0; j < pointer.child.length; j++) {
+				if( string == (pointer.child)[j].path ){
+					pointer = (pointer.child)[j];
+					flag = true;
+					break;
+				}
+			}
+
+			if( flag == false){
+				console.log("cannot find "+path);
+				return null;
+
+			}
+
+			if( i == paths.length-1){
+				return pointer;
+			}
+
+		}
+
+	}
+}
+
+function Node(){
+	
+	this.child = new Array();
+	this.path = "";
+	this.leaf = false;
+	this.url="";
+}

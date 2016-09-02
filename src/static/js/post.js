@@ -101,20 +101,28 @@ function logoutPost(){
 
 //5.新建项目的post
 
-function newProjectPost(name, labels, links, intro, files, token){
+function newProjectPost(name,  files_name_string, files, labels_string, links, intro, token){
 	var formData = new FormData();
 	formData.append('action_id', 5);
-	formData.append('name', name);
+	formData.append('proj_name', name);
 
-	formData.append("action_id", 5);
+	for (var i = 0; i < files.length; i++) {
+		formData.append( "file"+(i+1), files[i]);
+	}
+
+	formData.append("file_names", files_name_string);
+	formData.append("labels", labels_string);
+	formData.append("links", links);
+	formData.append("introduction", intro);
+	formData.append("token", token);
 
 	jQuery.ajax({
 	  url: '/action',
 	  type: 'POST',
-	  dataType: 'xml/html/script/json/jsonp',
-	  data: {
-	  	
-	  },
+	  data: formData,
+	    processData: false,
+	  contentType: false,
+
 	  beforeSend: function() {
 	    
 	  },
@@ -129,10 +137,17 @@ function newProjectPost(name, labels, links, intro, files, token){
 }
 
 //6. 在已有的项目上分享新的收获post
-function uploadFilesPost(id, files, token){
+function uploadFilesPost(id, files_name_string, files, token){
 
 	var formData = new FormData();
+	for (var i = 0; i < files.length; i++) {
+		formData.append( "file"+(i+1), files[i]);
+	}
 
+	formData.append("file_name",files_name_string);
+	formData.append("action_id", 6);
+	formData.append("proj_id", id);
+	formData.append("token", token);
 
 	jQuery.ajax({
 	  url: '/action',
