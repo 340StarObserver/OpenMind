@@ -29,6 +29,10 @@ def send_comment(post_data,post_files,usr_sessions,server_conf):
     if  'id' not in usr_sessions:
         return {'result':False,'reason':1}
 
+    # check ""
+    if len(post_data['content']) is 0:
+        return {'result':False,'reason':3}
+
     # prepare timestamp and timestr
     time_stamp = int(time.time())
     time_array = time.localtime(time_stamp)

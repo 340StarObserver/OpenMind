@@ -157,6 +157,7 @@
                 # 仅当 result == false，此值才有  
                 # reason   : 1   表示未登陆  
                 # reason   : 2   表示令牌错误  
+                # reason   : 3   表示项目名称或项目简介为空  
                 
                 token      : 新的令牌  
                 # 仅当 result == true，此值才有  
@@ -559,6 +560,33 @@
                 # 仅当 result == false，此值才有  
                 # reason   : 1   表示未登陆  
                 # reason   : 2   表示不存在该项目  
+                # reason   : 3   表示评论内容为空  
+                
+                comment    :  
+                {  
+                    id        : "akfja3",  
+                    parent_id : "0",  
+                    
+                    send_usr  : "seven",  
+                    send_name : "LvYang",  
+                    send_head : a url,  
+                    
+                    recv_usr  : "xxxx",  
+                    recv_name : "yyyy",  
+                    
+                    time      : 1445599887,  
+                    content   : "this is the first comment"  
+                }  
+                # 仅当 result == true，此值才有  
+                # id          表示此评论的id，由评论者的用户名和时间戳的联合哈希（以此保证唯一性）计算得到  
+                # parent_id   表示父评论的id  
+                # send_usr    表示评论者（你）的用户名  
+                # send_name   表示评论者（你）的真实姓名  
+                # send_head   表示评论者（你）的头像链接地址   
+                # recv_usr    表示对方的用户名（若你这条评论针对这个项目，则该值填""）  
+                # recv_name   表示对方的真实姓名（若你这条评论针对这个项目，则该值填""）    
+                # time        表示此评论的时间戳  
+                # content     表示此评论的内容  
             }  
 
 
@@ -693,32 +721,6 @@
                 # reason   : 2   表示你已经投过该项目了  
                 # reason   : 3   表示该项目此时不处于投票状态  
                 # reason   : 4   表示你的投票权利用光了  
-                
-                comment    :  
-                {  
-                    id        : "akfja3",  
-                    parent_id : "0",  
-                    
-                    send_usr  : "seven",  
-                    send_name : "LvYang",  
-                    send_head : a url,  
-                    
-                    recv_usr  : "xxxx",  
-                    recv_name : "yyyy",  
-                    
-                    time      : 1445599887,  
-                    content   : "this is the first comment"  
-                }  
-                # 仅当 result == true，此值才有  
-                # id          表示此评论的id，由评论者的用户名和时间戳的联合哈希（以此保证唯一性）计算得到  
-                # parent_id   表示父评论的id  
-                # send_usr    表示评论者（你）的用户名  
-                # send_name   表示评论者（你）的真实姓名  
-                # send_head   表示评论者（你）的头像链接地址   
-                # recv_usr    表示对方的用户名（若你这条评论针对这个项目，则该值填""）  
-                # recv_name   表示对方的真实姓名（若你这条评论针对这个项目，则该值填""）    
-                # time        表示此评论的时间戳  
-                # content     表示此评论的内容  
             }  
 
 

@@ -38,6 +38,10 @@ def create_project(post_data,post_files,usr_sessions,server_conf):
     if  'token' not in usr_sessions or int(post_data['token']) != usr_sessions['token']:
         return {'result':False,'reason':2}
 
+    # check ""
+    if len(post_data['proj_name']) is 0 or len(post_data['introduction']) is 0:
+        return {'result':False,'reason':3}
+
     # prepare timestamp and timestr
     time_stamp = int(time.time())
     time_array = time.localtime(time_stamp)
