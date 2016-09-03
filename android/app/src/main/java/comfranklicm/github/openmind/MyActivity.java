@@ -17,6 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,10 +66,12 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+        Fresco.initialize(this);
         User.getInstance().setMyActivity(this);
         //User.getInstance().setAllView(this.getCurrentFocus());
         User.getInstance().addAllJsonParse();
         NetUtil.getInstance().setIpAddress("139.196.15.168");
+        //NetUtil.getInstance().setIpAddress("1.1.1.1");
         NetUtil.getInstance().setPort("80");
 		fManager = getSupportFragmentManager();
         Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);

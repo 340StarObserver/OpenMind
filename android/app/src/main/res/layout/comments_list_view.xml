@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ffffff"
@@ -62,13 +63,21 @@
         android:layout_marginLeft="10dp"
         android:layout_toEndOf="@+id/head_image_view" />
 
-    <ImageView
+    <!--<ImageView-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:id="@+id/head_image_view"-->
+        <!--android:src="@mipmap/head"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentStart="true" />-->
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/head_image_view"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/head_image_view"
-        android:src="@mipmap/head"
+        fresco:placeholderImage="@mipmap/head"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        />
 
     <TextView
         android:layout_width="wrap_content"

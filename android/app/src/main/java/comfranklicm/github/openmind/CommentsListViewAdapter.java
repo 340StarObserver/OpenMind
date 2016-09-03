@@ -1,5 +1,7 @@
 package comfranklicm.github.openmind;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.widget.BaseAdapter;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 /**
  * Created by lyy on 2016/9/1.
@@ -105,7 +109,7 @@ public class CommentsListViewAdapter extends BaseAdapter{
             convertView = listContainer.inflate(R.layout.comments_list_view, null);
             //获取控件对象
             //commentsListView.linearLayout1=(RelativeLayout)convertView.findViewById(R.id.RelativeLayout1);//改变这个的高度来适配不同长度的评论
-            commentsListView.head_image_view= (ImageView)convertView.findViewById(R.id.head_image_view);
+            commentsListView.head_image_view= (SimpleDraweeView)convertView.findViewById(R.id.head_image_view);
             commentsListView.comment_floor=(TextView)convertView.findViewById(R.id.comment_floor);
             commentsListView.user_name=(TextView)convertView.findViewById(R.id.user_name);
             commentsListView.comment_date=(TextView)convertView.findViewById(R.id.comment_date);
@@ -125,12 +129,12 @@ public class CommentsListViewAdapter extends BaseAdapter{
 //      Log.e("image", (String) listItems.get(position).get("info"));
 
         //设置文字和图片
-        commentsListView.head_image_view.setImageResource((Integer) listItems.get(position).get("head_image_view"));
-        commentsListView.comment_floor.setText((String)listItems.get(position).get("comment_floor"));
+        commentsListView.head_image_view.setImageURI((Uri) listItems.get(position).get("head_image_view"));
+        commentsListView.comment_floor.setText(""+listItems.get(position).get("comment_floor"));
         commentsListView.user_name.setText((String)listItems.get(position).get("user_name"));
         commentsListView.comment_date.setText((String)listItems.get(position).get("comment_date"));
         commentsListView.comment_content.setText((String)listItems.get(position).get("comment_content"));
-        commentsListView.comment_num.setText((String)listItems.get(position).get("comment_num"));
+        //commentsListView.comment_num.setText((String)listItems.get(position).get("comment_num"));
 
 
         return convertView;
