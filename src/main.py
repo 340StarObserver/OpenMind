@@ -140,13 +140,17 @@ def help():
     print help information of how to use this script
     """
     inform = "This script is the driver program of openmind server\
-        \r\nhow to run :\
-        \r\n\tpython main.py arg1 arg2 >/mydata/openmind_server/logs/2016xxxx.log 2>&1 &\
+        \r\n\r\nhow to run when debug :\
+        \r\n\tpython main.py arg1 arg2\
         \r\nparameters :\
         \r\n\t'arg1' is the bind ip,use 0.0.0.0 for deploy\
         \r\n\t'arg2' is the bind port\
         \r\nfor example :\
-        \r\n\tpython main.py 0.0.0.0 8081 >/mydata/openmind_server/logs/20160827.log 2>&1 &"
+        \r\n\tpython main.py 0.0.0.0 8081\
+        \r\n\r\nhow to run when deploy :\
+        \r\n\tuwsgi --ini conf/uwsgi8081.ini\
+        \r\n\tuwsgi --ini conf/uwsgi8082.ini\
+        \r\n\t( !! you must be in /home/seven/openmind_server )"
     print inform
 
 
