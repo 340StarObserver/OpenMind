@@ -88,7 +88,7 @@ def send_comment(post_data,post_files,usr_sessions,server_conf):
             mongo_client[db_name]['associate_info'].insert_one(msg)
 
         # set response
-        response = {'result':True}
+        response = {'result':True,'comment':one_comment}
 
     # delete some objects
     mongo_client.close()
@@ -144,4 +144,33 @@ def receive_messages(post_data,post_files,usr_sessions,server_conf):
     del data
 
     # return response
+    return response
+
+
+# deal with requests of get comments of one project
+def get_project_comments(post_data,post_files,usr_sessions,server_conf):
+    # declare response
+    response = []
+
+    # connect to mongo
+    db_name = server_conf['mongo']['db_name']
+    mongo_client = mongo_conn.get_conn(server_conf['mongo']['host'],db_name,\
+        server_conf['mongo']['db_user'],server_conf['mongo']['db_pwd'])
+
+    # do query
+    query_factor_1 = {'_id':ObjectId(post_data['proj_id'])}
+    query_factor_2 = {'_id':0,'comments':1}
+    data = mongo_client[db_name]['project_info'].find_one(query_factor_1,query_factor_2)
+    if data is not None:
+        response = data['comments']
+
+    # delete some objects
+    mongo_client.close()
+    del mongo_client
+    del db_name
+    del query_factor_1
+    del query_factor_2
+    del data
+
+    # return result
     return response

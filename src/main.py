@@ -47,6 +47,7 @@ Shared_Handlers.append(message_handlers.send_comment)
 Shared_Handlers.append(message_handlers.receive_messages)
 Shared_Handlers.append(vote_handlers.get_projects_in_vote)
 Shared_Handlers.append(vote_handlers.vote_project)
+Shared_Handlers.append(message_handlers.get_project_comments)
 
 
 # create a server app
