@@ -13,6 +13,7 @@
         <ProgressBar
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:id="@+id/progressBar"
             />
         <TextView
             android:id="@+id/foot_view_item_tv"

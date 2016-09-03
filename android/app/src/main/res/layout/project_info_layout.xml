@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
+                android:clickable="false"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="5dp"
                 app:cardPreventCornerOverlap="false" >
@@ -73,62 +73,123 @@
                         android:layout_marginRight="15dp"
                         android:layout_marginBottom="0dp"
                         android:layout_alignParentStart="false"
-                        android:layout_alignTop="@+id/linearLayout"
+                        android:layout_alignTop="@+id/labels"
                         android:id="@+id/view" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
+                    <comfranklicm.github.openmind.TagLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="1"
-                        android:id="@+id/linearLayout"
-                        android:layout_alignParentStart="false"
-                        android:layout_alignParentEnd="false"
-                        android:layout_below="@+id/cardviewitem_header">
+                        android:id="@+id/labels"
+                        android:background="#fff"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_below="@+id/cardviewitem_header"
+                        >
+                    </comfranklicm.github.openmind.TagLayout>
+                    <!--<HorizontalScrollView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/cardviewitem_label"-->
+                        <!--android:layout_below="@+id/cardviewitem_header">-->
+                    <!--<LinearLayout-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:weightSum="1"-->
+                        <!--android:id="@+id/linearLayout"-->
+                        <!--android:layout_alignParentStart="false"-->
+                        <!--android:layout_alignParentEnd="false"-->
+                        <!-->-->
 
-                        <TextView
-                            android:id="@+id/cardviewitem_label1"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentLeft="true"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="10dp"
-                            android:maxLines="1"
-                            android:background="@drawable/label_shape"
-                            android:textSize="10sp"
-                            android:padding="5dp"
-                            android:textColor="#ffffff"
-                            android:text="label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                        <!--<TextView-->
+                            <!--android:id="@+id/cardviewitem_label1"-->
+                            <!--android:layout_alignParentBottom="true"-->
+                            <!--android:layout_alignParentLeft="true"-->
+                            <!--android:layout_marginStart="15dp"-->
+                            <!--android:layout_marginLeft="5dp"-->
+                            <!--android:layout_marginTop="5dp"-->
+                            <!--android:layout_marginBottom="10dp"-->
+                            <!--android:maxLines="1"-->
+                            <!--android:background="@drawable/label_shape"-->
+                            <!--android:textSize="15sp"-->
+                            <!--android:padding="5dp"-->
+                            <!--android:textColor="#ffffff"-->
+                            <!--android:text="我们是中国好儿女"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:password="false" />-->
 
-                        <TextView
-                            android:id="@+id/cardviewitem_label2"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentLeft="false"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="5dp"
-                            android:maxLines="1"
-                            android:background="@drawable/label_shape"
-                            android:textSize="10sp"
-                            android:padding="5dp"
-                            android:textColor="#ffffff"
-                            android:text="label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                        <!--<TextView-->
+                            <!--android:id="@+id/cardviewitem_label2"-->
+                            <!--android:layout_alignParentBottom="true"-->
+                            <!--android:layout_alignParentLeft="false"-->
+                            <!--android:layout_marginLeft="5dp"-->
+                            <!--android:layout_marginTop="5dp"-->
+                            <!--android:maxLines="1"-->
+                            <!--android:background="@drawable/label_shape"-->
+                            <!--android:textSize="15sp"-->
+                            <!--android:padding="5dp"-->
+                            <!--android:textColor="#ffffff"-->
+                            <!--android:text="我们是中国好儿女"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"/>-->
 
-                        <!---  <ImageView
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:src="@drawable/person"/>-->
+                        <!--<TextView-->
+                            <!--android:id="@+id/cardviewitem_label3"-->
+                            <!--android:layout_alignParentBottom="true"-->
+                            <!--android:layout_alignParentLeft="false"-->
+                            <!--android:layout_marginLeft="5dp"-->
+                            <!--android:layout_marginTop="5dp"-->
+                            <!--android:maxLines="1"-->
+                            <!--android:background="@drawable/label_shape"-->
+                            <!--android:textSize="15sp"-->
+                            <!--android:padding="5dp"-->
+                            <!--android:textColor="#ffffff"-->
+                            <!--android:text="我们是中国好儿女"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content" />-->
 
-                    </LinearLayout>
+                        <!--<TextView-->
+                            <!--android:id="@+id/cardviewitem_label4"-->
+                            <!--android:layout_alignParentBottom="true"-->
+                            <!--android:layout_alignParentLeft="false"-->
+                            <!--android:layout_marginLeft="5dp"-->
+                            <!--android:layout_marginTop="5dp"-->
+                            <!--android:maxLines="1"-->
+                            <!--android:background="@drawable/label_shape"-->
+                            <!--android:textSize="15sp"-->
+                            <!--android:padding="5dp"-->
+                            <!--android:textColor="#ffffff"-->
+                            <!--android:text="我们是中国好儿女"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content" />-->
 
+                        <!--<TextView-->
+                            <!--android:id="@+id/cardviewitem_label5"-->
+                            <!--android:layout_alignParentBottom="true"-->
+                            <!--android:layout_alignParentLeft="false"-->
+                            <!--android:layout_marginLeft="5dp"-->
+                            <!--android:layout_marginTop="5dp"-->
+                            <!--android:maxLines="1"-->
+                            <!--android:background="@drawable/label_shape"-->
+                            <!--android:textSize="15sp"-->
+                            <!--android:padding="5dp"-->
+                            <!--android:textColor="#ffffff"-->
+                            <!--android:text="我们是中国好儿女"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content" />-->
+
+                        <!--&lt;!&ndash;-  <ImageView-->
+                              <!--android:layout_width="wrap_content"-->
+                              <!--android:layout_height="wrap_content"-->
+                              <!--android:src="@drawable/person"/>&ndash;&gt;-->
+
+                    <!--</LinearLayout>-->
+                    <!--</HorizontalScrollView>-->
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/view"
+                        android:layout_alignParentTop="true"
                         android:layout_alignEnd="@+id/view">
 
                         <TextView

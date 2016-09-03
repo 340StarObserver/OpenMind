@@ -55,6 +55,7 @@ public class ViewAllProjectsJsonParser extends BaseJsonParser{
             }
             JSONObject jarr=(JSONObject)jsonArray.get(jsonArray.length()-1);
             User.getInstance().setMinimumTime(jarr.getString("pub_time"));
+            User.getInstance().setReturnCount(jsonArray.length());
         }catch (JSONException e)
         {
             e.printStackTrace();

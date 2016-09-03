@@ -7,8 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.zip.Inflater;
 
@@ -60,9 +63,11 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
     }
     static class FootViewHolder extends  RecyclerView.ViewHolder{
         private TextView foot_view_item_tv;
+        private ProgressBar progressBar;
         public FootViewHolder(View view) {
             super(view);
             foot_view_item_tv=(TextView)view.findViewById(R.id.foot_view_item_tv);
+            progressBar=(ProgressBar)view.findViewById(R.id.progressBar);
         }
     }
     @Override
@@ -74,7 +79,9 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 case 0: {
                     if(holder instanceof ProjectViewHolder) {
                     ((ProjectViewHolder) holder).text_writer.setText(User.getInstance().allinfos.get(j).getOwnUser());
-                    ((ProjectViewHolder) holder).text_date.setText(User.getInstance().allinfos.get(j).getPubTime());
+                    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                    String time = sdf.format(new Date(Long.parseLong(User.getInstance().allinfos.get(j).getPubTime())*1000));
+                    ((ProjectViewHolder) holder).text_date.setText(time);
                     ((ProjectViewHolder) holder).cardviewitem_title.setText(User.getInstance().allinfos.get(j).getProjectName());
                     ((ProjectViewHolder) holder).cardviewitem_desc.setText(User.getInstance().allinfos.get(j).getIntroduction());
                     ((ProjectViewHolder) holder).Label1.setText(User.getInstance().allinfos.get(j).getLabel1());
@@ -92,6 +99,7 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                         FootViewHolder footViewHolder=(FootViewHolder)holder;
                         switch (load_more_status){
                             case PULLUP_LOAD_MORE:
+                                footViewHolder.progressBar.setVisibility(View.VISIBLE);
                                 footViewHolder.foot_view_item_tv.setText("上拉加载更多...");
                                 break;
                             case LOADING_MORE:
@@ -99,6 +107,7 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                                 break;
                             default:
                                 footViewHolder.foot_view_item_tv.setText("已经没有更多数据了");
+                                footViewHolder.progressBar.setVisibility(View.INVISIBLE);
                                 break;
                         }
                     }
@@ -107,7 +116,9 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 //投票中项目
                 case 1: {
                     ((ProjectViewHolder) holder).text_writer.setText(User.getInstance().voteinfos.get(j).getOwnUser());
-                    ((ProjectViewHolder) holder).text_date.setText(User.getInstance().voteinfos.get(j).getPubTime());
+                    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                    String time = sdf.format(new Date(Long.parseLong(User.getInstance().voteinfos.get(j).getPubTime())*1000));
+                    ((ProjectViewHolder) holder).text_date.setText(time);
                     ((ProjectViewHolder) holder).cardviewitem_title.setText(User.getInstance().voteinfos.get(j).getProjectName());
                     ((ProjectViewHolder) holder).cardviewitem_desc.setText(User.getInstance().voteinfos.get(j).getIntroduction());
                     ((ProjectViewHolder) holder).Label1.setText(User.getInstance().voteinfos.get(j).getLabel1());
@@ -119,6 +130,9 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 //自己的项目
                 case 2: {
                     ((ProjectViewHolder) holder).text_writer.setText(User.getInstance().owninfos.get(j).getOwnUser());
+                    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                    String time = sdf.format(new Date(Long.parseLong(User.getInstance().owninfos.get(j).getPubTime())*1000));
+                    ((ProjectViewHolder) holder).text_date.setText(time);
                     ((ProjectViewHolder) holder).text_date.setText(User.getInstance().owninfos.get(j).getPubTime());
                     ((ProjectViewHolder) holder).cardviewitem_title.setText(User.getInstance().owninfos.get(j).getProjectName());
                     ((ProjectViewHolder) holder).cardviewitem_desc.setText(User.getInstance().owninfos.get(j).getIntroduction());
@@ -142,17 +156,6 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
             } else if (viewType == TYPE_FOOTER) {
                 View foot_view = LayoutInflater.from(context).inflate(R.layout.recycler_load_more_layout, parent, false);
                 FootViewHolder footViewHolder = new FootViewHolder(foot_view);
-                switch (load_more_status){
-                    case PULLUP_LOAD_MORE:
-                        footViewHolder.foot_view_item_tv.setText("上拉加载更多...");
-                        break;
-                    case LOADING_MORE:
-                        footViewHolder.foot_view_item_tv.setText("正在加载更多数据...");
-                        break;
-                    default:
-                        footViewHolder.foot_view_item_tv.setText("已经没有更多数据了");
-                        break;
-                }
                 return footViewHolder;
             }
         return null;

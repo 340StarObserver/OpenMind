@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.JsonParser;
@@ -59,6 +58,7 @@ public class SettingFragment extends Fragment {
             synchron_btn.setVisibility(View.GONE);
             dashed_line1.setVisibility(View.GONE);
             logoutButton.setVisibility(View.GONE);
+            deleteall_btn.setVisibility(View.GONE);
         }else {
             logoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override

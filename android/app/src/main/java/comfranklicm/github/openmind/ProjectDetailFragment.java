@@ -1,8 +1,12 @@
 package comfranklicm.github.openmind;
 
+import android.app.ActionBar;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -32,7 +36,10 @@ import comfranklicm.github.openmind.CommentsListViewAdapter;
 public class ProjectDetailFragment extends Fragment {
     View view;
     TextView fa_star,fa_user,fa_info,fa_angle_double_down,fa_link,fa_angle_double_down2,fa_files_o,fa_angle_double_right,fa_comments;
+    TextView title,writer,date,infocontent;
     ListView comments_list_view;
+    TagLayout mflowLayout;
+    //String[] tags = new String[] {"我是中国好儿女", "我是中国好儿女", "我是中国好儿", "我", "我是中国好儿女"};
     CommentsListViewAdapter commentsListViewAdapter;
     List<Map<String, Object>> commentsListItems;
 
@@ -45,6 +52,19 @@ public class ProjectDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.project_info_layout, container,false);
         initlayout();
+        mflowLayout=(TagLayout)view.findViewById(R.id.labels);
+        for (int i = 0; i < User.getInstance().getCurrentProject().getLabellist().size(); i++) {
+            String tag = User.getInstance().getCurrentProject().getLabellist().get(i);
+            TextView tv = new TextView(getContext());
+            tv.setText(tag);
+            tv.setTextColor(Color.parseColor("#ffffff"));
+            tv.setTextSize(15);
+            tv.setBackgroundResource(R.drawable.label_shape);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(10, 10, 10, 10);
+            tv.setLayoutParams(params);
+            mflowLayout.addView(tv);
+        }
         return view;
     }
     private void initlayout() {
@@ -67,6 +87,14 @@ public class ProjectDetailFragment extends Fragment {
         fa_angle_double_right.setTypeface(FontManager.getTypeface(getContext(), FontManager.FONTAWESOME));
         fa_comments=(TextView)view.findViewById(R.id.fa_comments);
         fa_comments.setTypeface(FontManager.getTypeface(getContext(), FontManager.FONTAWESOME));
+        title=(TextView)view.findViewById(R.id.cardviewitem_title);
+        title.setText(User.getInstance().getCurrentProject().getProjectName());
+        writer=(TextView)view.findViewById(R.id.text_writer);
+        writer.setText(User.getInstance().getCurrentProject().getOwnName());
+        date=(TextView)view.findViewById(R.id.text_date);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        String time = sdf.format(new Date(Long.parseLong(User.getInstance().getCurrentProject().getPubTime())*1000));
+        date.setText(time);
 
         //评论区的动态加载
         comments_list_view=(ListView)view.findViewById(R.id.CommentsListView);

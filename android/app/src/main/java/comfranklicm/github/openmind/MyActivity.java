@@ -67,8 +67,8 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         User.getInstance().setMyActivity(this);
         //User.getInstance().setAllView(this.getCurrentFocus());
         User.getInstance().addAllJsonParse();
-        NetUtil.getInstance().setIpAddress("192.168.252.6w");
-        NetUtil.getInstance().setPort("8081");
+        NetUtil.getInstance().setIpAddress("139.196.15.168");
+        NetUtil.getInstance().setPort("80");
 		fManager = getSupportFragmentManager();
         Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
         FontManager.markAsIconContainer(findViewById(R.id.card_view), iconFont);
@@ -132,7 +132,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
            {
                e.printStackTrace();
            }
-           runnable.setStrResult("{\"result\":\"true\",\"realname\":\"李昌懋\",\"department\":\"软件学院\",\"signup_time\":\"2016-08-13\",\"head\":\"img/img.jpg\",\"token\":\"233\"}");
+           //runnable.setStrResult("{\"result\":\"true\",\"realname\":\"李昌懋\",\"department\":\"软件学院\",\"signup_time\":\"2016-08-13\",\"head\":\"img/img.jpg\",\"token\":\"233\"}");
            try {
                ((LoginJsonParser) User.getInstance().baseJsonParsers.get(1)).LoginJsonParsing(runnable.getStrResult());
            }catch (Exception e)
