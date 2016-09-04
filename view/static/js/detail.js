@@ -2,7 +2,8 @@ var proj_id,
 	proj_name, 
 	own_usr,
 	own_name,
-	head_comment_array=[];
+	head_comment_array=[],
+	comments=[];
 
 // var labels = [];
 // var links = [];
@@ -20,6 +21,10 @@ var example = {
 		{"address": "https://github.com/bobxwu/", "description": "github仓库"}
 	],
 	'introduction' : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\r\naaaaaaaa",
+	'shares':[
+
+	],
+
 	'comments' :  [
 	{  
                         "id"        : "akfja3",  
@@ -60,7 +65,21 @@ var example = {
                         "recv_name" : "yyyy",  
                     
                         "time"      : 1446633221,  
-                        "content"   : "this is the second comment"  
+                        "content"   : "this is a great idea."  
+    }, 
+    {  
+                        "id"        : "faddddd",  
+                        "parent_id" : "fad",  
+                    
+                        "send_usr"  : "dddd",  
+                        "send_name" : "3d",  
+                        "send_head" : '0',  
+                    
+                        "recv_usr"  : "dddd",  
+                        "recv_name" : "shangjun",  
+                    
+                        "time"      : 1446633221,  
+                        "content"   : "ddd hello "  
     }
 ]
 };
@@ -123,13 +142,22 @@ var exampleComments = [
     }
 ];
 
-$(document).ready(function() {
+var cReturn = {
+	result : 'true',
+	comment :{
+		id : 'newone',
+		parent_id: '0',
+		send_usr: 'wxb',
+		send_name: 'wxb',
+		send_head: '0',
+		recv_usr: 'xxx',
+		recv_name: 'yyy',
+		time: new Date().getTime(),
+		content: 'this is a new sentence'
+	}
+};
 
-	// var tree = new Tree();
-	// tree.add( "docs/data/a.jpg", 1445599887, "");
-	// tree.add( "docs/b.jpg", 1445599887, "");
-	// tree.add( "res/image/a.jpg", 1445599887, "");
-	// console.log( tree.root_node );
+$(document).ready(function() {
 
 	// init();
 
@@ -146,8 +174,9 @@ $(document).ready(function() {
 		
 	});
 
-	
-	$(".more-comment-btn").click(function(event) {
+	$(document).on('click', '.more-comment-btn', function(event) {
+		
+		console.log('comment-btn');
 
 		var follow = $(this).parent().siblings('.item-follow');
 		follow.find('.control-label').html('回复<span class="control-label-username"></span>&nbsp;:&nbsp;' );
@@ -175,7 +204,7 @@ $(document).ready(function() {
 		var index = ($(this).attr('id')).split('-')[1];
 		
 		var wrapper = $(this).siblings('.reply-input-wrapper');
-		//找到parent_id
+		
 		var parent_id = head_comment_array[index]['id'];
 
 		console.log( "parent_id:"+parent_id );
@@ -193,18 +222,17 @@ $(document).ready(function() {
 
 		//获取回复内容
 		var content = wrapper.find('.reply-input').val();
-		//TODO 回复内容不为空
+		//检查回复内容是否为空
 		if( content == ''){
 			showWarningTips("请输入回复内容");
 			return false;
 		}
 
-
 		console.log( parent_id );
 		//发送请求
 		// commentPost
 		console.log(proj_id, proj_name, own_usr, own_name, recv_usr, '', parent_id, content)
-
+		dealCommentReturn( cReturn );
 	});
 });
 
@@ -220,7 +248,8 @@ function dealProjDetailReturn(data){
 	if( data["result"] == false){
 		//TODO 没有找到该项目
 		alert("没有找到项目");
-		return false;
+		location.href = "home.html" ;
+ 		return false;
 	}
 
 	showProjDetail(data);
@@ -228,10 +257,12 @@ function dealProjDetailReturn(data){
 
 function showProjDetail(project){
 	$(".project-name").text(project['proj_name']);
-	//TODO 设置投票
+	//TODO 设置投票区域
+	
 
 	var labels = project["labels"],
 		html="";
+
 	for (var i = 0; i < labels.length; i++) {
 		html += '<span class="project-label">' + labels[i] + '</span>';
 	}
@@ -242,6 +273,7 @@ function showProjDetail(project){
 
 	var links = project["links"];
 	html="";
+
 	for (var i = 0; i < links.length; i++) {
 		html += '<a class="project-link "'+'href="'+ links[i]['address']+'">'+ links[i]["description"] +'</a>';
 	}
@@ -263,6 +295,8 @@ function showProjDetail(project){
 }
 
 function showComments(comments){
+	$('.comment-list').html('');
+
 	var head_comment_index = 0;
 	
 	for (var i = 0; i < comments.length; i++) {
@@ -331,8 +365,6 @@ function addHeadComment(comment, index){
 						'</div>'+
 					'</li>' ;
 	
-	console.log( html );
-
 	$('.comment-list').append(html);
 
 }
@@ -372,8 +404,19 @@ function dealCommentReturn(data){
 	    //显示错误信息
 	    showWarningTips(errorReason);
 	}else{
-		//更新评论区
-		$(".comment-list").html('');
-		showComments( data['comments'] );
+		//添加到评论区
+		var comment = data['comment'];
+		var parent_id = comment['parent_id'];
+
+		if( parent_id == 0){
+			head_comment_array.push({
+				"id": comment['id'],
+				"send_usr": comment['send_usr']
+			});
+			addHeadComment( comment, head_comment_array.length-1 );
+		}
+		else{
+			addFollowComment(comment);
+		}
 	}
 }

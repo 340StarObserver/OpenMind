@@ -226,7 +226,6 @@ function getProjBriefPost(){
 }
 
 
-
 //8. 浏览自己的所有项目的概要信息
 var ownProjBrief = [];
 

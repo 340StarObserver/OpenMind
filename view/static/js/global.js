@@ -54,15 +54,19 @@ function isImage(fileType){
     return (fileType.match('^image')!=null);
 }
 
-//文件大小是否符合标准
-function isSizeValid(fileSize){
-	return ((fileSize/1024)<200);
+//文件大小是否符合标准 fileSize以B为单位, Size以KB为单位
+function checkFileSize(fileSize, size){
+	return ((fileSize/1024) < size);
+}
+
+function checkFileName(filename){
+	return true;
 }
 
 //注销
 function dealLogoutReturn(data){
 	clearCookie();
-	
+	location.href = 'home.html';
 }
 
 //解析URL函数

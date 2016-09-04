@@ -13,10 +13,6 @@
 
 #vote-btn{
 	margin: 0;
-	/*border: 1px solid black;
-	border-radius: 3px;
-	padding: 0 10px;*/
-	
 }
 
 
@@ -218,4 +214,12 @@
 .more-comment-btn::before{
 	font-family: "FontAwesome";
 	content: "\f27b";
+}
+
+.comment-input-wrapper{
+	margin-top: 0;
+}
+
+#comment-btn{
+	float: right;
 }
