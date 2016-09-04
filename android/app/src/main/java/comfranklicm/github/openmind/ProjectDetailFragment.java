@@ -23,6 +23,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -45,7 +46,7 @@ import comfranklicm.github.openmind.CommentsListViewAdapter;
 public class ProjectDetailFragment extends Fragment {
     View view;
     TextView fa_star,fa_user,fa_info,fa_angle_double_down,fa_link,fa_angle_double_down2,fa_files_o,fa_angle_double_right,fa_comments;
-    TextView title,writer,date,infocontent;
+    TextView title,writer,date,infocontent,commentsnum;
     ListView comments_list_view;
     TagLayout mflowLayout,mflowLayout2;
     //String[] tags = new String[] {"我是中国好儿女", "我是中国好儿女", "我是中国好儿", "我", "我是中国好儿女"};
@@ -53,8 +54,8 @@ public class ProjectDetailFragment extends Fragment {
     List<Map<String, Object>> commentsListItems;
     LinearLayout scalingcontent,scalinglinks;
     boolean iscontentscaling=false,islinksscaling=false;
-    String[] usersname={"吴小宝","李昌懋","吕炀","dd","cc"};
-    String[] comment_contents={"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈","233333333333333333333333333333333333333333333","66666666666666666666666666666666","hh","5656"};
+//    String[] usersname={"吴小宝","李昌懋","吕炀","dd","cc"};
+//    String[] comment_contents={"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈","233333333333333333333333333333333333333333333","66666666666666666666666666666666","hh","5656"};
 
 
     @Override
@@ -72,6 +73,8 @@ public class ProjectDetailFragment extends Fragment {
             e.printStackTrace();
         }
         ((ViewProjectDetailJsonParser)User.getInstance().baseJsonParsers.get(8)).ViewProjectDetailJsonParsing(runnable.getStrResult());
+        seperateComment();
+        getChildCommentNumber();
         initlayout();
         mflowLayout=(TagLayout)view.findViewById(R.id.labels);
         for (int i = 0; i < User.getInstance().getCurrentProject().getLabellist().size(); i++) {
@@ -310,20 +313,20 @@ public class ProjectDetailFragment extends Fragment {
                 }
             }
         });
+        commentsnum=(TextView)view.findViewById(R.id.comments_num);
+        commentsnum.setText("共" + User.getInstance().currentParentComments.size()+"条评论");
         //评论区的动态加载
         comments_list_view=(ListView)view.findViewById(R.id.CommentsListView);
         commentsListItems=getListItems();
         commentsListViewAdapter=new CommentsListViewAdapter(this.getContext(),commentsListItems);
         comments_list_view.setAdapter(commentsListViewAdapter);
         setListViewHeightBasedOnChildren(comments_list_view);
-        ViewGroup.LayoutParams params=comments_list_view.getLayoutParams();
-        //params.height=2500;
-        //comments_list_view.setLayoutParams(params);
-//        if(!User.getInstance().isLogin()) {
-//
-//        }else {
-//
-//        }
+        comments_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
     }
 
 
@@ -346,21 +349,34 @@ public class ProjectDetailFragment extends Fragment {
     //下面这个方法是直接从User中读取出数据的，但因为数据库为空所以暂时没有数据
     private List<Map<String, Object>> getListItems() {
         List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
-        for(int i = 0; i <User.getInstance().getCurrentProject().getCommentList().size(); i++) {
+        if(User.getInstance().currentParentComments.size()>0)
+        {
+        for(int i = 0; i <User.getInstance().currentParentComments.size(); i++) {
             Map<String, Object> map = new HashMap<String, Object>();
-            if(!User.getInstance().getCurrentProject().getCommentList().get(i).getSendHead().equals("0")) {
-                Uri imgUri=Uri.parse((User.getInstance().getCurrentProject().getCommentList().get(i).getSendHead()));
+            if(!User.getInstance().currentParentComments.get(i).getSendHead().equals("0")) {
+                Uri imgUri=Uri.parse((User.getInstance().currentParentComments.get(i).getSendHead()));
                 map.put("head_image_view",imgUri);
             }else {
                 Uri uri=Uri.parse("file:///android_asset/image/head.jpg");
                 map.put("head_image_view",uri);
             }
-            map.put("user_name", User.getInstance().getCurrentProject().getCommentList().get(i).getSendName());
+            map.put("user_name", User.getInstance().currentParentComments.get(i).getSendName());
             map.put("comment_floor",i+1);
-            map.put("comment_date", User.getInstance().getCurrentProject().getCommentList().get(i).getTime());
-            map.put("comment_content", User.getInstance().getCurrentProject().getCommentList().get(i).getContent());
-            //map.put("comment_num", User.getInstance().getCurrentProject().getCommentList().get(i).getChildCommentCount());
+            map.put("comment_date", User.getInstance().currentParentComments.get(i).getTime());
+            map.put("comment_content", User.getInstance().currentParentComments.get(i).getContent());
+            map.put("comment_num", User.getInstance().currentParentComments.get(i).childCommentCount);
            listItems.add(map);
+        }
+        }else {
+            Map<String, Object> map = new HashMap<String, Object>();
+            Uri uri=Uri.parse("file:///android_asset/image/head.jpg");
+            map.put("head_image_view",uri);
+            map.put("user_name", "暂无评论");
+            map.put("comment_floor",0);
+            map.put("comment_date", "暂无评论");
+            map.put("comment_content", "暂无评论");
+            map.put("comment_num", 0);
+            listItems.add(map);
         }
         return listItems;
     }
@@ -399,5 +415,28 @@ public class ProjectDetailFragment extends Fragment {
 
         listView.setLayoutParams(params);
 
+    }
+
+    public void seperateComment() {
+        for (int i=0;i<User.getInstance().getCurrentProject().getCommentList().size();i++) {
+            if(User.getInstance().getCurrentProject().getCommentList().get(i).getParentId().equals("0")) {
+              User.getInstance().currentParentComments.add(User.getInstance().getCurrentProject().getCommentList().get(i));
+            }else {
+              User.getInstance().currentChildComments.add(User.getInstance().getCurrentProject().getCommentList().get(i));
+            }
+        }
+    }
+    public void getChildCommentNumber()
+    {
+       for (int i=0;i<User.getInstance().currentParentComments.size();i++)
+       {
+           for(int j=0;j<User.getInstance().currentChildComments.size();j++)
+           {
+               if (User.getInstance().currentChildComments.get(j).getParentId().equals(User.getInstance().currentParentComments.get(i).getCommentId()))
+               {
+                   User.getInstance().currentParentComments.get(i).childCommentCount++;
+               }
+           }
+       }
     }
 }

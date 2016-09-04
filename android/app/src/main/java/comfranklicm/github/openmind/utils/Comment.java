@@ -13,6 +13,7 @@ public class Comment{
     private String receiveName;
     private String time;
     private String content;
+    public Integer childCommentCount=0;
 
     public String getCommentId() {
         return commentId;

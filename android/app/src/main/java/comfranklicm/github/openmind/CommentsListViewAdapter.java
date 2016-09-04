@@ -3,6 +3,9 @@ package comfranklicm.github.openmind;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.widget.BaseAdapter;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import android.app.AlertDialog;
@@ -22,6 +25,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import comfranklicm.github.openmind.utils.User;
 
 /**
  * Created by lyy on 2016/9/1.
@@ -130,13 +135,17 @@ public class CommentsListViewAdapter extends BaseAdapter{
 
         //设置文字和图片
         commentsListView.head_image_view.setImageURI((Uri) listItems.get(position).get("head_image_view"));
-        commentsListView.comment_floor.setText(""+listItems.get(position).get("comment_floor"));
-        commentsListView.user_name.setText((String)listItems.get(position).get("user_name"));
-        commentsListView.comment_date.setText((String)listItems.get(position).get("comment_date"));
+        commentsListView.comment_floor.setText("" + listItems.get(position).get("comment_floor"));
+        commentsListView.user_name.setText((String) listItems.get(position).get("user_name"));
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        if(!((String)listItems.get(position).get("comment_date")).equals("暂无评论")) {
+            String time = sdf.format(new Date(Long.parseLong((String) listItems.get(position).get("comment_date")) * 1000));
+            commentsListView.comment_date.setText(time);
+        }else {
+            commentsListView.comment_date.setText((String) listItems.get(position).get("comment_date"));
+        }
         commentsListView.comment_content.setText((String)listItems.get(position).get("comment_content"));
-        //commentsListView.comment_num.setText((String)listItems.get(position).get("comment_num"));
-
-
+        commentsListView.comment_num.setText(""+listItems.get(position).get("comment_num"));
         return convertView;
     }
 }

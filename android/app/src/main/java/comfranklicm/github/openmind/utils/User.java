@@ -59,6 +59,9 @@ public class User {
     //为了实现每次使用该类时不创建新的对象而创建的静态对象
     private static User userInstance;
     private Integer returnCount=0;
+    private Comment currentParentComment;
+    public List<Comment> currentParentComments=new ArrayList<Comment>();
+    public List<Comment> currentChildComments=new ArrayList<Comment>();
     //构造方法私有化
     private User(){}
 
@@ -303,6 +306,14 @@ public class User {
 
     public void setReturnCount(Integer returnCount) {
         this.returnCount = returnCount;
+    }
+
+    public Comment getCurrentParentComment() {
+        return currentParentComment;
+    }
+
+    public void setCurrentParentComment(Comment currentParentComment) {
+        this.currentParentComment = currentParentComment;
     }
 }
 

@@ -49,6 +49,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
     private RegisterFragment fg8;
     private SettingFragment fg9;
     private ProjectDetailFragment fg10;
+    private ChildCommentListFragment fg11;
 	private RelativeLayout course_layout;
 	private RelativeLayout found_layout;
 	private RelativeLayout settings_layout;
@@ -507,6 +508,9 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         if (fg10!=null){
             transaction.hide(fg10);
         }
+        if (fg11!=null){
+            transaction.hide(fg11);
+        }
     }
 
 	public void clearChioce()
@@ -520,6 +524,8 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
 		settings_image.setImageResource(R.drawable.ic_tabbar_settings_normal);
 		settings_layout.setBackgroundColor(whirt);
 		settings_text.setTextColor(gray);
+        User.getInstance().currentChildComments.clear();
+        User.getInstance().currentParentComments.clear();
 	}
 	public void transactiontoLogin()
 	{
@@ -551,6 +557,14 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         hideFragments(transaction);
         fg10 = new ProjectDetailFragment();
         transaction.add(R.id.content, fg10);
+        transaction.commit();
+    }
+    public void transactiontoChildComment()
+    {
+        final FragmentTransaction transaction = fManager.beginTransaction();
+        hideFragments(transaction);
+        fg11 = new ChildCommentListFragment();
+        transaction.add(R.id.content, fg11);
         transaction.commit();
     }
 }
