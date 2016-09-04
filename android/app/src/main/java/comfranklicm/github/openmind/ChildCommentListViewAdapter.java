@@ -1,37 +1,27 @@
 package comfranklicm.github.openmind;
 
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.widget.BaseAdapter;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import android.app.AlertDialog;
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import comfranklicm.github.openmind.utils.User;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Created by lyy on 2016/9/1.
+ * Created by FrankLicm on 2016/9/4.
  */
-public class CommentsListViewAdapter extends BaseAdapter{
+public class ChildCommentListViewAdapter extends BaseAdapter {
     private Context context;                        //运行上下文
     private List<Map<String, Object>> listItems;    //商品信息集合
     private LayoutInflater listContainer;           //视图容器
@@ -50,7 +40,7 @@ public class CommentsListViewAdapter extends BaseAdapter{
     }
 
 
-    public CommentsListViewAdapter(Context context, List<Map<String, Object>> listItems) {
+    public ChildCommentListViewAdapter(Context context, List<Map<String, Object>> listItems) {
         this.context = context;
         listContainer = LayoutInflater.from(context);   //创建视图容器并设置上下文
         this.listItems = listItems;
@@ -111,7 +101,7 @@ public class CommentsListViewAdapter extends BaseAdapter{
         if (convertView == null) {
             commentsListView = new CommentsListView();
             //获取list_item布局文件的视图
-            convertView = listContainer.inflate(R.layout.comments_list_view, null);
+            convertView = listContainer.inflate(R.layout.child_comment_listview_items, null);
             //获取控件对象
             //commentsListView.linearLayout1=(RelativeLayout)convertView.findViewById(R.id.RelativeLayout1);//改变这个的高度来适配不同长度的评论
             commentsListView.head_image_view= (SimpleDraweeView)convertView.findViewById(R.id.head_image_view);
@@ -119,11 +109,6 @@ public class CommentsListViewAdapter extends BaseAdapter{
             commentsListView.user_name=(TextView)convertView.findViewById(R.id.user_name);
             commentsListView.comment_date=(TextView)convertView.findViewById(R.id.comment_date);
             commentsListView.comment_content=(TextView)convertView.findViewById(R.id.comment_content);
-            commentsListView.go_to_detail_btn=(TextView)convertView.findViewById(R.id.fa_angle_double_right);
-            commentsListView.go_to_detail_btn.setTypeface(FontManager.getTypeface(context,FontManager.FONTAWESOME));
-            commentsListView.comment_icon=(TextView)convertView.findViewById(R.id.fa_commenting_o);
-            commentsListView.comment_icon.setTypeface(FontManager.getTypeface(context,FontManager.FONTAWESOME));
-            commentsListView.comment_num=(TextView)convertView.findViewById(R.id.comments_num);
             commentsListView.line = (View)convertView.findViewById(R.id.view);
             //设置控件集到convertView
             convertView.setTag(commentsListView);
@@ -145,7 +130,6 @@ public class CommentsListViewAdapter extends BaseAdapter{
             commentsListView.comment_date.setText((String) listItems.get(position).get("comment_date"));
         }
         commentsListView.comment_content.setText((String)listItems.get(position).get("comment_content"));
-        commentsListView.comment_num.setText(""+listItems.get(position).get("comment_num"));
         return convertView;
     }
 }

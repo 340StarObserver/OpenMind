@@ -40,9 +40,10 @@
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:background="#bbbbbb"
+        android:layout_height="10dp"
+        android:background="@drawable/dashed_line_shape"
         android:layout_marginLeft="15dp"
+        android:layerType="software"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="0dp"
         android:layout_alignParentStart="false"
@@ -64,12 +65,12 @@
         android:layout_toEndOf="@+id/head_image_view" />
 
     <!--<ImageView-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:id="@+id/head_image_view"-->
-        <!--android:src="@mipmap/head"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_alignParentStart="true" />-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:id="@+id/head_image_view"-->
+    <!--android:src="@mipmap/head"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_alignParentStart="true" />-->
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/head_image_view"
         android:layout_width="50dp"

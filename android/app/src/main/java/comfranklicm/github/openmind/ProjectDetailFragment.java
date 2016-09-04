@@ -324,7 +324,11 @@ public class ProjectDetailFragment extends Fragment {
         comments_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                if(User.getInstance().currentParentComments.size()>0) {
+                    User.getInstance().setCurrentParentComment(User.getInstance().currentParentComments.get(position));
+                    MyActivity activity = (MyActivity) getActivity();
+                    activity.transactiontoChildComment();
+                }
             }
         });
     }
