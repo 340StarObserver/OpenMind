@@ -90,115 +90,116 @@ public class ProjectDetailFragment extends Fragment {
             mflowLayout.addView(tv);
         }
         mflowLayout2=(TagLayout)view.findViewById(R.id.links);
-        if(User.getInstance().getCurrentProject().getLinkList().size()>2) {
-            for (int i = 0; i < 2; i++) {
-                final int j = i;
-                String tag = User.getInstance().getCurrentProject().getLinkList().get(i).getDescription();
-                TextView tv = new TextView(getContext());
-                tv.setText(tag);
-                tv.setTextColor(Color.parseColor("#ffffff"));
-                tv.setTextSize(15);
-                tv.setBackgroundResource(R.drawable.label_shape);
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        intent.setAction("android.intent.action.VIEW");
-                        Uri content_url = Uri.parse("http://" + User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
-                        intent.setData(content_url);
-                        startActivity(intent);
-                    }
-                });
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.setMargins(10, 10, 10, 10);
-                tv.setLayoutParams(params);
-                mflowLayout2.addView(tv);
-            }
-        }else {
-            for (int i = 0; i < User.getInstance().getCurrentProject().getLinkList().size(); i++) {
-                final int j = i;
-                String tag = User.getInstance().getCurrentProject().getLinkList().get(i).getDescription();
-                TextView tv = new TextView(getContext());
-                tv.setText(tag);
-                tv.setTextColor(Color.parseColor("#ffffff"));
-                tv.setTextSize(15);
-                tv.setBackgroundResource(R.drawable.label_shape);
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        intent.setAction("android.intent.action.VIEW");
-                        Uri content_url = Uri.parse("http://" + User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
-                        intent.setData(content_url);
-                        startActivity(intent);
-                    }
-                });
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.setMargins(10, 10, 10, 10);
-                tv.setLayoutParams(params);
-                mflowLayout2.addView(tv);
-            }
-        }
+//        if(User.getInstance().getCurrentProject().getLinkList().size()>2) {
+//            for (int i = 0; i < 2; i++) {
+//                final int j = i;
+//                String tag = User.getInstance().getCurrentProject().getLinkList().get(i).getDescription();
+//                TextView tv = new TextView(getContext());
+//                tv.setText(tag);
+//                tv.setTextColor(Color.parseColor("#ffffff"));
+//                tv.setTextSize(15);
+//                tv.setBackgroundResource(R.drawable.label_shape);
+//                tv.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent = new Intent();
+//                        intent.setAction("android.intent.action.VIEW");
+//                        Uri content_url = Uri.parse("http://" + User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
+//                        intent.setData(content_url);
+//                        startActivity(intent);
+//                    }
+//                });
+//                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//                params.setMargins(10, 10, 10, 10);
+//                tv.setLayoutParams(params);
+//                mflowLayout2.addView(tv);
+//            }
+//        }else {
+//            for (int i = 0; i < User.getInstance().getCurrentProject().getLinkList().size(); i++) {
+//                final int j = i;
+//                String tag = User.getInstance().getCurrentProject().getLinkList().get(i).getDescription();
+//                TextView tv = new TextView(getContext());
+//                tv.setText(tag);
+//                tv.setTextColor(Color.parseColor("#ffffff"));
+//                tv.setTextSize(15);
+//                tv.setBackgroundResource(R.drawable.label_shape);
+//                tv.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent = new Intent();
+//                        intent.setAction("android.intent.action.VIEW");
+//                        Uri content_url = Uri.parse("http://" + User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
+//                        intent.setData(content_url);
+//                        startActivity(intent);
+//                    }
+//                });
+//                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//                params.setMargins(10, 10, 10, 10);
+//                tv.setLayoutParams(params);
+//                mflowLayout2.addView(tv);
+//            }
+//        }
         scalinglinks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(islinksscaling)
                 {
                     mflowLayout2.removeAllViews();
-                    if(User.getInstance().getCurrentProject().getLinkList().size()>2) {
-                        for (int i = 0; i < 2; i++) {
-                            final int j = i;
-                            String tag = User.getInstance().getCurrentProject().getLinkList().get(i).getDescription();
-                            TextView tv = new TextView(getContext());
-                            tv.setText(tag);
-                            tv.setTextColor(Color.parseColor("#ffffff"));
-                            tv.setTextSize(15);
-                            tv.setBackgroundResource(R.drawable.label_shape);
-                            tv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = new Intent();
-                                    intent.setAction("android.intent.action.VIEW");
-                                    Uri content_url = Uri.parse("http://" + User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
-                                    intent.setData(content_url);
-                                    startActivity(intent);
-                                }
-                            });
-                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                            params.setMargins(10, 10, 10, 10);
-                            tv.setLayoutParams(params);
-                            mflowLayout2.addView(tv);
-                        }
-                    }else {
-                        mflowLayout2.removeAllViews();
-                        for (int i = 0; i < User.getInstance().getCurrentProject().getLinkList().size(); i++) {
-                            final int j = i;
-                            String tag = User.getInstance().getCurrentProject().getLinkList().get(i).getDescription();
-                            TextView tv = new TextView(getContext());
-                            tv.setText(tag);
-                            tv.setTextColor(Color.parseColor("#ffffff"));
-                            tv.setTextSize(15);
-                            tv.setBackgroundResource(R.drawable.label_shape);
-                            tv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = new Intent();
-                                    intent.setAction("android.intent.action.VIEW");
-                                    Uri content_url = Uri.parse("http://" + User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
-                                    intent.setData(content_url);
-                                    startActivity(intent);
-                                }
-                            });
-                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                            params.setMargins(10, 10, 10, 10);
-                            tv.setLayoutParams(params);
-                            mflowLayout2.addView(tv);
-                        }
-                    }
+//                    if(User.getInstance().getCurrentProject().getLinkList().size()>2) {
+//                        for (int i = 0; i < 2; i++) {
+//                            final int j = i;
+//                            String tag = User.getInstance().getCurrentProject().getLinkList().get(i).getDescription();
+//                            TextView tv = new TextView(getContext());
+//                            tv.setText(tag);
+//                            tv.setTextColor(Color.parseColor("#ffffff"));
+//                            tv.setTextSize(15);
+//                            tv.setBackgroundResource(R.drawable.label_shape);
+//                            tv.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    Intent intent = new Intent();
+//                                    intent.setAction("android.intent.action.VIEW");
+//                                    Uri content_url = Uri.parse("http://" + User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
+//                                    intent.setData(content_url);
+//                                    startActivity(intent);
+//                                }
+//                            });
+//                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//                            params.setMargins(10, 10, 10, 10);
+//                            tv.setLayoutParams(params);
+//                            mflowLayout2.addView(tv);
+//                        }
+//                    }else {
+//                        //mflowLayout2.removeAllViews();
+//                        for (int i = 0; i < User.getInstance().getCurrentProject().getLinkList().size(); i++) {
+//                            final int j = i;
+//                            String tag = User.getInstance().getCurrentProject().getLinkList().get(i).getDescription();
+//                            TextView tv = new TextView(getContext());
+//                            tv.setText(tag);
+//                            tv.setTextColor(Color.parseColor("#ffffff"));
+//                            tv.setTextSize(15);
+//                            tv.setBackgroundResource(R.drawable.label_shape);
+//                            tv.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    Intent intent = new Intent();
+//                                    intent.setAction("android.intent.action.VIEW");
+//                                    Uri content_url = Uri.parse("http://" + User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
+//                                    intent.setData(content_url);
+//                                    startActivity(intent);
+//                                }
+//                            });
+//                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//                            params.setMargins(10, 10, 10, 10);
+//                            tv.setLayoutParams(params);
+//                            mflowLayout2.addView(tv);
+//                        }
+//                    }
                     fa_angle_double_down2.setText(R.string.fa_angle_double_down);
                     fa_angle_double_down2.setTypeface(FontManager.getTypeface(getContext(), FontManager.FONTAWESOME));
                     islinksscaling=false;
                 }else {
+                    //mflowLayout2.removeAllViews();
                     for (int i = 0; i < User.getInstance().getCurrentProject().getLinkList().size(); i++) {
                         final int j = i;
                         String tag = User.getInstance().getCurrentProject().getLinkList().get(i).getDescription();

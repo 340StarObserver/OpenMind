@@ -22,7 +22,7 @@ import comfranklicm.github.openmind.utils.NetUtil;
 import comfranklicm.github.openmind.utils.ProjectInfo;
 import comfranklicm.github.openmind.utils.User;
 
-public class Fragment6 extends Fragment {
+public class OwnProjectsFragment extends Fragment {
     private RecyclerView recyclerView;
     private ProjectListRecyViewAdapter adapter;
     SwipeRefreshLayout swipeRefreshLayout;

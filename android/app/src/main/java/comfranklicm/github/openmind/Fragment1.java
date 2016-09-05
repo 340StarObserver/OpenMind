@@ -1,25 +1,13 @@
 package comfranklicm.github.openmind;
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -101,8 +89,8 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
         alltext.setOnClickListener(this);
         votetext.setOnClickListener(this);
 
-        fg4=new Fragment4();
-        fg5=new Fragment5();
+        fg4=new AllProjectsFragment();
+        fg5=new VoteProjectsFragment();
 
         mFragments.add(fg4);
         mFragments.add(fg5);

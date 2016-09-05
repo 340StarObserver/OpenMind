@@ -1,17 +1,12 @@
 package comfranklicm.github.openmind;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +62,7 @@ public class Fragment2 extends Fragment {
 	}
 	private void initlayout(){
 		mPaper=(ViewPager)view.findViewById(R.id.view_pager);
-		fg6=new Fragment6();
+		fg6=new OwnProjectsFragment();
 		mFragments.add(fg6);
 	}
 }
