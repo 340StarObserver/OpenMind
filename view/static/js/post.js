@@ -340,7 +340,7 @@ function commentPost(proj_id, proj_name, own_usr, own_name, recv_usr, recv_name,
 	    
 	  },
 	  success: function(data, textStatus, xhr) {
-	    dealCommentReturn(data, parent_id, content);
+	    dealCommentReturn(data);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);

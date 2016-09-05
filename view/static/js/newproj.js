@@ -1,8 +1,8 @@
-// var token = getCookie('token');
-// console.log( token );
-// if( token == null){
-// 	location.href = 'home.html';
-// }
+var token = getCookie('token');
+console.log( token );
+if( token == null){
+	location.href = 'home.html';
+}
 
 var tree = new Tree();
 var pointer = tree.root_node; //指向当前节点
@@ -65,6 +65,20 @@ $(document).ready(function() {
 			return false;
 		}
 
+		//检查文件名是否合法
+		if( !checkFileName(filename)){
+			console.log( filename );
+			showWarningTips('文件名不合法，只能包含中文，英文数字和_，且不能以.开头或结尾')
+			return false;
+		}
+
+		//检查文件大小是否合法
+		if( !checkFileSize(file.size, 16*1024) ){
+			$('#file-input').addClass('has-error');
+			showWarningTips('文件大小不能超过16M');
+			return false;
+		}
+
 		//重复名字
 		var nodes = pointer.child;
 		for (var i = 0; i < nodes.length; i++) {
@@ -74,20 +88,6 @@ $(document).ready(function() {
 				return false;
 			}
 			
-		}
-
-		console.log(file);
-
-		//检查文件名是否合法
-		if( !checkFileName(file.name)){
-			showWarningTips('文件名不合法')
-			return false;
-		}
-
-		//检查文件大小是否合法
-		if( !checkFileSize(file.size, 16*1024) ){
-			$('#file-input').addClass('has-error');
-			return false;
 		}
 
 		addFile(filename, file);
@@ -109,7 +109,6 @@ $(document).ready(function() {
 		console.log("index "+index);
 
 		for (var i = 1; i <= index; i++) {
-			// console.log ("catalog text " + $("<div class="file-catalog"><li></li></div>").eq(i).text()  );
 			path += '/'+ ( $(".file-catalog>li").eq(i).text() );
 		}
 
@@ -121,7 +120,7 @@ $(document).ready(function() {
 		var item_name = $(this).text();
 		// console.log("pointer.path" + pointer.path );
 		var path = pointer.path +"/"+ item_name; // /docs/image
-		path = path.substring(1, path.length);
+		path = path.substring(1);
 
 		console.log( "path"+path );
 		changeFileConstruct(path);
@@ -176,7 +175,6 @@ $(document).ready(function() {
 		
 		var labelIndex = $(this).parent().index();
 		$(this).parent().remove();
-		// console.log(labelIndex);
 
 		//从数组中删除
 		labels.splice(labelIndex, 1);
@@ -210,7 +208,12 @@ $(document).ready(function() {
 
 		var name = $("#name-input").val();
 		var intro = $("#intro-input").val();
-		//TODO 检查各项输入合法性
+		
+		//检查各项输入合法性
+		if( name=='' || intro==''){
+			showWarningTips('请填写项目名称和简介');
+			return false;
+		}
 
 		var files_name_string = '',
 			labels_string = '',
@@ -295,7 +298,10 @@ function addDirectory(name){
 	}
 
 	//TODO 检查文件夹名是否合法
-
+	if( !checkDirectoryName(name) ){
+		showWarningTips('文件夹名不合法,只能包含中文，英文和数字');
+		return false;
+	}
 
 	var path = pointer.path+ "/" + name;  //  /docs/image
 	path = path.substring(1);

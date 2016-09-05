@@ -5,6 +5,9 @@ var proj_id,
 	head_comment_array=[],
 	comments=[];
 
+var tree = new Tree();
+var pointer = tree.root_node;
+
 // var labels = [];
 // var links = [];
 
@@ -21,8 +24,14 @@ var example = {
 		{"address": "https://github.com/bobxwu/", "description": "github仓库"}
 	],
 	'introduction' : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\r\naaaaaaaa",
-	'shares':[
-
+	'shares':[{
+		'name': 'docs/a.jpg','time':'1','url':'asdf'
+		},
+		{
+			'name': 'docs/new/a.jpg','time':'1','url':'asdf'
+		},{
+			'name': 'this.jpg','time':'1','url':'asdf'
+		}
 	],
 
 	'comments' :  [
@@ -159,9 +168,9 @@ var cReturn = {
 
 $(document).ready(function() {
 
-	// init();
+	init();
 
-	showProjDetail( example );
+	// showProjDetail( example );
 
 	$(".project-link").hover(function() {
 		var address = $(this).attr('href');
@@ -230,10 +239,53 @@ $(document).ready(function() {
 
 		console.log( parent_id );
 		//发送请求
-		// commentPost
-		console.log(proj_id, proj_name, own_usr, own_name, recv_usr, '', parent_id, content)
-		dealCommentReturn( cReturn );
+		commentPost(proj_id, proj_name, own_usr, own_name, recv_usr, '', parent_id, content)
 	});
+
+	$('#comment-publish-btn').click(function(event) {
+		var content = $('#comment-input').val();
+		if( content==''){
+			showWarningTips('请输入评论内容');
+			return false;
+		}
+		
+		console.log(content);
+
+		var recv_usr = own_usr,
+			parent_id = '0';
+
+		commentPost(proj_id, proj_name, own_usr, own_name, own_usr, '', parent_id, content);
+	});
+
+	$(document).on('click', '.catalog-root', function(event) {
+		changeFileConstruct('');
+	});
+
+	$(document).on('click', '.catalog-item>.catalog-item-name', function(event) {
+		
+		var index = $(this).parent().index();
+		var path ='';
+		console.log("index "+index);
+
+		for (var i = 1; i <= index; i++) {
+			path += '/'+ ( $(".file-catalog>li").eq(i).text() );
+		}
+
+		path = path.substring(1);
+		changeFileConstruct( path );
+	});
+
+	$(document).on('click', '.file-item-name', function(event) {
+		var item_name = $(this).text();
+		// console.log("pointer.path" + pointer.path );
+		var path = pointer.path +"/"+ item_name; // /docs/image
+		path = path.substring(1);
+
+		console.log( "path"+path );
+		changeFileConstruct(path);
+
+	});
+
 });
 
 function init(){
@@ -246,7 +298,6 @@ function init(){
 
 function dealProjDetailReturn(data){
 	if( data["result"] == false){
-		//TODO 没有找到该项目
 		alert("没有找到项目");
 		location.href = "home.html" ;
  		return false;
@@ -257,9 +308,7 @@ function dealProjDetailReturn(data){
 
 function showProjDetail(project){
 	$(".project-name").text(project['proj_name']);
-	//TODO 设置投票区域
 	
-
 	var labels = project["labels"],
 		html="";
 
@@ -282,10 +331,16 @@ function showProjDetail(project){
 
 	$('.project-links-container').html(html);
 
+	var shares = project['shares'];
+	for (var i = 0; i < shares.length; i++) {
+		tree.add( shares[i]['name'] ,true, shares[i]['time'], shares[i]['url'] );
+	}
+
+	changeFileConstruct('');
+
 	showComments( project['comments'] );
 	
 	console.log( project['comments'] );
-
 	//记录数据
 	proj_id = project['_id'];
 	proj_name = project['proj_name'];
@@ -408,15 +463,86 @@ function dealCommentReturn(data){
 		var comment = data['comment'];
 		var parent_id = comment['parent_id'];
 
-		if( parent_id == 0){
+		if( parent_id == '0'){
+
 			head_comment_array.push({
 				"id": comment['id'],
 				"send_usr": comment['send_usr']
 			});
+
 			addHeadComment( comment, head_comment_array.length-1 );
 		}
 		else{
 			addFollowComment(comment);
 		}
 	}
+}
+
+function changeFileConstruct(path){
+	var node = tree.find(path);   //   docs/image
+	console.log ( "changeFileConstrut" + path );
+
+	if( node != null){
+		if( node.leaf == true){
+			console.log("is a file");
+			return;
+		}
+
+		console.log("是文件夹");
+
+		pointer = node;
+
+		changeCatalog(path);
+		showFileList();
+		console.log(pointer);
+
+	}else{
+		showWarningTips("改变目录结构出错");
+	}
+}
+
+function changeCatalog(path){
+	
+	if( path == ''){
+		//根目录
+		$(".file-catalog").html( '<li class="active">..<li>' )
+		return;
+	}
+
+	console.log("change catalog: "+path);
+	var paths = path.split("/");
+
+	var n = paths.length;
+	var html ='<li class="catalog-root">..</li>';
+
+	for (var i = 0; i < n-1; i++) {
+		html += '<li class="catalog-item"><a class="catalog-item-name" href="javascript:void(0)">'+ paths[i] +'</a></li>';
+	}
+
+	html += '<li class="active">'+ paths[n-1] +'</li>';
+	
+	$(".file-catalog").html(html);
+
+	$(".file-catalog>li:last-child").addClass('active');
+}
+
+function showFileList(){
+
+	var nodes = pointer.child;
+	var html = '';
+	for (var i = 0; i < nodes.length; i++) {
+		var names = (nodes[i].path).split("/");
+		var name = names[ names.length-1 ];
+
+		if( nodes[i].leaf == false ){  //如果是文件夹
+			html += '<li class="file-item"><span class="file-item-name directory">'+ name +'</li>';
+		}		
+		else{// 如果是文件
+			html += '<li class="file-item"><span class="file-item-name file">'+ name +'</li>'
+		}
+		
+		console.log("add item: "+name);
+	}
+
+	$(".file-list").html(html);
 }

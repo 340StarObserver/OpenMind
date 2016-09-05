@@ -4,12 +4,6 @@ $(document).ready(function() {
 		$(this).blur();	
 	});
 
-	
-
-	// $("#next-btn").click(function(event) {
-	// 	$(this).blur();
-	// });
-
 	//回到顶部按钮点击事件 和 导航栏底部阴影添加事件
 	$(window).scroll(function() {
 		
@@ -36,7 +30,7 @@ function scrollToTop(){
 function showWarningTips(tips){
 	$(".warning-tips .btn-warning").html(tips);
 	$(".warning-tips").fadeIn('fast');
-	setTimeout("hideWarningTips()",2000);
+	setTimeout("hideWarningTips()",3000);
 }
 
 //隐藏顶部警告提示
@@ -59,8 +53,12 @@ function checkFileSize(fileSize, size){
 	return ((fileSize/1024) < size);
 }
 
+function checkDirectoryName(name){
+	return ( name.match('^[\u4e00-\u9fa5a-zA-Z0-9]+$') != null );
+}
+
 function checkFileName(filename){
-	return true;
+	return ( filename.match('^[\u4e00-\u9fa5a-zA-Z0-9][\u4e00-\u9fa5_a-zA-Z0-9\.]+[\u4e00-\u9fa5a-zA-Z0-9]$') != null );
 }
 
 //注销

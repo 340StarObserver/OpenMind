@@ -172,16 +172,24 @@ $(document).ready(function() {
 		if( $(this).hasClass('disabled') )
 			return false;
 		
-		scrollToTop();
-		updateProjectPage( projectBrief[--currentPage] );
+		
+		
 
 		enableBtn("#next-btn");
 
-		if( currentPage == 0 ){
+		if( --currentPage == 0 ){
+			//清空内存存储数组
+			projectBrief.length =0 ;
+
 			//上一页按钮失效
-			disableBtn('#prev-btn');
+			// disableBtn('#prev-btn');
+			getProjBriefPostFirst();
+			return false;
 		}
 
+		scrollToTop();
+
+		updateProjectPage( projectBrief[currentPage] );
 		console.log("从当前存储中选择上一页");
 	});
 
@@ -195,7 +203,7 @@ $(document).ready(function() {
 		enableBtn("#voting-next-btn");
 
 		if( --currentVotingPage == 0){
-			disableBtn("voting-prev-btn");
+			disableBtn("#voting-prev-btn");
 		}
 
 		console.log("从当前存储中选择正在投票的上一页");
@@ -268,11 +276,11 @@ function init(){
 	//getVotingProjPost();
 
 	//使上一页按钮失效
-	disableBtn('#prev-btn');
-	disableBtn('#voting-prev-btn');
+	// disableBtn('#prev-btn');
+	// disableBtn('#voting-prev-btn');
 
-	currentPage = 0;
-	currentVotingPage = 0;
+	// currentPage = 0;
+	// currentVotingPage = 0;
 
 	//查看是否有cookie
 	if( getCookie("token") != null ){
@@ -359,8 +367,8 @@ function dealProjBriefReturnFirst(data){
 	/* 有项目概要信息可以更新*/
 	console.log( "need to update first time:"+data );
 
-	// currentPage=0;
-	// disableBtn("#prev-btn");
+	currentPage=0;
+	disableBtn("#prev-btn");
 
 	//将新获得的项目概要信息json数组储存
 	projectBrief.push(data);
@@ -406,7 +414,6 @@ function dealVotingProjReturn(data){
 	}
 
 	var projects = [];
-	// console.log( "data.length:"+data.length );
 	for (var i = 0; i < data.length; i++) {
 		projects.push( data[i] );
 
