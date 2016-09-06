@@ -1,5 +1,7 @@
 package comfranklicm.github.openmind.JsonParsing;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -225,7 +227,8 @@ public class JsonParser {
                         }
                         projectInfo.setLinkList(linkList);
 
-
+                        projectInfo.setShares(jarr.getString("shares"));
+                        Log.d("shares", projectInfo.getShares());
                         JSONArray jsonArray2=new JSONArray(jarr.getString("shares"));
                         List<Share>shareList=new ArrayList<Share>();
                         for (int l=0;l<jsonArray2.length();l++)

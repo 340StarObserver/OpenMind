@@ -1,0 +1,139 @@
+package comfranklicm.github.openmind;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import comfranklicm.github.openmind.utils.ManyNodeTree;
+import comfranklicm.github.openmind.utils.ManyTreeNode;
+import comfranklicm.github.openmind.utils.User;
+
+
+/**
+ * Created by FrankLicm on 2016/9/5.
+ */
+public class FileViewFragment extends Fragment{
+    View view;
+    TextView route;
+    TextView backtoprojectdetail;
+    ListView fileListView;
+    FileListViewAdapter fileListViewAdapter;
+    List<Map<String, Object>> fileListItems;
+    List<String>filePathList=new ArrayList<String>();
+    Integer layerNumber;
+    ManyTreeNode manyTreeNode;
+    ManyNodeTree tree=new ManyNodeTree();
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view=inflater.inflate(R.layout.file_view_layout,container,false);
+        route=(TextView)view.findViewById(R.id.route);
+        route.setText("...");
+        backtoprojectdetail=(TextView)view.findViewById(R.id.backbtn);
+        backtoprojectdetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyActivity activity = (MyActivity) getActivity();
+                activity.transactiontoProjectDetail();
+            }
+        });
+        getFilePathTree();
+        fileListView=(ListView)view.findViewById(R.id.list_view);
+        fileListItems=getListItems();
+        fileListViewAdapter=new FileListViewAdapter(this.getContext(),fileListItems);
+        fileListView.setAdapter(fileListViewAdapter);
+        fileListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position)
+                {
+                    case 0:{
+                        if(tree.getCurNode().getParentManyTreeNode()!=null)
+                        {
+                            //tree.setCurNode(tree.getCurNode().getParentManyTreeNode());
+                            tree.back();
+                            fileListItems=getListItems();
+                            fileListViewAdapter.listItems=getListItems();
+                            //fileListView.setAdapter(fileListViewAdapter);
+                            fileListViewAdapter.notifyDataSetChanged();
+                            Log.d("curpath", tree.getCurPath());
+                            route.setText(tree.getCurPath());
+                        }
+                        break;
+                    }
+                    default:{
+                        if (tree.getCurNode().getChildList().size()!=0)
+                        {
+                            //tree.setCurNode(tree.getCurNode().getChildList().get(position - 1));
+                            if(!tree.getCurNode().getChildList().get(position - 1).getFileName().contains(".")) {
+                                tree.enter(tree.getCurPath() + "/" + tree.getCurNode().getChildList().get(position - 1).getFileName());
+                                fileListItems = getListItems();
+                                fileListViewAdapter.listItems = getListItems();
+                                fileListViewAdapter.notifyDataSetChanged();
+                                Log.d("curpath", tree.getCurPath());
+                                route.setText(tree.getCurPath());
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        });
+        return view;
+    }
+    public void getFilePathTree()
+    {
+        for(int i=0;i<User.getInstance().getCurrentProject().getShareList().size();i++) {
+            tree.addPath(User.getInstance().getCurrentProject().getShareList().get(i).getName());
+        }
+    }
+   private  List<Map<String, Object>> getListItems()
+   {
+       List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
+       Map<String, Object> rootmap = new HashMap<String, Object>();
+       rootmap.put("filetype",0);
+       rootmap.put("filename","...");
+       listItems.add(rootmap);
+       for(int i=0;i<tree.getCurNode().getChildList().size();i++)
+       {
+           Map<String, Object> map = new HashMap<String, Object>();
+           Integer type=0;
+           if(!tree.getCurNode().getChildList().get(i).getFileName().contains("."))
+           {
+               type=0;
+           }else {
+               type=1;
+               for(int j=0;j<User.getInstance().getCurrentProject().getShareList().size();j++)
+               {
+                   if (User.getInstance().getCurrentProject().getShareList().get(j).getName().contains(tree.getCurNode().getChildList().get(i).getFileName()))
+                   {
+                       SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                       String time = sdf.format(new Date(Long.parseLong(User.getInstance().getCurrentProject().getShareList().get(j).getTime())*1000));
+                       map.put("filedate",time);
+                       break;
+                   }
+               }
+           }
+           map.put("filetype",type);
+           map.put("filename", tree.getCurNode().getChildList().get(i).getFileName());
+           //Log.d("filename",manyTreeNode.getChildList().get(i).getData().getNodeId());
+           listItems.add(map);
+       }
+       return listItems;
+   }
+}

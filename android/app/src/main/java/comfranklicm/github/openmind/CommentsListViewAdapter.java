@@ -105,7 +105,7 @@ public class CommentsListViewAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         Log.e("method", "getView");
-        final int selectID = position;
+        //final int selectID = position;
         //自定义视图
         CommentsListView  commentsListView = null;
         if (convertView == null) {

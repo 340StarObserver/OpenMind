@@ -52,7 +52,7 @@ public class ProjectDetailFragment extends Fragment {
     //String[] tags = new String[] {"我是中国好儿女", "我是中国好儿女", "我是中国好儿", "我", "我是中国好儿女"};
     CommentsListViewAdapter commentsListViewAdapter;
     List<Map<String, Object>> commentsListItems;
-    LinearLayout scalingcontent,scalinglinks;
+    LinearLayout scalingcontent,scalinglinks,filelayout;
     boolean iscontentscaling=false,islinksscaling=false;
 //    String[] usersname={"吴小宝","李昌懋","吕炀","dd","cc"};
 //    String[] comment_contents={"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈","233333333333333333333333333333333333333333333","66666666666666666666666666666666","hh","5656"};
@@ -325,11 +325,19 @@ public class ProjectDetailFragment extends Fragment {
         comments_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(User.getInstance().currentParentComments.size()>0) {
+                if (User.getInstance().currentParentComments.size() > 0) {
                     User.getInstance().setCurrentParentComment(User.getInstance().currentParentComments.get(position));
                     MyActivity activity = (MyActivity) getActivity();
                     activity.transactiontoChildComment();
                 }
+            }
+        });
+        filelayout=(LinearLayout)view.findViewById(R.id.filelayout);
+        filelayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             MyActivity activity=(MyActivity)getActivity();
+                activity.transactiontoFileView();
             }
         });
     }

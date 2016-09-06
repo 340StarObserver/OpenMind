@@ -50,6 +50,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
     private SettingFragment fg9;
     private ProjectDetailFragment fg10;
     private ChildCommentListFragment fg11;
+    private FileViewFragment fg12;
 	private RelativeLayout course_layout;
 	private RelativeLayout found_layout;
 	private RelativeLayout settings_layout;
@@ -511,6 +512,9 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         if (fg11!=null){
             transaction.hide(fg11);
         }
+        if(fg12!=null){
+            transaction.hide(fg12);
+        }
     }
 
 	public void clearChioce()
@@ -565,6 +569,14 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         hideFragments(transaction);
         fg11 = new ChildCommentListFragment();
         transaction.add(R.id.content, fg11);
+        transaction.commit();
+    }
+    public void transactiontoFileView()
+    {
+        final FragmentTransaction transaction = fManager.beginTransaction();
+        hideFragments(transaction);
+        fg12 =new FileViewFragment();
+        transaction.add(R.id.content,fg12);
         transaction.commit();
     }
 }

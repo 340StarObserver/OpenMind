@@ -1,9 +1,12 @@
 package comfranklicm.github.openmind.JsonParsing;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +67,8 @@ public class ViewProjectDetailJsonParser extends BaseJsonParser{
                 }
                 projectInfo.setLinkList(linkList);
 
-
+                projectInfo.setShares(jarr.getString("shares"));
+                Log.d("shares",projectInfo.getShares());
                 JSONArray jsonArray2=new JSONArray(jarr.getString("shares"));
                 List<Share>shareList=new ArrayList<Share>();
                 for (int l=0;l<jsonArray2.length();l++)
@@ -76,8 +80,9 @@ public class ViewProjectDetailJsonParser extends BaseJsonParser{
                     share.setUrl(jsonObject.getString("url"));
                     shareList.add(share);
                 }
-                projectInfo.setShareList(shareList);
 
+                projectInfo.setShareList(shareList);
+               // Log.d("shareslist",shareList.get(0).getName());
 
                 JSONArray jsonArray3=new JSONArray(jarr.getString("comments"));
                 List<Comment>commentList=new ArrayList<Comment>();
