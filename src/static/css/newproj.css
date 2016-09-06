@@ -32,7 +32,8 @@
 }
 
 #new-directory-btn::before,
-#new-file-btn::before{
+#new-file-btn::before,
+.file-item-name::before{
 	font-family: "FontAwesome";
 }
 
@@ -46,7 +47,7 @@
 
 .file-list>li{
 	padding: 8px;
-	color: blue;
+	color: #4078c0;
 }
 
 .file-list>li:nth-child(odd){
@@ -62,19 +63,22 @@
 	padding: 5px 10px;
 }
 
-.catalog-root:hover{
-	background-color: 
-}
-
-li.project-label{
+.project-label{
 	display: inline-block;
 	padding: 5px 20px;
 	border-radius: 5px;
 	margin-top: 10px;
-	font-size: 1em;
 	background-color: #99cccc;
 	color: white;
 	margin-left: 5px;
+	font-size: 1em;
+	line-height: 1.6;
+}
+
+.project-label>.close,
+.project-link>.close,
+.file-item>.close{
+	display: none;
 }
 
 .project-link{
@@ -127,4 +131,28 @@ li.project-label{
 	display: block;
 	width: 50%;
 	margin: auto;
+}
+
+.catalog-root,
+.catalog-item-name,
+.file-item-name.directory{
+	cursor: pointer;
+}
+
+.catalog-root:hover,
+.catalog-item-name:hover,
+.file-item-name.directory:hover{
+	opacity: .5;
+}
+
+.file-item-name::before{
+	margin-right: 5px;
+}
+
+.file-item-name.file::before{
+	content: '\f0c5';
+}
+
+.file-item-name.directory::before{
+	content: '\f07b';
 }

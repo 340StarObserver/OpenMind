@@ -1,12 +1,24 @@
 $(document).ready(function() {
-	//取消.btn点击后的自动获取焦点
-	$(".btn").click(function(event) {
-		$(this).blur();
-	});
 
-	// $("#next-btn").click(function(event) {
-	// 	$(this).blur();
-	// });
+	//查看是否有cookie
+	if( getCookie("token") != null ){
+		//显示用户名
+		var username = getCookie('username');
+	
+		$('.navbar-username').html(username+'<b class="caret"></b>');
+		$('.navbar .login-btn').remove();
+	}else{
+	
+		$('.navbar-header').css('float', 'left');
+		$('.navbar-collapse.collapse').remove();
+		$('.navbar-header .navbar-toggle').remove();
+		$('.navbar .login-btn').show();	
+	}
+
+	//取消.btn点击后的自动获取焦点
+	$(document).on('click', '.btn', function(event) {
+		$(this).blur();	
+	});
 
 	//回到顶部按钮点击事件 和 导航栏底部阴影添加事件
 	$(window).scroll(function() {
@@ -34,7 +46,7 @@ function scrollToTop(){
 function showWarningTips(tips){
 	$(".warning-tips .btn-warning").html(tips);
 	$(".warning-tips").fadeIn('fast');
-	setTimeout("hideWarningTips()",2000);
+	setTimeout("hideWarningTips()",3000);
 }
 
 //隐藏顶部警告提示
@@ -43,8 +55,21 @@ function hideWarningTips(){
 }
 
 //时间戳转yyyy-mm-dd;
-function dataFormat(nS) {     
+function formatDate(nS) {     
    return new Date(parseInt(nS*1000)).toLocaleString().split(" ")[0].replace(/\//g,"-");
+}
+
+//时间戳转yyyy-mm-dd hh-mm
+function formatDateHM(nS){
+
+	var date = new Date(parseInt(nS*1000));
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	var day = date.getDate();
+	var h = date.getHours();
+	var m = date.getMinutes();
+
+	return year+'-'+month+'-'+day+' '+h+':'+m;
 }
 
 //判断是否是图片文件
@@ -52,14 +77,23 @@ function isImage(fileType){
     return (fileType.match('^image')!=null);
 }
 
-//图片文件大小是否符合标准
-function isSizeValid(fileSize){
-	return ((fileSize/1024)<200);
+//文件大小是否符合标准 fileSize以B为单位, Size以KB为单位
+function checkFileSize(fileSize, size){
+	return ((fileSize/1024) < size);
 }
 
+function checkDirectoryName(name){
+	return ( name.match('^[\u4e00-\u9fa5a-zA-Z0-9]+$') != null );
+}
+
+function checkFileName(filename){
+	return ( filename.match('^[\u4e00-\u9fa5a-zA-Z0-9][\u4e00-\u9fa5_a-zA-Z0-9\.]+[\u4e00-\u9fa5a-zA-Z0-9]$') != null );
+}
+
+//注销
 function dealLogoutReturn(data){
 	clearCookie();
-	
+	location.href = '/home';
 }
 
 //解析URL函数
@@ -91,6 +125,10 @@ function parseURL(url) {
 	}; 
 }
 
+function clearInput(selector){
+	$(selector).val('');
+}
+
 function Tree(){
 	this.root_node = new Node();
 
@@ -99,6 +137,8 @@ function Tree(){
 		var string = "";
 		var pointer = this.root_node;
 
+		console.log( tree.root_node );
+		
 		for(var i=0; i<paths.length; i++){
 			string += "/"+paths[i];
 			var flag = false;
@@ -118,7 +158,7 @@ function Tree(){
 			}
 
 			if( leaf == true && i == (paths.length-1) ){
-				pointer.leaf = true;
+				pointer.leaf = leaf;
 				pointer.url = url;
 				pointer.time = time;
 			}
@@ -138,7 +178,7 @@ function Tree(){
 		
 		for (var i = 0; i < paths.length; i++) {
 			string += "/"+paths[i];
-			console.log("string "+string)
+			console.log("string "+string);
 			var flag = false;
 			for (var j = 0; j < pointer.child.length; j++) {
 				if( string == (pointer.child)[j].path ){
@@ -161,6 +201,43 @@ function Tree(){
 		}
 
 	}
+
+	//删除
+	this.delete = function(path){
+		var paths   = path.split("/");
+		var string  = '';
+		var pointer = this.root_node;
+		var parent = '';
+
+		for (var i = 0; i < pointer.child.length; i++) {
+			string += "/"+paths[i];
+			console.log("string "+string);
+
+			var flag = false;
+			var j;
+
+			for ( j = 0; j < pointer.child.length; j++) {
+				if( string == (pointer.child)[j].path ){
+					parent = pointer;
+					pointer = (pointer.child)[j];
+					flag = true;
+					break;
+				}
+			}
+
+			if( flag == false){
+				console.log("cannot find "+path);
+				return false;
+
+			}
+
+			if( i == paths.length-1 ){
+				(parent.child).splice(j,1);
+				return true;
+			}
+		}
+
+	}
 }
 
 function Node(){
@@ -169,4 +246,20 @@ function Node(){
 	this.path = "";
 	this.leaf = false;
 	this.url="";
+}
+
+function getSuffix(url){
+	
+	var filename = getFilename(url);
+	var names = filename.split('.');
+	var suffix = names[ names.length-1 ];
+	// console.log( suffix );
+
+	return suffix;
+}
+
+function getFilename(url){
+	var urls = url.split('/');
+	var filename = urls[ urls.length-1 ];
+	return filename;
 }

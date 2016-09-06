@@ -91,6 +91,12 @@ def newproj():
     return flask.render_template("newproj.html")
 
 
+# fileview page
+@Server_App.route("/fileview",methods=['GET'])
+def fileview():
+    return flask.render_template("fileview.html")
+
+
 # a test for sessions
 @Server_App.route("/session",methods=['GET'])
 def session():

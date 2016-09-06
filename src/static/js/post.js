@@ -104,7 +104,7 @@ function logoutPost(){
 function newProjectPost(name,  files_name_string, files, labels_string, links, intro, token){
 	var formData = new FormData();
 	formData.append('action_id', 5);
-	formData.append('proj_name', name);
+	formData.append('proj_name', name)
 
 	for (var i = 0; i < files.length; i++) {
 		formData.append( "file"+(i+1), files[i]);
@@ -120,7 +120,7 @@ function newProjectPost(name,  files_name_string, files, labels_string, links, i
 	  url: '/action',
 	  type: 'POST',
 	  data: formData,
-	    processData: false,
+	  processData: false,
 	  contentType: false,
 
 	  beforeSend: function() {
@@ -226,7 +226,6 @@ function getProjBriefPost(){
 }
 
 
-
 //8. 浏览自己的所有项目的概要信息
 var ownProjBrief = [];
 
@@ -252,7 +251,8 @@ function getOwnProjPost(){
 }
 
 //9. 浏览一个项目的详细信息的post请求
-function getProjDetail(id){
+function getProjDetailPost(id){
+	
 	jQuery.ajax({
 	  url: '/action',
 	  type: 'POST',
@@ -260,6 +260,7 @@ function getProjDetail(id){
 	  data: {
 	  	action_id: 9,
 	  	proj_id: id},
+
 	  beforeSend: function() {
 	    
 	  },
@@ -319,7 +320,7 @@ function getActiveDegreePost(month, num){
 }
 
 //12. 发表评论和建议的post请求
-function commentPost(proj_id, proj_name, own_usr, parent_id, content){
+function commentPost(proj_id, proj_name, own_usr, own_name, recv_usr, recv_name, parent_id, content){
 	jQuery.ajax({
 	  url: '/action',
 	  type: 'POST',
@@ -329,7 +330,11 @@ function commentPost(proj_id, proj_name, own_usr, parent_id, content){
 	  	proj_id: proj_id,
 	  	proj_name: proj_name,
 	  	own_usr: own_usr,
-	  	parent_id: parent_id},
+	  	own_name: own_name,
+	  	recv_usr: recv_usr,
+	  	recv_name: recv_name,
+	  	parent_id: parent_id,
+	  	content: content },
 
 	  beforeSend: function() {
 	    
@@ -441,6 +446,29 @@ function voteForProjPost(id){
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);
+	  }
+	});
+}
+
+function fileGet(fileUrl){
+	
+	//如果是.md, .txt, .jpg, .png文件
+	jQuery.ajax({
+	  url: fileUrl,
+	  type: 'GET',
+	  
+	  beforeSend: function(xhr, textStatus) {
+	    //gif加载动画
+	    // $('.container').html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
+	  },
+	  success: function(data, textStatus, xhr) {
+	  	dealFileReturn(data);
+	  	
+	  },
+	  error: function(xhr, textStatus, errorThrown) {
+	    showWarningTips(textStatus);
+	    alert('没有找到文件');
+	    window.close();
 	  }
 	});
 }

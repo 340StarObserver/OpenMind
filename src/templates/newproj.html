@@ -62,7 +62,7 @@
             <div class="navbar-username"></div>
         </div>
 
-         <a href="/login" class="btn btn-raised btn-primary login-btn" >登录<div class="ripple-container"></div></a>
+        <a href="/login" class="btn btn-raised btn-primary login-btn" >登录<div class="ripple-container"></div></a>
     </nav>
 
     <article class="container">
@@ -79,11 +79,12 @@
 				<div class="labels-input-container">
 					<div class="title">添加标签</div>
 					<ul class="labels-container">
-						<!-- <li class="project-label">html</div> -->
+						<!-- <li class="project-label">html
+						<span class="close">×</span></li> -->
 					</ul>
 					<div class="label-input-wrapper form-group is-empty">
 					    <label class="control-label" for="inputDefault">标签</label>
-					    <input id="label-input" type="text" class="form-control" maxlength="10">
+					    <input id="label-input" type="text" class="form-control" maxlength="16">
 				    </div>
 					<div class="clearfix">
 						<button id="label-confirm-btn" type="submit" class="btn btn-primary">确定
@@ -106,7 +107,7 @@
 
 						<div class="form-group form-group-sm is-empty remark-input-wrapper">
 				            <label class="control-label" for="inputSmall">备注</label>
-				            <input class="form-control" type="text" id="remark-input" maxlength="8">
+				            <input class="form-control" type="text" id="remark-input" maxlength="16">
 				        </div>
 
 				        <div class="form-group form-group-sm is-empty url-input-wrapper">
@@ -176,8 +177,8 @@
                 </div>
                 <div class="modal-body">
                   	<div class="form-group is-empty">
-					            <label class="control-label" for="inputDefault">文件夹名</label>
-					            <input id="directory-name-input" type="text" class="form-control" maxlength="10">
+					    <label class="control-label" for="inputDefault">文件夹名</label>
+					    <input id="directory-name-input" type="text" class="form-control" maxlength="10">
 				    </div>
                 </div>
                 <div class="modal-footer">
@@ -198,7 +199,7 @@
                 <div class="modal-body">
 	                <div class="form-group is-empty">
 			            <label class="control-label" for="inputDefault">文件名称</label>
-			            <input type="text" id="file-name-input" class="form-control" maxlength="10">
+			            <input type="text" id="file-name-input" class="form-control" maxlength="15">
 		          	</div>
                   	<div class="form-group is-empty is-fileinput">
 		                <label for="inputFile" class="control-label">文件</label>

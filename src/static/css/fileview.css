@@ -1,0 +1,14 @@
+img{
+	display: block;
+	margin: auto;
+}
+
+iframe{
+	width: 100%;
+	min-height: 800px;
+}
+
+.file-container{
+	white-space: pre-wrap;
+	word-break: break-all;
+}

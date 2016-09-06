@@ -100,7 +100,7 @@
 		    			<span>简介</span>
 		    		</div>
 		    		<div class="project-intro-container">
-		    			Adobe Illustrator是Adobe系统公司推出的基于矢量的图形制作软件Adobe Illustrator是Adobe Adobe Illustrator是Adobe系统公司推出的基于矢量的图形制作软件Adobe Illustrator是Adobe Adobe Illustrator是Adobe系统公司推出的基于矢量的图形制作软件Adobe Illustrator是Adobe
+		    			
 		    		</div>
 		    	</div>
 
@@ -110,7 +110,7 @@
 		    		</div>
 
 		    		<div class="project-links-container">
-	    		 		<a class="project-link">github<span class="link-address">
+	    		 		<!-- <a class="project-link">github<span class="link-address">
 	    		 			https://github.com/bobxwu/a.git
 	    		 		</span></a>
 						<a class="project-link">github<span class="link-address">
@@ -118,32 +118,28 @@
 	    		 		</span></a>
 						<a class="project-link">github<span class="link-address">
 	    		 			https://github.com/bobxwu/a.git
-	    		 		</span></a>
+	    		 		</span></a> -->
 	    
 	    		 	</div>
 
 		    	</div>
 
-		    	<div class="project-files-wrapper">
-		    		<div class="title-wrapper">
-		    			<span>所有文件</span>
-		    		</div>
+			    <div class="project-files-wrapper">
+			    	<div class="title-wrapper">
+			    			<span>所有文件</span>
+			    	</div>
 
-		    		<div class="project-files-container">
-		    			<ul class="breadcrumb" >
-  							<li><a href="javascript:void(0)">Home</a></li>
-  							<li><a href="javascript:void(0)">Library</a></li>
-  							<li class="active">Data</li>
-						</ul>
-
-						<div class="project-files">
-							
+			    	<div class="project-files-container">
+			            <div class="clearfix">
+				            <ul class="file-catalog breadcrumb" >
+							</ul>
 						</div>
-		    		</div>
+			            <ul class="file-list">
+			            		
+			            </ul>
+		            </div>
 		    	</div>
 	    	</div>
-
-	    	
 	    </div>
 
 		<div class="comment-container well">
@@ -152,8 +148,8 @@
 			</div>
 			<div class="comment-list-container">
 				<ul class="comment-list">
-					<li class="comment-item">
-						<div class="item-title clearfix">
+					<!-- <li class="comment-item">
+						<div id="" class="item-title clearfix">
 							<div class="title-left commenter-icon">
 								<img src="static/res/image/icon.png" alt="">
 							</div>
@@ -225,13 +221,27 @@
 						             <button type="submit" class="btn btn-primary reply-btn">回复</button>
 								</div>
 						</div>
-
 						<div class="item-bottom clearfix">
 							<button type="submit" class="btn btn-primary more-comment-btn">查看更多回复
 							</button>
 						</div>
-					</li>
+					</li> -->
 				</ul>
+				<!-- <ul class="pager">
+                	<li id="prev-btn" class="disabled"><a class="withripple" href="javascript:void(0)">上一页</a></li>
+                	<li id="next-btn" class=""><a class="withripple" href="javascript:void(0)">下一页</a></li>
+            	</ul> -->
+			</div>
+			<div class="comment-input-container">
+				<div class="comment-input-wrapper form-group is-empty">
+					<label for="textArea" class="control-label">发表评论
+					</label>
+					<textarea id="comment-input" class="form-control" maxlength="150" rows="3"></textarea>
+					<span class="help-block">不超过150字</span>
+				</div>
+				<div class="comment-btn-wrapper clearfix">
+					<a class="btn btn-raised btn-primary" id="comment-publish-btn">发表<div class="ripple-container"></div></a>
+				</div>
 			</div>
 		</div>
 		
