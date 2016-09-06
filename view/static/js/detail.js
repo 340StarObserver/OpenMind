@@ -8,9 +8,6 @@ var proj_id,
 var tree = new Tree();
 var pointer = tree.root_node;
 
-// var labels = [];
-// var links = [];
-
 var example = {
 	"_id" : 1,
 	"proj_name" : "Bilibili guichu",
@@ -25,12 +22,12 @@ var example = {
 	],
 	'introduction' : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\r\naaaaaaaa",
 	'shares':[{
-		'name': 'docs/a.jpg','time':'1','url':'asdf'
+		'name': 'docs/a.jpg','time':'1','url':'http://openmind.oss-cn-shanghai.aliyuncs.com/userimages/20160828/14723669411n62i20r.jpg'
 		},
 		{
-			'name': 'docs/new/a.jpg','time':'1','url':'asdf'
+			'name': 'docs/new/a.pdf','time':'1','url':'http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/1473056696LvYangshehuishijian.pdf'
 		},{
-			'name': 'this.jpg','time':'1','url':'asdf'
+			'name': 'a.txt','time':'1','url':'http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/git-branch.txt'
 		}
 	],
 
@@ -168,9 +165,9 @@ var cReturn = {
 
 $(document).ready(function() {
 
-	init();
+	// init();
 
-	// showProjDetail( example );
+	showProjDetail( example );
 
 	$(".project-link").hover(function() {
 		var address = $(this).attr('href');
@@ -275,7 +272,7 @@ $(document).ready(function() {
 		changeFileConstruct( path );
 	});
 
-	$(document).on('click', '.file-item-name', function(event) {
+	$(document).on('click', '.file-item-name.directory', function(event) {
 		var item_name = $(this).text();
 		// console.log("pointer.path" + pointer.path );
 		var path = pointer.path +"/"+ item_name; // /docs/image
@@ -283,6 +280,18 @@ $(document).ready(function() {
 
 		console.log( "path"+path );
 		changeFileConstruct(path);
+
+	});
+
+	$(document).on('click', '.file-item-name.file', function(event) {
+		var item_name = $(this).text();
+		var path = pointer.path +"/"+ item_name; // /docs/image
+		path = path.substring(1);
+		
+		var node = tree.find(path);   //   docs/image
+		var fileUrl = node.url;
+
+		location.href = 'fileview.html?fileUrl='+fileUrl;
 
 	});
 
@@ -308,7 +317,7 @@ function dealProjDetailReturn(data){
 
 function showProjDetail(project){
 	$(".project-name").text(project['proj_name']);
-	
+	$(".project-pub-time").text( formatDate( project['pub_time'] ) );
 	var labels = project["labels"],
 		html="";
 
@@ -395,7 +404,7 @@ function addHeadComment(comment, index){
 											'<span class="commenter-username">'+ comment['send_usr'] +'</span>发表评论:'+
 									'</div>'+
 									'<div class="comment-time">'+
-											dateFormat(comment['time'])+
+											formatDateHM(comment['time'])+
 									'</div>'+
 								'</div>'+
 								'<div class="comment-content">'+
@@ -425,15 +434,18 @@ function addHeadComment(comment, index){
 }
 
 function addFollowComment(comment){
+	if( comment['send_head'] == '0' )
+		comment['send_head'] = '../static/res/image/icon.png';
+
 	var html = '<li id="'+ comment['id'] +'" class="follow-item clearfix">'+
 									'<div class="item-left">'+
-										'<span class="child-commenter">'+ comment['send_usr'] +'</span>回复<span class="parent-commenter">'+ comment['recv_usr'] +'</span>'+
+									'<img alt="icon" src="'+ comment['send_head'] +'"><span class="child-commenter">'+ comment['send_usr'] +'</span>回复<span class="parent-commenter">'+ comment['recv_usr'] +'</span>'+
 										'<span class="comment-content">'+ comment['content'] +'</span>'+
 									'</div>'+
 									'<div class="item-right">'+
 										'<span class="item-reply-btn">回复</span>'+
 										'<span class="comment-time">'+
-											dateFormat( comment['time'] )+
+											formatDateHM( comment['time'] )+
 										'</span>'+
 									'</div>'+
 								'</li>';

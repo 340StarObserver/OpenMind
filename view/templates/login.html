@@ -26,24 +26,20 @@
 
 <body>
 	<!-- 导航栏 -->
-	<nav role="navigation" class="navbar clearfix">
-		<div class="navbar-header clearfix">
-			<img src="../static/res/image/openmind-icon.png" alt="openmind-icon">
-		</div>
-		
-		<div class="warning-tips">
-			<a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
-		</div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+                <a class="navbar-brand" href="javascript:void(0)"><img src="../static/res/image/openmind-icon.png" alt="openmind-icon"></a>
 
-		<ul class="nav-list">
-			<li class="nav-list-item home">
-				<a href="home.html" data-toggle="tab" aria-expanded="true">首页</a>
-			</li>
-		</ul>
-		
-		<a href="javascript:void(0)" class="btn btn-raised btn-primary" id="signup-toggle-btn">注册<div class="ripple-container"></div></a>
-	</nav>
-	
+            </div>
+
+            <div class="warning-tips">
+                <a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
+            </div>
+
+            <a href="javascript:void(0)" class="btn btn-raised btn-primary" id="signup-toggle-btn">登录</a>
+        </div>
+    </nav>
 
 	<!-- 登录框和注册框部分 -->
 	<article class="container">
@@ -127,16 +123,7 @@
                   </select>
                 </div>
              </div>
-			 
-			 <div class="form-group is-empty is-fileinput ">
-                <label for="inputFile" class="control-label">头像(请勿超过200KB)</label>
-
-                <div class="">
-                  <input type="text" readonly="" class="form-control"  placeholder="Browse...">
-                  <input type="file" id="signup-headIcon-input" multiple="">
-                </div>
-            </div>
-
+			
           </form>
 
           <div class="signup-btn-wrapper"><a href="javascript:void(0)" class="btn btn-raised btn-primary" id="signup-btn">注册</a>

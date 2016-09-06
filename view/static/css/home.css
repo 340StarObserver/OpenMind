@@ -5,7 +5,6 @@
 
 .login-btn{
 	float: right;
-	/*margin: 7px auto;*/
 }
 
 .browse-title{
@@ -59,7 +58,11 @@ i.fa{
 	border-top: .5px solid rgba(0,0,0,.5);
 	font-size: 1.2em;
 	font-weight: 400;
+}
+
+.brief-intro{
 	word-break: break-all;
+	white-space: pre-wrap;
 }
 
 .author-info{

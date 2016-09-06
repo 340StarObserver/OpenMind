@@ -1,4 +1,20 @@
 $(document).ready(function() {
+
+	//查看是否有cookie
+	if( getCookie("token") != null ){
+		//显示用户名
+		var username = getCookie('username');
+	
+		$('.navbar-username').html(username+'<b class="caret"></b>');
+		$('.navbar .login-btn').remove();
+	}else{
+	
+		$('.navbar-header').css('float', 'left');
+		$('.navbar-collapse.collapse').remove();
+		$('.navbar-header .navbar-toggle').remove();
+		$('.navbar .login-btn').show();	
+	}
+
 	//取消.btn点击后的自动获取焦点
 	$(document).on('click', '.btn', function(event) {
 		$(this).blur();	
@@ -39,8 +55,21 @@ function hideWarningTips(){
 }
 
 //时间戳转yyyy-mm-dd;
-function dateFormat(nS) {     
+function formatDate(nS) {     
    return new Date(parseInt(nS*1000)).toLocaleString().split(" ")[0].replace(/\//g,"-");
+}
+
+//时间戳转yyyy-mm-dd hh-mm
+function formatDateHM(nS){
+
+	var date = new Date(parseInt(nS*1000));
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	var day = date.getDate();
+	var h = date.getHours();
+	var m = date.getMinutes();
+
+	return year+'-'+month+'-'+day+' '+h+':'+m;
 }
 
 //判断是否是图片文件
@@ -217,4 +246,20 @@ function Node(){
 	this.path = "";
 	this.leaf = false;
 	this.url="";
+}
+
+function getSuffix(url){
+	
+	var filename = getFilename(url);
+	var names = filename.split('.');
+	var suffix = names[ names.length-1 ];
+	// console.log( suffix );
+
+	return suffix;
+}
+
+function getFilename(url){
+	var urls = url.split('/');
+	var filename = urls[ urls.length-1 ];
+	return filename;
 }

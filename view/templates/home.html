@@ -32,40 +32,49 @@
 </head>
 <body>
 	<!-- 导航栏 -->
-	<nav class="navbar">
-        <div class="navbar-header">
-            <img class="navbar-brand" src="../static/res/image/openmind-icon.png" alt="openmind-icon">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
 
-			
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)"><img src="../static/res/image/openmind-icon.png" alt="openmind-icon"></a>
+
+            </div>
+
+            <div class="warning-tips">
+                <a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
+            </div>
+
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="javascript:void(0)">首页</a></li>
+                  <li id="management-btn"><a href="javascript:void(0)">管理项目</a></li>
+                  <li id="newproj-btn"><a href="newproj.html">发布项目</a></li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                      <div class="form-group is-empty">
+                        <input type="text" class="form-control col-md-8" placeholder="Search">
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" data-target="#" class="dropdown-toggle navbar-username" data-toggle="dropdown" aria-expanded="false">wuxiaobao<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:void(0)">活跃记录</a></li>
+                            <li><a href="javascript:void(0)">修改个人信息</a></li>
+                            <li class="divider"></li>
+                            <li><a href="javascript:void(0)">注销</a></li>
+                          </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <a href="javascript:void(0)" class="btn btn-raised btn-primary login-btn">登录</a>
         </div>
-        
-        <div class="warning-tips">
-			<a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
-	    </div>
-
-        <div class="nav-list">
-        <!-- <div class="nav-list navbar-collapse collapse navbar-responsive-collapse"> -->
-            <ul class="nav navbar-nav">
-                <li class="active">
-                <a href="javascript:void(0)">首页</a></li>
-                <li><a href="javascript:void(0)">管理项目</a></li>
-                <li><a href="javascript:void(0)"><i class="fa fa-plus">发布新项目</i></a></li>
-                  
-            </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group is-empty">
-                	<input type="text" class="form-control col-md-8" placeholder="Search">
-                </div>
-            </form>	
-            <div class="navbar-username"></div>
-        </div>
-
-         <a href="login.html" class="btn btn-raised btn-primary login-btn" >登录<div class="ripple-container"></div></a>
     </nav>
 
     <!-- 项目内容主体 -->
@@ -83,48 +92,7 @@
     			
     		</div>
     		<ul class="project-list">
-    			<li class="panel panel-default project-list-item">
-    				<div class="panel-body">
-    					<div class="item-title-wrapper clearfix">
-    						<div class="item-title-left">
-    							<span class="project-name">Adobe Illustrator</span>
-    							<span class="project-label label label-info">Info</span>
-    							<span class="project-label label label-info">Info</span>
-    						</div>
-    						
-    						<div class="item-title-right">
-    							<span class="create-time">
-    								2016-8-22
-    							</span>
-                                <!-- <button id="vote-btn">
-                                    <i class="fa fa-thumbs-o-up">120</i>
-                                </button> -->
-
-                                <a href="javascript:void(0)" id="vote-btn" class="btn btn-sup btn.raised btn-material-brown ">
-                                    <i class="fa fa-thumbs-o-up">123</i>
-                                   
-                                 <!--  <div class="ripple-container"></div> --></a>
-
-    						</div>
-
-    					</div>
-                        
-                        <div class="brief-intro-wrapper clearfix">
-                            <div class="author-info">
-                                <img class="author-icon" src="../static/res/image/icon.png" alt="author-icon">
-                                
-                                <div class="author-name">
-                                    作者
-                                </div>
-                            </div>
-
-                            <div class="brief-intro">
-                            Adobe Illustrator是Adobe系统公司推出的基于矢量的图形制作软件Adobe Illustrator是Adobe Adobe Illustrator是Adobe系统公司推出的基于矢量的图形制作软件Adobe Illustrator是Adobe Adobe Illustrator是Adobe系统公司推出的基于矢量的图形制作软件Adobe Illustrator是Adobe
-                            </div>
-                        </div>
-    					
-    				</div>
-    			</li>
+    			
     		</ul>
 
             <!-- 分页 -->

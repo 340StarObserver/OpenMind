@@ -1,0 +1,13 @@
+head urls :
+http://openmind.oss-cn-shanghai.aliyuncs.com/userimages/20160828/1472347514qtwy2br6.jpg
+http://openmind.oss-cn-shanghai.aliyuncs.com/userimages/20160828/1472353153ahvhphv9.jpg
+http://openmind.oss-cn-shanghai.aliyuncs.com/userimages/20160828/14723669411n62i20r.jpg
+
+shared files :
+http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/1473038178LvYang28001.conf
+http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/1473038178LvYanginit.sh
+http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/1473056695LvYangredis-cluster.md
+http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/1473056696LvYangshehuishijian.pdf
+http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/HashStrategy.cpp
+http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/HashPool.h
+http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/git-branch.txt

@@ -31,38 +31,45 @@
 </head>
 <body>
 	<!-- 导航栏 -->
-	<nav class="navbar">
-        <div class="navbar-header">
-            <img class="navbar-brand" src="../static/res/image/openmind-icon.png" alt="openmind-icon">
-			<!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button> -->
+	<nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)"><img src="../static/res/image/openmind-icon.png" alt="openmind-icon"></a>
+            </div>
 
-			
+            <div class="warning-tips">
+                <a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
+            </div>
+
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="javascript:void(0)">首页</a></li>
+                  <li id="management-btn"><a href="javascript:void(0)">管理项目</a></li>
+                  <li id="newproj-btn"><a href="newproj.html">发布项目</a></li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                      <div class="form-group is-empty">
+                        <input type="text" class="form-control col-md-8" placeholder="Search">
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">wuxiaobao<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:void(0)">活跃记录</a></li>
+                            <li><a href="javascript:void(0)">修改个人信息</a></li>
+                            <li class="divider"></li>
+                            <li><a href="javascript:void(0)">注销</a></li>
+                          </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-        
-        <div class="warning-tips">
-			<a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
-	    </div>
-
-        <div class="nav-list">
-        <!-- <div class="nav-list navbar-collapse collapse navbar-responsive-collapse"> -->
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="javascript:void(0)">首页</a></li>
-                <li><a href="javascript:void(0)">管理项目</a></li>
-                  
-            </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group is-empty">
-                	<input type="text" class="form-control col-md-8" placeholder="Search">
-                </div>
-            </form>	
-            <div class="navbar-username"></div>
-        </div>
-
-        <a href="login.html" class="btn btn-raised btn-primary login-btn" >登录<div class="ripple-container"></div></a>
     </nav>
 
     <article class="container">
@@ -135,13 +142,7 @@
 
 	            	<div class="clearfix">
 		            	<ul class="file-catalog breadcrumb" >
-	  							<!-- <li><a class="catalog-item" href="javascript:void(0)">Home</a></li>
-	  							<li><a class="catalog-item" href="javascript:void(0)">Library</a></li> -->
-	  							<!-- <li class="catalog-root active">..</li> -->
 						</ul>
-
-						
-
 					</div>
 					<div class="file-btn-group-container clearfix">
 						<div class="file-btn-group">
@@ -160,6 +161,7 @@
 	            		</li> -->
 	            	</ul>
 	            </div>
+	            
 	            <div class="publish-btn-wrapper">
 					<a id="publish-btn" href="javascript:void(0)" class="btn btn-raised btn-primary">发布</a>
 				</div>

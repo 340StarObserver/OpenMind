@@ -70,6 +70,10 @@ def index():
 def home():
     return flask.render_template("home.html")
 
+# home page
+@Server_App.route("/test1",methods=['GET'])
+def test1():
+    return flask.render_template("test.html")
 
 # detail page
 @Server_App.route("/detail",methods=['GET'])

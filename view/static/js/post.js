@@ -449,3 +449,26 @@ function voteForProjPost(id){
 	  }
 	});
 }
+
+function fileGet(fileUrl){
+	
+	//如果是.md, .txt, .jpg, .png文件
+	jQuery.ajax({
+	  url: fileUrl,
+	  type: 'GET',
+	  
+	  beforeSend: function(xhr, textStatus) {
+	    //gif加载动画
+	    // $('.container').html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
+	  },
+	  success: function(data, textStatus, xhr) {
+	  	dealFileReturn(data);
+	  	
+	  },
+	  error: function(xhr, textStatus, errorThrown) {
+	    showWarningTips(textStatus);
+	    alert('没有找到文件');
+	    window.close();
+	  }
+	});
+}

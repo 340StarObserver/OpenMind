@@ -45,24 +45,6 @@
 	content: "\f093"
 }
 
-.file-list>li{
-	padding: 8px;
-	color: #4078c0;
-}
-
-.file-list>li:nth-child(odd){
-	background-color: #deeffa;
-	
-}
-
-.file-list>li:nth-child(even){
-	background-color: #fafafa;
-}
-
-.catalog-root{
-	padding: 5px 10px;
-}
-
 .project-label{
 	display: inline-block;
 	padding: 5px 20px;
@@ -133,17 +115,6 @@
 	margin: auto;
 }
 
-.catalog-root,
-.catalog-item-name,
-.file-item-name.directory{
-	cursor: pointer;
-}
-
-.catalog-root:hover,
-.catalog-item-name:hover,
-.file-item-name.directory:hover{
-	opacity: .5;
-}
 
 .file-item-name::before{
 	margin-right: 5px;

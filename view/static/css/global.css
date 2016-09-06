@@ -12,7 +12,7 @@ article{
 	max-width: 850px;
 }
 
-.navbar{
+nav.navbar.navbar-default{
 	background-color: #263238;
 	padding: 0 15px;
 	position: fixed;
@@ -23,6 +23,12 @@ article{
 	font-size: 1em;
 }
 
+
+.navbar .navbar-brand{
+	padding: 0;
+	margin-right: 20px;
+}
+
 .navbar.shadow-bottom{
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,.50);
 }
@@ -31,22 +37,8 @@ article{
 	margin: 0 auto;
 }
 
-.navbar-header img{
-	display: block;
-	float: left;
-}
-
-.nav-list{
-	margin: 0 0 0 20px;
-	line-height: 43px;
-}
-
-.nav-list-item>a{
-	color: white;
-}
-
-.navbar-username{
-	float: right;
+.navbar .navbar-nav .dropdown .dropdown-toggle:after{
+	display: none;
 }
 
 .login-btn{
@@ -79,6 +71,10 @@ article{
 	visibility: hidden;
 }
 
+#newproj-btn>a::before{
+	content: "\f067";
+}
+
 .tooltip{
 	display: none;
 	position: absolute;
@@ -93,7 +89,8 @@ article{
 	margin-bottom: 10px;
 }
 
-.title-wrapper::before{
+.title-wrapper::before,
+#newproj-btn>a::before{
 	font-family: "FontAwesome";
 }
 
@@ -156,12 +153,6 @@ footer{
 	margin-bottom: 10px;
 }
 
-@media screen and (max-width: 770px){
-	.navbar-username{
-		float: none;
-	}
-}
-
 @media screen and (max-width: 400px) {
 	body{
 		font-size: 8px;
@@ -180,9 +171,5 @@ footer{
 		margin: 50px 0 0;
 		padding: 0;
 		width: 100%;
-	}
-
-	.nav-list{
-		margin-left: 0;
 	}
 }
