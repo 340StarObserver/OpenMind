@@ -15,13 +15,15 @@ import java.io.InputStream;
 /**
  * Created by Administrator on 2016/9/3.
  */
-public class HttpGetRunnable implements Runnable{
+public class HttpGetPictureRunnable implements Runnable {
     Bitmap pic;
+    String pname;
+    String path;
+
     public Bitmap getPic() {
         return pic;
     }
-    String pname;
-    String path;
+
     public void setName(String name) {this.pname = name;}
     public void setPath(String path) {
         this.path = path;

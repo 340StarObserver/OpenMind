@@ -38,7 +38,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PictureViewActivity"></activity>
+        <activity android:name=".PictureViewActivity" />
+        <activity android:name=".TextFileViewActivity" />
+        <activity android:name=".MarkdownViewActivity"></activity>
     </application>
 
 </manifest>

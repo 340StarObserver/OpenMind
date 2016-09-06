@@ -17,9 +17,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -239,7 +236,7 @@ public class HttpPostRunnable implements Runnable{
                             e.printStackTrace();
                         }
                         /**读取服务器返回过来的json字符串数据**/
-                        strResult = EntityUtils.toString(response.getEntity());
+                        strResult = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
                         Log.d("strResult", strResult);
                     } catch (IllegalStateException e) {
                         // TODO Auto-generated catch block

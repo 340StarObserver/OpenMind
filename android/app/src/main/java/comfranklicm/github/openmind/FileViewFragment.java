@@ -1,5 +1,7 @@
 package comfranklicm.github.openmind;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -94,9 +97,15 @@ public class FileViewFragment extends Fragment{
                                 Log.d("curpath", tree.getCurPath());
                                 route.setText(tree.getCurPath());
                             } else {
-                                String[] s = tree.getCurNode().getChildList().get(position - 1).getFileName().split(".");
-                                String route = tree.getCurPath().substring(4) + "/" + tree.getCurNode().getChildList().get(position - 1).getFileName();
+                                String route = null;
+                                if (!tree.getCurPath().equals("...")) {
+                                    route = tree.getCurPath().substring(4) + "/" + tree.getCurNode().getChildList().get(position - 1).getFileName();
+                                } else {
+                                    route = tree.getCurNode().getChildList().get(position - 1).getFileName();
+                                }
                                 Log.d("route", route);
+                                String[] s = route.split("\\.");
+                                Log.d("s", Arrays.toString(s));
                                 String url = null;
                                 for (int j = 0; j < User.getInstance().getCurrentProject().getShareList().size(); j++) {
                                     if (User.getInstance().getCurrentProject().getShareList().get(j).getName().contains(route)) {
@@ -104,15 +113,26 @@ public class FileViewFragment extends Fragment{
                                         break;
                                     }
                                 }
+                                User.getInstance().setFileUrl(url);
                                 Log.d("routeurl", url);
                                 if (pictureType.contains(s[1])) {
-
-
+                                    Log.d("routetype", "picture");
+                                    Intent intent = new Intent(getActivity(), PictureViewActivity.class);
+                                    startActivity(intent);
                                 } else if (textType.contains(s[1])) {
-
-
+                                    Log.d("routeurl", "text");
+                                    Intent intent = new Intent(getActivity(), TextFileViewActivity.class);
+                                    startActivity(intent);
                                 } else if (markDown.contains(s[1])) {
-
+                                    Log.d("routeurl", "markdown");
+                                    Intent intent = new Intent(getActivity(), MarkdownViewActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Intent intent = new Intent();
+                                    intent.setAction("android.intent.action.VIEW");
+                                    Uri content_url = Uri.parse(User.getInstance().getFileUrl());
+                                    intent.setData(content_url);
+                                    startActivity(intent);
                                 }
                             }
                         }

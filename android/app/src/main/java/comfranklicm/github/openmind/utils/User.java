@@ -24,18 +24,22 @@ import comfranklicm.github.openmind.MyActivity;
  * 用户信息封装，User单例
  */
 public class User {
-    private String userName;
-    private String passWord;
-    private String realName;
-    private String department;
-    private String registerTime;
-    private String voteNumber;
+    //为了实现每次使用该类时不创建新的对象而创建的静态对象
+    private static User userInstance;
     public List<ProjectInfo>allinfos=new ArrayList<ProjectInfo>();
     public List<ProjectInfo>voteinfos=new ArrayList<ProjectInfo>();
     public List<ProjectInfo>owninfos=new ArrayList<ProjectInfo>();
     public List<ActiveInfo>ownactives=new ArrayList<ActiveInfo>();
     public List<AboutMe>aboutMeList=new ArrayList<AboutMe>();
     public List<BaseJsonParser>baseJsonParsers=new ArrayList<BaseJsonParser>();
+    public List<Comment> currentParentComments = new ArrayList<Comment>();
+    public List<Comment> currentChildComments = new ArrayList<Comment>();
+    private String userName;
+    private String passWord;
+    private String realName;
+    private String department;
+    private String registerTime;
+    private String voteNumber;
     private boolean isLogin=false;
     private String pictureLink;
     private MyActivity myActivity;//add by lyy 2016.9.1
@@ -56,12 +60,9 @@ public class User {
     private Integer pageNumber;
     private String  minimumTime;
     private boolean isLastLogin=false;
-    //为了实现每次使用该类时不创建新的对象而创建的静态对象
-    private static User userInstance;
     private Integer returnCount=0;
     private Comment currentParentComment;
-    public List<Comment> currentParentComments=new ArrayList<Comment>();
-    public List<Comment> currentChildComments=new ArrayList<Comment>();
+    private String fileUrl;
     //构造方法私有化
     private User(){}
 
@@ -314,6 +315,14 @@ public class User {
 
     public void setCurrentParentComment(Comment currentParentComment) {
         this.currentParentComment = currentParentComment;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
     }
 }
 

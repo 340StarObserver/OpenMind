@@ -54,4 +54,6 @@ dependencies {
 
     // 仅支持 WebP 静态图，需要添加
     compile 'com.facebook.fresco:webpsupport:0.12.0'
+    compile 'me.relex:photodraweeview:1.1.0'
+    compile 'us.feras.mdv:markdownview:1.1.0'
 }

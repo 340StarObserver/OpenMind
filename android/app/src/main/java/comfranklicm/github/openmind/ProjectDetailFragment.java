@@ -1,44 +1,29 @@
 package comfranklicm.github.openmind;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.ArrayList;
-
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import comfranklicm.github.openmind.Httprequests.HttpGetRunnable;
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
-import comfranklicm.github.openmind.JsonParsing.JsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewProjectDetailJsonParser;
 import comfranklicm.github.openmind.utils.User;
-import comfranklicm.github.openmind.CommentsListViewAdapter;
 
 /**
  * Created by Lyy on 2016/9/1.
@@ -213,7 +198,7 @@ public class ProjectDetailFragment extends Fragment {
                             public void onClick(View v) {
                                 Intent intent = new Intent();
                                 intent.setAction("android.intent.action.VIEW");
-                                Uri content_url = Uri.parse("http://" + User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
+                                Uri content_url = Uri.parse(User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
                                 intent.setData(content_url);
                                 startActivity(intent);
                             }

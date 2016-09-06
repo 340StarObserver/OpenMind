@@ -1,9 +1,9 @@
 package comfranklicm.github.openmind;
 
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +45,7 @@ public class ChildCommentListFragment extends Fragment{
         childCommentListView=(ListView)view.findViewById(R.id.child_listview);
         backbtn=(TextView)view.findViewById(R.id.backbtn);
         childNum=(TextView)view.findViewById(R.id.childnum);
-        parentname.setText(User.getInstance().getCurrentParentComment().getSendName() + "(" + User.getInstance().getCurrentParentComment().getSendUser() + ")");
+        parentname.setText(User.getInstance().getCurrentParentComment().getSendName());
         parentcontent.setText(User.getInstance().getCurrentParentComment().getContent());
         Uri uri=Uri.parse(User.getInstance().getCurrentParentComment().getSendHead());
         parenthead.setImageURI(uri);
@@ -79,7 +79,7 @@ public class ChildCommentListFragment extends Fragment{
                     Uri uri=Uri.parse("file:///android_asset/image/head.jpg");
                     map.put("head_image_view",uri);
                 }
-                map.put("user_name", User.getInstance().currentChildComments.get(i).getSendName());
+                    map.put("user_name", User.getInstance().currentChildComments.get(i).getSendName() + " 回复 " + User.getInstance().currentChildComments.get(i).getReceiveName());
                 map.put("comment_floor","");
                 map.put("comment_date", User.getInstance().currentChildComments.get(i).getTime());
                 map.put("comment_content", User.getInstance().currentChildComments.get(i).getContent());
