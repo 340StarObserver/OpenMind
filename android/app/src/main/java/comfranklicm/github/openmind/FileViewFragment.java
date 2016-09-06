@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,6 +36,9 @@ public class FileViewFragment extends Fragment{
     List<String>filePathList=new ArrayList<String>();
     Integer layerNumber;
     ManyTreeNode manyTreeNode;
+    String pictureType = ".png.jpg.webp.gif.bmp.jpeg";
+    String textType = ".txt.c.cpp.php.java.asp.net.jsp.js.css.html.cc.m.mm.h.xml.hlp.conf.sh.bat";
+    String markDown = ".md";
     ManyNodeTree tree=new ManyNodeTree();
     @Nullable
     @Override
@@ -48,6 +50,10 @@ public class FileViewFragment extends Fragment{
         backtoprojectdetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (User.getInstance().currentChildComments.size() != 0) {
+                    User.getInstance().currentChildComments.clear();
+                    User.getInstance().currentParentComments.clear();
+                }
                 MyActivity activity = (MyActivity) getActivity();
                 activity.transactiontoProjectDetail();
             }
@@ -87,6 +93,27 @@ public class FileViewFragment extends Fragment{
                                 fileListViewAdapter.notifyDataSetChanged();
                                 Log.d("curpath", tree.getCurPath());
                                 route.setText(tree.getCurPath());
+                            } else {
+                                String[] s = tree.getCurNode().getChildList().get(position - 1).getFileName().split(".");
+                                String route = tree.getCurPath().substring(4) + "/" + tree.getCurNode().getChildList().get(position - 1).getFileName();
+                                Log.d("route", route);
+                                String url = null;
+                                for (int j = 0; j < User.getInstance().getCurrentProject().getShareList().size(); j++) {
+                                    if (User.getInstance().getCurrentProject().getShareList().get(j).getName().contains(route)) {
+                                        url = User.getInstance().getCurrentProject().getShareList().get(j).getUrl();
+                                        break;
+                                    }
+                                }
+                                Log.d("routeurl", url);
+                                if (pictureType.contains(s[1])) {
+
+
+                                } else if (textType.contains(s[1])) {
+
+
+                                } else if (markDown.contains(s[1])) {
+
+                                }
                             }
                         }
                         break;
