@@ -5,8 +5,8 @@ $(document).ready(function() {
 		//显示用户名
 		var username = getCookie('username');
 	
-		$('.navbar-username').html(username+'<b class="caret"></b>');
-		$('.navbar .login-btn').remove();
+		$('#navbar-username').html(username+'<b class="caret"></b>');
+		$('#navbar-login-btn').remove();
 	}else{
 	
 		$('.navbar-header').css('float', 'left');

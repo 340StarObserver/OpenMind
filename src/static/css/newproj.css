@@ -8,7 +8,10 @@
 
 .project-form-container{
 	padding: 20px 100px;
+}
 
+.form-group label.control-label{
+	font-size: 1.4em;
 }
 
 .title{

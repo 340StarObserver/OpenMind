@@ -41,7 +41,7 @@ nav.navbar.navbar-default{
 	display: none;
 }
 
-.login-btn{
+#navbar-login-btn{
 	float: right;
 	
 }
