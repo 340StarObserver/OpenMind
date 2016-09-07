@@ -333,5 +333,15 @@ public class User {
     public void setCommentadded(Comment commentadded) {
         Commentadded = commentadded;
     }
+
+    //根据日期来获取当月的活跃记录 add by lyy 2016-9-5
+    public ActiveInfo getActiveInfo(String date) {
+        for (int i = 0; i < ownactives.size(); i++) {
+            if (ownactives.get(i).getMonth().equals(date)) {
+                return ownactives.get(i);
+            }
+        }
+        return null;
+    }
 }
 
