@@ -33,7 +33,7 @@ import comfranklicm.github.openmind.utils.User;
  */
 public class CommentsListViewAdapter extends BaseAdapter{
     private Context context;                        //运行上下文
-    private List<Map<String, Object>> listItems;    //商品信息集合
+    public List<Map<String, Object>> listItems;    //商品信息集合
     private LayoutInflater listContainer;           //视图容器
     //private boolean[] hasChecked;                   //记录商品选中状态
     final class CommentsListView{                //自定义控件集合

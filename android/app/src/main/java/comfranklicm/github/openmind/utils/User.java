@@ -63,6 +63,7 @@ public class User {
     private Integer returnCount=0;
     private Comment currentParentComment;
     private String fileUrl;
+    private Comment Commentadded;
     //构造方法私有化
     private User(){}
 
@@ -323,6 +324,14 @@ public class User {
 
     public void setFileUrl(String fileUrl) {
         this.fileUrl = fileUrl;
+    }
+
+    public Comment getCommentadded() {
+        return Commentadded;
+    }
+
+    public void setCommentadded(Comment commentadded) {
+        Commentadded = commentadded;
     }
 }
 

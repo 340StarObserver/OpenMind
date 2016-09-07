@@ -7,9 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -18,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
+import comfranklicm.github.openmind.JsonParsing.CommentJsonParser;
 import comfranklicm.github.openmind.utils.User;
 
 /**
@@ -31,9 +38,12 @@ public class ChildCommentListFragment extends Fragment{
     TextView parentcontent;
     TextView childNum;
     SimpleDraweeView parenthead;
+    Button submitComment;
+    EditText disInputText ;
     ListView childCommentListView;
     ChildCommentListViewAdapter commentsListViewAdapter;
     List<Map<String, Object>> commentsListItems;
+    RelativeLayout relativeLayout,r1_bottom;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +55,11 @@ public class ChildCommentListFragment extends Fragment{
         childCommentListView=(ListView)view.findViewById(R.id.child_listview);
         backbtn=(TextView)view.findViewById(R.id.backbtn);
         childNum=(TextView)view.findViewById(R.id.childnum);
+        relativeLayout=(RelativeLayout)view.findViewById(R.id.RelativeLayout1);
+        r1_bottom=(RelativeLayout)view.findViewById(R.id.rl_bottom);
+        r1_bottom.setVisibility(View.GONE);
+        disInputText=(EditText)view.findViewById(R.id.group_discuss);
+        submitComment=(Button)view.findViewById(R.id.group_discuss_submit);
         parentname.setText(User.getInstance().getCurrentParentComment().getSendName());
         parentcontent.setText(User.getInstance().getCurrentParentComment().getContent());
         Uri uri=Uri.parse(User.getInstance().getCurrentParentComment().getSendHead());
@@ -63,6 +78,121 @@ public class ChildCommentListFragment extends Fragment{
         commentsListViewAdapter=new ChildCommentListViewAdapter(this.getContext(),commentsListItems);
         childCommentListView.setAdapter(commentsListViewAdapter);
         setListViewHeightBasedOnChildren(childCommentListView);
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                r1_bottom.setVisibility(View.VISIBLE);
+                disInputText.setHint("回复 " + User.getInstance().getCurrentParentComment().getSendName());
+                submitComment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!disInputText.getText().toString().equals("")) {
+                            HttpPostRunnable r = new HttpPostRunnable();
+                            r.setActionId(12);
+                            r.setProjectId(User.getInstance().getCurrentProject().getProjectId());
+                            r.setProjectName(User.getInstance().getCurrentProject().getProjectName());
+                            r.setProjectOwnerUser(User.getInstance().getCurrentProject().getOwnUser());
+                            r.setProjectOwnerName(User.getInstance().getCurrentProject().getOwnName());
+                            r.setReceiveuser(User.getInstance().getCurrentParentComment().getSendUser());
+                            r.setReceivename(User.getInstance().getCurrentParentComment().getSendName());
+                            r.setParentId(User.getInstance().getCurrentParentComment().getCommentId());
+                            r.setContent(disInputText.getText().toString());
+                            Thread t = new Thread(r);
+                            t.start();
+                            try {
+                                t.join();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            ((CommentJsonParser) User.getInstance().baseJsonParsers.get(11)).CommentJsonParsing(r.getStrResult());
+                            if (User.getInstance().getCommentResult().equals("true")) {
+                                Map<String, Object> map = new HashMap<String, Object>();
+                                if (!User.getInstance().getCommentadded().getSendHead().equals("0")) {
+                                    Uri imgUri = Uri.parse((User.getInstance().getCommentadded().getSendHead()));
+                                    map.put("head_image_view", imgUri);
+                                } else {
+                                    Uri uri = Uri.parse("file:///android_asset/image/head.jpg");
+                                    map.put("head_image_view", uri);
+                                }
+                                map.put("user_name", User.getInstance().getCommentadded().getSendName() + " 回复 " + User.getInstance().getCommentadded().getReceiveName());
+                                map.put("comment_floor", "");
+                                map.put("comment_date", User.getInstance().getCommentadded().getTime());
+                                map.put("comment_content", User.getInstance().getCommentadded().getContent());
+                                map.put("comment_num", "");
+                                commentsListViewAdapter.listItems.add(map);
+                                childCommentListView.setAdapter(commentsListViewAdapter);
+                                commentsListViewAdapter.notifyDataSetChanged();
+                                setListViewHeightBasedOnChildren(childCommentListView);
+                                r1_bottom.setVisibility(View.GONE);
+                                User.getInstance().currentChildComments.add(User.getInstance().getCommentadded());
+                                User.getInstance().getCurrentParentComment().childCommentCount++;
+                                childNum.setText("相关回复 共" + User.getInstance().getCurrentParentComment().childCommentCount + "条");
+                            } else {
+                                Toast.makeText(getActivity(), "评论失败:" + User.getInstance().getCommentError(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+                });
+            }
+        });
+        childCommentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                r1_bottom.setVisibility(View.VISIBLE);
+                disInputText.setHint("回复 " + User.getInstance().currentChildComments.get(position).getSendName());
+                submitComment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!disInputText.getText().toString().equals("")) {
+                            HttpPostRunnable r = new HttpPostRunnable();
+                            r.setActionId(12);
+                            r.setProjectId(User.getInstance().getCurrentProject().getProjectId());
+                            r.setProjectName(User.getInstance().getCurrentProject().getProjectName());
+                            r.setProjectOwnerUser(User.getInstance().getCurrentProject().getOwnUser());
+                            r.setProjectOwnerName(User.getInstance().getCurrentProject().getOwnName());
+                            r.setReceiveuser(User.getInstance().currentChildComments.get(position).getSendUser());
+                            r.setReceivename(User.getInstance().currentChildComments.get(position).getSendName());
+                            r.setParentId(User.getInstance().currentChildComments.get(position).getParentId());
+                            r.setContent(disInputText.getText().toString());
+                            Thread t = new Thread(r);
+                            t.start();
+                            try {
+                                t.join();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            ((CommentJsonParser) User.getInstance().baseJsonParsers.get(11)).CommentJsonParsing(r.getStrResult());
+                            if (User.getInstance().getCommentResult().equals("true")) {
+                                Map<String, Object> map = new HashMap<String, Object>();
+                                if (!User.getInstance().getCommentadded().getSendHead().equals("0")) {
+                                    Uri imgUri = Uri.parse((User.getInstance().getCommentadded().getSendHead()));
+                                    map.put("head_image_view", imgUri);
+                                } else {
+                                    Uri uri = Uri.parse("file:///android_asset/image/head.jpg");
+                                    map.put("head_image_view", uri);
+                                }
+                                map.put("user_name", User.getInstance().getCommentadded().getSendName() + " 回复 " + User.getInstance().getCommentadded().getReceiveName());
+                                map.put("comment_floor", "");
+                                map.put("comment_date", User.getInstance().getCommentadded().getTime());
+                                map.put("comment_content", User.getInstance().getCommentadded().getContent());
+                                map.put("comment_num", "");
+                                commentsListViewAdapter.listItems.add(map);
+                                childCommentListView.setAdapter(commentsListViewAdapter);
+                                commentsListViewAdapter.notifyDataSetChanged();
+                                setListViewHeightBasedOnChildren(childCommentListView);
+                                r1_bottom.setVisibility(View.GONE);
+                                User.getInstance().currentChildComments.add(User.getInstance().getCommentadded());
+                                User.getInstance().getCurrentParentComment().childCommentCount++;
+                                childNum.setText("相关回复 共" + User.getInstance().getCurrentParentComment().childCommentCount + "条");
+                                disInputText.setText("");
+                            } else {
+                                Toast.makeText(getActivity(), "评论失败:" + User.getInstance().getCommentError(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+                });
+            }
+        });
         return view;
     }
     private List<Map<String, Object>> getListItems() {

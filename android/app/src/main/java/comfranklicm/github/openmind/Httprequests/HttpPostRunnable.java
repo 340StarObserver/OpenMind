@@ -23,12 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comfranklicm.github.openmind.utils.NetUtil;
+import comfranklicm.github.openmind.utils.User;
 
 /**
  * 请求封装
  * action_id:{
  *     1:创建新用户
- *     2:创建新用户
+ *     2:登陆认证
  *     4:注销
  *     7:浏览所有项目的概要信息
  *     8:浏览自己的所有项目的概要信息
@@ -60,6 +61,8 @@ public class HttpPostRunnable implements Runnable{
     private String time_max;//12
     private String strResult;//返回的字符串
     private Context context;
+    private String receiveuser;
+    private String receivename;
 
     @Override
     public void run() {
@@ -164,8 +167,10 @@ public class HttpPostRunnable implements Runnable{
                     NameValuePair pair3 = new BasicNameValuePair("proj_name",projectName);
                     NameValuePair pair4 = new BasicNameValuePair("own_usr",projectOwnerUser);
                     NameValuePair pair5 = new BasicNameValuePair("own_name",projectOwnerName);
-                    NameValuePair pair6 = new BasicNameValuePair("parent_id",parentId);
-                    NameValuePair pair7 = new BasicNameValuePair("content",content);
+                    NameValuePair pair6 = new BasicNameValuePair("recv_usr",receiveuser);
+                    NameValuePair pair7 = new BasicNameValuePair("recv_name",receivename);
+                    NameValuePair pair8 = new BasicNameValuePair("parent_id",parentId);
+                    NameValuePair pair9= new BasicNameValuePair("content",content);
                     pairList.add(pair1);
                     pairList.add(pair2);
                     pairList.add(pair3);
@@ -173,6 +178,8 @@ public class HttpPostRunnable implements Runnable{
                     pairList.add(pair5);
                     pairList.add(pair6);
                     pairList.add(pair7);
+                    pairList.add(pair8);
+                    pairList.add(pair9);
                     break;
                 }
                 /**
@@ -216,25 +223,23 @@ public class HttpPostRunnable implements Runnable{
                 HttpResponse response;
                 HttpEntity requestHttpEntity = new UrlEncodedFormEntity(pairList, HTTP.UTF_8);
                 request.setEntity(requestHttpEntity);
-                if (actionId!=2&&actionId!=1)
+                if (actionId!=2&&actionId!=1&& User.getInstance().isLogin())
                 {
-                    request.setHeader("Cookie",NetUtil.getInstance().getSessionId());
+                    request.setHeader("Cookie", NetUtil.getInstance().getSessionId());
+                    Log.d("sessionid",NetUtil.getInstance().getSessionId());
                 }
                 response = client.execute(request);
                 if (response.getStatusLine().getStatusCode() == 200) {
                     try {
-                        try {
-                            if (actionId == 2&&actionId==5&&actionId==6&&actionId==10) {
+                            if (actionId == 2||actionId==5||actionId==6||actionId==10) {
                                 Header it = response.getFirstHeader("Set-Cookie");
                                 String session = it.toString();
                                 String[] heads = session.split(";");
-                                session = heads[0];
+                                String [] split = heads[0].split(":");
+                                session=split[1];
                                 NetUtil.getInstance().setSessionId(session);
+                                Log.d("sessionid", NetUtil.getInstance().getSessionId());
                             }
-                        }catch (NullPointerException e)
-                        {
-                            e.printStackTrace();
-                        }
                         /**读取服务器返回过来的json字符串数据**/
                         strResult = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
                         Log.d("strResult", strResult);
@@ -403,5 +408,21 @@ public class HttpPostRunnable implements Runnable{
 
     public void setMonth(String month) {
         this.month = month;
+    }
+
+    public String getReceivename() {
+        return receivename;
+    }
+
+    public void setReceivename(String receivename) {
+        this.receivename = receivename;
+    }
+
+    public String getReceiveuser() {
+        return receiveuser;
+    }
+
+    public void setReceiveuser(String receiveuser) {
+        this.receiveuser = receiveuser;
     }
 }

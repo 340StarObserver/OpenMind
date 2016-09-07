@@ -5,14 +5,18 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
+import comfranklicm.github.openmind.JsonParsing.CommentJsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewProjectDetailJsonParser;
 import comfranklicm.github.openmind.utils.User;
 
@@ -37,6 +42,8 @@ public class ProjectDetailFragment extends Fragment {
     //String[] tags = new String[] {"我是中国好儿女", "我是中国好儿女", "我是中国好儿", "我", "我是中国好儿女"};
     CommentsListViewAdapter commentsListViewAdapter;
     List<Map<String, Object>> commentsListItems;
+    Button commentButton,submitComment;
+    EditText disInputText ;
     LinearLayout scalingcontent,scalinglinks,filelayout;
     boolean iscontentscaling=false,islinksscaling=false;
 //    String[] usersname={"吴小宝","李昌懋","吕炀","dd","cc"};
@@ -47,6 +54,11 @@ public class ProjectDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.project_info_layout, container,false);
+        commentButton=(Button)view.findViewById(R.id.button2);
+        disInputText=(EditText)view.findViewById(R.id.group_discuss);
+        disInputText.setVisibility(View.GONE);
+        submitComment=(Button)view.findViewById(R.id.group_discuss_submit);
+        submitComment.setVisibility(View.GONE);
         HttpPostRunnable runnable=new HttpPostRunnable();
         runnable.setActionId(9);
         runnable.setProjectId(User.getInstance().getCurrentProject().getProjectId());
@@ -214,6 +226,67 @@ public class ProjectDetailFragment extends Fragment {
                 }
             }
         });
+        commentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitComment.setVisibility(View.VISIBLE);
+                disInputText.setVisibility(View.VISIBLE);
+                disInputText.setHint("回复 " + User.getInstance().getCurrentProject().getOwnName());
+                disInputText.requestFocus();
+            }
+        });
+        submitComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!disInputText.getText().toString().equals(""))
+                {
+                    HttpPostRunnable r=new HttpPostRunnable();
+                     r.setActionId(12);
+                     r.setProjectId(User.getInstance().getCurrentProject().getProjectId());
+                     r.setProjectName(User.getInstance().getCurrentProject().getProjectName());
+                     r.setProjectOwnerUser(User.getInstance().getCurrentProject().getOwnUser());
+                     r.setProjectOwnerName(User.getInstance().getCurrentProject().getOwnName());
+                     r.setReceiveuser(User.getInstance().getCurrentProject().getOwnUser());
+                     r.setReceivename(User.getInstance().getCurrentProject().getOwnName());
+                     r.setParentId("0");
+                     r.setContent(disInputText.getText().toString());
+                     Thread t=new Thread(r);
+                     t.start();
+                     try {
+                        t.join();
+                     } catch (InterruptedException e) {
+                        e.printStackTrace();
+                     }
+                    ((CommentJsonParser)User.getInstance().baseJsonParsers.get(11)).CommentJsonParsing(r.getStrResult());
+                     if(User.getInstance().getCommentResult().equals("true"))
+                     {
+                         Map<String, Object> map = new HashMap<String, Object>();
+                         if(! User.getInstance().getCommentadded().getSendHead().equals("0")) {
+                             Uri imgUri=Uri.parse((User.getInstance().getCommentadded().getSendHead()));
+                             map.put("head_image_view",imgUri);
+                         }else {
+                             Uri uri=Uri.parse("file:///android_asset/image/head.jpg");
+                             map.put("head_image_view",uri);
+                         }
+                         map.put("user_name", User.getInstance().getCommentadded().getSendName());
+                         map.put("comment_floor",commentsListItems.size()+1);
+                         map.put("comment_date",User.getInstance().getCommentadded().getTime());
+                         map.put("comment_content", User.getInstance().getCommentadded().getContent());
+                         map.put("comment_num", User.getInstance().getCommentadded().childCommentCount);
+                         commentsListViewAdapter.listItems.add(map);
+                         comments_list_view.setAdapter(commentsListViewAdapter);
+                         commentsListViewAdapter.notifyDataSetChanged();
+                         setListViewHeightBasedOnChildren(comments_list_view);
+                         disInputText.setVisibility(View.GONE);
+                         submitComment.setVisibility(View.GONE);
+                         User.getInstance().currentParentComments.add(User.getInstance().getCommentadded());
+                         commentsnum.setText("共" + User.getInstance().currentParentComments.size() + "条评论");
+                     }else {
+                         Toast.makeText(getActivity(),"评论失败:"+User.getInstance().getCommentError(),Toast.LENGTH_LONG).show();
+                     }
+                }
+            }
+        });
         return view;
     }
     private void initlayout() {
@@ -365,17 +438,18 @@ public class ProjectDetailFragment extends Fragment {
             map.put("comment_num", User.getInstance().currentParentComments.get(i).childCommentCount);
            listItems.add(map);
         }
-        }else {
-            Map<String, Object> map = new HashMap<String, Object>();
-            Uri uri=Uri.parse("file:///android_asset/image/head.jpg");
-            map.put("head_image_view",uri);
-            map.put("user_name", "暂无评论");
-            map.put("comment_floor",0);
-            map.put("comment_date", "暂无评论");
-            map.put("comment_content", "暂无评论");
-            map.put("comment_num", 0);
-            listItems.add(map);
         }
+//        else {
+//            Map<String, Object> map = new HashMap<String, Object>();
+//            Uri uri=Uri.parse("file:///android_asset/image/head.jpg");
+//            map.put("head_image_view",uri);
+//            map.put("user_name", "暂无评论");
+//            map.put("comment_floor",0);
+//            map.put("comment_date", "暂无评论");
+//            map.put("comment_content", "暂无评论");
+//            map.put("comment_num", 0);
+//            listItems.add(map);
+//        }
         return listItems;
     }
     public void setListViewHeightBasedOnChildren(ListView listView) {

@@ -55,6 +55,7 @@
                     android:layout_height="wrap_content"
                     android:background="#ffffff"
                     android:id="@+id/RelativeLayout1"
+                    android:descendantFocusability="blocksDescendants"
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
                     android:paddingRight="10dp"
@@ -188,10 +189,40 @@
                     android:layout_alignParentBottom="true"
                     android:layout_below="@+id/childnum"/>
        </RelativeLayout>
-
             </android.support.v7.widget.CardView>
-
-
         </RelativeLayout>
     </ScrollView>
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/group_discuss_submit"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/newcomment_btn_shape"
+            android:text="发送"
+            android:textSize="15sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+        <EditText
+            android:id="@+id/group_discuss"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000"
+            android:cursorVisible="true"
+            android:textCursorDrawable="@null"
+            android:background="@drawable/edit_text_shape"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/group_discuss_submit"
+            android:hint="评论"
+            android:singleLine="true"
+            android:textSize="18sp" >
+            <requestFocus/>
+        </EditText>
+    </RelativeLayout>
 </RelativeLayout>

@@ -9,7 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,15 +42,19 @@ public class FileViewFragment extends Fragment{
     List<String>filePathList=new ArrayList<String>();
     Integer layerNumber;
     ManyTreeNode manyTreeNode;
+
     String pictureType = ".png.jpg.webp.gif.bmp.jpeg";
     String textType = ".txt.c.cpp.php.java.asp.net.jsp.js.css.html.cc.m.mm.h.xml.hlp.conf.sh.bat";
     String markDown = ".md";
     ManyNodeTree tree=new ManyNodeTree();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.file_view_layout,container,false);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         route=(TextView)view.findViewById(R.id.route);
+
         route.setText("...");
         backtoprojectdetail=(TextView)view.findViewById(R.id.backbtn);
         backtoprojectdetail.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +68,7 @@ public class FileViewFragment extends Fragment{
                 activity.transactiontoProjectDetail();
             }
         });
+
         getFilePathTree();
         fileListView=(ListView)view.findViewById(R.id.list_view);
         fileListItems=getListItems();
@@ -69,15 +77,13 @@ public class FileViewFragment extends Fragment{
         fileListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position)
-                {
-                    case 0:{
-                        if(tree.getCurNode().getParentManyTreeNode()!=null)
-                        {
+                switch (position) {
+                    case 0: {
+                        if (tree.getCurNode().getParentManyTreeNode() != null) {
                             //tree.setCurNode(tree.getCurNode().getParentManyTreeNode());
                             tree.back();
-                            fileListItems=getListItems();
-                            fileListViewAdapter.listItems=getListItems();
+                            fileListItems = getListItems();
+                            fileListViewAdapter.listItems = getListItems();
                             //fileListView.setAdapter(fileListViewAdapter);
                             fileListViewAdapter.notifyDataSetChanged();
                             Log.d("curpath", tree.getCurPath());
@@ -85,11 +91,10 @@ public class FileViewFragment extends Fragment{
                         }
                         break;
                     }
-                    default:{
-                        if (tree.getCurNode().getChildList().size()!=0)
-                        {
+                    default: {
+                        if (tree.getCurNode().getChildList().size() != 0) {
                             //tree.setCurNode(tree.getCurNode().getChildList().get(position - 1));
-                            if(!tree.getCurNode().getChildList().get(position - 1).getFileName().contains(".")) {
+                            if (!tree.getCurNode().getChildList().get(position - 1).getFileName().contains(".")) {
                                 tree.enter(tree.getCurPath() + "/" + tree.getCurNode().getChildList().get(position - 1).getFileName());
                                 fileListItems = getListItems();
                                 fileListViewAdapter.listItems = getListItems();
@@ -141,6 +146,7 @@ public class FileViewFragment extends Fragment{
                 }
             }
         });
+
         return view;
     }
     public void getFilePathTree()
