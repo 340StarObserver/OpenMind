@@ -1,6 +1,6 @@
-// if( getCookie("token") !=null ){
-// 	location.href = "home.html";
-// }
+if( getCookie("token") !=null ){
+	location.href = "home.html";
+}
 
 $(document).ready(function() {
 

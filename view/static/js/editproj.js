@@ -1,18 +1,97 @@
-// var token = getCookie('token');
-// console.log( token );
-// if( token == null){
-// 	location.href = 'home.html';
-// }
-
 var tree = new Tree();
-var pointer = tree.root_node; //指向当前节点
-var files = []; 	//filename:file
-var labels= []; 	//name of label
-var links = []; 	//链接
+var pointer = tree.root_node;
+
+var proj_id,
+	files=[];
+
+var example = {
+	"_id" : 1,
+	"proj_name" : "Bilibili guichu",
+	"own_usr" : "LvYang",
+	"own_name" : "吕神",
+	"own_head" : "0",
+	"pub_time" : 1445599887,
+	"labels" : ['123', '123'],
+	"links" : [
+		{"address": "https://github.com/bobxwu/", "description": "github仓库"},
+		{"address": "https://github.com/bobxwu/", "description": "github仓库"}
+	],
+	'introduction' : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\r\naaaaaaaa",
+	'shares':[{
+		'name': 'docs/a.jpg','time':'1','url':'http://openmind.oss-cn-shanghai.aliyuncs.com/userimages/20160828/14723669411n62i20r.jpg'
+		},
+		{
+			'name': 'docs/new/a.pdf','time':'1','url':'http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/1473056696LvYangshehuishijian.pdf'
+		},{
+			'name': 'a.txt','time':'1','url':'http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/git-branch.txt'
+		}
+	],
+
+	'comments' :  [
+	{  
+                        "id"        : "akfja3",  
+                        "parent_id" : "0",
+                        "send_usr"  : "seven",  
+                        "send_name" : "LvYang",  
+                        "send_head" : '0',  
+                    
+                        "recv_usr"  : "xxxx",  
+                        "recv_name" : "yyyy",  
+                    
+                        "time"      : 1445599887,  
+                        "content"   : "this is the first comment"  
+    },
+    {  
+                        "id"        : "fa3gad",  
+                        "parent_id" : "akfja3",  
+                    
+                        "send_usr"  : "leo",  
+                        "send_name" : "shangjun",  
+                        "send_head" : '0',  
+                    
+                        "recv_usr"  : "xxxx",  
+                        "recv_name" : "yyyy",  
+                    
+                        "time"      : 1446633221,  
+                        "content"   : "this is the second comment"  
+    },
+    {  
+                        "id"        : "fad",  
+                        "parent_id" : "0",  
+                    
+                        "send_usr"  : "dddd",  
+                        "send_name" : "shangjun",  
+                        "send_head" : '0',  
+                    
+                        "recv_usr"  : "xxxx",  
+                        "recv_name" : "yyyy",  
+                    
+                        "time"      : 1446633221,  
+                        "content"   : "this is a great idea."  
+    }, 
+    {  
+                        "id"        : "faddddd",  
+                        "parent_id" : "fad",  
+                    
+                        "send_usr"  : "dddd",  
+                        "send_name" : "3d",  
+                        "send_head" : '0',  
+                    
+                        "recv_usr"  : "dddd",  
+                        "recv_name" : "shangjun",  
+                    
+                        "time"      : 1446633221,  
+                        "content"   : "ddd hello "  
+    }
+	]
+};
 
 $(document).ready(function() {
+	var params = parseURL( location.href )["params"];
+	proj_id = params["id"];
 
-	changeFileConstruct('');
+	// getProjDetailPost(id);
+	dealProjDetailReturn( example );
 
 	$("#new-directory-btn").click(function(event) {
 		$(".modal.new-directory-dialog").fadeIn('slow');
@@ -94,8 +173,7 @@ $(document).ready(function() {
 
 		$('.modal').fadeOut('fast');
 		showFileList();
-		console.log( tree.root_node );
-		console.log( pointer.child );
+		
 	});
 
 	$(document).on('click', '.catalog-root', function(event) {
@@ -127,142 +205,67 @@ $(document).ready(function() {
 
 	});
 
-	$("#label-confirm-btn").click(function(event) {
-		addLabel();
-	});
-
-	$('#label-input').keyup(function(event) {
-		if( event.keyCode == 13){
-			addLabel();
-		}
-	});
-
-	$(document).on('keyup', '#directory-name-input', function(event) {
-		if( event.keyCode == 13){
-			addDirectory();
-		}
-	});
-
-	$('#url-input').keyup(function(event) {
-		if( event.keyCode == 13){
-			addLink();
-		}
-	});
-
-	$('#link-confirm-btn').click(function(event) {
-		addLink();
-	});
-
-	//删除链接
-	$(document).on('click', '.project-link>.close', function(event) {
-		var parent = $(this).parent();
-		var linkIndex = parent.index();
-		parent.remove();
-		links.splice(linkIndex, 1);
-		console.log(links);
-	});
-
-	$(document).on('mouseover', '.project-label,.project-link,.file-item', function(event) {
-		$(this).children('.close').fadeIn('fast');
-	});
-
-	$(document).on('mouseleave', '.project-label,.project-link,.file-item', function(event){
-		$(this).children('.close').fadeOut('slow');
-	});
-
-	//删除标签
-	$(document).on('click', '.project-label>.close', function(event) {
-		
-		var labelIndex = $(this).parent().index();
-		$(this).parent().remove();
-
-		//从数组中删除
-		labels.splice(labelIndex, 1);
-		console.log(labels);
-
-	});
-
-	
-	$(document).on('click', '.file-item>.close', function(event) {
-		console.log("delete file or directory");
-		var item_name = $(this).siblings('.file-item-name').text();
-		var path = pointer.path +"/"+ item_name; // /docs/image
-		path = path.substring(1, path.length);
-
-		tree.delete(path);
-		console.log( tree.root_node );
-
-		console.log( "path"+path );
-		showFileList();
-
-		return false;
-	});
-
-	$("#publish-btn").click(function(event) {
-		var token = getCookie('token');
-
-		if( token == null ){
-			location.href = 'home.html';
+	$('#edit-confirm-btn').click(function(event) {
+		if( files.length == 0){
+			showWarningTips('请上传新文件');
 			return false;
 		}
 
-		var name = $("#name-input").val();
-		var intro = $("#intro-input").val();
-		
-		//检查各项输入合法性
-		if( name=='' || intro==''){
-			showWarningTips('请填写项目名称和简介');
-			return false;
-		}
-
-		var files_name_string = '',
-			labels_string = '',
+		var files_name_string='',
 			files_array=[];
-		
-		if( files.length != 0){
-			
-			for (var i = 0; i < files.length; i++) {
-				files_name_string += files[i]["name"]+",";
-				files_array.push( files[i]["file"] );
-			}
 
-			files_name_string = files_name_string.substring(0, files_name_string.length-1);
+		for (var i = 0; i < files.length; i++) {
+			files_name_string += files[i]["name"]+",";
+			files_array.push( files[i]["file"] );
 		}
 
-		if(labels.length != 0){
-			for (var i = 0; i < labels.length; i++) {
-				labels_string += labels[i]+',';
-			}
-
-			labels_string = labels_string.substring(0, labels_string.length-1);
-		}
-
-		var links_jsonstring = JSON.stringify( links );
+		files_name_string = files_name_string.substring(0, files_name_string.length-1);
 		
-		console.log( 'name' + name);
-		console.log('intro' + intro);
-		console.log("links "+links_jsonstring);
-		console.log("labels_string "+labels_string);
-		console.log("files_string "+ files_name_string );
-		console.log("files_array" + files_array );
+		console.log( files_name_string );
+		console.log( files_array );
 
-		newProjectPost(name, files_name_string, files_array, labels_string, links_jsonstring, intro, token);
+		var token = getCookie("token");
 
+		editProjPost( proj_id, files_name_string, files_array, token);
 	});
-	
+
 });
+
+function dealProjDetailReturn(data){
+
+	$('#name-input').val( data['proj_name'] );
+	$('#intro-input').val( data['introduction'] );
+
+	
+	//添加标签
+	var labels = data['labels'];
+	for (var i = 0; i < labels.length; i++) {
+		addLabelItem( labels[i] );
+	}
+
+	//添加链接
+	var links = data['links'];
+	for (var i = 0; i < links.length; i++) {
+		addLinkItem( links[i]['description'], links[i]['address'] );
+	}
+
+	//添加文件
+	var shares = data['shares'];
+	for (var i = 0; i < shares.length; i++) {
+		tree.add( shares[i]['name'] ,true, shares[i]['time'], shares[i]['url'] );
+	}
+
+	changeFileConstruct('');
+
+}
 
 function addFile(filename, file){
 	var path = pointer.path+'/'+filename;
 	path = path.substring(1, path.length);
 
-	console.log(path);
-
 	//添加到树结构
 	var timestamp = new Date().getTime();
 	tree.add(path, true, timestamp );
-
-	console.log( file );
 
 	//添加到内存
 	console.log(files );
@@ -273,7 +276,7 @@ function addFile(filename, file){
 	});
 
 	console.log( files );
-	console.log( files.length );
+	
 
 }
 
@@ -403,84 +406,25 @@ function addLinkItem(remark, url){
 	$('.links-container').append(html);
 }
 
-function dealNewProjectReturn(data){
-	if( data['result'] == true ){
-		setCookie("token", data['token'], 7);
-
-	}else{
+function dealEditProjReturn(data){
+	if( data['result'] == false){
 		var errorReason;
 		switch( data['reason'] ){
 			case 1:
-				errorReason = "未登录";
-				break;
+			errorReason = "未登录";
+			break;
 			case 2:
-				errorReason = "令牌错误";
-				break;
+			errorReason = "令牌错误";
+			break;
 			default:
 			errorReason = "信息错误";
 		}
-	    
-	    //显示错误信息
-	    showWarningTips(errorReason);
+	    	//显示错误信息
+	    	showWarningTips(errorReason);
+	    }
 	}
-}
-
-function addLabel(){
-	var label = $("#label-input").val();
-		
-		if( label == '' ){
-			showWarningTips('请输入标签');
-			return false;
-		}
-
-		if( labels.length == 5){
-			showWarningTips('不能超过5个标签');
-			return false;
-		}
-
-		if( $.inArray(label, labels) != -1 ){
-			showWarningTips('存在重复标签');
-			return false;
-		}
-
-		addLabelItem(label);
-		//存入数组
-		labels.push(label);
-		clearInput('#label-input');
-		$('#label-input').focus();
-}
-
-function addLink(){
-
-	var remark = $("#remark-input").val();
-	var url = $("#url-input").val();
-	if( remark=='' || url==''){
-		showWarningTips("请填写完成链接信息");
-		return false;
+	else{
+		setCookie('token', data['token'], 7);
+		location.href = 'ownproj.html';
 	}
-
-	//检查是否链接重复
-	for (var i = 0; i < links.length; i++) {
-		if( remark == links[i]['description'] || url == links[i]['address'] ){
-			showWarningTips('存在重复链接');
-			return false;
-		}
-	}
-
-	if( links.length == 5){
-		showWarningTips('链接数量不得超过5个');
-		return false;
-	}
-
-	clearInput('#url-input');
-	clearInput('#remark-input');
-
-	links.push({
-		'address' : url,
-		'description': remark
-	});
-
-	addLinkItem(remark, url);
-	console.log( links.length );
-	$('#remark-input').focus();
 }

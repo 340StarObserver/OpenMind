@@ -60,7 +60,7 @@
 	background-color: #99cccc;
 	padding: 0 10px;
 	color: white;
-	font-size: .8em;
+	font-size: 1em;
 }
 
 .project-links-wrapper{
@@ -238,4 +238,8 @@
 
 #comment-publish-btn{
 	float: right;
+}
+
+.login-comment-btn{
+	text-align: center;
 }

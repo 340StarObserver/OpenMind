@@ -165,9 +165,9 @@ var cReturn = {
 
 $(document).ready(function() {
 
-	// init();
+	init();
 
-	showProjDetail( example );
+	// showProjDetail( example );
 
 	$(".project-link").hover(function() {
 		var address = $(this).attr('href');
@@ -291,7 +291,7 @@ $(document).ready(function() {
 		var node = tree.find(path);   //   docs/image
 		var fileUrl = node.url;
 
-		location.href = 'fileview.html?fileUrl='+fileUrl;
+		location.href = 'fileview.html?fileUrl='+fileUrl+'&filename='+item_name;
 
 	});
 
@@ -350,15 +350,33 @@ function showProjDetail(project){
 	showComments( project['comments'] );
 	
 	console.log( project['comments'] );
+
 	//记录数据
 	proj_id = project['_id'];
 	proj_name = project['proj_name'];
 	own_usr = project['own_usr'];
 	own_name = project['own_name'];
 
+	//如果没有登录
+	if( getCookie('token') == null ){
+
+		$('.comment-input-container').remove();
+		$('.reply-input-container').remove();
+		$('.item-reply-btn').remove();
+	}else{
+		$('.login-comment-btn').remove();
+	}
+	
 }
 
 function showComments(comments){
+	if(comments.length == 0 ){
+		//TODO 显示有没评论
+
+		// $('.comment-list').html();
+		return false;
+	}
+
 	$('.comment-list').html('');
 
 	var head_comment_index = 0;

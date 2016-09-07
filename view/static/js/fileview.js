@@ -6,40 +6,37 @@ $(document).ready(function() {
 
 	var params = parseURL( location.href )["params"];
 	fileUrl = params["fileUrl"];
+	filename = params["filename"];
+
 	if( fileUrl == null){
 
 		alert("没有找到文件");
 		window.close();
 	}
 
-	filename = getFilename( fileUrl );
 	suffix = getSuffix( fileUrl );
 
 	console.log("filename "+filename);
 	console.log("suffix "+suffix);
 
-
 	$('.file-name-container').text( filename );
 
-	if( suffix == 'md'){
-		//md文件
-		fileGet(fileUrl);
-
-	}
-	else if( suffix== 'jpg' || suffix=='png' ){
-		
+	if( suffix== 'jpg' || suffix=='png' ){
 		//图片文件
 		$('.file-container').html('<img src="'+ fileUrl +'" alt="'+ filename +'">');
 	}
-	else{
-		
-		//pdf文件
-		var html =  '<iframe src="'+ fileUrl +'" frameborder="0"></iframe>';
-		$('.file-container').html(html);
-
+	else if( suffix=='pdf'){
+		$('.file-container').html(
+			' <iframe src="'+ fileUrl +'" frameborder="0"></iframe>'
+		);
 	}
-	
-	//调整iframe高度
+	else if( suffix =='txt' || suffix=='md' || suffix=='conf' || suffix=='config' || suffix=='bat'
+		|| suffix=='sh' || suffix=='cpp' || suffix=='c' || suffix=='h' || suffix=='java' || suffix=='php'
+		|| suffix=='py' || suffix=='html' || suffix=='css' || suffix=='js'  || suffix=='cs' || suffix=='rb' ){
+		
+		fileGet(fileUrl);
+	}
+
 });
 
 function dealFileReturn(data){
@@ -47,18 +44,14 @@ function dealFileReturn(data){
 	if( suffix == 'md'){
 		dealMDReturn(data);
 	}
-	else if( suffix == ''){
-
-	}
-	else if( suffix == '' ){
-
+	else{
+		$(".file-container").html(data);
 	}
 }
 
 function dealMDReturn(data){
 
-	var converter = new Markdown.Converter();
+    var converter = new Markdown.Converter();
     var mdHtml = converter.makeHtml(data);
-    $('.file-container').html(html);
-
+    $('.file-container').html(mdHtml);
 }

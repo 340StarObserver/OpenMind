@@ -109,7 +109,8 @@
 	margin-top: 30px;
 }
 
-#publish-btn{
+#publish-btn,
+#edit-confirm-btn{
 	display: block;
 	width: 50%;
 	margin: auto;

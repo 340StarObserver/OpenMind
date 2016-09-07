@@ -249,17 +249,10 @@ function Node(){
 }
 
 function getSuffix(url){
-	
-	var filename = getFilename(url);
-	var names = filename.split('.');
-	var suffix = names[ names.length-1 ];
-	// console.log( suffix );
 
-	return suffix;
-}
-
-function getFilename(url){
 	var urls = url.split('/');
 	var filename = urls[ urls.length-1 ];
-	return filename;
+	var names = filename.split('.');
+	var suffix = names[ names.length-1 ];
+	return suffix;
 }
