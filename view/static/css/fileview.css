@@ -7,3 +7,8 @@ iframe{
 	width: 100%;
 	min-height: 800px;
 }
+
+.file-container{
+	word-break: break-all;
+	white-space: pre-wrap;
+}

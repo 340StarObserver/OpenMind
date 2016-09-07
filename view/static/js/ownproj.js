@@ -76,7 +76,7 @@ $(document).ready(function() {
 	$(document).on('click', '.option-item.edit-project', function(event) {
 		
 		var id = $(this).parent().attr("id");
-		location.href = "editproj.html?id="+id;
+		location.href = "/editproj?id="+id;
 	});
 		
 	$(document).on('click', '.setting-btn', function(event) {

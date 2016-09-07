@@ -202,7 +202,7 @@ $(document).ready(function() {
 		var token = getCookie('token');
 
 		if( token == null ){
-			location.href = 'home.html';
+			location.href = '/home';
 			return false;
 		}
 

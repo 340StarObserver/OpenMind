@@ -1,5 +1,5 @@
 if( getCookie("token") !=null ){
-	location.href = "home.html";
+	location.href = "/home";
 }
 
 $(document).ready(function() {

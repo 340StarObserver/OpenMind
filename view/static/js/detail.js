@@ -236,7 +236,9 @@ $(document).ready(function() {
 
 		console.log( parent_id );
 		//发送请求
-		commentPost(proj_id, proj_name, own_usr, own_name, recv_usr, '', parent_id, content)
+		commentPost(proj_id, proj_name, own_usr, own_name, recv_usr, recv_usr, parent_id, content)
+		wrapper.find('.reply-input').val('');
+		
 	});
 
 	$('#comment-publish-btn').click(function(event) {
@@ -251,7 +253,8 @@ $(document).ready(function() {
 		var recv_usr = own_usr,
 			parent_id = '0';
 
-		commentPost(proj_id, proj_name, own_usr, own_name, own_usr, '', parent_id, content);
+		commentPost(proj_id, proj_name, own_usr, own_name, own_usr, own_name, parent_id, content);
+		clearInput('#comment-input');
 	});
 
 	$(document).on('click', '.catalog-root', function(event) {
@@ -291,7 +294,7 @@ $(document).ready(function() {
 		var node = tree.find(path);   //   docs/image
 		var fileUrl = node.url;
 
-		location.href = 'fileview.html?fileUrl='+fileUrl+'&filename='+item_name;
+		location.href = '/fileview?fileUrl='+fileUrl+'&filename='+ decodeURI( item_name );
 
 	});
 
@@ -308,7 +311,7 @@ function init(){
 function dealProjDetailReturn(data){
 	if( data["result"] == false){
 		alert("没有找到项目");
-		location.href = "home.html" ;
+		location.href = "/home" ;
  		return false;
 	}
 

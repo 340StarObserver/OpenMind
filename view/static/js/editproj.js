@@ -90,8 +90,8 @@ $(document).ready(function() {
 	var params = parseURL( location.href )["params"];
 	proj_id = params["id"];
 
-	// getProjDetailPost(id);
-	dealProjDetailReturn( example );
+	getProjDetailPost(proj_id);
+	// dealProjDetailReturn( example );
 
 	$("#new-directory-btn").click(function(event) {
 		$(".modal.new-directory-dialog").fadeIn('slow');
@@ -421,10 +421,10 @@ function dealEditProjReturn(data){
 		}
 	    	//显示错误信息
 	    	showWarningTips(errorReason);
-	    }
+	    
 	}
 	else{
 		setCookie('token', data['token'], 7);
-		location.href = 'ownproj.html';
+		location.href = '/ownproj';
 	}
 }

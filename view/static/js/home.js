@@ -242,7 +242,7 @@ $(document).ready(function() {
 
 	$(document).on('click', '.project-name', function(event) {
 		var id = $(this).attr('id');
-		location.href = "detail.html?id="+id;
+		location.href = "/detail?id="+id;
 	});
 
 });

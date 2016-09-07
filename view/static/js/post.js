@@ -143,7 +143,7 @@ function editProjPost(id, files_name_string, files, token){
 		formData.append( "file"+(i+1), files[i]);
 	}
 
-	formData.append("file_name",files_name_string);
+	formData.append("file_names",files_name_string);
 	formData.append("action_id", 6);
 	formData.append("proj_id", id);
 	formData.append("token", token);

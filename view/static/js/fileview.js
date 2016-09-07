@@ -6,7 +6,9 @@ $(document).ready(function() {
 
 	var params = parseURL( location.href )["params"];
 	fileUrl = params["fileUrl"];
-	filename = params["filename"];
+	filename = decodeURI( params["filename"] );
+	
+	console.log(filename);
 
 	if( fileUrl == null){
 

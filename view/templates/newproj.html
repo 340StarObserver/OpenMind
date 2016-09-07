@@ -5,28 +5,28 @@
 	<title>OpenMind</title>
 
 	<!-- jquery -->
-	<script type="text/javascript" src="../static/js/3rd/jquery.js"></script>
+	<script type="text/javascript" src="static/js/3rd/jquery.js"></script>
 	
 	<!-- bootstrap -->
 	<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<!-- bootstrap-material-design -->
-	<link rel="stylesheet" type="text/css" href="../static/css/3rd/bootstrap-material-design.css">
-    <script type="text/javascript" src="../static/js/3rd/material.min.js"></script>
-  	<link rel="stylesheet" type="text/css" href="../static/css/3rd/ripples.min.css">
-  	<script type="text/javascript" src="../static/js/3rd/ripples.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/3rd/bootstrap-material-design.css">
+    <script type="text/javascript" src="static/js/3rd/material.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="static/css/3rd/ripples.min.css">
+  	<script type="text/javascript" src="static/js/3rd/ripples.min.js"></script>
 	
 	
 	<!-- fontawesome -->
 	<link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="../static/css/global.css">
-	<script type="text/javascript" src="../static/js/cookie.js"></script>
-	<script type="text/javascript" src="../static/js/global.js"></script>
-	<script type="text/javascript" src="../static/js/post.js"></script>
-	<script type="text/javascript" src="../static/js/newproj.js"></script>
-	<link rel="stylesheet" href="../static/css/newproj.css">
+	<link rel="stylesheet" href="static/css/global.css">
+	<script type="text/javascript" src="static/js/cookie.js"></script>
+	<script type="text/javascript" src="static/js/global.js"></script>
+	<script type="text/javascript" src="static/js/post.js"></script>
+	<script type="text/javascript" src="static/js/newproj.js"></script>
+	<link rel="stylesheet" href="static/css/newproj.css">
 
 </head>
 <body>
@@ -39,7 +39,8 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="javascript:void(0)"><img src="../static/res/image/openmind-icon.png" alt="openmind-icon"></a>
+                <a class="navbar-brand" href="javascript:void(0)"><img src="static/res/image/openmind-icon.png" alt="openmind-icon"></a>
+
             </div>
 
             <div class="warning-tips">
@@ -48,9 +49,9 @@
 
             <div class="navbar-collapse collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
-                  <li class="active"><a href="javascript:void(0)">首页</a></li>
-                  <li id="management-btn"><a href="javascript:void(0)">管理项目</a></li>
-                  <li id="newproj-btn"><a href="newproj.html">发布项目</a></li>
+                  <li><a href="/home">首页</a></li>
+                  <li id="management-btn"><a href="/ownproj">管理项目</a></li>
+                  <li class="active" id="newproj-btn"><a href="/newproj">发布项目</a></li>
                 </ul>
                 <form class="navbar-form navbar-left">
                       <div class="form-group is-empty">
@@ -59,16 +60,18 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">wuxiaobao<b class="caret"></b></a>
+                        <a href="javascript:void(0)" data-target="#" class="dropdown-toggle" id="navbar-username" data-toggle="dropdown" aria-expanded="false"></a>
                         <ul class="dropdown-menu">
-                            <li><a href="javascript:void(0)">活跃记录</a></li>
-                            <li><a href="javascript:void(0)">修改个人信息</a></li>
+                            <li id="active-degree-btn"><a href="javascript:void(0)">活跃记录</a></li>
+                            <li id="edit-perinfo-btn"><a href="javascript:void(0)">修改个人信息</a></li>
                             <li class="divider"></li>
-                            <li><a href="javascript:void(0)">注销</a></li>
+                            <li id="logout-btn"><a href="javascript:void(0)">注销</a></li>
                           </ul>
                     </li>
                 </ul>
             </div>
+
+            <a href="/login" class="btn btn-raised btn-primary" id="navbar-login-btn">登录</a>
         </div>
     </nav>
 
@@ -86,8 +89,6 @@
 				<div class="labels-input-container">
 					<div class="title">添加标签</div>
 					<ul class="labels-container">
-						<!-- <li class="project-label">html
-						<span class="close">×</span></li> -->
 					</ul>
 					<div class="label-input-wrapper form-group is-empty">
 					    <label class="control-label" for="inputDefault">标签</label>
@@ -103,24 +104,19 @@
 				<div class="links-input-container">
 					<div class="title">链接</div>
 					<ul class="links-container">
-						<!-- <li class="project-link">
-							<span class="link-remark">github</span>
-							<span class="link-url">https://github.com/bobxwu</span>
-						</li> -->
 					</ul>
 					
 
 					<div class="links-input-wrapper clearfix">
+						<div class="form-group is-empty remark-input-wrapper">
+					            	<label class="control-label" for="inputDefault">备注</label>
+					            	<input class="form-control" id="remark-input" type="text" maxlength="10">
+					           </div>
 
-						<div class="form-group form-group-sm is-empty remark-input-wrapper">
-				            <label class="control-label" for="inputSmall">备注</label>
-				            <input class="form-control" type="text" id="remark-input" maxlength="8">
-				        </div>
-
-				        <div class="form-group form-group-sm is-empty url-input-wrapper">
-				            <label class="control-label" for="inputSmall">链接</label>
-				            <input class="form-control" type="text" id="url-input">
-				        </div>
+					           <div class="form-group is-empty url-input-wrapper">
+					            	<label class="control-label" for="inputDefault">链接</label>
+					            	<input class="form-control" id="url-input" type="text">
+					           </div>
 
 						<div class="clearfix">
 							<button id="link-confirm-btn" type="submit" class="btn btn-primary">确定
@@ -224,7 +220,7 @@
     <!-- 低栏部分 -->
 	<footer>
 		<div class="bottom-name">
-		<a href="index.html">OpenMind</a></div>
+		<a href="/index">OpenMind</a></div>
 		<div class="bottom-remark">2016 SouthEast University</div>
 	</footer>
 
