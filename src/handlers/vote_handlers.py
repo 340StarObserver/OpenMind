@@ -30,12 +30,22 @@ def get_projects_in_vote(post_data,post_files,usr_sessions,server_conf):
     db_name = server_conf['mongo']['db_name']
     mongo_client = mongo_conn.get_conn(server_conf['mongo']['host'],db_name,\
         server_conf['mongo']['db_user'],server_conf['mongo']['db_pwd'])
+
+    usr_id = None
+    if 'id' in usr_sessions:
+        usr_id = usr_sessions['id']
+    check_factor_1 = {'username':usr_id}
     
     # do query
     data = mongo_client[db_name]['vote_info'].find({})
     response = []
     for proj in data:
         proj['_id'] = str(proj['_id'])
+        proj['ever_voted'] = False
+        if usr_id is not None:
+            check_factor_1['proj_id'] = proj['_id']
+            if mongo_client[db_name]['vote_record'].find_one(check_factor_1) is not None:
+                proj['ever_voted'] = True
         response.append(proj)
         del proj
 
@@ -44,6 +54,7 @@ def get_projects_in_vote(post_data,post_files,usr_sessions,server_conf):
     del mongo_client
     del db_name
     del data
+    del check_factor_1
 
     # return result
     return response
