@@ -24,9 +24,15 @@ public class VoteJsonParser extends BaseJsonParser{
                 switch (jarr.getString("reason"))
                 {
                     case "1":error="未登陆";break;
-                    case "2":error="你的投票次数用完了";break;
-                    case "3":error="此时投票已经结束了";break;
-                    case "4":error="不存在该项目";break;
+                    case "2":
+                        error = "你已经投过该项目了  ";
+                        break;
+                    case "3":
+                        error = "该项目此时不处于投票状态";
+                        break;
+                    case "4":
+                        error = "你的投票权利用光了";
+                        break;
                     default:error="其他错误";break;
                 }
                 User.getInstance().setVoteError(error);

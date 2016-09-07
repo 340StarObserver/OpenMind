@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -62,6 +60,8 @@ public class FileViewFragment extends Fragment{
             public void onClick(View v) {
                 if (User.getInstance().currentChildComments.size() != 0) {
                     User.getInstance().currentChildComments.clear();
+                }
+                if (User.getInstance().currentParentComments.size() != 0) {
                     User.getInstance().currentParentComments.clear();
                 }
                 MyActivity activity = (MyActivity) getActivity();

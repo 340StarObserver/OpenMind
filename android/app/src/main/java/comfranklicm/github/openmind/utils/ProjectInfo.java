@@ -22,6 +22,7 @@ public class ProjectInfo {
     private String label1;
     private String label2;
     private String score;
+    private String everVoted;
     private List<String>labellist;
     private List<Link>linkList;
     private List<Comment>commentList;
@@ -187,6 +188,14 @@ public class ProjectInfo {
 
     public void setScore(String score) {
         this.score = score;
+    }
+
+    public String getEverVoted() {
+        return everVoted;
+    }
+
+    public void setEverVoted(String everVoted) {
+        this.everVoted = everVoted;
     }
 }
 

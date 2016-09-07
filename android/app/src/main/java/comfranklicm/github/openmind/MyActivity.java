@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,12 +22,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLDataException;
 import java.util.ArrayList;
 import java.util.List;
 
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
-import comfranklicm.github.openmind.JsonParsing.JsonParser;
 import comfranklicm.github.openmind.JsonParsing.LoginJsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewAllProjectsJsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewVoteProjectsJsonParser;
@@ -36,13 +33,13 @@ import comfranklicm.github.openmind.utils.Active;
 import comfranklicm.github.openmind.utils.DataBaseUtil;
 import comfranklicm.github.openmind.utils.MD5;
 import comfranklicm.github.openmind.utils.NetUtil;
-import comfranklicm.github.openmind.utils.ProjectInfo;
 import comfranklicm.github.openmind.utils.User;
 
 
 public class MyActivity extends FragmentActivity implements OnClickListener{
 
-	private Fragment1 fg1;
+    FragmentManager fManager;
+    private Fragment1 fg1;
 	private Fragment2 fg2;
 	private Fragment3 fg3;
 	private LoginFragment fg7;
@@ -51,7 +48,8 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
     private ProjectDetailFragment fg10;
     private ChildCommentListFragment fg11;
     private FileViewFragment fg12;
-	private RelativeLayout course_layout;
+    private VoteProjectDetailFragment fg13;
+    private RelativeLayout course_layout;
 	private RelativeLayout found_layout;
 	private RelativeLayout settings_layout;
 	private ImageView course_image;
@@ -63,7 +61,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
 	private int whirt = 0xFFFFFFFF;
 	private int gray = 0xFF7597B3;
 	private int blue =0xFF0AB2FB;
-	FragmentManager fManager;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -515,6 +513,9 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         if(fg12!=null){
             transaction.hide(fg12);
         }
+        if (fg13 != null) {
+            transaction.hide(fg13);
+        }
     }
 
 	public void clearChioce()
@@ -577,6 +578,14 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         hideFragments(transaction);
         fg12 =new FileViewFragment();
         transaction.add(R.id.content,fg12);
+        transaction.commit();
+    }
+
+    public void transactiontoVoteProjectDetail() {
+        final FragmentTransaction transaction = fManager.beginTransaction();
+        hideFragments(transaction);
+        fg13 = new VoteProjectDetailFragment();
+        transaction.add(R.id.content, fg13);
         transaction.commit();
     }
 }

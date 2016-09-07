@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,8 +63,10 @@ public class ChildCommentListFragment extends Fragment{
         submitComment=(Button)view.findViewById(R.id.group_discuss_submit);
         parentname.setText(User.getInstance().getCurrentParentComment().getSendName());
         parentcontent.setText(User.getInstance().getCurrentParentComment().getContent());
-        Uri uri=Uri.parse(User.getInstance().getCurrentParentComment().getSendHead());
-        parenthead.setImageURI(uri);
+        if (!User.getInstance().getCurrentParentComment().getSendHead().equals("0")) {
+            Uri uri = Uri.parse(User.getInstance().getCurrentParentComment().getSendHead());
+            parenthead.setImageURI(uri);
+        }
         childNum.setText("相关回复 共" + User.getInstance().getCurrentParentComment().childCommentCount + "条");
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,9 +170,11 @@ public class ChildCommentListFragment extends Fragment{
                                 if (!User.getInstance().getCommentadded().getSendHead().equals("0")) {
                                     Uri imgUri = Uri.parse((User.getInstance().getCommentadded().getSendHead()));
                                     map.put("head_image_view", imgUri);
+                                    Log.d("url1", imgUri.toString());
                                 } else {
                                     Uri uri = Uri.parse("file:///android_asset/image/head.jpg");
                                     map.put("head_image_view", uri);
+                                    Log.d("url2", uri.toString());
                                 }
                                 map.put("user_name", User.getInstance().getCommentadded().getSendName() + " 回复 " + User.getInstance().getCommentadded().getReceiveName());
                                 map.put("comment_floor", "");

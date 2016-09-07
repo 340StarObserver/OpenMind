@@ -32,6 +32,7 @@ public class ViewVoteProjectsJsonParser extends BaseJsonParser{
                 projectInfo.setPubTime(jarr.getString("pub_time"));
                 projectInfo.setIntroduction(jarr.getString("introduction"));
                 projectInfo.setLabels(jarr.getString("labels"));
+                projectInfo.setEverVoted(jarr.getString("ever_voted"));
                 projectInfo.setScore(jarr.getString("score"));
                 JSONArray jsonArray1=new JSONArray(jarr.getString("labels"));
                 List<String> stringList=new ArrayList<String>();
