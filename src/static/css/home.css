@@ -5,7 +5,6 @@
 
 .login-btn{
 	float: right;
-	/*margin: 7px auto;*/
 }
 
 .browse-title{
@@ -45,7 +44,7 @@ i.fa{
 	background-color: #99cccc;
 	padding: 0 5px;
 	color: white;
-	font-size: .5em;
+	font-size: 1em;
 }
 
 .item-title-right{

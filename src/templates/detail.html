@@ -29,38 +29,48 @@
 </head>
 <body>
 	<!-- 导航栏 -->
-	<nav class="navbar">
-        <div class="navbar-header">
-            <img class="navbar-brand" src="static/res/image/openmind-icon.png" alt="openmind-icon">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
+	<nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)"><img src="static/res/image/openmind-icon.png" alt="openmind-icon"></a>
+            </div>
 
-			
+            <div class="warning-tips">
+                <a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
+            </div>
+
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="javascript:void(0)">首页</a></li>
+                  <li id="management-btn"><a href="javascript:void(0)">管理项目</a></li>
+                  <li id="newproj-btn"><a href="/newproj">发布项目</a></li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                      <div class="form-group is-empty">
+                        <input type="text" class="form-control col-md-8" placeholder="Search">
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">wuxiaobao<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:void(0)">活跃记录</a></li>
+                            <li><a href="javascript:void(0)">修改个人信息</a></li>
+                            <li class="divider"></li>
+                            <li><a href="javascript:void(0)">注销</a></li>
+                          </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <a href="/login" class="btn btn-raised btn-primary login-btn">登录</a>
+
         </div>
-        
-        <div class="warning-tips">
-			<a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
-	    </div>
-
-        <div class="nav-list">
-        <!-- <div class="nav-list navbar-collapse collapse navbar-responsive-collapse"> -->
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="javascript:void(0)">首页</a></li>
-                <li><a href="javascript:void(0)">管理项目</a></li>
-                  
-            </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group is-empty">
-                	<input type="text" class="form-control col-md-8" placeholder="Search">
-                </div>
-            </form>	
-            <div class="navbar-username"></div>
-        </div>
-
-         <a href="/login" class="btn btn-raised btn-primary login-btn" >登录<div class="ripple-container"></div></a>
     </nav>
 
     <article class="container">
@@ -81,15 +91,11 @@
 		    		  	<span class="vote-number">111</span>
 		    		 </div>
 				</div>
-	    		 <div class="title-bottom">
+	    		 <div class="title-bottom clearfix">
 	    		 	<div class="project-label-wrapper">
-	    		 		<span class="project-label">github</span>
-						<span class="project-label">github</span>
-						<span class="project-label">github</span>
-
 	    		 	</div>
-
-
+					<div class="project-pub-time">
+					</div>
 	    		 </div>
 	    	</div>
 			
@@ -110,15 +116,6 @@
 		    		</div>
 
 		    		<div class="project-links-container">
-	    		 		<!-- <a class="project-link">github<span class="link-address">
-	    		 			https://github.com/bobxwu/a.git
-	    		 		</span></a>
-						<a class="project-link">github<span class="link-address">
-	    		 			https://github.com/bobxwu/a.git
-	    		 		</span></a>
-						<a class="project-link">github<span class="link-address">
-	    		 			https://github.com/bobxwu/a.git
-	    		 		</span></a> -->
 	    
 	    		 	</div>
 
@@ -148,89 +145,7 @@
 			</div>
 			<div class="comment-list-container">
 				<ul class="comment-list">
-					<!-- <li class="comment-item">
-						<div id="" class="item-title clearfix">
-							<div class="title-left commenter-icon">
-								<img src="static/res/image/icon.png" alt="">
-							</div>
-							<div class="title-right">
-								<div class="right-top clearfix">
-									<div class="top-left">
-											<span class="commenter-username">用户名</span>发表评论:
-									</div>
-									<div class="comment-time">
-											2016-8-22
-									</div>
-								</div>
-								<div class="comment-content">
-									赞太赞了，想具体了解一下能和我联系吗我的邮箱是请问你的邮箱是你的电话是你的住址是你查户口吗
-								</div>
-							</div>
-						</div>
-						<div class="item-follow">
-							<ul class="follow-list">
-								<li id="" class="follow-item clearfix">
-									<div class="item-left">
-										<span class="child-commenter">作者</span>回复<span class="parent-commenter">谁谁谁:</span>
-										<span class="comment-content">123123</span>
-									</div>
-									<div class="item-right">
-										<span class="item-reply-btn">
-											回复
-										</span>
-										<span class="comment-time">
-											2016-8-22
-										</span>
-									</div>
-								</li>
-								<li id="" class="follow-item clearfix">
-									<div class="item-left">
-										<span class="child-commenter">张三</span>回复<span class="parent-commenter">谁谁谁:</span>
-										<span class="comment-content">123123</span>
-									</div>
-									<div class="item-right">
-										<span class="item-reply-btn">
-											回复
-										</span>
-										<span class="comment-time">
-											2016-8-22
-										</span>
-									</div>
-								</li>
-								<li id="" class="follow-item clearfix">
-									<div class="item-left">
-										<span class="child-commenter">作者</span>回复<span class="parent-commenter">谁谁谁:</span>
-										<span class="comment-content">123123</span>
-									</div>
-									<div class="item-right">
-										<span class="item-reply-btn">
-											回复
-										</span>
-										<span class="comment-time">
-											2016-8-22
-										</span>
-									</div>
-								</li>
-							</ul>
-							<div class="reply-input-container clearfix">
-									<div class="reply-input-wrapper form-group is-empty">
-						                <label for="textArea" class="control-label">回复</label>          
-						                 <textarea class="form-control reply-input" maxlength="150" rows="3"></textarea>
-						                  <span class="help-block">不超过150字</span>
-						              </div>
-						             <button type="submit" class="btn btn-primary reply-btn">回复</button>
-								</div>
-						</div>
-						<div class="item-bottom clearfix">
-							<button type="submit" class="btn btn-primary more-comment-btn">查看更多回复
-							</button>
-						</div>
-					</li> -->
 				</ul>
-				<!-- <ul class="pager">
-                	<li id="prev-btn" class="disabled"><a class="withripple" href="javascript:void(0)">上一页</a></li>
-                	<li id="next-btn" class=""><a class="withripple" href="javascript:void(0)">下一页</a></li>
-            	</ul> -->
 			</div>
 			<div class="comment-input-container">
 				<div class="comment-input-wrapper form-group is-empty">
@@ -243,8 +158,10 @@
 					<a class="btn btn-raised btn-primary" id="comment-publish-btn">发表<div class="ripple-container"></div></a>
 				</div>
 			</div>
+			<div class="login-comment-btn">
+				<a href="/login" class="btn btn-raised btn-primary">登录后评论</a>
+			</div>
 		</div>
-		
     </article>
 
     <!-- 低栏部分 -->

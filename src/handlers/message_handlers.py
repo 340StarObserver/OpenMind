@@ -22,6 +22,7 @@ from bson import ObjectId
 
 import mongo_conn
 import active_manager
+import xss_filter
 
 # deal with requests of sending a comment
 def send_comment(post_data,post_files,usr_sessions,server_conf):
@@ -40,29 +41,38 @@ def send_comment(post_data,post_files,usr_sessions,server_conf):
     this_month = int(time.strftime("%Y%m",time_array))
     this_day = int(time.strftime("%d",time_array))
 
+    # filter xss
+    th_parent_id = xss_filter.valid_filter(post_data['parent_id'])
+    th_recv_usr = xss_filter.valid_filter(post_data['recv_usr'])
+    th_recv_name = xss_filter.valid_filter(post_data['recv_name'])
+    th_content = xss_filter.valid_filter(post_data['content'])
+    th_own_usr = xss_filter.valid_filter(post_data['own_usr'])
+    th_proj_id = xss_filter.valid_filter(post_data['proj_id'])
+    th_proj_name = xss_filter.valid_filter(post_data['proj_name'])
+
     # construct a comment
     one_comment = {}
     one_comment['id'] = "%d%s"%(time_stamp,usr_sessions['id'])
-    one_comment['parent_id'] = post_data['parent_id']
+    one_comment['parent_id'] = th_parent_id
     one_comment['send_usr'] = usr_sessions['id']
     one_comment['send_name'] = usr_sessions['name']
     one_comment['send_head'] = usr_sessions['head']
-    one_comment['recv_usr'] = post_data['recv_usr']
-    one_comment['recv_name'] = post_data['recv_name']
+    one_comment['recv_usr'] = th_recv_usr
+    one_comment['recv_name'] = th_recv_name
     one_comment['time'] = time_stamp
-    one_comment['content'] = post_data['content']
+    one_comment['content'] = th_content
 
     # construct a message to inform this project's owner
     msg = {}
-    msg['username'] = post_data['own_usr']
+    msg['username'] = th_own_usr
     msg['who_usr'] = usr_sessions['id']
     msg['who_name'] = usr_sessions['name']
     msg['who_head'] = usr_sessions['head']
     msg['time'] = time_stamp
-    msg['proj_id'] = post_data['proj_id']
-    msg['proj_name'] = post_data['proj_name']
+    msg['proj_id'] = th_proj_id
+    msg['proj_name'] = th_proj_name
     msg['action_id'] = 0
-    msg['content'] = post_data['content']
+    msg['content'] = th_content
 
     # connect to mongo
     db_name = server_conf['mongo']['db_name']
@@ -73,7 +83,7 @@ def send_comment(post_data,post_files,usr_sessions,server_conf):
     response = {'result':False,'reason':2}
 
     # push a comment to mongo
-    update_factor_1 = {'_id':ObjectId(post_data['proj_id']),'own_usr':post_data['own_usr']}
+    update_factor_1 = {'_id':ObjectId(th_proj_id),'own_usr':th_own_usr}
     update_factor_2 = {'$push':{'comments':one_comment}}
     update_res = mongo_client[db_name]['project_info'].update_one(update_factor_1,update_factor_2)
     if update_res.modified_count > 0:
@@ -86,8 +96,8 @@ def send_comment(post_data,post_files,usr_sessions,server_conf):
         mongo_client[db_name]['associate_info'].insert_one(msg)
 
         # insert a message to inform the user who I reply
-        if post_data['parent_id'] != "0" and post_data['own_usr']!=post_data['recv_usr']:
-            msg['username'] = post_data['recv_usr']
+        if th_parent_id != "0" and th_own_usr!=th_recv_usr:
+            msg['username'] = th_recv_usr
             msg.pop('_id',None)
             mongo_client[db_name]['associate_info'].insert_one(msg)
 
@@ -108,6 +118,13 @@ def send_comment(post_data,post_files,usr_sessions,server_conf):
     del update_factor_1
     del update_factor_2
     del update_res
+    del th_parent_id
+    del th_recv_usr
+    del th_recv_name
+    del th_content
+    del th_own_usr
+    del th_proj_id
+    del th_proj_name
 
     # return result
     return response

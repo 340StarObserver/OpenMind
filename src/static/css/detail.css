@@ -6,6 +6,10 @@
 	font-size: 1.8em;
 }
 
+.project-pub-time{
+	float: right;
+}
+
 .vote-wrapper{
 	float: right;
 	
@@ -26,7 +30,7 @@
 }
 
 .title-bottom{
-	padding: 5px 50px;
+	padding: 5px 0 5px 50px;
 }
 
 .project-detail-container{
@@ -47,12 +51,16 @@
 	padding: 10px;
 }
 
+.project-label-wrapper{
+	float: left;
+}
+
 .project-label{
 	margin-left: 5px;
 	background-color: #99cccc;
 	padding: 0 10px;
 	color: white;
-	font-size: .8em;
+	font-size: 1em;
 }
 
 .project-links-wrapper{
@@ -66,7 +74,6 @@
 	border-left: 1px solid #bbb;
 	padding-left: 10px;
 }
-
 
 .project-intro-wrapper>.title-wrapper::before{
 	content: "\f129";
@@ -130,6 +137,7 @@
 .title-left>img{
 	display: block;
 	width: 100%;
+	border-radius: 100%;
 }
 
 .title-right{
@@ -184,8 +192,16 @@
 	float: left;
 }
 
+.item-left>img{
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	margin-right: 5px;
+}
+
 .item-right{
 	float: right;
+	line-height: 30px;
 }
 
 .item-reply-btn{
@@ -222,4 +238,8 @@
 
 #comment-publish-btn{
 	float: right;
+}
+
+.login-comment-btn{
+	text-align: center;
 }

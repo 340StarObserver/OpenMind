@@ -148,33 +148,16 @@ var votingExample = [
 	}
 ];
 
-var t = 0;
 
 $(document).ready(function() {
 
 	init();
-
-	$(".voting-project-toggle").click(function(event) {
-		t++;
-		if( t == 2 ){
-			t=0;
-			updateProjectPage( votingProject[currentVotingPage] );
-			console.log ( "show voting projects" );
-		}
-		else{
-			updateProjectPage( votingProject[currentVotingPage] );
-		}
-		// return false;
-	});
 
 	$("#prev-btn").click(function(event) {
 
 		if( $(this).hasClass('disabled') )
 			return false;
 		
-		
-		
-
 		enableBtn("#next-btn");
 
 		if( --currentPage == 0 ){
@@ -270,37 +253,6 @@ function init(){
 	//获取第一页概要信息
 	getProjBriefPostFirst();
 	
-	//dealProjBriefReturn( example[0] );
-	
-	//获取所有正在投票的项目
-	//getVotingProjPost();
-
-	//使上一页按钮失效
-	// disableBtn('#prev-btn');
-	// disableBtn('#voting-prev-btn');
-
-	// currentPage = 0;
-	// currentVotingPage = 0;
-
-	//查看是否有cookie
-	if( getCookie("token") != null ){
-		//显示用户名
-		//$(".navbar-username").html("张三");
-		$(".navbar-username").html( getCookie("username") );
-		
-		$(".nav-list").show();
-		$(".login-btn").hide();
-
-	}else{
-		console.log("no cookie");
-
-		//显示登录按钮
-		$(".login-btn").show();
-		$(".nav-list").hide();
-		
-	}
-
-	
 }
 
 function updateProjectPage(data){
@@ -309,11 +261,6 @@ function updateProjectPage(data){
 	//解析包含多个项目简要信息的json数组
 	for (var i = 0; i < data.length; i++) {
 		html += getProjectItemHtml( data[i] );
-
-		// html += getProjectItemHtml(data[i]["_id"], data[i]["proj_name"], 
-		// 	data[i]["own_usr"], data[i]["own_name"], data[i]["own_head"],
-		// 	data[i]["pub_time"], data[i]["labels"], data[i]["introduction"]);
-		
 	}
 
 	//替换html
@@ -337,14 +284,6 @@ function dealProjBriefReturn(data){
 	enableBtn("#prev-btn");
 	currentPage++;
 
-	// //post请求下一页
-	// if( projectBrief.length-1 < currentPage+1){
-	// 	currentPage++;
-
-	// 	//不是第一次请求
-	// 	if( projectBrief.length > 0)
-	// 		enableBtn("#prev-btn");
-	// }
 
 	//将新获得的项目概要信息json数组储存
 	projectBrief.push(data);

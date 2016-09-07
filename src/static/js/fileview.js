@@ -6,13 +6,16 @@ $(document).ready(function() {
 
 	var params = parseURL( location.href )["params"];
 	fileUrl = params["fileUrl"];
+	filename = params["filename"];
+	
+	console.log(filename);
+
 	if( fileUrl == null){
 
 		alert("没有找到文件");
 		window.close();
 	}
 
-	filename = getFilename( fileUrl );
 	suffix = getSuffix( fileUrl );
 
 	console.log("filename "+filename);

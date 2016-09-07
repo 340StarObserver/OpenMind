@@ -1,0 +1,40 @@
+.project-title{
+	font-size: 2em;
+	margin-bottom: 20px;
+}
+
+.project-list-container{
+	font-size: 1.5em;
+	text-align: center;
+}
+
+th{
+	text-align: center;
+}
+
+.setting-btn{
+	position: relative;
+	margin: 0;
+	cursor: pointer;
+}
+
+.option-list{
+	position: absolute;
+	top: 50px;
+	left: 0;
+	display: none;
+	padding: 5px 0;
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background-color: white;
+	z-index: 999;
+
+}
+
+.option-item{
+	padding: 5px 20px;
+	cursor: pointer;
+}
+
+.option-item:hover{
+	background-color: #ddd;
+}

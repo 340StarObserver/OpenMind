@@ -55,22 +55,22 @@ Server_App = flask.Flask(__name__)
 Server_App.secret_key = '\r\x9d1\xd1\xccW\x9e\xa6\x9a\x97[\xb1=\x93\x87\x15s<\xe8\xe3\x13DL?'
 
 
-# test page
-@Server_App.route("/test",methods=['GET'])
-def test():
-    return flask.render_template("test.html")
+# detail page
+@Server_App.route("/detail",methods=['GET'])
+def detail():
+    return flask.render_template("detail.html")
 
 
-# login page
-@Server_App.route("/login",methods=['GET'])
-def login():
-    return flask.render_template("login.html")
+# editproj page
+@Server_App.route("/editproj",methods=['GET'])
+def editproj():
+    return flask.render_template("editproj.html")
 
 
-# index page
-@Server_App.route("/index",methods=['GET'])
-def index():
-    return flask.render_template("index.html")
+# fileview page
+@Server_App.route("/fileview",methods=['GET'])
+def fileview():
+    return flask.render_template("fileview.html")
 
 
 # home page
@@ -79,10 +79,16 @@ def home():
     return flask.render_template("home.html")
 
 
-# detail page
-@Server_App.route("/detail",methods=['GET'])
-def detail():
-    return flask.render_template("detail.html")
+# index page
+@Server_App.route("/index",methods=['GET'])
+def index():
+    return flask.render_template("index.html")
+
+
+# login page
+@Server_App.route("/login",methods=['GET'])
+def login():
+    return flask.render_template("login.html")
 
 
 # newproj page
@@ -91,10 +97,16 @@ def newproj():
     return flask.render_template("newproj.html")
 
 
-# fileview page
-@Server_App.route("/fileview",methods=['GET'])
-def fileview():
-    return flask.render_template("fileview.html")
+# ownproj page
+@Server_App.route("/ownproj",methods=['GET'])
+def ownproj():
+    return flask.render_template("ownproj.html")
+
+
+# test page
+@Server_App.route("/test",methods=['GET'])
+def test():
+    return flask.render_template("test.html")
 
 
 # a test for sessions

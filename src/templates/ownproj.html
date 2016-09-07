@@ -18,16 +18,17 @@
     <script type="text/javascript" src="static/js/3rd/material.min.js"></script>
   	<link rel="stylesheet" type="text/css" href="static/css/3rd/ripples.min.css">
   	<script type="text/javascript" src="static/js/3rd/ripples.min.js"></script>
-	<link rel="stylesheet" href="static/css/global.css">
-	<link rel="stylesheet" href="static/css/home.css">
 
-    <!-- fontawesome -->
+  	 <!-- fontawesome -->
     <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
+	<link rel="stylesheet" href="static/css/global.css">
+	<link rel="stylesheet" href="static/css/ownproj.css">
+	
 	<script type="text/javascript" src="static/js/cookie.js"></script>
 	<script type="text/javascript" src="static/js/global.js"></script>
 	<script type="text/javascript" src="static/js/post.js"></script>
-	<script type="text/javascript" src="static/js/home.js"></script>
+	<script type="text/javascript" src="static/js/ownproj.js"></script>
 	
 </head>
 <body>
@@ -61,7 +62,7 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="javascript:void(0)" data-target="#" class="dropdown-toggle navbar-username" data-toggle="dropdown" aria-expanded="false"><b class="caret"></b></a>
+                        <a href="javascript:void(0)" data-target="#" class="dropdown-toggle navbar-username" data-toggle="dropdown" aria-expanded="false">wuxiaobao<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="active-degree-btn"><a href="javascript:void(0)">活跃记录</a></li>
                             <li id="edit-perinfo-btn"><a href="javascript:void(0)">修改个人信息</a></li>
@@ -81,24 +82,22 @@
     	<div class="project-container well">
     		<div class="project-title">
                 <i class="fa fa-th-list" aria-hidden="true"></i>
-    			<span class="browse-title">项目浏览</span>
-
-    			<span class="voting-project-toggle togglebutton">
-                    <label>
-                      <input id="a" type="checkbox" >查看正在投票的项目
-                    </label>
-                </span>
-    			
+    			<span class="own-proj-title">个人项目</span>
     		</div>
-    		<ul class="project-list">
-    			
-    		</ul>
-
-            <!-- 分页 -->
-            <ul class="pager">
-                <li id="prev-btn" class="disabled"><a class="withripple" href="javascript:void(0)">上一页</a></li>
-                <li id="next-btn" class=""><a class="withripple" href="javascript:void(0)">下一页</a></li>
-            </ul>
+    		<div class="project-list-container">
+            <table class="table table-striped table-hover ">
+              <thead>
+              <tr>
+                <th>编号</th>
+                <th>项目名称</th>
+                <th>发布时间</th>
+                <th>&nbsp;&nbsp;&nbsp;</th>
+              </tr>
+              </thead>
+              <tbody class="project-list">
+              </tbody>
+          </table>
+    		</div>
 
     	</div>
     </article>

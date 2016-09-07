@@ -100,7 +100,6 @@ function logoutPost(){
 }
 
 //5.新建项目的post
-
 function newProjectPost(name,  files_name_string, files, labels_string, links, intro, token){
 	var formData = new FormData();
 	formData.append('action_id', 5);
@@ -137,14 +136,14 @@ function newProjectPost(name,  files_name_string, files, labels_string, links, i
 }
 
 //6. 在已有的项目上分享新的收获post
-function uploadFilesPost(id, files_name_string, files, token){
+function editProjPost(id, files_name_string, files, token){
 
 	var formData = new FormData();
 	for (var i = 0; i < files.length; i++) {
 		formData.append( "file"+(i+1), files[i]);
 	}
 
-	formData.append("file_name",files_name_string);
+	formData.append("file_names",files_name_string);
 	formData.append("action_id", 6);
 	formData.append("proj_id", id);
 	formData.append("token", token);
@@ -152,15 +151,15 @@ function uploadFilesPost(id, files_name_string, files, token){
 	jQuery.ajax({
 	  url: '/action',
 	  type: 'POST',
+	  data: formData,
 	  processData: false,
 	  contentType: false,
-	  data: formData,
-
+	  
 	  beforeSend: function() {
 	    
 	  },
 	  success: function(data, textStatus, xhr) {
-	    dealUploadFilesReturn();
+	    dealEditProjReturn();
 
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
@@ -227,8 +226,6 @@ function getProjBriefPost(){
 
 
 //8. 浏览自己的所有项目的概要信息
-var ownProjBrief = [];
-
 function getOwnProjPost(){
 	jQuery.ajax({
 	  url: '/action',
@@ -274,27 +271,6 @@ function getProjDetailPost(id){
 	
 }
 
-//10. 同步数据post
-function updateDataPost(token){
-	jQuery.ajax({
-	  url: '/action',
-	  type: 'POST',
-	  dataType: 'json',
-	  data: {
-	  	action_id: 10,
-	  	token: token},
-	  beforeSend: function() {
-	    
-	  },
-	  success: function(data, textStatus, xhr) {
-	    
-	  },
-	  error: function(xhr, textStatus, errorThrown) {
-	    showWarningTips(textStatus);
-	  }
-	});
-	
-}
 
 //11. 查看我的活跃记录的post请求
 function getActiveDegreePost(month, num){
@@ -451,8 +427,7 @@ function voteForProjPost(id){
 }
 
 function fileGet(fileUrl){
-	
-	//如果是.md, .txt, .jpg, .png文件
+
 	jQuery.ajax({
 	  url: fileUrl,
 	  type: 'GET',
@@ -466,7 +441,6 @@ function fileGet(fileUrl){
 	  	
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
-	    showWarningTips(textStatus);
 	    alert('没有找到文件');
 	    window.close();
 	  }

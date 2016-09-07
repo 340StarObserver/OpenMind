@@ -9,6 +9,6 @@ iframe{
 }
 
 .file-container{
-	white-space: pre-wrap;
 	word-break: break-all;
+	white-space: pre-wrap;
 }
