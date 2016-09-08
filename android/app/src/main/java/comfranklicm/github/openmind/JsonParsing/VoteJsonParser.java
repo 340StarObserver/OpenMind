@@ -25,7 +25,7 @@ public class VoteJsonParser extends BaseJsonParser{
                 {
                     case "1":error="未登陆";break;
                     case "2":
-                        error = "你已经投过该项目了  ";
+                        error = "2";
                         break;
                     case "3":
                         error = "该项目此时不处于投票状态";

@@ -50,7 +50,7 @@ public class Fragment3 extends Fragment {
                 activity.transactiontoSetting();
             }
         });
-        if(!User.getInstance().isLogin()) {
+        if (!User.getInstance().isLogin() && !User.getInstance().isLastLogin()) {
             username.setVisibility(View.GONE);
             department.setVisibility(View.GONE);
             //xuxian3.setVisibility(View.GONE);

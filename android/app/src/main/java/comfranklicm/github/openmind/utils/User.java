@@ -64,6 +64,7 @@ public class User {
     private Comment currentParentComment;
     private String fileUrl;
     private Comment Commentadded;
+    private Integer currentChildCount;
     //构造方法私有化
     private User(){}
 
@@ -342,6 +343,14 @@ public class User {
             }
         }
         return null;
+    }
+
+    public Integer getCurrentChildCount() {
+        return currentChildCount;
+    }
+
+    public void setCurrentChildCount(Integer currentChildCount) {
+        this.currentChildCount = currentChildCount;
     }
 }
 

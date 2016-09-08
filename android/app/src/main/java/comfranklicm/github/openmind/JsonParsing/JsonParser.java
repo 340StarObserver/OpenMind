@@ -98,46 +98,47 @@ public class JsonParser {
             case 7:
             {
                try{
-                   JSONArray jsonArray=new JSONArray(strResult);
-                   for(int i=0;i<jsonArray.length();i++)
-                   {
-                       JSONObject jarr=(JSONObject)jsonArray.get(i);
-                       ProjectInfo projectInfo=new ProjectInfo();
-                       projectInfo.setProjectId(jarr.getString("_id"));
-                       projectInfo.setProjectName(jarr.getString("proj_name"));
-                       projectInfo.setOwnUser(jarr.getString("own_usr"));
-                       projectInfo.setOwnName(jarr.getString("own_name"));
-                       projectInfo.setOwn_head(jarr.getString("own_head"));
-                       projectInfo.setPubTime(jarr.getString("pub_time"));
-                       projectInfo.setIntroduction(jarr.getString("introduction"));
-                       projectInfo.setLabels(jarr.getString("labels"));
-                       JSONArray jsonArray1=new JSONArray(jarr.getString("labels"));
-                       List<String>stringList=new ArrayList<String>();
-                       for (int j=0;j<jsonArray1.length();j++)
-                       {
-                           if (j==0)
-                           {
-                               projectInfo.setLabel1(jsonArray1.getString(j));
-                           }
-                           try {
-                               if (j==1)
-                               {
-                                   projectInfo.setLabel2(jsonArray1.getString(j));
+                   if (!strResult.equals("[]")) {
+                       JSONArray jsonArray = new JSONArray(strResult);
+                       int i;
+                       for (i = 0; i < jsonArray.length(); i++) {
+                           JSONObject jarr = (JSONObject) jsonArray.get(i);
+                           ProjectInfo projectInfo = new ProjectInfo();
+                           projectInfo.setProjectId(jarr.getString("_id"));
+                           projectInfo.setProjectName(jarr.getString("proj_name"));
+                           projectInfo.setOwnUser(jarr.getString("own_usr"));
+                           projectInfo.setOwnName(jarr.getString("own_name"));
+                           projectInfo.setOwn_head(jarr.getString("own_head"));
+                           projectInfo.setPubTime(jarr.getString("pub_time"));
+                           projectInfo.setIntroduction(jarr.getString("introduction"));
+                           projectInfo.setLabels(jarr.getString("labels"));
+                           JSONArray jsonArray1 = new JSONArray(jarr.getString("labels"));
+                           List<String> stringList = new ArrayList<String>();
+                           for (int j = 0; j < jsonArray1.length(); j++) {
+                               if (j == 0) {
+                                   projectInfo.setLabel1(jsonArray1.getString(j));
                                }
-                           }catch (JSONException e)
-                           {
-                               e.printStackTrace();
+                               try {
+                                   if (j == 1) {
+                                       projectInfo.setLabel2(jsonArray1.getString(j));
+                                   }
+                               } catch (JSONException e) {
+                                   e.printStackTrace();
+                               }
+                               stringList.add(jsonArray1.getString(j));
                            }
-                           stringList.add(jsonArray1.getString(j));
+                           projectInfo.setLabellist(stringList);
+                           User.getInstance().allinfos.add(projectInfo);
                        }
-                       projectInfo.setLabellist(stringList);
-                       User.getInstance().allinfos.add(projectInfo);
+                       JSONObject jarr = (JSONObject) jsonArray.get(jsonArray.length() - 1);
+                       User.getInstance().setMinimumTime(jarr.getString("pub_time"));
+                       User.getInstance().setReturnCount(i);
+                   } else {
+                       User.getInstance().setReturnCount(0);
                    }
-                   JSONObject jarr=(JSONObject)jsonArray.get(jsonArray.length()-1);
-                   User.getInstance().setMinimumTime(jarr.getString("pub_time"));
-                   User.getInstance().setReturnCount(jsonArray.length());
                }catch (JSONException e)
                {
+                   User.getInstance().setReturnCount(0);
                  e.printStackTrace();
                }
                 break;

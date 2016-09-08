@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,9 +31,11 @@ import comfranklicm.github.openmind.JsonParsing.LoginJsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewAllProjectsJsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewVoteProjectsJsonParser;
 import comfranklicm.github.openmind.utils.Active;
+import comfranklicm.github.openmind.utils.ActiveInfo;
 import comfranklicm.github.openmind.utils.DataBaseUtil;
 import comfranklicm.github.openmind.utils.MD5;
 import comfranklicm.github.openmind.utils.NetUtil;
+import comfranklicm.github.openmind.utils.ProjectInfo;
 import comfranklicm.github.openmind.utils.User;
 
 
@@ -152,10 +155,12 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
        localCursor.close();
        if (User.getInstance().isLastLogin())
        {
-           Cursor cursor=database.rawQuery("select * from ProjectInfo where 1=?",new String[]{"1"});
+           Log.d("lastlogin", "true");
+           Cursor cursor = database.rawQuery("select * from ProjectInfo", null);
            int i=0;
             while (cursor.moveToNext())
             {
+                Log.d("lastlogin2", "true");
                 int idColumnIndex=cursor.getColumnIndex("id");
                 int nameColumnIndex=cursor.getColumnIndex("proj_name");
                 int ownUserColumnIndex=cursor.getColumnIndex("own_usr");
@@ -165,26 +170,32 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
                 int label1ColumnIndex=cursor.getColumnIndex("label1");
                 int label2ColumnIndex=cursor.getColumnIndex("label2");
                 int introductionColumnIndex=cursor.getColumnIndex("introduction");
-                User.getInstance().owninfos.get(i).setProjectId(cursor.getString(idColumnIndex));
-                User.getInstance().owninfos.get(i).setProjectName(cursor.getString(nameColumnIndex));
-                User.getInstance().owninfos.get(i).setOwnUser(cursor.getString(ownUserColumnIndex));
-                User.getInstance().owninfos.get(i).setOwnName(cursor.getString(ownNameColumnIndex));
-                User.getInstance().owninfos.get(i).setOwn_head(cursor.getString(ownHeadColumnIndex));
-                User.getInstance().owninfos.get(i).setPubTime(cursor.getString(pubTimeColumnIndex));
-                User.getInstance().owninfos.get(i).setLabel1(cursor.getString(label1ColumnIndex));
-                User.getInstance().owninfos.get(i).setLabel2(cursor.getString(label2ColumnIndex));
-                User.getInstance().owninfos.get(i).setIntroduction(cursor.getString(introductionColumnIndex));
+                ProjectInfo projectInfo = new ProjectInfo();
+                projectInfo.setProjectId(cursor.getString(idColumnIndex));
+                projectInfo.setProjectName(cursor.getString(nameColumnIndex));
+                projectInfo.setOwnUser(cursor.getString(ownUserColumnIndex));
+                projectInfo.setOwnName(cursor.getString(ownNameColumnIndex));
+                projectInfo.setOwn_head(cursor.getString(ownHeadColumnIndex));
+                projectInfo.setPubTime(cursor.getString(pubTimeColumnIndex));
+                projectInfo.setLabel1(cursor.getString(label1ColumnIndex));
+                projectInfo.setLabel2(cursor.getString(label2ColumnIndex));
+                projectInfo.setIntroduction(cursor.getString(introductionColumnIndex));
+                //System.out.println(User.getInstance().owninfos.get(i).getProjectId());
+                //System.out.println(User.getInstance().owninfos.get(i).getProjectName());
+                User.getInstance().owninfos.add(projectInfo);
             }
+
            cursor.close();
 
-           Cursor cursor1=database.rawQuery("select * from ActiveInfo where 1=?", new String[]{"1"});
+           Cursor cursor1 = database.rawQuery("select * from ActiveInfo", null);
            int j=0;
            while (cursor1.moveToNext())
            {
                int monthColumnIndex=cursor1.getColumnIndex("month");
                int activeColumnIndex=cursor1.getColumnIndex("active");
-               User.getInstance().ownactives.get(i).setMonth(cursor1.getString(monthColumnIndex));
-               User.getInstance().ownactives.get(i).setActive(cursor1.getString(activeColumnIndex));
+               ActiveInfo activeInfo = new ActiveInfo();
+               activeInfo.setMonth(cursor1.getString(monthColumnIndex));
+               activeInfo.setActive(cursor1.getString(activeColumnIndex));
                try {
                    JSONArray jsonArray=new JSONArray("["+cursor1.getString(activeColumnIndex)+"]");
                    List<Active>activeList=new ArrayList<Active>();
@@ -196,11 +207,12 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
                        active.setDegree(jsonObject.getString("degree"));
                        activeList.add(active);
                    }
-                   User.getInstance().ownactives.get(j).setActiveList(activeList);
+                   activeInfo.setActiveList(activeList);
                } catch (JSONException e) {
                    e.printStackTrace();
                }
                j++;
+               User.getInstance().ownactives.add(activeInfo);
            }
            cursor1.close();
        }

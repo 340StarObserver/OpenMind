@@ -3,7 +3,6 @@ package comfranklicm.github.openmind;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,15 +16,15 @@ import android.widget.Toast;
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.JsonParser;
 import comfranklicm.github.openmind.utils.NetUtil;
-import comfranklicm.github.openmind.utils.ProjectInfo;
 import comfranklicm.github.openmind.utils.User;
 
 public class AllProjectsFragment extends Fragment {
+    private static int num = User.getInstance().allinfos.size();
+    SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private ProjectListRecyViewAdapter adapter;
-    SwipeRefreshLayout swipeRefreshLayout;
     private int lastVisibleItem;
-    private static int num=User.getInstance().allinfos.size();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class AllProjectsFragment extends Fragment {
                 Log.d("return1",""+User.getInstance().getReturnCount());
                 Log.d("returnlastvisible",""+lastVisibleItem);
                 Log.d("returnadapter",""+adapter.getItemCount());
-                if (adapter.getItemCount()!=0&&newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == adapter.getItemCount()&&User.getInstance().getReturnCount()>=5) {
+                if (adapter.getItemCount() != 0 && newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == adapter.getItemCount()) {
                     adapter.changeMoreStatus(ProjectListRecyViewAdapter.LOADING_MORE);
                     adapter.notifyDataSetChanged();
                     new Handler().postDelayed(new Runnable() {
@@ -188,28 +187,29 @@ public class AllProjectsFragment extends Fragment {
 //                                            "]  ");
 //                                }
                                 JsonParser.ParseJson(7, runnable.getStrResult());
-                                adapter.notifyDataSetChanged();
-                                Log.d("return4",""+adapter.getItemCount());
+                                //adapter.notifyDataSetChanged();
+                                Log.d("return4", "" + adapter.getItemCount());
                                 num = num + User.getInstance().getReturnCount();
-                                Log.d("return2",""+User.getInstance().getReturnCount());
-                                Log.d("return3",""+num);
+                                Log.d("return2", "" + User.getInstance().getReturnCount());
+                                Log.d("return3", "" + num);
                             } else {
                                 Toast.makeText(getActivity(), "网络连接失败，请检查网络", Toast.LENGTH_LONG).show();
                             }
+                            if (User.getInstance().getReturnCount() >= 5) {
+                                adapter.changeMoreStatus(ProjectListRecyViewAdapter.PULLUP_LOAD_MORE);
+                            } else {
+                                adapter.changeMoreStatus(2);
+                            }
+                            adapter.notifyDataSetChanged();
                         }
                     }, 1000);
-                    adapter.notifyDataSetChanged();
-                    adapter.changeMoreStatus(ProjectListRecyViewAdapter.PULLUP_LOAD_MORE);
-                }else {
-                    adapter.changeMoreStatus(2);
-                    adapter.notifyDataSetChanged();
                 }
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                lastVisibleItem = num;
+                lastVisibleItem = layoutManager.findLastVisibleItemPosition();
             }
         });
         swipeRefreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.demo_swiperefreshlayout);
@@ -334,6 +334,7 @@ public class AllProjectsFragment extends Fragment {
                             num++;
                         }*/
                             num = num + 5;
+                            adapter.changeMoreStatus(ProjectListRecyViewAdapter.PULLUP_LOAD_MORE);
                             adapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(getActivity(), "网络连接失败，请检查网络", Toast.LENGTH_LONG).show();

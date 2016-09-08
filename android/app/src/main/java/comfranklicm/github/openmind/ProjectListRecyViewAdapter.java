@@ -31,7 +31,7 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private Context context;
     private int type;
     //上拉加载更多状态-默认为0
-    private int load_more_status=0;
+    private int load_more_status;
     public ProjectListRecyViewAdapter(Context context,int type){
          this.context=context;
          this.type=type;
@@ -66,10 +66,12 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                     FootViewHolder footViewHolder = (FootViewHolder) holder;
                     switch (load_more_status) {
                         case PULLUP_LOAD_MORE:
-                            footViewHolder.progressBar.setVisibility(View.VISIBLE);
+                            //footViewHolder.progressBar.setVisibility(View.VISIBLE);
+                            footViewHolder.progressBar.setVisibility(View.INVISIBLE);
                             footViewHolder.foot_view_item_tv.setText("上拉加载更多...");
                             break;
                         case LOADING_MORE:
+                            footViewHolder.progressBar.setVisibility(View.VISIBLE);
                             footViewHolder.foot_view_item_tv.setText("正在加载更多数据...");
                             break;
                         default:
@@ -93,11 +95,38 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 ((ProjectViewHolder) holder).textView1.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
                 ((ProjectViewHolder) holder).textView2.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
                 if (User.getInstance().voteinfos.get(j).getEverVoted().equals("true")) {
-                    ((ProjectViewHolder) holder).praiseLayout.setClickable(false);
+                    ((ProjectViewHolder) holder).praiseLayout.setClickable(true);
                     User.getInstance().voteinfos.get(j).setScore("" + (Integer.valueOf(User.getInstance().voteinfos.get(j).getScore()) + 1));
                     ((ProjectViewHolder) holder).textView6.setText(User.getInstance().voteinfos.get(j).getScore());
                     ((ProjectViewHolder) holder).textView3.setText(R.string.fa_thumbs_up);
                     ((ProjectViewHolder) holder).textView3.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
+                    ((ProjectViewHolder) holder).praiseLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            HttpPostRunnable r = new HttpPostRunnable();
+                            r.setActionId(15);
+                            r.setProjectId(User.getInstance().voteinfos.get(j).getProjectId());
+                            Thread t = new Thread(r);
+                            t.start();
+                            try {
+                                t.join();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            ((VoteJsonParser) User.getInstance().baseJsonParsers.get(14)).VoteJsonParsing(r.getStrResult());
+                            if (User.getInstance().getVoteResult().equals("false") && User.getInstance().getVoteError().equals("2")) {
+                                ((ProjectViewHolder) holder).praiseLayout.setClickable(true);
+                                //User.getInstance().voteinfos.get(j).setScore("" + (Integer.getInteger(User.getInstance().voteinfos.get(j).getScore()) - 1));
+                                ((ProjectViewHolder) holder).textView6.setText(User.getInstance().voteinfos.get(j).getScore());
+                                ((ProjectViewHolder) holder).textView3.setText(R.string.fa_thumbs_o_up);
+                                ((ProjectViewHolder) holder).textView3.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
+                                User.getInstance().voteinfos.get(j).setEverVoted("false");
+                            } else {
+                                Toast.makeText(context, "取消投票失败", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
                 } else {
                     ((ProjectViewHolder) holder).textView3.setText(R.string.fa_thumbs_o_up);
                     ((ProjectViewHolder) holder).textView3.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
@@ -118,11 +147,12 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                             }
                             ((VoteJsonParser) User.getInstance().baseJsonParsers.get(14)).VoteJsonParsing(r.getStrResult());
                             if (User.getInstance().getVoteResult().equals("true")) {
-                                ((ProjectViewHolder) holder).praiseLayout.setClickable(false);
-                                User.getInstance().voteinfos.get(j).setScore("" + (Integer.getInteger(User.getInstance().voteinfos.get(j).getScore()) + 1));
+                                ((ProjectViewHolder) holder).praiseLayout.setClickable(true);
+                                //User.getInstance().voteinfos.get(j).setScore("" + (Integer.getInteger(User.getInstance().voteinfos.get(j).getScore()) + 1));
                                 ((ProjectViewHolder) holder).textView6.setText(User.getInstance().voteinfos.get(j).getScore());
                                 ((ProjectViewHolder) holder).textView3.setText(R.string.fa_thumbs_up);
                                 ((ProjectViewHolder) holder).textView3.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
+                                User.getInstance().voteinfos.get(j).setEverVoted("true");
                             } else {
                                 Toast.makeText(context, "投票失败:" + User.getInstance().getVoteError(), Toast.LENGTH_LONG).show();
                             }

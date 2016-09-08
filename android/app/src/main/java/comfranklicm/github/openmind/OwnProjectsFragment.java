@@ -5,7 +5,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,13 +18,13 @@ import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.JsonParser;
 import comfranklicm.github.openmind.utils.DataBaseUtil;
 import comfranklicm.github.openmind.utils.NetUtil;
-import comfranklicm.github.openmind.utils.ProjectInfo;
 import comfranklicm.github.openmind.utils.User;
 
 public class OwnProjectsFragment extends Fragment {
+    SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private ProjectListRecyViewAdapter adapter;
-    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -90,7 +89,7 @@ public class OwnProjectsFragment extends Fragment {
                                     arrayOfObject[6] = User.getInstance().owninfos.get(i).getLabel1();
                                     arrayOfObject[7] = User.getInstance().owninfos.get(i).getLabel2();
                                     arrayOfObject[8] = User.getInstance().owninfos.get(i).getIntroduction();
-                                    writedb.execSQL("insert into ProjectInfo(id,proj_name,own_user,own_name,own_head,pub_time,label1,label2,introduction) values(?,?,?,?,?,?,?,?,?)", arrayOfObject);
+                                    writedb.execSQL("insert into ProjectInfo(id,proj_name,own_usr,own_name,own_head,pub_time,label1,label2,introduction) values(?,?,?,?,?,?,?,?,?)", arrayOfObject);
                                 }
                                 writedb.close();
                             } catch (SQLException e) {

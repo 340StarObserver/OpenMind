@@ -3,7 +3,6 @@ package comfranklicm.github.openmind.Httprequests;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -249,7 +248,7 @@ public class HttpPostRunnable implements Runnable{
                     }
                 }
                 else{
-                    Toast.makeText(context, "POST提交失败", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "POST提交失败", Toast.LENGTH_SHORT).show();
                 }
             } catch (ClientProtocolException e) {
                 // TODO Auto-generated catch block

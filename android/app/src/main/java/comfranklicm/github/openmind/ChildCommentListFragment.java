@@ -26,6 +26,7 @@ import java.util.Map;
 
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.CommentJsonParser;
+import comfranklicm.github.openmind.utils.Comment;
 import comfranklicm.github.openmind.utils.User;
 
 /**
@@ -45,6 +46,7 @@ public class ChildCommentListFragment extends Fragment{
     ChildCommentListViewAdapter commentsListViewAdapter;
     List<Map<String, Object>> commentsListItems;
     RelativeLayout relativeLayout,r1_bottom;
+    List<Comment> currentChildComment = new ArrayList<Comment>();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -128,8 +130,10 @@ public class ChildCommentListFragment extends Fragment{
                                 setListViewHeightBasedOnChildren(childCommentListView);
                                 r1_bottom.setVisibility(View.GONE);
                                 User.getInstance().currentChildComments.add(User.getInstance().getCommentadded());
+                                currentChildComment.add(User.getInstance().getCommentadded());
                                 User.getInstance().getCurrentParentComment().childCommentCount++;
                                 childNum.setText("相关回复 共" + User.getInstance().getCurrentParentComment().childCommentCount + "条");
+                                disInputText.setText("");
                             } else {
                                 Toast.makeText(getActivity(), "评论失败:" + User.getInstance().getCommentError(), Toast.LENGTH_LONG).show();
                             }
@@ -142,7 +146,7 @@ public class ChildCommentListFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 r1_bottom.setVisibility(View.VISIBLE);
-                disInputText.setHint("回复 " + User.getInstance().currentChildComments.get(position).getSendName());
+                disInputText.setHint("回复 " + currentChildComment.get(position).getSendName());
                 submitComment.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -153,9 +157,9 @@ public class ChildCommentListFragment extends Fragment{
                             r.setProjectName(User.getInstance().getCurrentProject().getProjectName());
                             r.setProjectOwnerUser(User.getInstance().getCurrentProject().getOwnUser());
                             r.setProjectOwnerName(User.getInstance().getCurrentProject().getOwnName());
-                            r.setReceiveuser(User.getInstance().currentChildComments.get(position).getSendUser());
-                            r.setReceivename(User.getInstance().currentChildComments.get(position).getSendName());
-                            r.setParentId(User.getInstance().currentChildComments.get(position).getParentId());
+                            r.setReceiveuser(currentChildComment.get(position).getSendUser());
+                            r.setReceivename(currentChildComment.get(position).getSendName());
+                            r.setParentId(currentChildComment.get(position).getParentId());
                             r.setContent(disInputText.getText().toString());
                             Thread t = new Thread(r);
                             t.start();
@@ -187,6 +191,7 @@ public class ChildCommentListFragment extends Fragment{
                                 setListViewHeightBasedOnChildren(childCommentListView);
                                 r1_bottom.setVisibility(View.GONE);
                                 User.getInstance().currentChildComments.add(User.getInstance().getCommentadded());
+                                currentChildComment.add(User.getInstance().getCommentadded());
                                 User.getInstance().getCurrentParentComment().childCommentCount++;
                                 childNum.setText("相关回复 共" + User.getInstance().getCurrentParentComment().childCommentCount + "条");
                                 disInputText.setText("");
@@ -220,6 +225,7 @@ public class ChildCommentListFragment extends Fragment{
                 map.put("comment_content", User.getInstance().currentChildComments.get(i).getContent());
                 map.put("comment_num", "");
                 listItems.add(map);
+                    currentChildComment.add(User.getInstance().currentChildComments.get(i));
             }
             }
         }
