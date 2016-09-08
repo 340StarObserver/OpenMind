@@ -83,8 +83,9 @@ def visit_my_projects(post_data,post_files,usr_sessions,server_conf):
         while i>=0:
             query_factor_1['_id'] = ObjectId(user_data['projects'][i])
             proj = mongo_client[db_name]['project_info'].find_one(query_factor_1,query_factor_3)
-            proj['_id'] = str(proj['_id'])
-            response.append(proj)
+            if proj is not None:
+                proj['_id'] = str(proj['_id'])
+                response.append(proj)
             i-=1
             del proj
 

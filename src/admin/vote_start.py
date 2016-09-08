@@ -38,6 +38,7 @@ def batch_get_projects(mongo_client,db_name,from_id,page_size):
         del proj
     del query_factor
     del data
+    res.reverse()
     return res
 
 
@@ -67,7 +68,7 @@ def show_project(proj_dict):
     time_str = time.strftime("%Y%m%d",time_array)
     inform = "project_name : %s\r\nmaster_user : %s\r\nmaster_name : %s\r\nshare_time : %s\r\nlabels : %s\r\nintroduction : %s\r\n"%(\
         proj_dict['proj_name'],proj_dict['own_usr'],proj_dict['own_name'],\
-        time_str,str(proj_dict['labels']),proj_dict['introduction'][0:50])
+        time_str,str(proj_dict['labels']),proj_dict['introduction'])
     print inform
     del time_array
     del time_str
@@ -94,11 +95,11 @@ def entrance(confpath):
 
     # print projects page by page
     proj_total_num = mongo_client[db_name]['project_info'].count()
-    page_size = 3
+    page_size = 2
     insert_projects = []
-    i = 0
+    i = max(0, proj_total_num - page_size)
     total_chosen = 0
-    while i < proj_total_num:
+    while i >= 0:
         del insert_projects[:]
         this_page_projs = batch_get_projects(mongo_client,db_name,i,page_size)
         real_num = len(this_page_projs)
@@ -126,7 +127,7 @@ def entrance(confpath):
             del input_ids
         except Exception,e:
             print str(e)
-        i+=page_size
+        i -= page_size
 
     # set all users' vote_limit to the max limit
     vote_max = int((total_chosen+1)*conf['user']['default_vote_max'])
