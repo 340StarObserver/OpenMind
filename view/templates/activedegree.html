@@ -19,7 +19,7 @@
   	<link rel="stylesheet" type="text/css" href="../static/css/3rd/ripples.min.css">
   	<script type="text/javascript" src="../static/js/3rd/ripples.min.js"></script>
 	<link rel="stylesheet" href="../static/css/global.css">
-	<link rel="stylesheet" href="../static/css/home.css">
+	<link rel="stylesheet" href="../static/css/activedegree.css">
 
     <!-- fontawesome -->
     <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@
 	<script type="text/javascript" src="../static/js/cookie.js"></script>
 	<script type="text/javascript" src="../static/js/global.js"></script>
 	<script type="text/javascript" src="../static/js/post.js"></script>
-	<script type="text/javascript" src="../static/js/home.js"></script>
+	<script type="text/javascript" src="../static/js/activedegree.js"></script>
 	
 </head>
 <body>
@@ -78,25 +78,59 @@
 
     <!-- 项目内容主体 -->
     <article class="container"> 
-    	<div class="project-container well">
-    		<div class="project-title">
-            <i class="fa fa-th-list" aria-hidden="true"></i>
-    			  <span class="browse-title">项目浏览</span>
-
-    			<span class="voting-project-toggle togglebutton">
-              <a href="votingproj.html" class="btn btn-default">查看正在投票的项目</a>
-          </span>
-    			
-    		</div>
-    		<ul class="project-list">
-    			
-    		</ul>
-
-            <!-- 分页 -->
-            <ul class="pager">
-                <li id="prev-btn" class="disabled"><a class="withripple" href="javascript:void(0)">上一页</a></li>
-                <li id="next-btn" class=""><a class="withripple" href="javascript:void(0)">下一页</a></li>
-            </ul>
+    	<div class="well">
+    		<div class="title">
+	        <i class="fa fa-comments" aria-hidden="true"></i>
+	    		<span class="">活跃程度</span>
+	    	</div>
+        <div class="active-degree-list-container">
+    		  <ul class="active-degree-list">
+    			<!-- <li class="degree-list-item">
+            <span class="month">
+              201608
+            </span>
+            <div class="square-list">
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i class="d-1"></i>
+              <i></i>
+              <i></i>
+              <i class="d-1"></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i class="d-1"></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i class="d-3"></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i class="d-4"></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+            </div>
+    			</li> -->
+          
+    		  </ul>
+        </div>
+        <div class="more-btn-container">
+          <a id="more-btn" href="javascript:void(0)" class="btn btn-raised btn-primary" id="more-active-degree">加载更多</a>
+        </div>
 
     	</div>
     </article>

@@ -3,10 +3,6 @@
 	margin-right: 20px;
 }
 
-.login-btn{
-	float: right;
-}
-
 .browse-title{
 	font-size: 2em;
 }
@@ -14,6 +10,7 @@
 .voting-project-toggle{
 	margin-left: 10px;
 }
+
 .voting-project-toggle>label{
 	font-size: 1em;
 }
@@ -86,16 +83,31 @@ i.fa{
 	margin-left: 75px;
 }
 
-#vote-btn{
-	font-size: .8em;
-	background-color: #ededed;
-	color: #336699;
-	border-radius: 8px;
+.vote-btn.btn.btn-default{
 	margin: 0;
-	padding: 5px 8px;
+	font-size: 1.2em;
+	padding: 0 10px;
+	color: #336699;
 }
 
-#vote-btn.disabled{
-	opacity: .5;
-	pointer-events: none;
+.vote-btn::before{
+	font-family: "FontAwesome";
+	content: "\f087";
+}
+
+.vote-btn.disabled{
+	opacity: .3;
+}
+
+.vote-btn.voted::before{
+	content: "\f164";
+}
+
+.vote-number{
+	color: #336699;
+}
+
+.vote-number::after{
+	font-family: 'FontAwesome';
+	content: attr(data-unit);
 }

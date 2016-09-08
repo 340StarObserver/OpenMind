@@ -172,9 +172,9 @@ function editProjPost(id, files_name_string, files, token){
 //7. 获取项目概要信息的post请求
 /*第一次请求*/
 function getProjBriefPostFirst(){
-	console.log("first get project brief info");
-	var timestamp = new Date().getTime();
 	
+	var timestamp = new Date().getTime();
+
 	jQuery.ajax({
 	  url: '/action',
 	  type: 'POST',
@@ -198,7 +198,7 @@ function getProjBriefPostFirst(){
 
 }
 
-  /*第二次及以后的请求*/
+/*第二次及以后的请求*/
 function getProjBriefPost(){
 	var projects = projectBrief[ projectBrief.length-1 ]
 	var timestamp = projects[ projects.length-1 ]["pub_time"];
@@ -283,7 +283,7 @@ function getActiveDegreePost(month, num){
 	  	month: month,	//201608
 	  	num: num},
 	  beforeSend: function() {
-	    //called when complete
+	  	
 	  },
 	  success: function(data, textStatus, xhr) {
 	    dealActiveDegreeReturn(data);
@@ -403,22 +403,20 @@ function getVotingProjPost(){
 }
 
 //15. 为喜爱的项目投票
-function voteForProjPost(id){
+function votePost(id, vote_btn){
 	jQuery.ajax({
 	  url: '/action',
 	  type: 'POST',
 	  dataType: 'json',
 	  data: {
-	  	action_id: 13,
+	  	action_id: 15,
 	  	proj_id: id},
 
 	  beforeSend: function() {
-	    //投票按钮失效
-	    disableBtn("#vote-btn");
-
+	  	vote_btn.addClass('disabled');
 	  },
 	  success: function(data, textStatus, xhr) {
-	    dealVoteReturn(data);
+	    dealVoteReturn(data, vote_btn);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);
