@@ -403,22 +403,20 @@ function getVotingProjPost(){
 }
 
 //15. 为喜爱的项目投票
-function voteForProjPost(id){
+function votePost(id, vote_btn){
 	jQuery.ajax({
 	  url: '/action',
 	  type: 'POST',
 	  dataType: 'json',
 	  data: {
-	  	action_id: 13,
+	  	action_id: 15,
 	  	proj_id: id},
 
 	  beforeSend: function() {
-	    //投票按钮失效
-	    disableBtn("#vote-btn");
-
+	  	vote_btn.addClass('disabled');
 	  },
 	  success: function(data, textStatus, xhr) {
-	    dealVoteReturn(data);
+	    dealVoteReturn(data, vote_btn);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);

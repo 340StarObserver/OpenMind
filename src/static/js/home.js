@@ -2,8 +2,6 @@ var currentPage ;
 var currentVotingPage ;
 //存储所有项目的概要信息,每个元素对应一页的信息
 var projectBrief=[];
-var votingProject = [];
-
 
 var example =[
 	[{
@@ -74,80 +72,6 @@ var example =[
 	}],
 	
 ];
-
-var votingExample = [
-	{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},
-	{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},
-	{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},
-	{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},
-	{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},
-	{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},
-	{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	}
-];
-
 
 $(document).ready(function() {
 
@@ -260,7 +184,7 @@ function updateProjectPage(data){
 	var html="";
 	//解析包含多个项目简要信息的json数组
 	for (var i = 0; i < data.length; i++) {
-		html += getProjectItemHtml( data[i] );
+		html += getProjItemHtml( data[i] );
 	}
 
 	//替换html
@@ -316,7 +240,7 @@ function dealProjBriefReturnFirst(data){
 }
 
 //获取每个项目简要信息生成的html
-function getProjectItemHtml(project){
+function getProjItemHtml(project){
 
 	if( project['own_head'] == "0"){
 		project['own_head'] = "../static/res/image/icon.png";
@@ -345,30 +269,30 @@ function getProjectItemHtml(project){
     return html;
 }
 
-function dealVotingProjReturn(data){
-	if( data.length == 0){
-		//TODO 显示暂无正在投票的项目
+// function dealVotingProjReturn(data){
+// 	if( data.length == 0){
+// 		//TODO 显示暂无正在投票的项目
 
-		return false;
-	}
+// 		return false;
+// 	}
 
-	var projects = [];
-	for (var i = 0; i < data.length; i++) {
-		projects.push( data[i] );
+// 	var projects = [];
+// 	for (var i = 0; i < data.length; i++) {
+// 		projects.push( data[i] );
 
-		if( (i+1) % 5 == 0){
-			// console.log( projects ); 
-			votingProject.push(projects);
-			projects = [];
+// 		if( (i+1) % 5 == 0){
+// 			// console.log( projects ); 
+// 			votingProject.push(projects);
+// 			projects = [];
 
-		}
-	}
+// 		}
+// 	}
 
-	//添加余下的
-	votingProject.push( projects );
+// 	//添加余下的
+// 	votingProject.push( projects );
 
-	disableBtn("#voting-prev-btn");
-}
+// 	disableBtn("#voting-prev-btn");
+// }
 
 function enableBtn(selector){
 	$(selector).removeClass('disabled');

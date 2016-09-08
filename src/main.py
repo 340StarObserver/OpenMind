@@ -109,6 +109,12 @@ def test():
     return flask.render_template("test.html")
 
 
+# votingproj page
+@Server_App.route("/votingproj",methods=['GET'])
+def votingproj():
+    return flask.render_template("votingproj.html")
+
+
 # a test for sessions
 @Server_App.route("/session",methods=['GET'])
 def session():
