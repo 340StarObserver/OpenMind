@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
-import comfranklicm.github.openmind.JsonParsing.JsonParser;
+import comfranklicm.github.openmind.JsonParsing.ViewVoteProjectsJsonParser;
 import comfranklicm.github.openmind.utils.NetUtil;
 import comfranklicm.github.openmind.utils.User;
 
@@ -98,7 +98,9 @@ public class VoteProjectsFragment extends Fragment {
 //                                    "                score        : 票数  \n" +
 //                                    "            }\n" +
 //                                    "]  ";
-                            JsonParser.ParseJson(14, runnable.getStrResult());
+                            // JsonParser.ParseJson(14, runnable.getStrResult());
+                            ((ViewVoteProjectsJsonParser) User.getInstance().baseJsonParsers.get(13)).ViewVoteProjectsJsonParsing(runnable.getStrResult());
+
                       /*  for (int i = 0; i < 5; i++) {
                             ProjectInfo projectInfo = new ProjectInfo();
                             projectInfo.setProjectName("voteprojectname" + num);
