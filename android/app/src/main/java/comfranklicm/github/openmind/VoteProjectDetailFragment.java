@@ -58,7 +58,6 @@ public class VoteProjectDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.project_voting_info_layout, container, false);
-        User.getInstance().index = 1;
         vote_area = (RelativeLayout) view.findViewById(R.id.vote_area);
         fa_thumb = (TextView) view.findViewById(R.id.fa_thumbs_up);
         if (User.getInstance().getCurrentProject().getEverVoted().equals("true")) {

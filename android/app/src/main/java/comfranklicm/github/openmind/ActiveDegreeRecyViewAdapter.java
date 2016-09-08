@@ -36,12 +36,12 @@ public class ActiveDegreeRecyViewAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final int j = position;
-        for (int i = 0; i < User.getInstance().getActiveInfo(date).getActiveList().size(); i++) {
-            if (Integer.valueOf(User.getInstance().getActiveInfo(date).getActiveList().get(i).getDegree()) > 10) {
+        for (int i = 0; i < User.getInstance().ownactives.get(j).getActiveList().size(); i++) {
+            if (Integer.valueOf(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) > 10) {
                 //根据活跃度的高度来更改方格的背景颜色
-                ((ActiveDegreeViewHolder) holder).day[Integer.valueOf(User.getInstance().getActiveInfo(date).getActiveList().get(i).getDay())].setBackgroundColor(Color.GRAY);
-            } else if (Integer.valueOf(User.getInstance().getActiveInfo(date).getActiveList().get(i).getDegree()) > 20) {
-                ((ActiveDegreeViewHolder) holder).day[Integer.valueOf(User.getInstance().getActiveInfo(date).getActiveList().get(i).getDay())].setBackgroundColor(Color.BLACK);
+                ((ActiveDegreeViewHolder) holder).day[Integer.valueOf(User.getInstance().ownactives.get(j).getActiveList().get(i).getDay())].setBackgroundColor(Color.GRAY);
+            } else if (Integer.valueOf(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) > 20) {
+                ((ActiveDegreeViewHolder) holder).day[Integer.valueOf(User.getInstance().ownactives.get(j).getActiveList().get(i).getDay())].setBackgroundColor(Color.BLACK);
             } else if (true) {
                 //......
             }
@@ -74,6 +74,8 @@ public class ActiveDegreeRecyViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     break;
                 } else {
                     ((ActiveDegreeViewHolder) holder).day[30].setVisibility(View.GONE);
+                    ((ActiveDegreeViewHolder) holder).day[29].setVisibility(View.GONE);
+                    ((ActiveDegreeViewHolder) holder).day[28].setVisibility(View.GONE);
                     break;
                 }
             }
