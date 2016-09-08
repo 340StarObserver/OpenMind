@@ -13,6 +13,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import comfranklicm.github.openmind.utils.User;
+
 
 public class Fragment1 extends Fragment implements View.OnClickListener {
     View view;
@@ -74,7 +76,17 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
 
             }
         });
-
+        if (User.getInstance().index == 0) {
+            resetcolor();
+            alltext.setBackgroundColor(Color.parseColor("#444444"));
+            votetext.setBackgroundColor(Color.parseColor("#000000"));
+            mPaper.setCurrentItem(0);
+        } else {
+            resetcolor();
+            votetext.setBackgroundColor(Color.parseColor("#444444"));
+            alltext.setBackgroundColor(Color.parseColor("#000000"));
+            mPaper.setCurrentItem(1);
+        }
             return view;
 	}
     private void resetcolor(){
@@ -107,8 +119,9 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
                   break;
               }
               case R.id.main_top_vote: {
+                  resetcolor();
                   votetext.setBackgroundColor(Color.parseColor("#444444"));
-                  votetext.setBackgroundColor(Color.parseColor("#000000"));
+                  alltext.setBackgroundColor(Color.parseColor("#000000"));
                   mPaper.setCurrentItem(1);
                   break;
               }

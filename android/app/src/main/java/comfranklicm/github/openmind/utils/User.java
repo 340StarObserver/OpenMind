@@ -19,6 +19,7 @@ import comfranklicm.github.openmind.JsonParsing.ViewProjectDetailJsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewVoteProjectsJsonParser;
 import comfranklicm.github.openmind.JsonParsing.VoteJsonParser;
 import comfranklicm.github.openmind.MyActivity;
+import comfranklicm.github.openmind.ProjectListRecyViewAdapter;
 
 /**
  * 用户信息封装，User单例
@@ -35,6 +36,8 @@ public class User {
     public List<Comment> currentParentComments = new ArrayList<Comment>();
     public List<Comment> currentChildComments = new ArrayList<Comment>();
     public List<Integer> votenumbers = new ArrayList<Integer>();
+    public ProjectListRecyViewAdapter projectListRecyViewAdapter;
+    public int index = 0;
     private String userName;
     private String passWord;
     private String realName;

@@ -29,6 +29,7 @@ public class AllProjectsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fg4, container, false);
+        User.getInstance().index = 0;
         recyclerView= (RecyclerView) view.findViewById(R.id.recyclerView);
         final Context context=getContext();
         adapter=new ProjectListRecyViewAdapter(context,0);

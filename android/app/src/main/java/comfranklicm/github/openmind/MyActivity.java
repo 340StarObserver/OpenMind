@@ -458,12 +458,8 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
 			course_text.setTextColor(blue);
 			course_layout.setBackgroundResource(R.drawable.ic_tabbar_bg_click);
             User.getInstance().setPageNumber(0);
-            if (fg1 == null) {
-                fg1 = new Fragment1();
-                transaction.add(R.id.content, fg1);
-            } else {
-                transaction.show(fg1);  
-            }
+            fg1 = new Fragment1();
+            transaction.add(R.id.content, fg1);
             transaction.commit();
             break;
 		case 1:
@@ -472,12 +468,8 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
 			found_layout.setBackgroundResource(R.drawable.ic_tabbar_bg_click);
             User.getInstance().setPageNumber(1);
             if (User.getInstance().isLastLogin()||User.getInstance().isLogin()) {
-                if (fg2 == null) {
-                    fg2 = new Fragment2();
-                    transaction.add(R.id.content, fg2);
-                } else {
-                    transaction.show(fg2);
-                }
+                fg2 = new Fragment2();
+                transaction.add(R.id.content, fg2);
                 transaction.commit();
             }else {
                 transactiontoLogin();

@@ -58,6 +58,7 @@ public class VoteProjectDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.project_voting_info_layout, container, false);
+        User.getInstance().index = 1;
         vote_area = (RelativeLayout) view.findViewById(R.id.vote_area);
         fa_thumb = (TextView) view.findViewById(R.id.fa_thumbs_up);
         if (User.getInstance().getCurrentProject().getEverVoted().equals("true")) {
@@ -108,6 +109,7 @@ public class VoteProjectDetailFragment extends Fragment {
                     votenum.setText("" + User.getInstance().getCurrentVotenum());
                     fa_thumb.setText(R.string.fa_thumbs_up);
                     fa_thumb.setTypeface(FontManager.getTypeface(getActivity(), FontManager.FONTAWESOME));
+                    User.getInstance().index = 1;
                 } else if (User.getInstance().getVoteResult().equals("false") && User.getInstance().getVoteError().equals("2")) {
                     vote_area.setClickable(true);
                     Integer jj = User.getInstance().getCurrentVotenum() - 1;
@@ -115,6 +117,7 @@ public class VoteProjectDetailFragment extends Fragment {
                     votenum.setText("" + User.getInstance().getCurrentVotenum());
                     fa_thumb.setText(R.string.fa_thumbs_o_up);
                     fa_thumb.setTypeface(FontManager.getTypeface(getActivity(), FontManager.FONTAWESOME));
+                    User.getInstance().index = 1;
                 } else {
                     Toast.makeText(getActivity(), "操作失败:" + User.getInstance().getVoteError(), Toast.LENGTH_LONG).show();
                 }
