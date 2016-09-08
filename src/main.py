@@ -55,6 +55,12 @@ Server_App = flask.Flask(__name__)
 Server_App.secret_key = '\r\x9d1\xd1\xccW\x9e\xa6\x9a\x97[\xb1=\x93\x87\x15s<\xe8\xe3\x13DL?'
 
 
+# activedegree page
+@Server_App.route("/activedegree",methods=['GET'])
+def activedegree():
+    return flask.render_template("activedegree.html")
+
+
 # detail page
 @Server_App.route("/detail",methods=['GET'])
 def detail():

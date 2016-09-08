@@ -172,9 +172,9 @@ function editProjPost(id, files_name_string, files, token){
 //7. 获取项目概要信息的post请求
 /*第一次请求*/
 function getProjBriefPostFirst(){
-	console.log("first get project brief info");
-	var timestamp = new Date().getTime();
 	
+	var timestamp = new Date().getTime();
+
 	jQuery.ajax({
 	  url: '/action',
 	  type: 'POST',
@@ -198,7 +198,7 @@ function getProjBriefPostFirst(){
 
 }
 
-  /*第二次及以后的请求*/
+/*第二次及以后的请求*/
 function getProjBriefPost(){
 	var projects = projectBrief[ projectBrief.length-1 ]
 	var timestamp = projects[ projects.length-1 ]["pub_time"];
@@ -283,7 +283,7 @@ function getActiveDegreePost(month, num){
 	  	month: month,	//201608
 	  	num: num},
 	  beforeSend: function() {
-	    //called when complete
+	  	
 	  },
 	  success: function(data, textStatus, xhr) {
 	    dealActiveDegreeReturn(data);
