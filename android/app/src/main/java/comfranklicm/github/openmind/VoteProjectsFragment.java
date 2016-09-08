@@ -1,10 +1,8 @@
 package comfranklicm.github.openmind;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,13 +15,13 @@ import android.widget.Toast;
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.JsonParser;
 import comfranklicm.github.openmind.utils.NetUtil;
-import comfranklicm.github.openmind.utils.ProjectInfo;
 import comfranklicm.github.openmind.utils.User;
 
 public class VoteProjectsFragment extends Fragment {
+    SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private ProjectListRecyViewAdapter adapter;
-    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,6 +39,7 @@ public class VoteProjectsFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        User.getInstance().votenumbers.clear();
                         User.getInstance().voteinfos.clear();
                         if (NetUtil.isNetworkConnectionActive(getActivity())) {
                             HttpPostRunnable runnable = new HttpPostRunnable();

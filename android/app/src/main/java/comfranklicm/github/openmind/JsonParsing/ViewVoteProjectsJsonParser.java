@@ -34,6 +34,8 @@ public class ViewVoteProjectsJsonParser extends BaseJsonParser{
                 projectInfo.setLabels(jarr.getString("labels"));
                 projectInfo.setEverVoted(jarr.getString("ever_voted"));
                 projectInfo.setScore(jarr.getString("score"));
+                Integer s = Integer.parseInt(jarr.getString("score"));
+                User.getInstance().votenumbers.add(s);
                 JSONArray jsonArray1=new JSONArray(jarr.getString("labels"));
                 List<String> stringList=new ArrayList<String>();
                 for (int j=0;j<jsonArray1.length();j++)

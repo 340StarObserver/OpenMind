@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ import comfranklicm.github.openmind.JsonParsing.VoteJsonParser;
 import comfranklicm.github.openmind.utils.User;
 
 /**
- * Created by Administrator on 2016/9/7.
+ * Created by FrankLicm on 2016/9/7.
  */
 public class VoteProjectDetailFragment extends Fragment {
     View view;
@@ -65,33 +66,10 @@ public class VoteProjectDetailFragment extends Fragment {
         } else {
             fa_thumb.setText(R.string.fa_thumbs_o_up);
             fa_thumb.setTypeface(FontManager.getTypeface(getActivity(), FontManager.FONTAWESOME));
-            vote_area.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    HttpPostRunnable r = new HttpPostRunnable();
-                    r.setActionId(15);
-                    r.setProjectId(User.getInstance().getCurrentProject().getProjectId());
-                    Thread t = new Thread(r);
-                    t.start();
-                    try {
-                        t.join();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    ((VoteJsonParser) User.getInstance().baseJsonParsers.get(14)).VoteJsonParsing(r.getStrResult());
-                    if (User.getInstance().getVoteResult().equals("true")) {
-                        User.getInstance().getCurrentProject().setScore("" + (Integer.getInteger(User.getInstance().getCurrentProject().getScore()) + 1));
-                        votenum.setText(User.getInstance().getCurrentProject().getScore());
-                        fa_thumb.setText(R.string.fa_thumbs_up);
-                        fa_thumb.setTypeface(FontManager.getTypeface(getActivity(), FontManager.FONTAWESOME));
-                    } else {
-                        Toast.makeText(getActivity(), "投票失败:" + User.getInstance().getVoteError(), Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
         }
+
         votenum = (TextView) view.findViewById(R.id.vote_num);
-        votenum.setText(User.getInstance().getCurrentProject().getScore());
+        votenum.setText("" + User.getInstance().getCurrentVotenum());
         commentButton = (Button) view.findViewById(R.id.button2);
         disInputText = (EditText) view.findViewById(R.id.group_discuss);
         disInputText.setVisibility(View.GONE);
@@ -108,6 +86,40 @@ public class VoteProjectDetailFragment extends Fragment {
             e.printStackTrace();
         }
         ((ViewProjectDetailJsonParser) User.getInstance().baseJsonParsers.get(8)).ViewProjectDetailJsonParsing(runnable.getStrResult());
+        vote_area.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HttpPostRunnable r = new HttpPostRunnable();
+                r.setActionId(15);
+                r.setProjectId(User.getInstance().getCurrentProject().getProjectId());
+                Thread t = new Thread(r);
+                t.start();
+                try {
+                    t.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                ((VoteJsonParser) User.getInstance().baseJsonParsers.get(14)).VoteJsonParsing(r.getStrResult());
+                if (User.getInstance().getVoteResult().equals("true")) {
+                    vote_area.setClickable(true);
+                    Log.d("score", "" + User.getInstance().getCurrentVotenum());
+                    Integer jj = User.getInstance().getCurrentVotenum() + 1;
+                    User.getInstance().setCurrentVotenum(jj);
+                    votenum.setText("" + User.getInstance().getCurrentVotenum());
+                    fa_thumb.setText(R.string.fa_thumbs_up);
+                    fa_thumb.setTypeface(FontManager.getTypeface(getActivity(), FontManager.FONTAWESOME));
+                } else if (User.getInstance().getVoteResult().equals("false") && User.getInstance().getVoteError().equals("2")) {
+                    vote_area.setClickable(true);
+                    Integer jj = User.getInstance().getCurrentVotenum() - 1;
+                    User.getInstance().setCurrentVotenum(jj);
+                    votenum.setText("" + User.getInstance().getCurrentVotenum());
+                    fa_thumb.setText(R.string.fa_thumbs_o_up);
+                    fa_thumb.setTypeface(FontManager.getTypeface(getActivity(), FontManager.FONTAWESOME));
+                } else {
+                    Toast.makeText(getActivity(), "操作失败:" + User.getInstance().getVoteError(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         seperateComment();
         getChildCommentNumber();
         initlayout();

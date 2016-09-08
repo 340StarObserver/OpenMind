@@ -34,6 +34,7 @@ public class User {
     public List<BaseJsonParser>baseJsonParsers=new ArrayList<BaseJsonParser>();
     public List<Comment> currentParentComments = new ArrayList<Comment>();
     public List<Comment> currentChildComments = new ArrayList<Comment>();
+    public List<Integer> votenumbers = new ArrayList<Integer>();
     private String userName;
     private String passWord;
     private String realName;
@@ -65,6 +66,7 @@ public class User {
     private String fileUrl;
     private Comment Commentadded;
     private Integer currentChildCount;
+    private Integer currentVotenum;
     //构造方法私有化
     private User(){}
 
@@ -351,6 +353,14 @@ public class User {
 
     public void setCurrentChildCount(Integer currentChildCount) {
         this.currentChildCount = currentChildCount;
+    }
+
+    public Integer getCurrentVotenum() {
+        return currentVotenum;
+    }
+
+    public void setCurrentVotenum(Integer currentVotenum) {
+        this.currentVotenum = currentVotenum;
     }
 }
 

@@ -96,73 +96,56 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 ((ProjectViewHolder) holder).textView2.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
                 if (User.getInstance().voteinfos.get(j).getEverVoted().equals("true")) {
                     ((ProjectViewHolder) holder).praiseLayout.setClickable(true);
-                    User.getInstance().voteinfos.get(j).setScore("" + (Integer.valueOf(User.getInstance().voteinfos.get(j).getScore()) + 1));
                     ((ProjectViewHolder) holder).textView6.setText(User.getInstance().voteinfos.get(j).getScore());
                     ((ProjectViewHolder) holder).textView3.setText(R.string.fa_thumbs_up);
                     ((ProjectViewHolder) holder).textView3.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
-                    ((ProjectViewHolder) holder).praiseLayout.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            HttpPostRunnable r = new HttpPostRunnable();
-                            r.setActionId(15);
-                            r.setProjectId(User.getInstance().voteinfos.get(j).getProjectId());
-                            Thread t = new Thread(r);
-                            t.start();
-                            try {
-                                t.join();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            ((VoteJsonParser) User.getInstance().baseJsonParsers.get(14)).VoteJsonParsing(r.getStrResult());
-                            if (User.getInstance().getVoteResult().equals("false") && User.getInstance().getVoteError().equals("2")) {
-                                ((ProjectViewHolder) holder).praiseLayout.setClickable(true);
-                                //User.getInstance().voteinfos.get(j).setScore("" + (Integer.getInteger(User.getInstance().voteinfos.get(j).getScore()) - 1));
-                                ((ProjectViewHolder) holder).textView6.setText(User.getInstance().voteinfos.get(j).getScore());
-                                ((ProjectViewHolder) holder).textView3.setText(R.string.fa_thumbs_o_up);
-                                ((ProjectViewHolder) holder).textView3.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
-                                User.getInstance().voteinfos.get(j).setEverVoted("false");
-                            } else {
-                                Toast.makeText(context, "取消投票失败", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
 
                 } else {
                     ((ProjectViewHolder) holder).textView3.setText(R.string.fa_thumbs_o_up);
                     ((ProjectViewHolder) holder).textView3.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
                     ((ProjectViewHolder) holder).textView6.setText(User.getInstance().voteinfos.get(j).getScore());
                     ((ProjectViewHolder) holder).praiseLayout.setClickable(true);
-                    ((ProjectViewHolder) holder).praiseLayout.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            HttpPostRunnable r = new HttpPostRunnable();
-                            r.setActionId(15);
-                            r.setProjectId(User.getInstance().voteinfos.get(j).getProjectId());
-                            Thread t = new Thread(r);
-                            t.start();
-                            try {
-                                t.join();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            ((VoteJsonParser) User.getInstance().baseJsonParsers.get(14)).VoteJsonParsing(r.getStrResult());
-                            if (User.getInstance().getVoteResult().equals("true")) {
-                                ((ProjectViewHolder) holder).praiseLayout.setClickable(true);
-                                //User.getInstance().voteinfos.get(j).setScore("" + (Integer.getInteger(User.getInstance().voteinfos.get(j).getScore()) + 1));
-                                ((ProjectViewHolder) holder).textView6.setText(User.getInstance().voteinfos.get(j).getScore());
-                                ((ProjectViewHolder) holder).textView3.setText(R.string.fa_thumbs_up);
-                                ((ProjectViewHolder) holder).textView3.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
-                                User.getInstance().voteinfos.get(j).setEverVoted("true");
-                            } else {
-                                Toast.makeText(context, "投票失败:" + User.getInstance().getVoteError(), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
                 }
+                ((ProjectViewHolder) holder).praiseLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        HttpPostRunnable r = new HttpPostRunnable();
+                        r.setActionId(15);
+                        r.setProjectId(User.getInstance().voteinfos.get(j).getProjectId());
+                        Thread t = new Thread(r);
+                        t.start();
+                        try {
+                            t.join();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        ((VoteJsonParser) User.getInstance().baseJsonParsers.get(14)).VoteJsonParsing(r.getStrResult());
+                        if (User.getInstance().getVoteResult().equals("true")) {
+                            ((ProjectViewHolder) holder).praiseLayout.setClickable(true);
+                            Integer jj = User.getInstance().votenumbers.get(j) + 1;
+                            User.getInstance().votenumbers.set(j, jj);
+                            ((ProjectViewHolder) holder).textView6.setText("" + User.getInstance().votenumbers.get(j));
+                            ((ProjectViewHolder) holder).textView3.setText(R.string.fa_thumbs_up);
+                            ((ProjectViewHolder) holder).textView3.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
+                            User.getInstance().voteinfos.get(j).setEverVoted("true");
+                        } else if (User.getInstance().getVoteResult().equals("false") && User.getInstance().getVoteError().equals("2")) {
+                            ((ProjectViewHolder) holder).praiseLayout.setClickable(true);
+                            Integer jj = User.getInstance().votenumbers.get(j) - 1;
+                            User.getInstance().votenumbers.set(j, jj);
+                            ((ProjectViewHolder) holder).textView6.setText("" + User.getInstance().votenumbers.get(j));
+                            ((ProjectViewHolder) holder).textView3.setText(R.string.fa_thumbs_o_up);
+                            ((ProjectViewHolder) holder).textView3.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
+                            User.getInstance().voteinfos.get(j).setEverVoted("false");
+                        } else {
+                            Toast.makeText(context, "操作失败:" + User.getInstance().getVoteError(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
                 ((ProjectViewHolder) holder).cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         User.getInstance().setCurrentProject(User.getInstance().voteinfos.get(j));
+                        User.getInstance().setCurrentVotenum(User.getInstance().votenumbers.get(j));
                         User.getInstance().getMyActivity().transactiontoVoteProjectDetail();
                     }
                 });
