@@ -406,7 +406,7 @@ function addLinkItem(remark, url){
 function dealNewProjectReturn(data){
 	if( data['result'] == true ){
 		setCookie("token", data['token'], 7);
-
+		location.href = '/home';
 	}else{
 		var errorReason;
 		switch( data['reason'] ){

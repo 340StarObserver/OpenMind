@@ -54,8 +54,9 @@ $(document).ready(function() {
 		// dealVoteReturn(data, vote_btn);
 	});
 
-	$(document).on('click', '.vote-btn.voted', function(event) {
-		
+	$(document).on('click', '.project-name', function(event) {
+		var id = $(this).attr("id");
+		location.href = "/detail?id="+id;
 	});
 
 });
