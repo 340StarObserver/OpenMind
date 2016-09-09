@@ -1,36 +1,3 @@
-var data=[
-	{
-		who_usr: 'LvYang',
-		who_name: 'LvYang',
-		who_head: '0',
-		time: 10,
-		proj_id: 'ffa',
-		proj_name: 'Bilibili guichu',
-		action_id: 0,
-		content: '别测试了，发布会讲什么'
-	},
-	{
-		who_usr: 'LvYang',
-		who_name: 'LvYang',
-		who_head: '0',
-		time: 10,
-		proj_id: 'ffa',
-		proj_name: 'Bilibili guichu',
-		action_id: 0,
-		content: '别测试了，发布会讲什么'
-	},
-	{
-		who_usr: 'LvYang',
-		who_name: 'LvYang',
-		who_head: '0',
-		time: 1467676799,
-		proj_id: 'ffa',
-		proj_name: 'Bilibili guichu',
-		action_id: 0,
-		content: '别测试了，发布会讲什么'
-	}
-
-];
 
 $(document).ready(function() {
 	
@@ -52,11 +19,11 @@ function dealMessageReturn(data){
 	if( data.length != 0 )
 		time_max = data[ data.length-1 ]['time'];
 
-	if( data.length < 2 ){
-		console.log( "length<2");
+	if( data.length < 5 ){
+		console.log( "length<5");
 		$('#no-more').css('display', 'block').fadeIn('fast');
 	}else{
-		console.log( "length>=2" );
+		console.log( "length>=5" );
 		$(window).scroll( moreMessage );
 	}
 

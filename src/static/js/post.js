@@ -90,7 +90,7 @@ function logoutPost(){
 
 	  },
 	  success: function(data, textStatus, xhr) {
-	    dealLogoutReturn();
+	    dealLogoutReturn(data);
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);
@@ -337,7 +337,7 @@ function getMessagePost(){
 	  data: {
 	  	action_id: 13,
 	  	time_max: time_max,
-	  	page_size: 2
+	  	page_size: 5
 	  },
 
 	  beforeSend: function(){

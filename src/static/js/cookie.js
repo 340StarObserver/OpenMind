@@ -29,7 +29,7 @@ function delCookie(key){
 }
 
 // delete all the cookies
-function cleanCookie(){
+function clearCookie(){
 	var pairs=document.cookie.split("; ");
 	var n=pairs.length;
 	for(var i=0;i<n;i++){

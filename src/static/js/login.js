@@ -1,4 +1,4 @@
-if( getCookie("token") !=null ){
+if( getCookie("username") !=null ){
 	location.href = "/home";
 }
 

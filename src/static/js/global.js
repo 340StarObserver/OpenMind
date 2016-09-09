@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	//查看是否有cookie
-	if( getCookie("token") != null ){
+	if( getCookie("username") != null ){
 		//显示用户名
 		var username = getCookie('username');
 	
@@ -14,6 +14,10 @@ $(document).ready(function() {
 		$('.navbar-header .navbar-toggle').remove();
 		$('.navbar .login-btn').show();	
 	}
+
+	$(document).on("click", "#logout-btn", function(){
+		logoutPost();
+	});
 
 	//取消.btn点击后的自动获取焦点
 	$(document).on('click', '.btn', function(event) {
