@@ -12,10 +12,12 @@
 
 .author-icon{
 	float: left;
+	width: 4em;
 }
 
 .author-icon img{
-	width: 70px;
+	display: block;
+	width: 100%;
 	border-radius: 100%;
 }
 

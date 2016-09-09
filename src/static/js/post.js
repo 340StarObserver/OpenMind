@@ -159,7 +159,7 @@ function editProjPost(id, files_name_string, files, token){
 	    
 	  },
 	  success: function(data, textStatus, xhr) {
-	    dealEditProjReturn();
+	    dealEditProjReturn(data);
 
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
