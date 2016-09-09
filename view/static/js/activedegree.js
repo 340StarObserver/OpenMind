@@ -25,7 +25,7 @@ $(document).ready(function() {
 
 	// dealActiveDegreeReturn( data );
 
-	$('.more-btn').click(function(event) {
+	$('#more-btn').click(function(event) {
 		getActiveDegree(num);
 
 	});
@@ -38,9 +38,20 @@ function getActiveDegree(){
 }
 
 function dealActiveDegreeReturn(data){
-	for (var i = 0; i < data.length; i++) {
-		addMonthList(data[i]);
+	for (var i = 0; i < num; i++) {
+		if( i< data.length)
+			addMonthList( data[i] );
+		else
+			addMonthListEmpty();
+
+		//当前月份减1
+		date.setMonth( date.getMonth()-1 );
+		console.log(date);
 	}
+
+	// for (var i = 0; i < data.length; i++) {
+	// 	addMonthList(data[i]);
+	// }
 
 	console.log(date);
 }
@@ -84,9 +95,24 @@ function addMonthList(data){
 
 	$('.active-degree-list').append( list_item );
 
-	//当前月份减1
-	date.setMonth( date.getMonth()-1 );
-	console.log(date);
+}
+
+function addMonthListEmpty(){
+	var html='<li class="degree-list-item">'+
+           	 '<span class="month">'+
+              transformDate(date)+
+            '</span>'+
+            '<div class="square-list">';
+
+	var days_num = daysInMonth(date); 
+	console.log( days_num );
+
+	for (var i = 0; i < days_num; i++)
+		html += '<i></i>';
+
+	html += '</div></li>';
+	var list_item = $(html);
+	$('.active-degree-list').append( list_item );
 }
 
 function transformDate(date){

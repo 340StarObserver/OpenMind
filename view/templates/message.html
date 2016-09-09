@@ -15,20 +15,19 @@
 
 	<!-- bootstrap-material-design -->
 	<link rel="stylesheet" type="text/css" href="static/css/3rd/bootstrap-material-design.css">
-  <script type="text/javascript" src="static/js/3rd/material.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="static/css/3rd/ripples.min.css">
-  <script type="text/javascript" src="static/js/3rd/ripples.min.js"></script>
+    <script type="text/javascript" src="static/js/3rd/material.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="static/css/3rd/ripples.min.css">
+  	<script type="text/javascript" src="static/js/3rd/ripples.min.js"></script>
 	<link rel="stylesheet" href="static/css/global.css">
-	<link rel="stylesheet" href="static/css/home.css">
+	<link rel="stylesheet" href="static/css/message.css">
 
-  <!-- fontawesome -->
-  <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <!-- fontawesome -->
+    <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 	<script type="text/javascript" src="static/js/cookie.js"></script>
 	<script type="text/javascript" src="static/js/global.js"></script>
 	<script type="text/javascript" src="static/js/post.js"></script>
-  <script type="text/javascript" src="static/js/votingproj.js"></script>
-	
+	<script type="text/javascript" src="static/js/message.js"></script>
 </head>
 <body>
 	<!-- 导航栏 -->
@@ -53,7 +52,7 @@
                   <li class="active"><a href="/home">首页</a></li>
                   <li><a href="/ownproj">管理项目</a></li>
                   <li><a href="/newproj">发布项目</a></li>
-                  <li><a href="/message">消息</a></li>
+                  <li><a href="javascript:void(0)">消息</a></li>
                 </ul>
                 <form class="navbar-form navbar-left">
                       <div class="form-group is-empty">
@@ -79,39 +78,19 @@
 
     <!-- 项目内容主体 -->
     <article class="container"> 
-    	<div class="project-container well">
-    		<div class="project-title">
-            <i class="fa fa-th-list" aria-hidden="true"></i>
-    			  <span class="browse-title">正在投票的项目</span>
-    		</div>
-    		<ul class="project-list">
-    			<!-- <li class="panel panel-default project-list-item">
-            <div class="panel-body">
-              <div class="item-title-wrapper clearfix">
-                <div class="item-title-left">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <span class="project-name" id="57cd0fb76cad201efb38f4e4">testf</span>
-                </div>
-                <div class="item-title-right">
-                  <a href="javascript:void(0)" class="btn btn-default vote-btn unvoted"></a>
-                  <strong class="vote-number">123票</strong>
-                  &nbsp;|&nbsp;
-                  <span class="create-time">2016-9-5</span>
-                </div>
-              </div>
-              <div class="brief-intro-wrapper clearfix">
-                <div class="author-info">
-                  <img class="author-icon" src="http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160828/1472381606sevennew_file_1.png" alt="author-icon">
-                  <div class="author-name">LvYang</div>
-                </div>
-                <div class="brief-intro">testf</div>
-              </div>
-            </div>
-          </li> -->
-    		</ul>
-    	</div>
+    	<div class="well">
+    		<div class="title">
+	        	<i class="fa fa-commenting" aria-hidden="true"></i>
+	    		<span class="">与我相关</span>
+	    	</div>
+			<div class="message-list-container">
+				<ul class="message-list">
+				</ul>
+                      <a id="no-more" href="javascript:void(0)" class="btn btn-default btn-lg btn-block btn-raised">已经加载全部</a>
+			</div>
+        </div>
     </article>
-	
+
 	<!-- 低栏部分 -->
 	<footer>
 		<div class="bottom-name">

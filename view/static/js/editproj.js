@@ -424,7 +424,7 @@ function dealEditProjReturn(data){
 	    
 	}
 	else{
-		setCookie('token', data['token'], 7);
+		setCookie("token", data['token'], 7);
 		location.href = '/ownproj';
 	}
 }
