@@ -502,8 +502,13 @@ public class JsonParser {
                       }
                       User.getInstance().aboutMeList.add(aboutMe);
                   }
+                  User.getInstance().setAboutMeReturnSize(jsonArray.length());
+                  JSONObject jsonObject = (JSONObject) jsonArray.get(jsonArray.length() - 1);
+                  User.getInstance().setAboutMeMiniTime(jsonObject.getString("time"));
+                  Log.d("aboutmetime", User.getInstance().getAboutMeMiniTime());
               }catch (JSONException e)
               {
+                  User.getInstance().setAboutMeReturnSize(0);
                   e.printStackTrace();
               }
                 break;

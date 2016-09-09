@@ -53,6 +53,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
     private FileViewFragment fg12;
     private VoteProjectDetailFragment fg13;
     private ActiveDegreeFragment fg14;
+    private AboutMeFragment fg15;
     private RelativeLayout course_layout;
 	private RelativeLayout found_layout;
 	private RelativeLayout settings_layout;
@@ -158,7 +159,6 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
        {
            Log.d("lastlogin", "true");
            Cursor cursor = database.rawQuery("select * from ProjectInfo", null);
-           int i=0;
             while (cursor.moveToNext())
             {
                 Log.d("lastlogin2", "true");
@@ -185,20 +185,19 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
                 //System.out.println(User.getInstance().owninfos.get(i).getProjectName());
                 User.getInstance().owninfos.add(projectInfo);
             }
-
            cursor.close();
-
            Cursor cursor1 = database.rawQuery("select * from ActiveInfo", null);
-           int j=0;
            while (cursor1.moveToNext())
            {
+               Log.d("activedata", "sdaf");
                int monthColumnIndex=cursor1.getColumnIndex("month");
                int activeColumnIndex=cursor1.getColumnIndex("active");
                ActiveInfo activeInfo = new ActiveInfo();
                activeInfo.setMonth(cursor1.getString(monthColumnIndex));
                activeInfo.setActive(cursor1.getString(activeColumnIndex));
                try {
-                   JSONArray jsonArray=new JSONArray("["+cursor1.getString(activeColumnIndex)+"]");
+                   Log.d("active", cursor1.getString(activeColumnIndex));
+                   JSONArray jsonArray = new JSONArray(cursor1.getString(activeColumnIndex));
                    List<Active>activeList=new ArrayList<Active>();
                    for (int k=0;k<jsonArray.length();k++)
                    {
@@ -212,7 +211,6 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
                } catch (JSONException e) {
                    e.printStackTrace();
                }
-               j++;
                User.getInstance().ownactives.add(activeInfo);
            }
            cursor1.close();
@@ -366,6 +364,9 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         if (fg14 != null) {
             transaction.hide(fg14);
         }
+        if (fg15 != null) {
+            transaction.hide(fg15);
+        }
     }
 
 	public void clearChioce()
@@ -444,6 +445,14 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         hideFragments(transaction);
         fg14 = new ActiveDegreeFragment();
         transaction.add(R.id.content, fg14);
+        transaction.commit();
+    }
+
+    public void transactiontoAboutMe() {
+        final FragmentTransaction transaction = fManager.beginTransaction();
+        hideFragments(transaction);
+        fg15 = new AboutMeFragment();
+        transaction.add(R.id.content, fg15);
         transaction.commit();
     }
 }

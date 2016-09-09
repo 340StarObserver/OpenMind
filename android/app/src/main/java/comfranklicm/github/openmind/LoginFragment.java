@@ -3,9 +3,7 @@ package comfranklicm.github.openmind;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.apache.http.protocol.HTTP;
-
-import java.sql.SQLDataException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.JsonParser;
@@ -150,15 +148,11 @@ public class LoginFragment extends Fragment {
 
                         HttpPostRunnable httpPostRunnable1=new HttpPostRunnable();
                         httpPostRunnable1.setActionId(11);
-                        httpPostRunnable1.setNum("12");
-                        Time time = new Time("GMT+8");
-                        String month;
-                        if (time.month<10) {
-                            month = "" + time.year + "0"+time.month;
-                        }
-                        else {
-                            month=""+time.year+time.month;
-                        }
+                        httpPostRunnable1.setNum("5");
+                        Date date = new Date();
+                        DateFormat format = new SimpleDateFormat("yyyyMM");
+                        String month = format.format(date);
+                        Log.d("activemonth", month);
                         httpPostRunnable1.setMonth(month);
                         Thread thread1=new Thread(httpPostRunnable1);
                         thread1.start();
@@ -167,26 +161,6 @@ public class LoginFragment extends Fragment {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-//                        httpPostRunnable1.setStrResult("  [  \n" +
-//                                "            {  \n" +
-//                                "                month  : 201608,\n" +
-//                                "\n" +
-//                                "                active :  \n" +
-//                                "                [  \n" +
-//                                "                    { day : 1,  degree : 10 },  \n" +
-//                                "                    { day : 29, degree : 6 }  \n" +
-//                                "                ]  \n" +
-//                                "               \n" +
-//                                "            },  \n" +
-//                                "            {  \n" +
-//                                "              month  : 201609,\n" +
-//                                "              active :  \n" +
-//                                "                [  \n" +
-//                                "                    { day : 1,  degree : 10 },  \n" +
-//                                "                    { day : 29, degree : 6 }  \n" +
-//                                "                ]  \n" +
-//                                "            }  \n" +
-//                                "        ]  ");
                         ((ViewActiveDataJsonParser)User.getInstance().baseJsonParsers.get(10)).ViewActiveDataJsonParsing(httpPostRunnable1.getStrResult());
                          try {
                              SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
@@ -197,6 +171,7 @@ public class LoginFragment extends Fragment {
                                   arrayOfObject[1]=User.getInstance().ownactives.get(i).getActive();
                                   writedb.execSQL("insert into ActiveInfo(month,active) values(?,?)",arrayOfObject);
                               }
+                             writedb.close();
                          }catch (SQLException e)
                          {
                              e.printStackTrace();

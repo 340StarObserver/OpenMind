@@ -157,7 +157,6 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String time = sdf.format(new Date(Long.parseLong(User.getInstance().owninfos.get(j).getPubTime()) * 1000));
                 ((ProjectViewHolder) holder).text_date.setText(time);
-                ((ProjectViewHolder) holder).text_date.setText(User.getInstance().owninfos.get(j).getPubTime());
                 ((ProjectViewHolder) holder).cardviewitem_title.setText(User.getInstance().owninfos.get(j).getProjectName());
                 ((ProjectViewHolder) holder).cardviewitem_desc.setText(User.getInstance().owninfos.get(j).getIntroduction());
                 ((ProjectViewHolder) holder).Label1.setText(User.getInstance().owninfos.get(j).getLabel1());

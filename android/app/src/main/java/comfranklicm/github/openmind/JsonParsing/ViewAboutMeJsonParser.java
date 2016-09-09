@@ -32,8 +32,12 @@ public class ViewAboutMeJsonParser extends BaseJsonParser{
                 }
                 User.getInstance().aboutMeList.add(aboutMe);
             }
+            User.getInstance().setAboutMeReturnSize(jsonArray.length());
+            JSONObject jsonObject = (JSONObject) jsonArray.get(jsonArray.length() - 1);
+            User.getInstance().setAboutMeMiniTime(jsonObject.getString("time"));
         }catch (JSONException e)
         {
+            User.getInstance().setAboutMeReturnSize(0);
             e.printStackTrace();
         }
     }

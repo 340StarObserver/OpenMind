@@ -72,6 +72,8 @@ public class User {
     private Integer currentVotenum;
     private String minimumMonth;
     private Integer activeReturnSize;
+    private String aboutMeMiniTime;
+    private Integer aboutMeReturnSize;
     //构造方法私有化
     private User(){}
 
@@ -372,6 +374,22 @@ public class User {
 
     public void setActiveReturnSize(Integer activeReturnSize) {
         this.activeReturnSize = activeReturnSize;
+    }
+
+    public Integer getAboutMeReturnSize() {
+        return aboutMeReturnSize;
+    }
+
+    public void setAboutMeReturnSize(Integer aboutMeReturnSize) {
+        this.aboutMeReturnSize = aboutMeReturnSize;
+    }
+
+    public String getAboutMeMiniTime() {
+        return aboutMeMiniTime;
+    }
+
+    public void setAboutMeMiniTime(String aboutMeMiniTime) {
+        this.aboutMeMiniTime = aboutMeMiniTime;
     }
 }
 
