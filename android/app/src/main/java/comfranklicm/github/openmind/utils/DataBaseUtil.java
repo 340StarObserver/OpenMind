@@ -1,10 +1,9 @@
 package comfranklicm.github.openmind.utils;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import java.util.List;
 
 
@@ -15,11 +14,11 @@ public class DataBaseUtil extends SQLiteOpenHelper{
 
 
     private static final String dataBaseName="opemmind.db";
-    private List<String>tableList;
     private static  final int Version=1;
-    private Context context;
     //为了实现每次使用该类时不创建新的对象而创建的静态对象
     private static DataBaseUtil DataBaseUtilInstance;
+    private List<String> tableList;
+    private Context context;
     //构造方法私有化
     /**
      * @param context 上下文
@@ -40,7 +39,7 @@ public class DataBaseUtil extends SQLiteOpenHelper{
         // 创建一个t_users表，id主键，自动增长，字符类型的username和pass;
         db.execSQL("create table if not exists User(id integer primary key autoincrement,username varchar(200),password varchar(200),realname varchar(200),department varchar(200),signuptime varchar(200),projects varchar(200),vote_limit integer(15))");
         db.execSQL("create table if not exists ProjectInfo(id varchar(200) primary key,proj_name varchar(200),own_usr varchar(200),own_name varchar(200),own_head varchar(200),pub_time varchar(200),label1 varchar(200),label2 varchar(200),introduction varchar(200))");
-        db.execSQL("create table if not exists ActiveInfo(id integer primary key autoincrement,month varchar(200),active varchar(3500))");
+        db.execSQL("create table if not exists ActiveInfo(month varchar(200) primary key,active varchar(3500))");
         //"create table t_users(id integer primary key autoincrement,username varchar(200),pass varchar(200) )"
     }
     @Override
