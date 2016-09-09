@@ -54,8 +54,8 @@ def create_project(post_data,post_files,usr_sessions,server_conf):
     th_proj_name = xss_filter.valid_filter(post_data['proj_name'])
     th_introduction = xss_filter.valid_filter(post_data['introduction'])
     th_labels = xss_filter.valid_filter(post_data['labels'])
-    th_links = xss_filter.valid_filter(post_data['links'])
-    th_file_names = xss_filter.valid_filter(post_data['file_names'])
+    th_links = post_data['links']
+    th_file_names = post_data['file_names']
 
     # prepare a dict for this project
     project_data = {}

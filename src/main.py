@@ -97,6 +97,12 @@ def login():
     return flask.render_template("login.html")
 
 
+# message page
+@Server_App.route("/message",methods=['GET'])
+def message():
+    return flask.render_template("message.html")
+
+
 # newproj page
 @Server_App.route("/newproj",methods=['GET'])
 def newproj():

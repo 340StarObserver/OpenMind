@@ -48,6 +48,12 @@ function dealActiveDegreeReturn(data){
 		date.setMonth( date.getMonth()-1 );
 		console.log(date);
 	}
+
+	// for (var i = 0; i < data.length; i++) {
+	// 	addMonthList(data[i]);
+	// }
+
+	console.log(date);
 }
 
 function addMonthList(data){

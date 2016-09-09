@@ -326,56 +326,31 @@ function commentPost(proj_id, proj_name, own_usr, own_name, recv_usr, recv_name,
 }
 
 //13. 查看与我相关的消息的post请求
-var ownNewsArray = [];
+var time_max = new Date().getTime();
 
-//第一次请求消息
-function getNewsPostFirst(){
-	var timestamp = new Date().getTime();
+function getMessagePost(){
+
 	jQuery.ajax({
 	  url: '/action',
 	  type: 'POST',
 	  dataType: 'json',
 	  data: {
 	  	action_id: 13,
-	  	time_max: timestamp
+	  	time_max: time_max,
+	  	page_size: 2
 	  },
+
 	  beforeSend: function(){
 
 	  },
 	  success: function(data, textStatus, xhr) {
-	  	dealNewsReturnFirst(data);
-	    
+	  	dealMessageReturn(data);
+
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    showWarningTips(textStatus);
 	  }
-	});
-}
 
-//第二次及以后请求消息
-function getNewsPost(){
-
-	var news = newsArray[ newsArray.length-1 ]
-	var timestamp = news[ news.length-1 ]["time"];
-	
-	jQuery.ajax({
-	  url: '/action',
-	  type: 'POST',
-	  dataType: 'json',
-	  data: {
-	  	action_id: 13,
-	  	time_max: timestamp
-	  },
-	  beforeSend: function(){
-
-	  },
-	  success: function(data, textStatus, xhr) {
-	  	dealNewsReturn(data);
-	    
-	  },
-	  error: function(xhr, textStatus, errorThrown) {
-	    showWarningTips(textStatus);
-	  }
 	});
 }
 
