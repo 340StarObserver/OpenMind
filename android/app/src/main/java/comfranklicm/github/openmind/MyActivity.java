@@ -52,6 +52,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
     private ChildCommentListFragment fg11;
     private FileViewFragment fg12;
     private VoteProjectDetailFragment fg13;
+    private ActiveDegreeFragment fg14;
     private RelativeLayout course_layout;
 	private RelativeLayout found_layout;
 	private RelativeLayout settings_layout;
@@ -229,94 +230,6 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
            } catch (InterruptedException e) {
                e.printStackTrace();
            }
-//             runnable.setStrResult("[\n" +
-//                     "            {  \n" +
-//                     "                _id          : fsdfsdfsdf,  \n" +
-//                     "\n" +
-//                     "                proj_name    : sdafsadfsd,  \n" +
-//                     "\n" +
-//                     "                own_usr      : sdfsadfasdf,  \n" +
-//                     "\n" +
-//                     "                own_name     : dsfafdsafsdf,  \n" +
-//                     "\n" +
-//                     "                own_head     : sadfsdafsdfsdf,                \n" +
-//                     "\n" +
-//                     "                pub_time     : 发布时间戳,  \n" +
-//                     "\n" +
-//                     "                labels       : [ 标签1, 标签2, ... ],  \n" +
-//                     "\n" +
-//                     "                introduction : 项目简介  \n" +
-//                     "            },  \n" +
-//                     "            {  \n" +
-//                     "                 _id          : sdgfdagsd,  \n" +
-//                     "\n" +
-//                     "                proj_name    : esfadsf,  \n" +
-//                     "\n" +
-//                     "                own_usr      : 发起人用户名,  \n" +
-//                     "\n" +
-//                     "                own_name     : 发起人姓名,  \n" +
-//                     "\n" +
-//                     "                own_head     : 发起人的头像,  \n" +
-//                     "\n" +
-//                     "                pub_time     : 发布时间戳,  \n" +
-//                     "\n" +
-//                     "                labels       : [ 标签1, 标签2, ... ],  \n" +
-//                     "\n" +
-//                     "                introduction : 项目简介  \n" +
-//                     "            },\n" +
-//                     "           {\n" +
-//                     "                _id          : safdsdaga,  \n" +
-//                     "\n" +
-//                     "                proj_name    : sdafsdaf,  \n" +
-//                     "\n" +
-//                     "                own_usr      : 发起人用户名,  \n" +
-//                     "\n" +
-//                     "                own_name     : 发起人姓名,  \n" +
-//                     "\n" +
-//                     "                own_head     : sdafsdafsdf,  \n" +
-//                     "      \n" +
-//                     "\n" +
-//                     "                pub_time     : 发布时间戳,  \n" +
-//                     "\n" +
-//                     "                labels       : [ 标签1, 标签2, ... ],  \n" +
-//                     "\n" +
-//                     "                introduction : 项目简介  \n" +
-//                     "            },\n" +
-//                     "                {\n" +
-//                     "                 _id          : sdafadfgsd,  \n" +
-//                     "\n" +
-//                     "                proj_name    : 项目名称,  \n" +
-//                     "\n" +
-//                     "                own_usr      : 发起人用户名,  \n" +
-//                     "\n" +
-//                     "                own_name     : 发起人姓名,  \n" +
-//                     "\n" +
-//                     "                own_head     : 发起人的头像,   \n" +
-//                     "\n" +
-//                     "                pub_time     : 发布时间戳,  \n" +
-//                     "\n" +
-//                     "                labels       : [ 标签1, 标签2, ... ],  \n" +
-//                     "\n" +
-//                     "                introduction : 项目简介  \n" +
-//                     "             },\n" +
-//                     "              {\n" +
-//                     "                _id          : sdafhujkd,  \n" +
-//                     "\n" +
-//                     "                proj_name    : 项目名称,  \n" +
-//                     "\n" +
-//                     "                own_usr      : 发起人用户名,  \n" +
-//                     "\n" +
-//                     "                own_name     : 发起人姓名,  \n" +
-//                     "\n" +
-//                     "                own_head     : 发起人的头像,                  \n" +
-//                     "\n" +
-//                     "                pub_time     : 发布时间戳,  \n" +
-//                     "\n" +
-//                     "                labels       : [ 标签1, 标签2, ... ],  \n" +
-//                     "\n" +
-//                     "                introduction : 项目简介  \n" +
-//                     "              }            \n" +
-//                     "]  ");
            try {
                ((ViewAllProjectsJsonParser) User.getInstance().baseJsonParsers.get(6)).ViewAllProjectsJsonParsing(runnable.getStrResult());
            } catch (NullPointerException e) {
@@ -331,52 +244,6 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
            } catch (InterruptedException e) {
                e.printStackTrace();
            }
-//           String str="[  \n" +
-//                   "            {  \n" +
-//                   "                _id          : 项目id,  \n" +
-//                   "\n" +
-//                   "                proj_name    : 项目名称,  \n" +
-//                   "\n" +
-//                   "                own_usr      : 发起人的用户名,  \n" +
-//                   "\n" +
-//                   "                own_name     : 发起人的名字,  \n" +
-//                   "\n" +
-//                   "                own_head     : 发起人的头像,  \n" +
-//                   "                # 是一个url链接，指向oss中的一张图  \n" +
-//                   "\n" +
-//                   "                pub_time     : 1445599887,  \n" +
-//                   "\n" +
-//                   "                labels       : [ 标签1, 标签2, ... ],  \n" +
-//                   "\n" +
-//                   "                links         : [{address:dfadf,description:fdadjflaj},{address:dfafdjlafij,description:fjdajdkfl}],\n" +
-//                   "\n" +
-//                   "                introduction : 项目简介,  \n" +
-//                   "\n" +
-//                   "                score        : 票数  \n" +
-//                   "            },  \n" +
-//                   "           {  \n" +
-//                   "                _id          : 项目id,  \n" +
-//                   "\n" +
-//                   "                proj_name    : 项目名称,  \n" +
-//                   "\n" +
-//                   "                own_usr      : 发起人的用户名,  \n" +
-//                   "\n" +
-//                   "                own_name     : 发起人的名字,  \n" +
-//                   "\n" +
-//                   "                own_head     : 发起人的头像,  \n" +
-//                   "                # 是一个url链接，指向oss中的一张图  \n" +
-//                   "\n" +
-//                   "                pub_time     : 1445599887,  \n" +
-//                   "\n" +
-//                   "                labels       : [ 标签1, 标签2, ... ],  \n" +
-//                   "\n" +
-//                   "                links         : [{address:dfadf,description:fdadjflaj},{address:dfafdjlafij,description:fjdajdkfl}],  \n" +
-//                   "\n" +
-//                   "                introduction : 项目简介,  \n" +
-//                   "\n" +
-//                   "                score        : 票数  \n" +
-//                   "            }\n" +
-//                   "]  ";
            try {
                ((ViewVoteProjectsJsonParser) User.getInstance().baseJsonParsers.get(13)).ViewVoteProjectsJsonParsing(runnable1.getStrResult());
            } catch (NullPointerException e) {
@@ -385,39 +252,6 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
        }else {
            Toast.makeText(this,"网络连接失败，请检查网络",Toast.LENGTH_LONG).show();
        }
-     /*  for (int i=0;i<5;i++)
-       {
-           ProjectInfo projectInfo=new ProjectInfo();
-           projectInfo.setProjectName("allprojectname"+i);
-           projectInfo.setIntroduction("Adobe illustrator是一种应用于出版、多媒体和在线图像的工业标准矢量插画的软件，作为一款非常好的图片处理工具，Adobe Illustrator广泛应用于印刷出版、海报书籍排版、专业插..." + i);
-           projectInfo.setPubTime("2016-8-28");
-           projectInfo.setOwnUser("allwriter" + i);
-           projectInfo.setLabel1("alllabel" + i + 1);
-           projectInfo.setLabel2("alllabel" + i + 2);
-           User.getInstance().allinfos.add(projectInfo);
-       }
-       for (int i=0;i<5;i++)
-       {
-           ProjectInfo projectInfo=new ProjectInfo();
-           projectInfo.setProjectName("voteprojectname" + i);
-           projectInfo.setIntroduction("Adobe illustrator是一种应用于出版、多媒体和在线图像的工业标准矢量插画的软件，作为一款非常好的图片处理工具，Adobe Illustrator广泛应用于印刷出版、海报书籍排版、专业插..." + i);
-           projectInfo.setPubTime("2016-8-28");
-           projectInfo.setOwnUser("votewriter" + i);
-           projectInfo.setLabel1("votelabel" + i + 1);
-           projectInfo.setLabel2("votelabel" + i + 2);
-           User.getInstance().voteinfos.add(projectInfo);
-       }
-       for (int i=0;i<5;i++)
-       {
-           ProjectInfo projectInfo=new ProjectInfo();
-           projectInfo.setProjectName("ownprojectname" + i);
-           projectInfo.setIntroduction("Adobe illustrator是一种应用于出版、多媒体和在线图像的工业标准矢量插画的软件，作为一款非常好的图片处理工具，Adobe Illustrator广泛应用于印刷出版、海报书籍排版、专业插..." + i);
-           projectInfo.setPubTime("2016-8-28");
-           projectInfo.setOwnUser("ownwriter");
-           projectInfo.setLabel1("ownlabel" + i + 1);
-           projectInfo.setLabel2("ownlabel" + i + 2);
-           User.getInstance().owninfos.add(projectInfo);
-       }*/
    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -529,6 +363,9 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         if (fg13 != null) {
             transaction.hide(fg13);
         }
+        if (fg14 != null) {
+            transaction.hide(fg14);
+        }
     }
 
 	public void clearChioce()
@@ -599,6 +436,14 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         hideFragments(transaction);
         fg13 = new VoteProjectDetailFragment();
         transaction.add(R.id.content, fg13);
+        transaction.commit();
+    }
+
+    public void transactiontoActiveDegree() {
+        final FragmentTransaction transaction = fManager.beginTransaction();
+        hideFragments(transaction);
+        fg14 = new ActiveDegreeFragment();
+        transaction.add(R.id.content, fg14);
         transaction.commit();
     }
 }

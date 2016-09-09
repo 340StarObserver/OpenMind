@@ -433,8 +433,25 @@ public class JsonParser {
                          activeInfo.setActiveList(activeList);
                          User.getInstance().ownactives.add(activeInfo);
                      }
+                     User.getInstance().setActiveReturnSize(jsonArray1.length());
+                     String date = ((JSONObject) jsonArray1.get(jsonArray1.length() - 1)).getString("month");
+                     int year = Integer.parseInt(date.substring(0, 3));
+                     int month = Integer.parseInt(date.substring(4));
+                     if (month == 12) {
+                         year++;
+                         month = 1;
+                     } else {
+                         month++;
+                     }
+                     if (month < 10) {
+                         date = "" + year + "0" + month;
+                     } else {
+                         date = "" + year + month;
+                     }
+                     User.getInstance().setMinimumMonth(date);
                  }catch (JSONException e)
                  {
+                     User.getInstance().setActiveReturnSize(0);
                      e.printStackTrace();
                  }
                 break;

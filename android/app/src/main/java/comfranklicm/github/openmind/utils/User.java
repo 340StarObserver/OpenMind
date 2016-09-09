@@ -70,6 +70,8 @@ public class User {
     private Comment Commentadded;
     private Integer currentChildCount;
     private Integer currentVotenum;
+    private String minimumMonth;
+    private Integer activeReturnSize;
     //构造方法私有化
     private User(){}
 
@@ -340,16 +342,6 @@ public class User {
         Commentadded = commentadded;
     }
 
-    //根据日期来获取当月的活跃记录 add by lyy 2016-9-5
-    public ActiveInfo getActiveInfo(String date) {
-        for (int i = 0; i < ownactives.size(); i++) {
-            if (ownactives.get(i).getMonth().equals(date)) {
-                return ownactives.get(i);
-            }
-        }
-        return null;
-    }
-
     public Integer getCurrentChildCount() {
         return currentChildCount;
     }
@@ -364,6 +356,22 @@ public class User {
 
     public void setCurrentVotenum(Integer currentVotenum) {
         this.currentVotenum = currentVotenum;
+    }
+
+    public String getMinimumMonth() {
+        return minimumMonth;
+    }
+
+    public void setMinimumMonth(String minimumMonth) {
+        this.minimumMonth = minimumMonth;
+    }
+
+    public Integer getActiveReturnSize() {
+        return activeReturnSize;
+    }
+
+    public void setActiveReturnSize(Integer activeReturnSize) {
+        this.activeReturnSize = activeReturnSize;
     }
 }
 

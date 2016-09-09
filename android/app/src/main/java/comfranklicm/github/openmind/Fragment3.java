@@ -52,6 +52,7 @@ public class Fragment3 extends Fragment {
         });
         if (!User.getInstance().isLogin() && !User.getInstance().isLastLogin()) {
             username.setVisibility(View.GONE);
+            active.setVisibility(View.GONE);
             department.setVisibility(View.GONE);
             //xuxian3.setVisibility(View.GONE);
             aboutme.setVisibility(View.GONE);
@@ -66,6 +67,13 @@ public class Fragment3 extends Fragment {
             loginorname.setText(User.getInstance().getRealName());
             username.setText(User.getInstance().getUserName());
             department.setText(User.getInstance().getDepartment());
+            active.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MyActivity activity = (MyActivity) getActivity();
+                    activity.transactiontoActiveDegree();
+                }
+            });
         }
     }
 }

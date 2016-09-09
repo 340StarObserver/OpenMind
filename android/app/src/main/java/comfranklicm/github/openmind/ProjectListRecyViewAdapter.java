@@ -229,7 +229,6 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 return TYPE_ITEM;
             }
         } else return TYPE_ITEM;
-        //return super.getItemViewType(position);
     }
 
     /**

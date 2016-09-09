@@ -3,6 +3,8 @@ package comfranklicm.github.openmind;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -14,110 +16,150 @@ import comfranklicm.github.openmind.utils.User;
  * Created by lyy on 2016/9/5.
  */
 public class ActiveDegreeRecyViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    //    private static final int TYPE_ITEM =0;  //普通Item View
-//    private static final int TYPE_FOOTER = 1;  //顶部FootView
     //上拉加载更多
     public static final int PULLUP_LOAD_MORE = 0;
     //正在加载中
     public static final int LOADING_MORE = 1;
+    private static final int TYPE_ITEM = 0;  //普通Item View
+    private static final int TYPE_FOOTER = 1;  //顶部FootView
     private Context context;
     private String year, month;
     private String date;
     //上拉加载更多状态-默认为0
     private int load_more_status = 0;
 
-    public ActiveDegreeRecyViewAdapter(Context context, String date) {
+    public ActiveDegreeRecyViewAdapter(Context context) {
         this.context = context;
-        this.date = date;
-        this.year = date.substring(0, 4);
-        this.month = date.substring(4);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final int j = position;
+        if (holder instanceof ActiveDegreeViewHolder) {
+            date = User.getInstance().ownactives.get(j).getMonth();
+            this.year = date.substring(0, 4);
+            Log.d("activedate", date);
+            Log.d("activeyear", year);
+            this.month = date.substring(4);
+            Log.d("activemonth", month);
         for (int i = 0; i < User.getInstance().ownactives.get(j).getActiveList().size(); i++) {
-            if (Integer.valueOf(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) > 10) {
+            if (Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) > 0 && Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) <= 10) {
                 //根据活跃度的高度来更改方格的背景颜色
-                ((ActiveDegreeViewHolder) holder).day[Integer.valueOf(User.getInstance().ownactives.get(j).getActiveList().get(i).getDay())].setBackgroundColor(Color.GRAY);
-            } else if (Integer.valueOf(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) > 20) {
-                ((ActiveDegreeViewHolder) holder).day[Integer.valueOf(User.getInstance().ownactives.get(j).getActiveList().get(i).getDay())].setBackgroundColor(Color.BLACK);
-            } else if (true) {
+                ((ActiveDegreeViewHolder) holder).day[Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDay()) - 1].setBackgroundColor(Color.parseColor("#1e6823"));
+            } else if (Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) <= 30 && Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) > 10) {
+                ((ActiveDegreeViewHolder) holder).day[Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDay()) - 1].setBackgroundColor(Color.parseColor("#44a340"));
+            } else if (Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) <= 60 && Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) > 30) {
                 //......
+                ((ActiveDegreeViewHolder) holder).day[Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDay()) - 1].setBackgroundColor(Color.parseColor("#8cc665"));
+            } else if (Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) <= 100 && Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) > 60) {
+                ((ActiveDegreeViewHolder) holder).day[Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDay()) - 1].setBackgroundColor(Color.parseColor("#d6e685"));
+            } else if (Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDegree()) > 100) {
+                ((ActiveDegreeViewHolder) holder).day[Integer.parseInt(User.getInstance().ownactives.get(j).getActiveList().get(i).getDay()) - 1].setBackgroundColor(Color.parseColor("#eeeeee"));
             }
         }
         switch (month) {
-            case "1":
-            case "3":
-            case "5":
-            case "7":
-            case "8":
+            case "01":
+                ((ActiveDegreeViewHolder) holder).date.setText(year + " Jan.");
+                break;
+            case "03":
+                ((ActiveDegreeViewHolder) holder).date.setText(year + " Mar.");
+                break;
+            case "05":
+                ((ActiveDegreeViewHolder) holder).date.setText(year + " May.");
+                break;
+            case "07":
+                ((ActiveDegreeViewHolder) holder).date.setText(year + " Jul.");
+                break;
+            case "08":
+                ((ActiveDegreeViewHolder) holder).date.setText(year + " Aug.");
+                break;
             case "10":
-            case "12": {
+                ((ActiveDegreeViewHolder) holder).date.setText(year + " Oct.");
                 break;
-            }
-            case "4":
-            case "6":
-            case "9":
-            case "11": {
-                ((ActiveDegreeViewHolder) holder).day[30].setVisibility(View.GONE);
+            case "12":
+                ((ActiveDegreeViewHolder) holder).date.setText(year + " Dec.");
                 break;
-            }
-            case "2": {
-                if (Integer.valueOf(year) % 4 == 0 && Integer.valueOf(year) % 100 != 0) {
-                    ((ActiveDegreeViewHolder) holder).day[30].setVisibility(View.GONE);
-                    ((ActiveDegreeViewHolder) holder).day[29].setVisibility(View.GONE);
-                    break;
-                } else if (Integer.valueOf(year) % 400 == 0) {
-                    ((ActiveDegreeViewHolder) holder).day[30].setVisibility(View.GONE);
-                    ((ActiveDegreeViewHolder) holder).day[29].setVisibility(View.GONE);
-                    break;
-                } else {
-                    ((ActiveDegreeViewHolder) holder).day[30].setVisibility(View.GONE);
-                    ((ActiveDegreeViewHolder) holder).day[29].setVisibility(View.GONE);
-                    ((ActiveDegreeViewHolder) holder).day[28].setVisibility(View.GONE);
-                    break;
-                }
-            }
+            case "04":
+                ((ActiveDegreeViewHolder) holder).day[30].setVisibility(View.INVISIBLE);
+                ((ActiveDegreeViewHolder) holder).date.setText(year + " Apr.");
+                break;
+            case "06":
+                ((ActiveDegreeViewHolder) holder).day[30].setVisibility(View.INVISIBLE);
+                ((ActiveDegreeViewHolder) holder).date.setText(year + " Jun.");
+                break;
+            case "09":
+                ((ActiveDegreeViewHolder) holder).day[30].setVisibility(View.INVISIBLE);
+                ((ActiveDegreeViewHolder) holder).date.setText(year + " Sep.");
+                break;
+            case "11":
+                ((ActiveDegreeViewHolder) holder).day[30].setVisibility(View.INVISIBLE);
+                ((ActiveDegreeViewHolder) holder).date.setText(year + " Nov.");
+                break;
 
+            case "02": {
+                if (Integer.valueOf(year) % 4 == 0 && Integer.valueOf(year) % 100 != 0) {
+                    ((ActiveDegreeViewHolder) holder).day[30].setVisibility(View.INVISIBLE);
+                    ((ActiveDegreeViewHolder) holder).day[29].setVisibility(View.INVISIBLE);
+                } else if (Integer.valueOf(year) % 400 == 0) {
+                    ((ActiveDegreeViewHolder) holder).day[30].setVisibility(View.INVISIBLE);
+                    ((ActiveDegreeViewHolder) holder).day[29].setVisibility(View.INVISIBLE);
+                } else {
+                    ((ActiveDegreeViewHolder) holder).day[30].setVisibility(View.INVISIBLE);
+                    ((ActiveDegreeViewHolder) holder).day[29].setVisibility(View.INVISIBLE);
+                    ((ActiveDegreeViewHolder) holder).day[28].setVisibility(View.INVISIBLE);
+                }
+                ((ActiveDegreeViewHolder) holder).date.setText(year + " Feb.");
+                break;
+            }
             default:
                 break;
+        }
+        } else if (holder instanceof FootViewHolder) {
+            FootViewHolder footViewHolder = (FootViewHolder) holder;
+            switch (load_more_status) {
+                case PULLUP_LOAD_MORE:
+                    //footViewHolder.progressBar.setVisibility(View.VISIBLE);
+                    footViewHolder.progressBar.setVisibility(View.INVISIBLE);
+                    footViewHolder.foot_view_item_tv.setText("上拉加载更多...");
+                    break;
+                case LOADING_MORE:
+                    footViewHolder.progressBar.setVisibility(View.VISIBLE);
+                    footViewHolder.foot_view_item_tv.setText("正在加载更多数据...");
+                    break;
+                default:
+                    footViewHolder.foot_view_item_tv.setText("已经没有更多数据了");
+                    footViewHolder.progressBar.setVisibility(View.INVISIBLE);
+                    break;
+            }
         }
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        if (viewType == TYPE_ITEM) {
-//            View v = LayoutInflater.from(context).inflate(R.layout.active_degree, parent, false);
-//            ActiveDegreeViewHolder viewHolder = new ActiveDegreeViewHolder(v);
-//            return viewHolder;
-//        } else if (viewType == TYPE_FOOTER) {
-//            View foot_view = LayoutInflater.from(context).inflate(R.layout.recycler_load_more_layout, parent, false);
-//            FootViewHolder footViewHolder = new FootViewHolder(foot_view);
-//            return footViewHolder;
-//        }
+        if (viewType == TYPE_ITEM) {
+            View v = LayoutInflater.from(context).inflate(R.layout.active_degree, parent, false);
+            ActiveDegreeViewHolder viewHolder = new ActiveDegreeViewHolder(v);
+            return viewHolder;
+        } else if (viewType == TYPE_FOOTER) {
+            View foot_view = LayoutInflater.from(context).inflate(R.layout.recycler_load_more_layout, parent, false);
+            FootViewHolder footViewHolder = new FootViewHolder(foot_view);
+            return footViewHolder;
+        }
         return null;
     }
 
     @Override
     public int getItemCount() {
-        int count = 0;
-        count = User.getInstance().ownactives.size();
-        return count;
+        return User.getInstance().ownactives.size() + 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-//        if (date ==0) {
-//            if (position + 1 == getItemCount()) {
-//                return TYPE_FOOTER;
-//            } else {
-//                return TYPE_ITEM;
-//            }
-//        }
-//        else return TYPE_ITEM;
-        //return super.getItemViewType(position);
-        return 0;
+        if (position + 1 == getItemCount()) {
+            return TYPE_FOOTER;
+        } else {
+            return TYPE_ITEM;
+        }
     }
 
     /**
