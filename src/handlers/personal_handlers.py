@@ -43,14 +43,13 @@ def sync_info(post_data,post_files,usr_sessions,server_conf):
     query_factor_3 = {'proj_name':1,'own_usr':1,'own_name':1,'own_head':1,'pub_time':1,'labels':1,'introduction':1}
     user_data = mongo_client[db_name]['user_info'].find_one(query_factor_1,query_factor_2)
     if user_data is not None:
-        n = len(user_data['projects'])
-        i = 0
-        while i<n:
+        i = len(user_data['projects']) -1
+        while i >= 0:
             query_factor_1['_id'] = ObjectId(user_data['projects'][i])
             proj = mongo_client[db_name]['project_info'].find_one(query_factor_1,query_factor_3)
             proj['_id'] = str(proj['_id'])
             my_projects.append(proj)
-            i+=1
+            i-=1
             del proj
 
     # sync my active data

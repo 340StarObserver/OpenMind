@@ -26,12 +26,18 @@ $(document).ready(function() {
 	if( suffix== 'jpg' || suffix=='png' ){
 		//图片文件
 		$('.file-container').html('<img src="'+ fileUrl +'" alt="'+ filename +'">');
-		var img = $(".file-container>img");
-		var width = img.outerWidth();
 
-		if( width>690 ){
-			img.css('width', '100%');
-		}
+		// if( width >= 690 ){
+		// 	console.log("width>690");
+		// 	img.css('width', '100%');
+		// }
+		// else if( width<690 && width>300 ) {
+		// 	console.log("width<690 && width>300");
+		// 	img.css({
+		// 		"width" : "100%",
+		// 		"max-width": "500px"
+		// 	});
+		// }
 	}
 	else if( suffix=='pdf'){
 		$('.file-container').html(
@@ -52,11 +58,14 @@ $(document).ready(function() {
 
 function dealFileReturn(data){
 	
+	data = data.replace( /</g, "&lt;");
+	data = data.replace( />/g, "&gt;");
+
 	if( suffix == 'md'){
 		dealMDReturn(data);
 	}
 	else{
-		$(".file-container").html(data);
+		$(".file-container").html( data  );
 	}
 }
 
