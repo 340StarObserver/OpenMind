@@ -45,7 +45,7 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
             //全部项目
             case 0: {
                 if (holder instanceof ProjectViewHolder) {
-                    ((ProjectViewHolder) holder).text_writer.setText(User.getInstance().allinfos.get(j).getOwnUser());
+                    ((ProjectViewHolder) holder).text_writer.setText(User.getInstance().allinfos.get(j).getOwnName());
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     String time = sdf.format(new Date(Long.parseLong(User.getInstance().allinfos.get(j).getPubTime()) * 1000));
                     ((ProjectViewHolder) holder).text_date.setText(time);
@@ -84,7 +84,7 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
             }
             //投票中项目
             case 1: {
-                ((ProjectViewHolder) holder).text_writer.setText(User.getInstance().voteinfos.get(j).getOwnUser());
+                ((ProjectViewHolder) holder).text_writer.setText(User.getInstance().voteinfos.get(j).getOwnName());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String time = sdf.format(new Date(Long.parseLong(User.getInstance().voteinfos.get(j).getPubTime()) * 1000));
                 ((ProjectViewHolder) holder).text_date.setText(time);
@@ -153,7 +153,7 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
             }
             //自己的项目
             case 2: {
-                ((ProjectViewHolder) holder).text_writer.setText(User.getInstance().owninfos.get(j).getOwnUser());
+                ((ProjectViewHolder) holder).text_writer.setText(User.getInstance().owninfos.get(j).getOwnName());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String time = sdf.format(new Date(Long.parseLong(User.getInstance().owninfos.get(j).getPubTime()) * 1000));
                 ((ProjectViewHolder) holder).text_date.setText(time);

@@ -56,4 +56,7 @@ dependencies {
     compile 'com.facebook.fresco:webpsupport:0.12.0'
     compile 'me.relex:photodraweeview:1.1.0'
     compile 'us.feras.mdv:markdownview:1.1.0'
+    compile('org.apache.httpcomponents:httpmime:4.3.6') {
+        exclude module: 'httpclient'
+    }
 }

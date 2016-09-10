@@ -74,6 +74,8 @@ public class User {
     private Integer activeReturnSize;
     private String aboutMeMiniTime;
     private Integer aboutMeReturnSize;
+    private String  upLoadImageResult;
+    private String  upLoadImageError;
     //构造方法私有化
     private User(){}
 
@@ -390,6 +392,22 @@ public class User {
 
     public void setAboutMeMiniTime(String aboutMeMiniTime) {
         this.aboutMeMiniTime = aboutMeMiniTime;
+    }
+
+    public String getUpLoadImageResult() {
+        return upLoadImageResult;
+    }
+
+    public void setUpLoadImageResult(String upLoadImageResult) {
+        this.upLoadImageResult = upLoadImageResult;
+    }
+
+    public String getUpLoadImageError() {
+        return upLoadImageError;
+    }
+
+    public void setUpLoadImageError(String upLoadImageError) {
+        this.upLoadImageError = upLoadImageError;
     }
 }
 

@@ -1,15 +1,26 @@
 package comfranklicm.github.openmind;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import java.io.File;
 
 import comfranklicm.github.openmind.utils.User;
 
@@ -26,6 +37,7 @@ public class Fragment3 extends Fragment {
     LinearLayout active;
     LinearLayout setting;
     LinearLayout aboutme;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -75,6 +87,13 @@ public class Fragment3 extends Fragment {
                 activity.transactiontoAboutMe();
             }
         });
+        head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyActivity activity=(MyActivity)getActivity();
+                activity.showDialog();
+            }
+        });
         if (!User.getInstance().isLogin() && !User.getInstance().isLastLogin()) {
             username.setVisibility(View.GONE);
             active.setVisibility(View.GONE);
@@ -93,11 +112,9 @@ public class Fragment3 extends Fragment {
             username.setText(User.getInstance().getUserName());
             department.setText(User.getInstance().getDepartment());
         }
-        head.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
     }
+
+
+
 }

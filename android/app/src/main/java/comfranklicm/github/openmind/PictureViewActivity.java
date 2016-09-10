@@ -34,6 +34,7 @@ public class PictureViewActivity extends Activity {
                 mPhotoDraweeView.update(imageInfo.getWidth(), imageInfo.getHeight());
             }
         });
+        controller.setAutoPlayAnimations(true);
         mPhotoDraweeView.setController(controller.build());
     }
 }
