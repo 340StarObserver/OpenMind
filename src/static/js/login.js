@@ -1,4 +1,5 @@
 if( getCookie("username") !=null ){
+	
 	location.href = "/home";
 }
 

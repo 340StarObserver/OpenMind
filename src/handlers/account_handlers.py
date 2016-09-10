@@ -183,8 +183,11 @@ def sethead(post_data,post_files,usr_sessions,server_conf):
     rand_str = "%d%s"%(time_stamp,rand.rand_key(server_conf['rand']['key_seed'],server_conf['rand']['key_length']))
     head_name = "%s/%s/%s.jpg"%(server_conf['oss']['head_dir'],time_str,rand_str)
     head_url = "%s/%s"%(server_conf['oss']['static_dir'],head_name)
-    head_bin = base64.b64decode(post_data['head'])
-    oss.add_object(oss_bucket_client,head_name,head_bin)
+    try:
+        head_bin = base64.b64decode(post_data['head'])
+        oss.add_object(oss_bucket_client,head_name,head_bin)
+    except Exception,e:
+        print str(e)
 
     # update head url in mongodb
     update_factor_1 = {'_id':usr_sessions['id']}

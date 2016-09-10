@@ -26,6 +26,12 @@ $(document).ready(function() {
 	if( suffix== 'jpg' || suffix=='png' ){
 		//图片文件
 		$('.file-container').html('<img src="'+ fileUrl +'" alt="'+ filename +'">');
+		var img = $(".file-container>img");
+		var width = img.outerWidth();
+
+		if( width>690 ){
+			img.css('width', '100%');
+		}
 	}
 	else if( suffix=='pdf'){
 		$('.file-container').html(
