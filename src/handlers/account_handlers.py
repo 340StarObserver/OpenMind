@@ -18,6 +18,7 @@ each function returns a dict
 """
 
 import time
+import base64
 
 import mongo_conn
 import oss
@@ -182,7 +183,7 @@ def sethead(post_data,post_files,usr_sessions,server_conf):
     rand_str = "%d%s"%(time_stamp,rand.rand_key(server_conf['rand']['key_seed'],server_conf['rand']['key_length']))
     head_name = "%s/%s/%s.jpg"%(server_conf['oss']['head_dir'],time_str,rand_str)
     head_url = "%s/%s"%(server_conf['oss']['static_dir'],head_name)
-    head_bin = post_files['head'].read()
+    head_bin = base64.b64decode(post_data['head'])
     oss.add_object(oss_bucket_client,head_name,head_bin)
 
     # update head url in mongodb
@@ -204,13 +205,12 @@ def sethead(post_data,post_files,usr_sessions,server_conf):
     del oss_bucket_client
     del rand_str
     del head_name
-    del head_url
     del head_bin
     del update_factor_1
     del update_factor_2
 
     # return result
-    return {'result':True,'token':new_token}
+    return {'result':True,'token':new_token,'head':head_url}
 
 
 

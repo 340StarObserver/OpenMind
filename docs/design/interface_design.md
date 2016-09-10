@@ -82,7 +82,7 @@
             }  
 
 
-<strong>03. 设置头像</strong>  
+<strong>03. 移动端设置头像</strong>  
 
         请求地址 : http://ip:port/action  
         
@@ -90,12 +90,13 @@
         
         请求体  
         
-            请求中附带一张图片，作为头像（限制jpg或png，200K以内，图片的键名为head）  
-            如何将图片和非图片数据一次性post，参见 test/upload.html  
-            
-            另外要把之前获得的token放在请求体中一并发送  
-            
-            action_id 取 3，放在请求体中一并发送  
+            {  
+                action_id : 3,  
+                
+                head      : 图片的base64编码,  
+                
+                token     : 令牌  
+            }  
         
         响应体  
         
@@ -108,9 +109,13 @@
                 # reason   : 1   表示未登陆  
                 # reason   : 2   表示token错误  
                 
-                token      : 新的token  
+                token      : 新的token,  
+                # 仅当 result == true，此值才有  
+                
+                head       : 新的头像的url  
                 # 仅当 result == true，此值才有  
             }  
+
 
 
 <strong>04. 注销</strong>

@@ -38,6 +38,9 @@ $(document).ready(function() {
 		
 		fileGet(fileUrl);
 	}
+	else{
+		location.href = fileUrl;
+	}
 
 });
 
