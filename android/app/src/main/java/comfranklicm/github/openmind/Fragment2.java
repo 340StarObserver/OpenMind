@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import comfranklicm.github.openmind.utils.User;
+
 public class Fragment2 extends Fragment {
 	View view;
-	Fragment fg6;
+	OwnProjectsFragment fg6;
 	private ViewPager mPaper;
 	private FragmentPagerAdapter mAdapter;
 	private List<Fragment> mFragments = new ArrayList<Fragment>();
@@ -63,6 +65,7 @@ public class Fragment2 extends Fragment {
 	private void initlayout(){
 		mPaper=(ViewPager)view.findViewById(R.id.view_pager);
 		fg6=new OwnProjectsFragment();
+		User.getInstance().setOwnProjectsFragment(fg6);
 		mFragments.add(fg6);
 	}
 }

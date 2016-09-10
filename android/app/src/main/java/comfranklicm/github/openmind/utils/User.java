@@ -5,6 +5,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import comfranklicm.github.openmind.ActiveDegreeFragment;
 import comfranklicm.github.openmind.JsonParsing.BaseJsonParser;
 import comfranklicm.github.openmind.JsonParsing.CommentJsonParser;
 import comfranklicm.github.openmind.JsonParsing.LoginJsonParser;
@@ -19,6 +20,7 @@ import comfranklicm.github.openmind.JsonParsing.ViewProjectDetailJsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewVoteProjectsJsonParser;
 import comfranklicm.github.openmind.JsonParsing.VoteJsonParser;
 import comfranklicm.github.openmind.MyActivity;
+import comfranklicm.github.openmind.OwnProjectsFragment;
 import comfranklicm.github.openmind.ProjectListRecyViewAdapter;
 
 /**
@@ -47,6 +49,8 @@ public class User {
     private boolean isLogin=false;
     private String pictureLink;
     private MyActivity myActivity;//add by lyy 2016.9.1
+    private OwnProjectsFragment ownProjectsFragment;
+    private ActiveDegreeFragment activeDegreeFragment;
     private View allView;
     private String loginResult;
     private String registerResult;
@@ -408,6 +412,22 @@ public class User {
 
     public void setUpLoadImageError(String upLoadImageError) {
         this.upLoadImageError = upLoadImageError;
+    }
+
+    public OwnProjectsFragment getOwnProjectsFragment() {
+        return ownProjectsFragment;
+    }
+
+    public void setOwnProjectsFragment(OwnProjectsFragment ownProjectsFragment) {
+        this.ownProjectsFragment = ownProjectsFragment;
+    }
+
+    public ActiveDegreeFragment getActiveDegreeFragment() {
+        return activeDegreeFragment;
+    }
+
+    public void setActiveDegreeFragment(ActiveDegreeFragment activeDegreeFragment) {
+        this.activeDegreeFragment = activeDegreeFragment;
     }
 }
 

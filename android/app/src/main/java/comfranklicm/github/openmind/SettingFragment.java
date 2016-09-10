@@ -2,6 +2,7 @@ package comfranklicm.github.openmind;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.JsonParser;
 import comfranklicm.github.openmind.utils.DataBaseUtil;
+import comfranklicm.github.openmind.utils.SynchronousData;
 import comfranklicm.github.openmind.utils.User;
 /*add by lyy 2016.8.31
   设置页面的fragment
@@ -43,6 +45,7 @@ public class SettingFragment extends Fragment {
         synchron_btn=(LinearLayout)view.findViewById(R.id.linearLayout);
         deleteall_btn=(LinearLayout)view.findViewById(R.id.LinearLayout2);
         nightmode_btn=(LinearLayout)view.findViewById(R.id.LinearLayout3);
+        nightmode_btn.setVisibility(View.GONE);
         dashed_line1=(View)view.findViewById(R.id.view);
         dashed_line2=(View)view.findViewById(R.id.view2);
         dashed_line1.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -54,11 +57,19 @@ public class SettingFragment extends Fragment {
         fa_moon_o=(TextView)view.findViewById(R.id.fa_moon_o);
         fa_moon_o.setTypeface(FontManager.getTypeface(getContext(), FontManager.FONTAWESOME));
         logoutButton=(Button)view.findViewById(R.id.button);
+        deleteall_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataBaseUtil.getInstance(getActivity()).deleteDatabase(getActivity());
+                Toast.makeText(getActivity(),"已清除本地数据",Toast.LENGTH_LONG).show();
+            }
+        });
         if(!User.getInstance().isLastLogin()&&!User.getInstance().isLogin()) {
             synchron_btn.setVisibility(View.GONE);
             dashed_line1.setVisibility(View.GONE);
+            //dashed_line2.setVisibility(View.GONE);
             logoutButton.setVisibility(View.GONE);
-            deleteall_btn.setVisibility(View.GONE);
+
         }else {
             logoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -74,7 +85,7 @@ public class SettingFragment extends Fragment {
                         e.printStackTrace();
                     }
                     //runnable.setStrResult("{result:true}");
-                    JsonParser.ParseJson(4,runnable.getStrResult());
+                    JsonParser.ParseJson(4, runnable.getStrResult());
                     if (User.getInstance().getLogoutResult().equals("true"))
                     {
                         User.getInstance().setIsLogin(false);
@@ -90,11 +101,27 @@ public class SettingFragment extends Fragment {
                     }
                 }
             });
-            deleteall_btn.setOnClickListener(new View.OnClickListener() {
+            synchron_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DataBaseUtil.getInstance(getActivity()).deleteDatabase(getActivity());
-                    Toast.makeText(getActivity(),"已清除本地数据",Toast.LENGTH_LONG).show();
+                    SynchronousData.Sychronous();
+                    //FragmentManager fm  = getActivity().getSupportFragmentManager();
+                    if(User.getInstance().getSynchronousResult().equals("true")) {
+                        try {
+                            OwnProjectsFragment ownProjectsFragment = User.getInstance().getOwnProjectsFragment();
+                            ownProjectsFragment.adapter.notifyDataSetChanged();
+
+                            ActiveDegreeFragment activeDegreeFragment = User.getInstance().getActiveDegreeFragment();
+                            activeDegreeFragment.adapter.notifyDataSetChanged();
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(getActivity(),"同步成功",Toast.LENGTH_LONG).show();
+                    }else
+                    {
+                        Toast.makeText(getActivity(),"同步失败:"+User.getInstance().getSynchronousError(),Toast.LENGTH_LONG).show();
+                    }
                 }
             });
         }

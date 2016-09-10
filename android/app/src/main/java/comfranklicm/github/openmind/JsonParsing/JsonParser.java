@@ -66,7 +66,7 @@ public class JsonParser {
                         User.getInstance().setDepartment(jarr.getString("department"));
                         User.getInstance().setRegisterTime(jarr.getString("signup_time"));
                         User.getInstance().setPictureLink(jarr.getString("head"));
-                        NetUtil.getInstance().setToken("token");
+                        NetUtil.getInstance().setToken(jarr.getString("token"));
                         User.getInstance().setIsLogin(true);
                     }
                     else

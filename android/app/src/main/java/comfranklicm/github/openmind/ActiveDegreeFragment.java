@@ -31,7 +31,7 @@ public class ActiveDegreeFragment extends Fragment {
     View view;
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private ActiveDegreeRecyViewAdapter adapter;
+    public ActiveDegreeRecyViewAdapter adapter;
     private int lastVisibleItem;
 
     @Nullable

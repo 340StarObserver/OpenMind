@@ -1,11 +1,14 @@
 package comfranklicm.github.openmind;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -37,7 +40,17 @@ public class Fragment3 extends Fragment {
     LinearLayout active;
     LinearLayout setting;
     LinearLayout aboutme;
-
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    Uri uri = Uri.parse(User.getInstance().getPictureLink());
+                    head.setImageURI(uri);
+                    break;
+            }
+        }
+    };
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -112,9 +125,11 @@ public class Fragment3 extends Fragment {
             username.setText(User.getInstance().getUserName());
             department.setText(User.getInstance().getDepartment());
         }
-
     }
-
-
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        MyActivity myActivity=(MyActivity)getActivity();
+        myActivity.setHandler(handler);
+    }
 }

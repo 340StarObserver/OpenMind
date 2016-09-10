@@ -9,10 +9,13 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -33,6 +36,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -79,6 +83,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
 	private int whirt = 0xFFFFFFFF;
 	private int gray = 0xFF7597B3;
 	private int blue =0xFF0AB2FB;
+    private Handler mHandler;
     Dialog dialog;
     /* 请求码 */
     private static final int IMAGE_REQUEST_CODE = 0;
@@ -465,6 +470,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         final FragmentTransaction transaction = fManager.beginTransaction();
         hideFragments(transaction);
         fg14 = new ActiveDegreeFragment();
+        User.getInstance().setActiveDegreeFragment(fg14);
         transaction.add(R.id.content, fg14);
         transaction.commit();
     }
@@ -546,34 +552,47 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
                             Bitmap photo = extras.getParcelable("data");
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                            HttpPostImageRunnable r=new HttpPostImageRunnable();
-                            r.imageBytes=baos.toByteArray();
-                            r.setToken(NetUtil.getInstance().getToken());
-                            Thread t=new Thread(r);
-                            t.start();
+                            byte[] buffer=baos.toByteArray();
+                            String data1 = Base64.encodeToString(buffer,
+                                    Base64.DEFAULT);
+                            //userimg.setImageBitmap(photo);
                             try {
-                                t.join();
-                            } catch (InterruptedException e) {
+                                File f = new File(IMGURL + "/"+IMAGE_FILE_NAME);
+                                Log.d("fileurl",IMGURL + IMAGE_FILE_NAME);
+                                if (!f.exists()) {
+                                    f.createNewFile();
+                                }
+                                FileOutputStream fOut = new FileOutputStream(f);
+                                photo.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+                                fOut.flush();
+                                fOut.close();
+                                Log.d("data1", data1);
+                                HttpPostImageRunnable r=new HttpPostImageRunnable();
+                                r.setData(data1);
+                                Thread t=new Thread(r);
+                                t.start();
+                                try {
+                                    t.join();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            } catch (IOException e) {
                                 e.printStackTrace();
                             }
-
-                            //userimg.setImageBitmap(photo);
-//                            try {
-//                                File f = new File(IMGURL + "/"+IMAGE_FILE_NAME);
-//                                Log.d("fileurl",IMGURL + IMAGE_FILE_NAME);
-//                                if (!f.exists()) {
-//                                    f.createNewFile();
-//                                }
-//                                FileOutputStream fOut = new FileOutputStream(f);
-//                                photo.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-//                                fOut.flush();
-//                                fOut.close();
-//                            } catch (IOException e) {
-//                                e.printStackTrace();
-//                            }
+                            if(User.getInstance().getUpLoadImageResult().equals("true"))
+                            {
+                                dialog.cancel();//关闭dialog
+                                Message msg = mHandler.obtainMessage();
+                                msg.what =0;
+                                mHandler.sendMessage(msg);
+                            }else
+                            {
+                                dialog.cancel();//关闭dialog
+                                Toast.makeText(this, "上传失败:" + User.getInstance().getUpLoadImageError(), Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
-                    dialog.cancel();//关闭dialog
+
                     break;
             }
         }
@@ -596,5 +615,8 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         intent.putExtra("outputY", 200);
         intent.putExtra("return-data", true);
         startActivityForResult(intent, 2);
+    }
+    public void setHandler(Handler handler) {
+        mHandler = handler;
     }
 }

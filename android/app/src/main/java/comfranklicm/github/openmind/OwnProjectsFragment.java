@@ -23,7 +23,7 @@ import comfranklicm.github.openmind.utils.User;
 public class OwnProjectsFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private ProjectListRecyViewAdapter adapter;
+    public ProjectListRecyViewAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
