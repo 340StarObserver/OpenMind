@@ -1,6 +1,8 @@
 package comfranklicm.github.openmind;
 
 import android.content.Context;
+import android.graphics.drawable.Animatable;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,12 +13,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.VoteJsonParser;
 import comfranklicm.github.openmind.utils.User;
+import me.relex.photodraweeview.PhotoDraweeView;
 
 /**
  * Created by FrankLicm on 2016/8/28.
@@ -51,8 +60,20 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                     ((ProjectViewHolder) holder).text_date.setText(time);
                     ((ProjectViewHolder) holder).cardviewitem_title.setText(User.getInstance().allinfos.get(j).getProjectName());
                     ((ProjectViewHolder) holder).cardviewitem_desc.setText(User.getInstance().allinfos.get(j).getIntroduction());
-                    ((ProjectViewHolder) holder).Label1.setText(User.getInstance().allinfos.get(j).getLabel1());
-                    ((ProjectViewHolder) holder).Label2.setText(User.getInstance().allinfos.get(j).getLabel2());
+                    if(User.getInstance().allinfos.get(j).getLabel1()!=null&&!User.getInstance().allinfos.get(j).getLabel1().equals("")) {
+                        ((ProjectViewHolder) holder).Label1.setText(User.getInstance().allinfos.get(j).getLabel1());
+                        ((ProjectViewHolder) holder).Label1.setVisibility(View.VISIBLE);
+                    }else
+                    {
+                        ((ProjectViewHolder) holder).Label1.setVisibility(View.GONE);
+                    }
+                    if(User.getInstance().allinfos.get(j).getLabel2()!=null&&!User.getInstance().allinfos.get(j).getLabel2().equals("")) {
+                        ((ProjectViewHolder) holder).Label2.setText(User.getInstance().allinfos.get(j).getLabel2());
+                        ((ProjectViewHolder) holder).Label2.setVisibility(View.VISIBLE);
+                    }else
+                    {
+                        ((ProjectViewHolder) holder).Label2.setVisibility(View.GONE);
+                    }
                     ((ProjectViewHolder) holder).textView1.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
                     ((ProjectViewHolder) holder).textView2.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
                     ((ProjectViewHolder) holder).cardView.setOnClickListener(new View.OnClickListener() {//add by lyy 2016.9.1
@@ -67,7 +88,7 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                     switch (load_more_status) {
                         case PULLUP_LOAD_MORE:
                             //footViewHolder.progressBar.setVisibility(View.VISIBLE);
-                            footViewHolder.progressBar.setVisibility(View.INVISIBLE);
+                            footViewHolder.progressBar.setVisibility(View.GONE);
                             footViewHolder.foot_view_item_tv.setText("上拉加载更多...");
                             break;
                         case LOADING_MORE:
@@ -76,7 +97,7 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                             break;
                         default:
                             footViewHolder.foot_view_item_tv.setText("已经没有更多数据了");
-                            footViewHolder.progressBar.setVisibility(View.INVISIBLE);
+                            footViewHolder.progressBar.setVisibility(View.GONE);
                             break;
                     }
                 }
@@ -90,8 +111,20 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 ((ProjectViewHolder) holder).text_date.setText(time);
                 ((ProjectViewHolder) holder).cardviewitem_title.setText(User.getInstance().voteinfos.get(j).getProjectName());
                 ((ProjectViewHolder) holder).cardviewitem_desc.setText(User.getInstance().voteinfos.get(j).getIntroduction());
-                ((ProjectViewHolder) holder).Label1.setText(User.getInstance().voteinfos.get(j).getLabel1());
-                ((ProjectViewHolder) holder).Label2.setText(User.getInstance().voteinfos.get(j).getLabel2());
+                if(User.getInstance().voteinfos.get(j).getLabel1()!=null&&!User.getInstance().voteinfos.get(j).getLabel1().equals("")) {
+                    ((ProjectViewHolder) holder).Label1.setText(User.getInstance().voteinfos.get(j).getLabel1());
+                    ((ProjectViewHolder) holder).Label1.setVisibility(View.VISIBLE);
+                }else
+                {
+                    ((ProjectViewHolder) holder).Label1.setVisibility(View.GONE);
+                }
+                if(User.getInstance().voteinfos.get(j).getLabel2()!=null&&!User.getInstance().voteinfos.get(j).getLabel2().equals("")) {
+                    ((ProjectViewHolder) holder).Label2.setText(User.getInstance().voteinfos.get(j).getLabel2());
+                    ((ProjectViewHolder) holder).Label2.setVisibility(View.VISIBLE);
+                }else
+                {
+                    ((ProjectViewHolder) holder).Label2.setVisibility(View.GONE);
+                }
                 ((ProjectViewHolder) holder).textView1.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
                 ((ProjectViewHolder) holder).textView2.setTypeface(FontManager.getTypeface(context, FontManager.FONTAWESOME));
                 if (User.getInstance().voteinfos.get(j).getEverVoted().equals("true")) {
@@ -157,6 +190,20 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String time = sdf.format(new Date(Long.parseLong(User.getInstance().owninfos.get(j).getPubTime()) * 1000));
                 ((ProjectViewHolder) holder).text_date.setText(time);
+                if(User.getInstance().owninfos.get(j).getLabel1()!=null&&!User.getInstance().owninfos.get(j).getLabel1().equals("")) {
+                    ((ProjectViewHolder) holder).Label1.setText(User.getInstance().owninfos.get(j).getLabel1());
+                    ((ProjectViewHolder) holder).Label1.setVisibility(View.VISIBLE);
+                }else
+                {
+                    ((ProjectViewHolder) holder).Label1.setVisibility(View.GONE);
+                }
+                if(User.getInstance().owninfos.get(j).getLabel2()!=null&&!User.getInstance().owninfos.get(j).getLabel2().equals("")) {
+                    ((ProjectViewHolder) holder).Label2.setVisibility(View.VISIBLE);
+                    ((ProjectViewHolder) holder).Label2.setText(User.getInstance().owninfos.get(j).getLabel2());
+                }else
+                {
+                    ((ProjectViewHolder) holder).Label2.setVisibility(View.GONE);
+                }
                 ((ProjectViewHolder) holder).cardviewitem_title.setText(User.getInstance().owninfos.get(j).getProjectName());
                 ((ProjectViewHolder) holder).cardviewitem_desc.setText(User.getInstance().owninfos.get(j).getIntroduction());
                 ((ProjectViewHolder) holder).Label1.setText(User.getInstance().owninfos.get(j).getLabel1());
@@ -279,12 +326,28 @@ public class ProjectListRecyViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     static class FootViewHolder extends RecyclerView.ViewHolder {
         private TextView foot_view_item_tv;
-        private ProgressBar progressBar;
+        private PhotoDraweeView progressBar;
 
         public FootViewHolder(View view) {
             super(view);
             foot_view_item_tv = (TextView) view.findViewById(R.id.foot_view_item_tv);
-            progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+            progressBar = (PhotoDraweeView) view.findViewById(R.id.progressBar);
+            Uri uri=Uri.parse("asset:///image/loading.gif");
+            PipelineDraweeControllerBuilder controller = Fresco.newDraweeControllerBuilder();
+            controller.setUri(uri);
+            controller.setOldController(progressBar.getController());
+            controller.setControllerListener(new BaseControllerListener<ImageInfo>() {
+                @Override
+                public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+                    super.onFinalImageSet(id, imageInfo, animatable);
+                    if (imageInfo == null || progressBar == null) {
+                        return;
+                    }
+                    progressBar.update(imageInfo.getWidth(), imageInfo.getHeight());
+                }
+            });
+            controller.setAutoPlayAnimations(true);
+            progressBar.setController(controller.build());
         }
     }
 }

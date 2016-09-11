@@ -1,6 +1,8 @@
 package comfranklicm.github.openmind;
 
 import android.content.Context;
+import android.graphics.drawable.Animatable;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,7 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
+import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,6 +23,7 @@ import java.util.Date;
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.ViewProjectDetailJsonParser;
 import comfranklicm.github.openmind.utils.User;
+import me.relex.photodraweeview.PhotoDraweeView;
 
 /**
  * Created by lyy on 2016/9/8.
@@ -76,7 +83,7 @@ public class AboutMeRecyViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             switch (load_more_status) {
                 case PULLUP_LOAD_MORE:
                     //footViewHolder.progressBar.setVisibility(View.VISIBLE);
-                    footViewHolder.progressBar.setVisibility(View.INVISIBLE);
+                    footViewHolder.progressBar.setVisibility(View.GONE);
                     footViewHolder.foot_view_item_tv.setText("上拉加载更多...");
                     break;
                 case LOADING_MORE:
@@ -85,7 +92,7 @@ public class AboutMeRecyViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     break;
                 default:
                     footViewHolder.foot_view_item_tv.setText("已经没有更多数据了");
-                    footViewHolder.progressBar.setVisibility(View.INVISIBLE);
+                    footViewHolder.progressBar.setVisibility(View.GONE);
                     break;
             }
         }
@@ -157,12 +164,28 @@ public class AboutMeRecyViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     static class FootViewHolder extends RecyclerView.ViewHolder {
         private TextView foot_view_item_tv;
-        private ProgressBar progressBar;
+        private PhotoDraweeView progressBar;
 
         public FootViewHolder(View view) {
             super(view);
             foot_view_item_tv = (TextView) view.findViewById(R.id.foot_view_item_tv);
-            progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+            progressBar = (PhotoDraweeView) view.findViewById(R.id.progressBar);
+            Uri uri=Uri.parse("asset:///image/loading.gif");
+            PipelineDraweeControllerBuilder controller = Fresco.newDraweeControllerBuilder();
+            controller.setUri(uri);
+            controller.setOldController(progressBar.getController());
+            controller.setControllerListener(new BaseControllerListener<ImageInfo>() {
+                @Override
+                public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+                    super.onFinalImageSet(id, imageInfo, animatable);
+                    if (imageInfo == null || progressBar == null) {
+                        return;
+                    }
+                    progressBar.update(imageInfo.getWidth(), imageInfo.getHeight());
+                }
+            });
+            controller.setAutoPlayAnimations(true);
+            progressBar.setController(controller.build());
         }
     }
 }
