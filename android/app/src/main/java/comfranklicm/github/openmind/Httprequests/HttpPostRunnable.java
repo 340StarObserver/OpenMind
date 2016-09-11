@@ -245,7 +245,7 @@ public class HttpPostRunnable implements Runnable{
                         /**读取服务器返回过来的json字符串数据**/
                         strResult = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
                         Log.d("strResult", strResult);
-                    } catch (IllegalStateException e) {
+                    } catch (Exception e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }

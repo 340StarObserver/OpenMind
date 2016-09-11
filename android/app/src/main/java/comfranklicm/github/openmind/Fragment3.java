@@ -113,6 +113,7 @@ public class Fragment3 extends Fragment {
             }
         });
         if (!User.getInstance().isLogin() && !User.getInstance().isLastLogin()) {
+            head.setClickable(false);
             username.setVisibility(View.GONE);
             active.setVisibility(View.GONE);
             department.setVisibility(View.GONE);
@@ -126,6 +127,7 @@ public class Fragment3 extends Fragment {
                 }
             });
         }else {
+            head.setClickable(true);
             loginorname.setText(User.getInstance().getRealName());
             username.setText(User.getInstance().getUserName());
             department.setText(User.getInstance().getDepartment());
