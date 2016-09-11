@@ -122,14 +122,15 @@ public class LoginFragment extends Fragment {
 //                                "            }\n" +
 //                                "        ]  ");
                         try {
-
+                             User.getInstance().owninfos.clear();
                             ((ViewOwnProjectsJsonParser) User.getInstance().baseJsonParsers.get(7)).ViewOwnProjectsJsonParsing(httpPostRunnable.getStrResult());
-                        }catch (NullPointerException e)
+                        }catch (Exception e)
                         {
                             e.printStackTrace();
                         }
                         try {
                             SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
+                            writedb.execSQL("delete from ProjectInfo");
                             for (int i=0;i<User.getInstance().owninfos.size();i++) {
                                 Object[] arrayOfObject = new Object[9];
                                 arrayOfObject[0]=User.getInstance().owninfos.get(i).getProjectId();
@@ -164,9 +165,16 @@ public class LoginFragment extends Fragment {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        ((ViewActiveDataJsonParser)User.getInstance().baseJsonParsers.get(10)).ViewActiveDataJsonParsing(httpPostRunnable1.getStrResult());
+                        try {
+                            User.getInstance().ownactives.clear();
+                            ((ViewActiveDataJsonParser) User.getInstance().baseJsonParsers.get(10)).ViewActiveDataJsonParsing(httpPostRunnable1.getStrResult());
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
                          try {
                              SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
+                             writedb.execSQL("delete from ActiveInfo");
                               for (int i=0;i<User.getInstance().ownactives.size();i++)
                               {
                                   Object[] arrayOfObject = new Object[2];

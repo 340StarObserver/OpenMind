@@ -1,5 +1,7 @@
 package comfranklicm.github.openmind;
 
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -93,6 +95,9 @@ public class SettingFragment extends Fragment {
                         User.getInstance().setIsLogin(false);
                         User.getInstance().setIsLastLogin(false);
                         DataBaseUtil.getInstance(getActivity()).deleteDatabase(getActivity());
+                        User.getInstance().ownactives.clear();
+                        User.getInstance().owninfos.clear();
+                        User.getInstance().setPictureLink("");
                         MyActivity activity=(MyActivity)getActivity();
                         activity.setChioceItem(2);
                         Toast.makeText(getContext(),"登出成功",Toast.LENGTH_LONG).show();
@@ -116,6 +121,43 @@ public class SettingFragment extends Fragment {
                             ActiveDegreeFragment activeDegreeFragment = User.getInstance().getActiveDegreeFragment();
                             activeDegreeFragment.adapter.notifyDataSetChanged();
 
+                            DataBaseUtil dataBaseUtil=DataBaseUtil.getInstance(getActivity());
+                            try {
+                                SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
+                                writedb.execSQL("delete from ProjectInfo");
+                                for (int i=0;i<User.getInstance().owninfos.size();i++) {
+                                    Object[] arrayOfObject = new Object[9];
+                                    arrayOfObject[0]=User.getInstance().owninfos.get(i).getProjectId();
+                                    arrayOfObject[1]=User.getInstance().owninfos.get(i).getProjectName();
+                                    arrayOfObject[2]=User.getInstance().owninfos.get(i).getOwnUser();
+                                    arrayOfObject[3]=User.getInstance().owninfos.get(i).getOwnName();
+                                    arrayOfObject[4]=User.getInstance().owninfos.get(i).getOwn_head();
+                                    arrayOfObject[5]=User.getInstance().owninfos.get(i).getPubTime();
+                                    arrayOfObject[6]=User.getInstance().owninfos.get(i).getLabel1();
+                                    arrayOfObject[7]=User.getInstance().owninfos.get(i).getLabel2();
+                                    arrayOfObject[8]=User.getInstance().owninfos.get(i).getIntroduction();
+                                    writedb.execSQL("insert into ProjectInfo(id,proj_name,own_usr,own_name,own_head,pub_time,label1,label2,introduction) values(?,?,?,?,?,?,?,?,?)",arrayOfObject);
+                                }
+                                writedb.close();
+                            }catch (SQLException e)
+                            {
+                                e.printStackTrace();
+                            }
+                            try {
+                                SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
+                                writedb.execSQL("delete from ActiveInfo");
+                                for (int i=0;i<User.getInstance().ownactives.size();i++)
+                                {
+                                    Object[] arrayOfObject = new Object[2];
+                                    arrayOfObject[0]=User.getInstance().ownactives.get(i).getMonth();
+                                    arrayOfObject[1]=User.getInstance().ownactives.get(i).getActive();
+                                    writedb.execSQL("insert into ActiveInfo(month,active) values(?,?)",arrayOfObject);
+                                }
+                                writedb.close();
+                            }catch (SQLException e)
+                            {
+                                e.printStackTrace();
+                            }
                         }catch (Exception e)
                         {
                             e.printStackTrace();

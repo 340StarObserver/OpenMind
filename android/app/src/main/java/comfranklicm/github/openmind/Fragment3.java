@@ -40,6 +40,7 @@ public class Fragment3 extends Fragment {
     TextView tubiao2;
     TextView tubiao3;
     View xuxian3;
+    View xuxian1;
     LinearLayout active;
     LinearLayout setting;
     LinearLayout aboutme;
@@ -66,6 +67,7 @@ public class Fragment3 extends Fragment {
         username=(TextView)view.findViewById(R.id.username);
         department=(TextView)view.findViewById(R.id.department);
         xuxian3=view.findViewById(R.id.xuxian3);
+        xuxian1=view.findViewById(R.id.xuxian1);
         active=(LinearLayout)view.findViewById(R.id.huoyuejilu);
         setting=(LinearLayout)view.findViewById(R.id.settings);
         aboutme=(LinearLayout)view.findViewById(R.id.yuwoxiangguan);
@@ -114,7 +116,7 @@ public class Fragment3 extends Fragment {
             username.setVisibility(View.GONE);
             active.setVisibility(View.GONE);
             department.setVisibility(View.GONE);
-            //xuxian3.setVisibility(View.GONE);
+            xuxian1.setVisibility(View.GONE);
             aboutme.setVisibility(View.GONE);
             loginorname.setOnClickListener(new View.OnClickListener() {
                 @Override
