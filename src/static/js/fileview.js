@@ -1,3 +1,6 @@
+/* Created by WuXiaobao on Sep.9 2016
+   js for page of browsering some files */
+
 var fileUrl,
 	filename,
 	suffix;
@@ -8,8 +11,6 @@ $(document).ready(function() {
 	fileUrl = params["fileUrl"];
 	filename = decodeURI( params["filename"] );
 	
-	console.log(filename);
-
 	if( fileUrl == null){
 
 		alert("没有找到文件");
@@ -18,26 +19,12 @@ $(document).ready(function() {
 
 	suffix = getSuffix( fileUrl );
 
-	console.log("filename "+filename);
-	console.log("suffix "+suffix);
-
 	$('.file-name-container').text( filename );
 
 	if( suffix== 'jpg' || suffix=='png' ){
 		//图片文件
 		$('.file-container').html('<img src="'+ fileUrl +'" alt="'+ filename +'">');
 
-		// if( width >= 690 ){
-		// 	console.log("width>690");
-		// 	img.css('width', '100%');
-		// }
-		// else if( width<690 && width>300 ) {
-		// 	console.log("width<690 && width>300");
-		// 	img.css({
-		// 		"width" : "100%",
-		// 		"max-width": "500px"
-		// 	});
-		// }
 	}
 	else if( suffix=='pdf'){
 		$('.file-container').html(

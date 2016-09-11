@@ -1,77 +1,8 @@
-var example =
-	[{
-		"_id":1,
-		"proj_name": "Android FlappyBird",
-		"own_usr":　"wxb",
-		"own_name": "wxb",
-		"pub_time": 1445599887,
-		"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-		"labels": ["label1","label2","label3"],
-		"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},{
-		"_id":1212,
-		"proj_name": "Android FlappyBird",
-		"own_usr":　"wxb",
-		"own_name": "wxb",
-		"pub_time": 1445599887,
-		"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-		"labels": ["label1","label2","label3"],
-		"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},{
-		"_id":1222233,
-		"proj_name": "Android FlappyBird",
-		"own_usr":　"wxb",
-		"own_name": "wxb",
-		"pub_time": 1445599887,
-		"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-		"labels": ["label1","label2","label3"],
-		"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},{
-		"_id":3331,
-		"proj_name": "Android FlappyBird",
-		"own_usr":　"wxb",
-		"own_name": "wxb",
-		"pub_time": 1445599887,
-		"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-		"labels": ["label1","label2","label3"],
-		"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},{
-		"_id":1,
-		"proj_name": "Android FlappyBird",
-		"own_usr":　"wxb",
-		"own_name": "wxb",
-		"pub_time": 1445599887,
-		"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-		"labels": ["label1","label2","label3"],
-		"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},
-	{
-		"_id":1,
-		"proj_name": "Android FlappyBird",
-		"own_usr":　"wxb",
-		"own_name": "wxb",
-		"pub_time": 1445599887,
-		"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-		"labels": ["label1","label2","label3"],
-		"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},
-	{
-		"_id":1,
-		"proj_name": "Android FlappyBird",
-		"own_usr":　"wxb",
-		"own_name": "wxb",
-		"pub_time": 1445599887,
-		"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-		"labels": ["label1","label2","label3"],
-		"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	}
-];
-
-
+/* Created by WuXiaobao on Sep.7 2016
+   js for page of own projects */
 
 $(document).ready(function() {
 	getOwnProjPost();
-	// dealOwnProjReturn(example);
 	
 	$(document).on('click', '.option-item.edit-project', function(event) {
 		
@@ -90,11 +21,12 @@ $(document).ready(function() {
 	});
 });
 
+//deal return of own projects
 function dealOwnProjReturn(data){
 
 	if( data.length == 0){
 		//TODO 显示暂无项目
-		$('.project-list-container').html('');
+		$('.project-list-container').html('<h1>暂无任何项目</h1>');
 		return false;
 	}
 
@@ -109,7 +41,8 @@ function dealOwnProjReturn(data){
 	$(".project-list").html( html );
 
 }
-		
+
+//return the html item of each project
 function getProjectItemHtml(project, index){
 
 	var html='<tr>'+

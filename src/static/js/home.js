@@ -1,77 +1,11 @@
+/* Created by WuXiaobao on Aug.28 2016
+   js for pages of home*/
+
 var currentPage ;
 var currentVotingPage ;
+
 //存储所有项目的概要信息,每个元素对应一页的信息
 var projectBrief=[];
-
-var example =[
-	[{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	},{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	}],
-	[{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	}],
-	[{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160826/ver2-2-small.png",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"
-	}],
-	
-];
 
 $(document).ready(function() {
 
@@ -97,7 +31,7 @@ $(document).ready(function() {
 		scrollToTop();
 
 		updateProjectPage( projectBrief[currentPage] );
-		console.log("从当前存储中选择上一页");
+
 	});
 
 	
@@ -106,14 +40,14 @@ $(document).ready(function() {
 			return false;
 		scrollToTop();
 
-		console.log("#voting-prev click");
+	
 		enableBtn("#voting-next-btn");
 
 		if( --currentVotingPage == 0){
 			disableBtn("#voting-prev-btn");
 		}
 
-		console.log("从当前存储中选择正在投票的上一页");
+	
 		updateProjectPage( votingProject[currentVotingPage] );
 
 	});
@@ -127,15 +61,11 @@ $(document).ready(function() {
 
 		//最大索引 < 当前索引+1, 需要post请求
 		if( projectBrief.length-1 < currentPage+1){
-
-			console.log("post请求加载下一页");
-
 			//发post请求
-			//dealProjBriefReturn( example[0] );
 			getProjBriefPost();
 		}
 		else{
-			console.log("从当前存储中选择下一页");
+			
 			//从当前存储中选择下一页
 			var data = projectBrief[ ++currentPage ];
 			updateProjectPage( data );
@@ -202,8 +132,6 @@ function dealProjBriefReturn(data){
 	}
 
 	/* 有项目概要信息可以更新*/
-	
-	console.log( "need to update:"+data );
 
 	enableBtn("#prev-btn");
 	currentPage++;
@@ -228,8 +156,6 @@ function dealProjBriefReturnFirst(data){
 	}
 
 	/* 有项目概要信息可以更新*/
-	console.log( "need to update first time:"+data );
-
 	currentPage=0;
 	disableBtn("#prev-btn");
 
@@ -269,35 +195,12 @@ function getProjItemHtml(project){
     return html;
 }
 
-// function dealVotingProjReturn(data){
-// 	if( data.length == 0){
-// 		//TODO 显示暂无正在投票的项目
-
-// 		return false;
-// 	}
-
-// 	var projects = [];
-// 	for (var i = 0; i < data.length; i++) {
-// 		projects.push( data[i] );
-
-// 		if( (i+1) % 5 == 0){
-// 			// console.log( projects ); 
-// 			votingProject.push(projects);
-// 			projects = [];
-
-// 		}
-// 	}
-
-// 	//添加余下的
-// 	votingProject.push( projects );
-
-// 	disableBtn("#voting-prev-btn");
-// }
-
+//按钮有效函数
 function enableBtn(selector){
 	$(selector).removeClass('disabled');
 }
 
+//按钮失效函数
 function disableBtn(selector){
 	$(selector).addClass('disabled');
 }   			    					

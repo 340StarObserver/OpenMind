@@ -1,30 +1,12 @@
+/*Created by WuXiaobao on Sep.9 2016
+  js for page of active degree*/
+
 var date = new Date();
 var num = 4;
 
-var data=[
-	{
-		month: 201609,
-		active: [
-			{day: 1,degree: 10},
-			{day: 3,degree: 3},
-			{day: 5,degree: 100},
-		]
-	},
-	{
-		month: 201608,
-		active: [
-			{day: 1,degree: 10},
-			{day: 3,degree: 3},
-			{day: 5,degree: 100},
-		]
-	}
-];
-
 $(document).ready(function() {
+
 	getActiveDegree();
-
-	// dealActiveDegreeReturn( data );
-
 	$('#more-btn').click(function(event) {
 		getActiveDegree(num);
 
@@ -46,14 +28,8 @@ function dealActiveDegreeReturn(data){
 
 		//当前月份减1
 		date.setMonth( date.getMonth()-1 );
-		console.log(date);
 	}
 
-	// for (var i = 0; i < data.length; i++) {
-	// 	addMonthList(data[i]);
-	// }
-
-	console.log(date);
 }
 
 function addMonthList(data){
@@ -65,7 +41,6 @@ function addMonthList(data){
             '<div class="square-list">';
 
 	var days_num = daysInMonth(date); 
-	console.log( days_num );
 
 	for (var i = 0; i < days_num; i++)
 		html += '<i></i>';
@@ -73,8 +48,6 @@ function addMonthList(data){
 	html += '</div></li>';
 
 	var list_item = $(html);
-	console.log( html );
-	console.log( list_item );
 	var degree, d_class;
 	var i_array = list_item.children('.square-list').children('i');
 
@@ -105,7 +78,6 @@ function addMonthListEmpty(){
             '<div class="square-list">';
 
 	var days_num = daysInMonth(date); 
-	console.log( days_num );
 
 	for (var i = 0; i < days_num; i++)
 		html += '<i></i>';

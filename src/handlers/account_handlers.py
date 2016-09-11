@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
 
-# Author 		: 	Lv Yang
+# Author 		: 	WuZhiXiang
 # Created 		: 	27 August 2016
-# Modified 		: 	29 August 2016
+# Modified 		: 	10 September 2016
 # Version 		: 	1.0
 
 """

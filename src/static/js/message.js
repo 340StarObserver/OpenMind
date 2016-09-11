@@ -1,3 +1,5 @@
+/* Created by WuXiaobao on Sep.9 2016
+ js for page of messages*/
 
 $(document).ready(function() {
 	
@@ -11,7 +13,6 @@ $(document).ready(function() {
 });
 
 function dealMessageReturn(data){
-	console.log(data.length);
 
 	for (var i = 0; i < data.length; i++)
 		appendMessageItem( data[i] );
@@ -20,14 +21,11 @@ function dealMessageReturn(data){
 		time_max = data[ data.length-1 ]['time'];
 
 	if( data.length < 5 ){
-		console.log( "length<5");
 		$('#no-more').css('display', 'block').fadeIn('fast');
 	}else{
-		console.log( "length>=5" );
 		$(window).scroll( moreMessage );
 	}
 
-	console.log(time_max);
 }
 
 function appendMessageItem(data){
@@ -55,7 +53,6 @@ function appendMessageItem(data){
 }
 
 function moreMessage(){
-	console.log("more message");
 
 	if( $(window).scrollTop() + $(window).height()  >= $('body').height() ){
 	    	$(window).off('scroll');

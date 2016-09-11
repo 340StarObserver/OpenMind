@@ -1,3 +1,6 @@
+/* Created by WuXiaobao on Aug.26 2016
+   js for all pages */
+
 $(document).ready(function() {
 
 	//查看是否有cookie
@@ -129,10 +132,12 @@ function parseURL(url) {
 	}; 
 }
 
+//清除input
 function clearInput(selector){
 	$(selector).val('');
 }
 
+//文件前缀树结构
 function Tree(){
 	this.root_node = new Node();
 
@@ -244,6 +249,7 @@ function Tree(){
 	}
 }
 
+//文件前缀树结点
 function Node(){
 	
 	this.child = new Array();
@@ -252,6 +258,7 @@ function Node(){
 	this.url="";
 }
 
+//url获取文件后缀
 function getSuffix(url){
 
 	var urls = url.split('/');

@@ -1,57 +1,15 @@
-var votingExample = [
-	{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "0",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
-			"score": 13,
-			"alive": true,
-			"ever_voted": true
-	},
-	{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "0",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
-			"score": 13,
-			"alive": false,
-			"ever_voted": false
-	},
-	{
-			"_id":1,
-			"proj_name": "Android FlappyBird",
-			"own_usr":　"wxb",
-			"own_name": "wxb",
-			"pub_time": 1445599887,
-			"own_head": "0",
-			"labels": ["label1","label2","label3"],
-			"introduction": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
-			"score": 13,
-			"alive": true,
-			"ever_voted": false
-	}
-];
+/* Created by WuXiaobao on Sep.9 2016
+   js for page of voting projects */
 
 $(document).ready(function() {
 	
 	getVotingProjPost();
-
-	// dealVotingProjReturn(votingExample);
 
 	$(document).on('click', '.vote-btn', function(event) {
 		var vote_btn = $(this);
 		var id = $(this).parent().siblings('.item-title-left').children('.project-name').attr('id');
 		
 		votePost(id, vote_btn);
-		// dealVoteReturn(data, vote_btn);
 	});
 
 	$(document).on('click', '.project-name', function(event) {
@@ -61,8 +19,8 @@ $(document).ready(function() {
 
 });
 
+//deal return of voting projects
 function dealVotingProjReturn(data){
-	
 
 	for (var i = 0; i < data.length; i++) {
 		var html =  getProjItemHtml( data[i] );
@@ -74,6 +32,7 @@ function dealVotingProjReturn(data){
 		$(".vote-btn").remove();
 }
 
+//get html item of each voting project
 function getProjItemHtml(project){
 
 	if( project['own_head'] == '0')
@@ -116,6 +75,7 @@ function getProjItemHtml(project){
 	return html;
 }
 
+//deal return of voting for a project post request
 function dealVoteReturn(data, vote_btn){
 	
 	if(data['result'] == false ){

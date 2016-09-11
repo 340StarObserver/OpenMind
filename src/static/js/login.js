@@ -1,3 +1,6 @@
+/*Created by WuXiaobao on Aug.28 2016
+  js for page of login */
+
 if( getCookie("username") !=null ){
 	
 	location.href = "/home";
@@ -40,16 +43,19 @@ $(document).ready(function() {
 
 	});
 
+	//用户名输入
 	$("#signup-username-input").focus(function(event) {
 		$(this).siblings(".control-label").html("用户名格式为3-15位数字或字母");
 		$(this).parent().removeClass('has-error');
 	});
 
+	//密码输入
 	$("#signup-password-input").focus(function(event) {
 		$(this).siblings(".control-label").html("密码格式为6-16位数字或字母");
 		$(this).parent().removeClass('has-error');
 	});
 
+	//用户名输入
 	$("#signup-username-input").blur(function(event) {
 		if(!checkUsername( $(this).val() )){
 			$(this).siblings(".control-label").html("用户名格式错误");
@@ -61,6 +67,7 @@ $(document).ready(function() {
 		}
 	});
 
+	//密码检查
 	$("#signup-password-input").blur(function(event) {
 		if( checkPassword( $(this).val() ) ){
 			$(this).parent().removeClass("has-error");
@@ -72,6 +79,7 @@ $(document).ready(function() {
 		}
 	});
 
+	//确认密码检查
 	$("#signup-confirm-password-input").blur(function(event) {
 		var password = $(this).val();
 		if( ! confirmPassword() ){
@@ -85,32 +93,17 @@ $(document).ready(function() {
 		}		
 	});
 
+	//姓名检查
 	$("#signup-name-input").focus(function(event) {
 		$(this).parent().removeClass('has-error');
 		$(this).siblings('.control-label').html("姓名");
 	});
 
+	//姓名检查
 	$("#signup-name-input").blur(function(event) {
 		if( $(this).val() == ""){
 			$(this).parent().addClass('has-error');
 			$(this).siblings('.control-label').html("姓名不能为空");
-		}
-	});
-
-	$("#signup-headIcon-input").change(function(event) {
-		var file = $("#signup-headIcon-input")[0].files[0];
-		
-		//不是图片格式
-		if( !isImage(file.type) ){
-			$(this).parent().parent().addClass('has-error');
-			$(this).parent().siblings('.control-label').html("头像图片格式错误");
-		}
-		else if( !isSizeValid(file.size)){ //图片太大
-			$(this).parent().parent().addClass('has-error');
-			$(this).parent().siblings('.control-label').html("头像(请勿超过200KB)");
-		}else{
-			$(this).parent().parent().removeClass('has-error');
-			$(this).parent().siblings('.control-label').html("头像(请勿超过200KB)");
 		}
 	});
 
@@ -128,6 +121,7 @@ function confirmPassword(){
 	return ( $("#signup-password-input").val() == $("#signup-confirm-password-input").val() );
 }
 
+//登录函数
 function login(){
 	var username = $("#login-username-input").val(),
 	password = $("#login-password-input").val();
@@ -140,6 +134,7 @@ function login(){
 	loginPost(username,password);
 }
 
+//注册函数
 function signup(){
 	
 	var username = $("#signup-username-input").val(),
@@ -166,6 +161,7 @@ function signup(){
 	signupPost(username,password,name,college);
 }
 
+//处理注册请求返回函数
 function dealSignupReturn(data, username, password){
 	
 	if( data['result'] == false ){
@@ -196,6 +192,7 @@ function dealSignupReturn(data, username, password){
 	    }
 }
 
+//处理登录请求返回函数
 function dealLoginReturn(data, username){
 
 	if(data["result"] == false){

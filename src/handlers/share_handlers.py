@@ -3,7 +3,7 @@
 
 # Author 		: 	Lv Yang
 # Created 		: 	28 August 2016
-# Modified 		: 	28 August 2016
+# Modified 		: 	10 September 2016
 # Version 		: 	1.0
 
 """
@@ -69,8 +69,20 @@ def create_project(post_data,post_files,usr_sessions,server_conf):
     project_data['labels'] = []
     if len(th_labels) > 0:
         project_data['labels'] = th_labels.split(',')
+        n = len(project_data['labels'])
+        i = 0
+        while i < n:
+            project_data['labels'][i] = xss_filter.valid_filter(project_data['labels'][i])
+            i+=1
 
     project_data['links'] = json.loads(th_links)
+    n = len(project_data['links'])
+    i = 0
+    while i < n:
+        project_data['links'][i]['address'] = xss_filter.valid_filter(project_data['links'][i]['address'])
+        project_data['links'][i]['description'] = xss_filter.valid_filter(project_data['links'][i]['description'])
+        i+=1
+    
     project_data['shares'] = []
     project_data['comments'] = []
 
@@ -116,6 +128,8 @@ def create_project(post_data,post_files,usr_sessions,server_conf):
         server_conf['active']['create_inc'])
 
     # delete some objects
+    mongo_client.close()
+    del mongo_client
     del time_stamp
     del time_array
     del time_str
@@ -123,8 +137,6 @@ def create_project(post_data,post_files,usr_sessions,server_conf):
     del this_day
     del project_data
     del db_name
-    mongo_client.close()
-    del mongo_client
     del oss_bucket_client
     del file_names
     del update_factor_1
@@ -206,14 +218,14 @@ def enrich_project(post_data,post_files,usr_sessions,server_conf):
         server_conf['active']['enrich_inc'])
 
     # delete some objects
+    mongo_client.close()
+    del mongo_client
     del time_stamp
     del time_array
     del time_str
     del this_month
     del this_day
     del db_name
-    mongo_client.close()
-    del mongo_client
     del oss_bucket_client
     del file_names
     del new_shares
