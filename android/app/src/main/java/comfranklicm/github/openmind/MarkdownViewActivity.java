@@ -6,7 +6,10 @@ import android.os.Bundle;
 import comfranklicm.github.openmind.Httprequests.HttpGetFileRunnable;
 import comfranklicm.github.openmind.utils.User;
 import us.feras.mdv.MarkdownView;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
+ */
 public class MarkdownViewActivity extends Activity {
     MarkdownView markdownView;
 

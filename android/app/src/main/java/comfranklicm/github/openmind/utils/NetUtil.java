@@ -3,7 +3,10 @@ package comfranklicm.github.openmind.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/31
+ */
 /**
  *网络部分封装  网络单例
  */

@@ -18,7 +18,10 @@ import comfranklicm.github.openmind.utils.NetUtil;
 import comfranklicm.github.openmind.utils.ProjectInfo;
 import comfranklicm.github.openmind.utils.Share;
 import comfranklicm.github.openmind.utils.User;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
+ */
 /**
  * json解析封装
  */

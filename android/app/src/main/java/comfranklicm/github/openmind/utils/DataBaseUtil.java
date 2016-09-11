@@ -6,7 +6,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.List;
 
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/29
+ */
 /**
  * 数据库部分封装,数据库单例
  */

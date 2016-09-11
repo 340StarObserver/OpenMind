@@ -3,7 +3,8 @@ package comfranklicm.github.openmind.utils;
 import android.os.Environment;
 
 /**
- * Created by Administrator on 9/10/2016.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/10
  */
 public class HavaSdCard {
     /**

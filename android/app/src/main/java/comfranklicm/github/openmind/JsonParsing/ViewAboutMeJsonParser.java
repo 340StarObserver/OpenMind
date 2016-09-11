@@ -8,7 +8,8 @@ import comfranklicm.github.openmind.utils.AboutMe;
 import comfranklicm.github.openmind.utils.User;
 
 /**
- * Created by Administrator on 2016/9/1.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
  */
 public class ViewAboutMeJsonParser extends BaseJsonParser{
     public void ViewAboutMeJsonParsing(String strResult)

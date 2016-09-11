@@ -24,7 +24,10 @@ import comfranklicm.github.openmind.utils.DataBaseUtil;
 import comfranklicm.github.openmind.utils.MD5;
 import comfranklicm.github.openmind.utils.NetUtil;
 import comfranklicm.github.openmind.utils.User;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/26
+ */
 public class LoginFragment extends Fragment {
     Button register;
     EditText userName;

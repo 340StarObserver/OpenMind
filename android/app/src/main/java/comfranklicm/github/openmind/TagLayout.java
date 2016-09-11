@@ -8,7 +8,10 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/2
+ */
 /**
  *标签自动换行
  */

@@ -1,7 +1,8 @@
 package comfranklicm.github.openmind.Httprequests;
 
 /**
- * Created by Administrator on 9/9/2016.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
  */
 import android.util.Log;
 

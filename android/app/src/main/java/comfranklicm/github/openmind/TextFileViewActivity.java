@@ -6,7 +6,10 @@ import android.widget.TextView;
 
 import comfranklicm.github.openmind.Httprequests.HttpGetFileRunnable;
 import comfranklicm.github.openmind.utils.User;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
+ */
 public class TextFileViewActivity extends Activity {
     TextView textView;
 

@@ -10,7 +10,10 @@ import java.util.List;
 import comfranklicm.github.openmind.utils.Link;
 import comfranklicm.github.openmind.utils.ProjectInfo;
 import comfranklicm.github.openmind.utils.User;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
+ */
 /**
  * 查看投票栏
  */

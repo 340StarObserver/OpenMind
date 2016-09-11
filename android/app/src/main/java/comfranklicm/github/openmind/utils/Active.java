@@ -1,5 +1,8 @@
 package comfranklicm.github.openmind.utils;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/28
+ */
 /**
  * Created by Administrator on 2016/8/30.
  */

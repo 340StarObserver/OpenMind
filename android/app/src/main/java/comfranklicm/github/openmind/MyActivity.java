@@ -55,7 +55,10 @@ import comfranklicm.github.openmind.utils.NetUtil;
 import comfranklicm.github.openmind.utils.ProjectInfo;
 import comfranklicm.github.openmind.utils.User;
 
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/26
+ */
 public class MyActivity extends FragmentActivity implements OnClickListener{
 
     FragmentManager fManager;

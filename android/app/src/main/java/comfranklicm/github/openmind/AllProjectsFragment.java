@@ -17,7 +17,10 @@ import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.JsonParser;
 import comfranklicm.github.openmind.utils.NetUtil;
 import comfranklicm.github.openmind.utils.User;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
+ */
 public class AllProjectsFragment extends Fragment {
     private static int num = User.getInstance().allinfos.size();
     SwipeRefreshLayout swipeRefreshLayout;

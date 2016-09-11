@@ -22,7 +22,10 @@ import comfranklicm.github.openmind.JsonParsing.VoteJsonParser;
 import comfranklicm.github.openmind.MyActivity;
 import comfranklicm.github.openmind.OwnProjectsFragment;
 import comfranklicm.github.openmind.ProjectListRecyViewAdapter;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/27
+ */
 /**
  * 用户信息封装，User单例
  */

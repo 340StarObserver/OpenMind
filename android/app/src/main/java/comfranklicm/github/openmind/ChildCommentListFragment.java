@@ -30,7 +30,8 @@ import comfranklicm.github.openmind.utils.Comment;
 import comfranklicm.github.openmind.utils.User;
 
 /**
- * Created by FrankLicm on 2016/9/4.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/4
  */
 public class ChildCommentListFragment extends Fragment{
     View view;

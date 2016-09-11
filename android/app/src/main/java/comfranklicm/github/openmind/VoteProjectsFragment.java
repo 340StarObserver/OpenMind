@@ -16,7 +16,10 @@ import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.ViewVoteProjectsJsonParser;
 import comfranklicm.github.openmind.utils.NetUtil;
 import comfranklicm.github.openmind.utils.User;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/7
+ */
 public class VoteProjectsFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;

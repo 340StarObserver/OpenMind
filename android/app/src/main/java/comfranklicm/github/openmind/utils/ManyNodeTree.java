@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by FrankLicm on 2016/9/5.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/5
  */
 public class ManyNodeTree {
 

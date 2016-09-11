@@ -40,7 +40,11 @@ import android.widget.Toast;
 
 import comfranklicm.github.openmind.utils.DataBaseUtil;
 
-
+/**
+ * Created and Modified by:XuBen
+ * Time:2016/8/25
+ * 测试使用
+ */
 public class testActivity extends Activity {
    WebView webView;
     SwipeRefreshLayout swipeLayout;

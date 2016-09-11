@@ -4,7 +4,8 @@ import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.SynchronousDataJsonParser;
 
 /**
- * Created by Frank on 9/10/2016.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/10
  */
 public class SynchronousData {
     public static void Sychronous(){

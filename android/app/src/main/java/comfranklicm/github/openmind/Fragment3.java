@@ -26,7 +26,10 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.io.File;
 
 import comfranklicm.github.openmind.utils.User;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/26
+ */
 public class Fragment3 extends Fragment {
     View view;
    TextView loginorname;

@@ -26,7 +26,9 @@ import comfranklicm.github.openmind.utils.User;
 import me.relex.photodraweeview.PhotoDraweeView;
 
 /**
- * Created by lyy on 2016/9/8.
+ * Created and Modified by:LeiYuanYuan
+ * Modified by:LiChangMao
+ * Time:2016/9/8
  */
 public class AboutMeRecyViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     //上拉加载更多

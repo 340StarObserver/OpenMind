@@ -1,5 +1,8 @@
 package comfranklicm.github.openmind.utils;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/27
+ */
 /**
  * 与我相关数据封装
  */

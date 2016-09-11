@@ -16,7 +16,10 @@ import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.JsonParser;
 import comfranklicm.github.openmind.utils.MD5;
 import comfranklicm.github.openmind.utils.User;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/29
+ */
 public class RegisterFragment extends Fragment {
     View view;
     EditText userName;

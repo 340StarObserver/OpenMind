@@ -12,7 +12,10 @@ import com.facebook.imagepipeline.image.ImageInfo;
 
 import comfranklicm.github.openmind.utils.User;
 import me.relex.photodraweeview.PhotoDraweeView;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
+ */
 public class PictureViewActivity extends Activity {
     PhotoDraweeView mPhotoDraweeView;
     @Override

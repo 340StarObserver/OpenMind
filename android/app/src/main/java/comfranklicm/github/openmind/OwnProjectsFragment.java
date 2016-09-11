@@ -19,7 +19,10 @@ import comfranklicm.github.openmind.JsonParsing.JsonParser;
 import comfranklicm.github.openmind.utils.DataBaseUtil;
 import comfranklicm.github.openmind.utils.NetUtil;
 import comfranklicm.github.openmind.utils.User;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/27
+ */
 public class OwnProjectsFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;

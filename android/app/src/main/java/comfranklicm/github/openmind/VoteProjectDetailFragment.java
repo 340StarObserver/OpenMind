@@ -33,7 +33,8 @@ import comfranklicm.github.openmind.JsonParsing.VoteJsonParser;
 import comfranklicm.github.openmind.utils.User;
 
 /**
- * Created by FrankLicm on 2016/9/7.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/7
  */
 public class VoteProjectDetailFragment extends Fragment {
     View view;

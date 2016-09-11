@@ -19,7 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by lyy on 2016/9/1.
+ * Created and Modified by:LeiYuanYuan
+ * Modified by:LiChangMao
+ * Time:2016/9/1
  */
 public class CommentsListViewAdapter extends BaseAdapter{
     public List<Map<String, Object>> listItems;    //商品信息集合

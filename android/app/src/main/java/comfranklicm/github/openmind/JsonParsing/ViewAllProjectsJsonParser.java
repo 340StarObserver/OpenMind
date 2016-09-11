@@ -9,7 +9,10 @@ import java.util.List;
 
 import comfranklicm.github.openmind.utils.ProjectInfo;
 import comfranklicm.github.openmind.utils.User;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
+ */
 /**
  * 浏览所有项目的概要信息 Json解析
  */

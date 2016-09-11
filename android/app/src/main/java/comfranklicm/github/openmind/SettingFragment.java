@@ -17,9 +17,11 @@ import comfranklicm.github.openmind.JsonParsing.JsonParser;
 import comfranklicm.github.openmind.utils.DataBaseUtil;
 import comfranklicm.github.openmind.utils.SynchronousData;
 import comfranklicm.github.openmind.utils.User;
-/*add by lyy 2016.8.31
-  设置页面的fragment
-*/
+/**
+ * Created and Modified by:LeiYuanYuan
+ * Modified by:LiChangMao
+ * Time:2016/8/31
+ */
 public class SettingFragment extends Fragment {
     View view;
     TextView fa_trash;
@@ -113,6 +115,7 @@ public class SettingFragment extends Fragment {
 
                             ActiveDegreeFragment activeDegreeFragment = User.getInstance().getActiveDegreeFragment();
                             activeDegreeFragment.adapter.notifyDataSetChanged();
+
                         }catch (Exception e)
                         {
                             e.printStackTrace();

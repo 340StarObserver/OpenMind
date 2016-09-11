@@ -1,6 +1,9 @@
 package comfranklicm.github.openmind.utils;
 
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/31
+ */
 import java.util.List;
 
 /**

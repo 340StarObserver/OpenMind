@@ -28,7 +28,8 @@ import comfranklicm.github.openmind.utils.User;
 
 
 /**
- * Created by FrankLicm on 2016/9/5.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/5
  */
 public class FileViewFragment extends Fragment{
     View view;

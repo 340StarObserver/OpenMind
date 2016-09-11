@@ -10,7 +10,8 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 /**
- * Created by Administrator on 2016/9/6.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
  */
 public class HttpGetFileRunnable implements Runnable {
     String path;

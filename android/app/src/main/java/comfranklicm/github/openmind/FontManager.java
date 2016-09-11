@@ -5,7 +5,10 @@ import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/5
+ */
 public class FontManager {
 
     public static final String ROOT = "fonts/",

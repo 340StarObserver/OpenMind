@@ -19,7 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by FrankLicm on 2016/9/4.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/4
  */
 public class ChildCommentListViewAdapter extends BaseAdapter {
     public List<Map<String, Object>> listItems;    //商品信息集合

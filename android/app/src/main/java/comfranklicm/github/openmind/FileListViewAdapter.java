@@ -13,7 +13,8 @@ import java.util.Map;
 import comfranklicm.github.openmind.utils.User;
 
 /**
- * Created by Administrator on 2016/9/5.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/5
  */
 public class FileListViewAdapter extends BaseAdapter{
     private Context context;                        //运行上下文

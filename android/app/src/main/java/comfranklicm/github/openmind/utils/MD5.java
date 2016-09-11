@@ -5,7 +5,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * MD5加密封装
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/3
  */
 public class MD5 {
    public static String getMD5Str(String str)

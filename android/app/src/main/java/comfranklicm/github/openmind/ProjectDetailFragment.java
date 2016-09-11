@@ -29,9 +29,9 @@ import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
 import comfranklicm.github.openmind.JsonParsing.CommentJsonParser;
 import comfranklicm.github.openmind.JsonParsing.ViewProjectDetailJsonParser;
 import comfranklicm.github.openmind.utils.User;
-
 /**
- * Created by Lyy on 2016/9/1.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/1
  */
 public class ProjectDetailFragment extends Fragment {
     View view;

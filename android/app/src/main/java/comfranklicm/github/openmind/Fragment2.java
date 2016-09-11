@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comfranklicm.github.openmind.utils.User;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/26
+ */
 public class Fragment2 extends Fragment {
 	View view;
 	OwnProjectsFragment fg6;

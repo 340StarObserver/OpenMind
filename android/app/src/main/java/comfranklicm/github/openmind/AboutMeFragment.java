@@ -20,7 +20,8 @@ import comfranklicm.github.openmind.utils.NetUtil;
 import comfranklicm.github.openmind.utils.User;
 
 /**
- * Created by FrankLicm on 9/8/2016.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
  */
 public class AboutMeFragment extends Fragment {
     private static int num = User.getInstance().aboutMeList.size();

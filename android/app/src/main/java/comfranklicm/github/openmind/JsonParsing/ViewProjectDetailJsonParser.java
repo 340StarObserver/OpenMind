@@ -15,7 +15,10 @@ import comfranklicm.github.openmind.utils.Link;
 import comfranklicm.github.openmind.utils.ProjectInfo;
 import comfranklicm.github.openmind.utils.Share;
 import comfranklicm.github.openmind.utils.User;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
+ */
 /**
  * 浏览具体的一个项目的详细信息
  */

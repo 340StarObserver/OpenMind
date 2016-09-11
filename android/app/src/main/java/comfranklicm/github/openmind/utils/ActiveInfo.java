@@ -1,7 +1,10 @@
 package comfranklicm.github.openmind.utils;
 
 import java.util.List;
-
+/**
+ * Created and Modified by:LiChangMao
+ * Time:2016/8/27
+ */
 /**
  * 用户活跃信息封装，用户活跃信息单例
  */

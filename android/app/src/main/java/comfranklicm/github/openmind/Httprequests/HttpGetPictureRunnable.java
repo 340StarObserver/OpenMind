@@ -13,7 +13,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.InputStream;
 
 /**
- * Created by Administrator on 2016/9/3.
+ * Created and Modified by:LiChangMao
+ * Time:2016/9/6
  */
 public class HttpGetPictureRunnable implements Runnable {
     Bitmap pic;
