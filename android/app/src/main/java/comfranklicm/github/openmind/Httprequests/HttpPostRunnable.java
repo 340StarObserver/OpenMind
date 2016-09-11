@@ -235,12 +235,17 @@ public class HttpPostRunnable implements Runnable{
                     try {
                             if (actionId == 2||actionId==5||actionId==6||actionId==10) {
                                 Header it = response.getFirstHeader("Set-Cookie");
-                                String session = it.toString();
-                                String[] heads = session.split(";");
-                                String [] split = heads[0].split(":");
-                                session=split[1];
-                                NetUtil.getInstance().setSessionId(session);
-                                Log.d("sessionid", NetUtil.getInstance().getSessionId());
+                                try {
+                                    String session = it.toString();
+                                    String[] heads = session.split(";");
+                                    String[] split = heads[0].split(":");
+                                    session = split[1];
+                                    NetUtil.getInstance().setSessionId(session);
+                                    Log.d("sessionid", NetUtil.getInstance().getSessionId());
+                                }catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
                             }
                         /**读取服务器返回过来的json字符串数据**/
                         strResult = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);

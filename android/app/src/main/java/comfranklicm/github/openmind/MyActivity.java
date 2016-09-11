@@ -158,7 +158,7 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
 
            if (NetUtil.isNetworkConnectionActive(this))
            {
-           Toast.makeText(this,"请检查网络连接",Toast.LENGTH_LONG).show();
+           //Toast.makeText(this,"网络连接",Toast.LENGTH_LONG).show();
            runnable.setActionId(2);
            runnable.setUsername(User.getInstance().getUserName());
            runnable.setPassword(MD5.getMD5Str(User.getInstance().getPassWord()));

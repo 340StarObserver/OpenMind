@@ -34,7 +34,7 @@ public class LoginJsonParser extends BaseJsonParser {
                 switch (jarr.getString("reason"))
                 {
                     case "1":error="用户名或密码格式错误";break;
-                    case "2":error="表示用户名密码错误";break;
+                    case "2":error="用户名密码错误";break;
                     default:error="其他错误";break;                        }
                 User.getInstance().setLoginError(error);
             }
