@@ -1,6 +1,3 @@
-/* Created by WuXiaobao on Aug.26 2016
-   js for all pages */
-
 $(document).ready(function() {
 
 	//查看是否有cookie
@@ -94,7 +91,7 @@ function checkDirectoryName(name){
 }
 
 function checkFileName(filename){
-	return ( filename.match('^[\u4e00-\u9fa5a-zA-Z0-9][\u4e00-\u9fa5_a-zA-Z0-9\.]+[\u4e00-\u9fa5a-zA-Z0-9]$') != null );
+	return ( filename.match('^[\u4e00-\u9fa5_a-zA-Z0-9][\u4e00-\u9fa5_a-zA-Z0-9\.]+[\u4e00-\u9fa5a-zA-Z0-9]$') != null );
 }
 
 //注销

@@ -1,6 +1,3 @@
-/* Created by WuXiaobao on Sep.3 2016
- js for page of adding a new project */
-
 var username = getCookie('username');
 if( username == null){
 	location.href = 'home.html';

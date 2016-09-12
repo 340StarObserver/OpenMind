@@ -1,6 +1,3 @@
-/*Created by WuXiaobao on Aug.26 2016
-  js for handling cookies*/
-
 // set cookie
 function setCookie(key,value,days){
 	var exp=new Date();

@@ -1,6 +1,3 @@
-/* Created by WuXiaobao on Aug.28 2016
-   js for pages of home*/
-
 var currentPage ;
 var currentVotingPage ;
 

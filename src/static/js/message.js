@@ -1,6 +1,3 @@
-/* Created by WuXiaobao on Sep.9 2016
- js for page of messages*/
-
 $(document).ready(function() {
 	
   	$(document).on('click', '.project-name', function(event) {

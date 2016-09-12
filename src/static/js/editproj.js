@@ -1,6 +1,3 @@
-/* Created by WuXiaobao on Aug.27  2016
-   js for the page of editing project */
-
 var tree = new Tree();
 var pointer = tree.root_node;
 

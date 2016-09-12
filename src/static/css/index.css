@@ -1,8 +1,5 @@
-/*Created by LeiYuanyuan on Sep.2 2016
- css for index page
-*/
 body{
-	background: url("static/res/image/head-bg.jpg");
+	background: url("../res/image/head-bg.jpg");
 	font-family: "Microsoft Yahei";
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -50,7 +47,7 @@ body{
 }
 
 .bottom {
-	background: url("static/res/image/head-bg.jpg");
+	background: url("../res/image/head-bg.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	text-align: center;

@@ -1,6 +1,3 @@
-/*Created by WuXiaobao on Sep.9 2016
-  js for page of active degree*/
-
 var date = new Date();
 var num = 4;
 

@@ -1,6 +1,3 @@
-/*Created by WuXiaobao on Aug.28 2016
-  js for page of login */
-
 if( getCookie("username") !=null ){
 	
 	location.href = "/home";

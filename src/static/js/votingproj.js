@@ -1,6 +1,3 @@
-/* Created by WuXiaobao on Sep.9 2016
-   js for page of voting projects */
-
 $(document).ready(function() {
 	
 	getVotingProjPost();

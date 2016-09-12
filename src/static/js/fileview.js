@@ -1,6 +1,3 @@
-/* Created by WuXiaobao on Sep.9 2016
-   js for page of browsering some files */
-
 var fileUrl,
 	filename,
 	suffix;
@@ -21,7 +18,7 @@ $(document).ready(function() {
 
 	$('.file-name-container').text( filename );
 
-	if( suffix== 'jpg' || suffix=='png' ){
+	if( suffix== 'jpg' || suffix=='png' || suffix=='gif' ){
 		//图片文件
 		$('.file-container').html('<img src="'+ fileUrl +'" alt="'+ filename +'">');
 
@@ -33,7 +30,8 @@ $(document).ready(function() {
 	}
 	else if( suffix =='txt' || suffix=='md' || suffix=='conf' || suffix=='config' || suffix=='bat'
 		|| suffix=='sh' || suffix=='cpp' || suffix=='c' || suffix=='h' || suffix=='java' || suffix=='php'
-		|| suffix=='py' || suffix=='html' || suffix=='css' || suffix=='js'  || suffix=='cs' || suffix=='rb' ){
+		|| suffix=='py' || suffix=='html' || suffix=='css' || suffix=='js'  || suffix=='cs' || suffix=='rb'
+                || suffix=='xml' ){
 		
 		fileGet(fileUrl);
 	}

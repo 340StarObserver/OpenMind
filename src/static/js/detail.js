@@ -1,6 +1,3 @@
-/* Created by WuXiaobao on Aug.27  2016
- js for the page of the deail infomation about each project */
-
 var proj_id, 
 	proj_name, 
 	own_usr,

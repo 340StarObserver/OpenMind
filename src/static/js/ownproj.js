@@ -1,6 +1,3 @@
-/* Created by WuXiaobao on Sep.7 2016
-   js for page of own projects */
-
 $(document).ready(function() {
 	getOwnProjPost();
 	

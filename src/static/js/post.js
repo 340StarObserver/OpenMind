@@ -1,6 +1,3 @@
-/* Created by WuXiaobao on Sep.7 2016
-   js for all post request */
-
 //1. 注册的post请求
 function signupPost(username, password, name, college){
 	
