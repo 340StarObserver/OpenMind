@@ -197,6 +197,7 @@ def sethead(post_data,post_files,usr_sessions,server_conf):
     # create a new token
     new_token = rand.rand_token(server_conf['rand']['token_range'])
     usr_sessions['token'] = new_token
+    usr_sessions['head'] = head_url
 
     # delete some objects
     mongo_client.close()
