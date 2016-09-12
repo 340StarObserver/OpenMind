@@ -183,6 +183,9 @@ $(document).ready(function() {
 	});
 
 	$("#publish-btn").click(function(event) {
+		if( $(this).hasClass('disabled')  )
+			return false;
+
 		var token = getCookie('token');
 
 		if( token == null ){
@@ -222,8 +225,11 @@ $(document).ready(function() {
 		}
 
 		var links_jsonstring = JSON.stringify( links );
-		newProjectPost(name, files_name_string, files_array, labels_string, links_jsonstring, intro, token);
 
+		//loading animation
+		$(this).addClass("disabled").html( '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>' );
+		
+		newProjectPost(name, files_name_string, files_array, labels_string, links_jsonstring, intro, token);
 	});
 	
 });
@@ -367,7 +373,9 @@ function addLinkItem(remark, url){
 function dealNewProjectReturn(data){
 	if( data['result'] == true ){
 		setCookie("token", data['token'], 7);
+		$("#publish-btn").html( '发布成功' );
 		location.href = '/home';
+		
 	}else{
 		var errorReason;
 		switch( data['reason'] ){

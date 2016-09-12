@@ -119,6 +119,9 @@ $(document).ready(function() {
 	});
 
 	$('#edit-confirm-btn').click(function(event) {
+		if( $(this).hasClass('disabled') )
+			return false;
+
 		if( files.length == 0){
 			showWarningTips('请上传新文件');
 			return false;
@@ -136,6 +139,7 @@ $(document).ready(function() {
 		
 		var token = getCookie("token");
 
+		$(this).addClass("disabled").html( '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>' );
 		editProjPost( proj_id, files_name_string, files_array, token);
 	});
 
@@ -323,6 +327,7 @@ function dealEditProjReturn(data){
 	}
 	else{
 		setCookie("token", data['token'], 7);
+		$('#edit-confirm-btn').html("修改成功");
 		location.href = '/ownproj';
 	}
 }

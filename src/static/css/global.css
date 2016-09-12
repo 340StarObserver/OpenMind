@@ -128,8 +128,11 @@ nav.navbar.navbar-default{
 	opacity: .5;
 }
 
+.disabled{
+	cursor: not-allowed;
+}
+
 a{
-/*a,a:hover{*/
 	text-decoration: none;
 }
 
