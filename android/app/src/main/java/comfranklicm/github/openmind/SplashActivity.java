@@ -15,6 +15,7 @@ import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.imagepipeline.image.ImageInfo;
 
+import comfranklicm.github.openmind.utils.User;
 import me.relex.photodraweeview.PhotoDraweeView;
 /**
  * Created and Modified by:LiChangMao
@@ -29,6 +30,15 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
         //Toast.makeText(this,"引导页启动",Toast.LENGTH_LONG).show();
         Uri uri=Uri.parse("asset:///image/splash.jpg");
+        try{
+            User.getInstance().ownactives.clear();
+            User.getInstance().owninfos.clear();
+            User.getInstance().voteinfos.clear();
+            User.getInstance().allinfos.clear();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
       final   PhotoDraweeView simpleDraweeView=(PhotoDraweeView)findViewById(R.id.simpleDraweeView);
         PipelineDraweeControllerBuilder controller = Fresco.newDraweeControllerBuilder();
         controller.setUri(uri);

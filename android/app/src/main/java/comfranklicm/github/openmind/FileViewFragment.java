@@ -43,7 +43,7 @@ public class FileViewFragment extends Fragment{
     ManyTreeNode manyTreeNode;
 
     String pictureType = ".png.jpg.webp.gif.bmp.jpeg";
-    String textType = ".txt.c.cpp.php.java.asp.net.jsp.js.css.html.cc.m.mm.h.xml.hlp.conf.sh.bat";
+    String textType = ".txt.c.cpp.php.java.asp.net.jsp.js.css.html.cc.m.mm.h.xml.hlp.conf.sh.bat.ini.py.rb.cs";
     String markDown = ".md";
     ManyNodeTree tree=new ManyNodeTree();
 

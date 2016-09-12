@@ -96,6 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
+                android:textColor="#66ccff"
                 android:layout_toEndOf="@+id/aboutme_statement"
                 android:text="项目名很长很长很长" />
 
@@ -105,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/aboutme_statement"
                 android:layout_below="@+id/aboutme_statement"
-                android:text="中回复你" />
+                android:text="中发表评论" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

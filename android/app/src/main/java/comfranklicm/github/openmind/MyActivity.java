@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
@@ -41,6 +42,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import comfranklicm.github.openmind.Httprequests.HttpPostImageRunnable;
 import comfranklicm.github.openmind.Httprequests.HttpPostRunnable;
@@ -98,8 +101,9 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
     private static final String IMAGE_FILE_NAME = "faceImage.jpg";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+
         Fresco.initialize(this);
         User.getInstance().setMyActivity(this);
         //User.getInstance().setAllView(this.getCurrentFocus());
@@ -107,17 +111,15 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
         NetUtil.getInstance().setIpAddress("139.196.15.168");
         //NetUtil.getInstance().setIpAddress("1.1.1.1");
         NetUtil.getInstance().setPort("80");
-		fManager = getSupportFragmentManager();
+        fManager = getSupportFragmentManager();
         Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
         FontManager.markAsIconContainer(findViewById(R.id.card_view), iconFont);
         initdatas();
-		initViews();
-        if (!NetUtil.isNetworkConnectionActive(this))
-        {
-            Toast.makeText(this,"请检查网络连接",Toast.LENGTH_LONG).show();
+        initViews();
+        if (!NetUtil.isNetworkConnectionActive(this)) {
+            Toast.makeText(this, "请检查网络连接", Toast.LENGTH_LONG).show();
         }
-	}
-
+    }
 	public void initViews()
 	{
 		course_image = (ImageView) findViewById(R.id.course_image);
@@ -259,8 +261,9 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
            }
            try {
                ((ViewAllProjectsJsonParser) User.getInstance().baseJsonParsers.get(6)).ViewAllProjectsJsonParsing(runnable.getStrResult());
-           } catch (NullPointerException e) {
+           } catch (Exception e) {
                e.printStackTrace();
+               Toast.makeText(this,"连接服务器失败",Toast.LENGTH_LONG).show();
            }
            HttpPostRunnable runnable1 = new HttpPostRunnable();
            runnable1.setActionId(14);
@@ -273,24 +276,35 @@ public class MyActivity extends FragmentActivity implements OnClickListener{
            }
            try {
                ((ViewVoteProjectsJsonParser) User.getInstance().baseJsonParsers.get(13)).ViewVoteProjectsJsonParsing(runnable1.getStrResult());
-           } catch (NullPointerException e) {
+           } catch (Exception e) {
                e.printStackTrace();
+               Toast.makeText(this,"连接服务器失败",Toast.LENGTH_LONG).show();
            }
        }else {
            Toast.makeText(this,"网络连接失败，请检查网络",Toast.LENGTH_LONG).show();
        }
    }
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-       if (keyCode == KeyEvent.KEYCODE_BACK ){
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            startActivity(intent);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
+    public void onBackPressed() {
+        //实现Home键效果
+        //super.onBackPressed();这句话一定要注掉,不然又去调用默认的back处理方式了
+        Intent i= new Intent(Intent.ACTION_MAIN);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addCategory(Intent.CATEGORY_HOME);
+        startActivity(i);
     }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//       if (keyCode == KeyEvent.KEYCODE_BACK ){
+//            Intent intent = new Intent(Intent.ACTION_MAIN);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.addCategory(Intent.CATEGORY_HOME);
+//            startActivity(intent);
+//            return true;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
+
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {

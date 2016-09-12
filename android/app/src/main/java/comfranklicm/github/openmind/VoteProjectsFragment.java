@@ -97,8 +97,13 @@ public class VoteProjectsFragment extends Fragment {
 //                                    "            }\n" +
 //                                    "]  ";
             // JsonParser.ParseJson(14, runnable.getStrResult());
-            ((ViewVoteProjectsJsonParser) User.getInstance().baseJsonParsers.get(13)).ViewVoteProjectsJsonParsing(runnable.getStrResult());
-
+            try {
+                ((ViewVoteProjectsJsonParser) User.getInstance().baseJsonParsers.get(13)).ViewVoteProjectsJsonParsing(runnable.getStrResult());
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+                Toast.makeText(getActivity(),"连接服务器失败",Toast.LENGTH_LONG).show();
+            }
                       /*  for (int i = 0; i < 5; i++) {
                             ProjectInfo projectInfo = new ProjectInfo();
                             projectInfo.setProjectName("voteprojectname" + num);

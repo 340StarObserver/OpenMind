@@ -78,26 +78,27 @@ public class OwnProjectsFragment extends Fragment {
 //                                    "                                \"            }  \\n\" +\n" +
 //                                    "                                \"        ]");
                             JsonParser.ParseJson(8, runnable.getStrResult());
-                            try {
-                                DataBaseUtil dataBaseUtil = DataBaseUtil.getInstance(getActivity());
-                                SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
-                                for (int i = 0; i < User.getInstance().owninfos.size(); i++) {
-                                    Object[] arrayOfObject = new Object[9];
-                                    arrayOfObject[0] = User.getInstance().owninfos.get(i).getProjectId();
-                                    arrayOfObject[1] = User.getInstance().owninfos.get(i).getProjectName();
-                                    arrayOfObject[2] = User.getInstance().owninfos.get(i).getOwnUser();
-                                    arrayOfObject[3] = User.getInstance().owninfos.get(i).getOwnName();
-                                    arrayOfObject[4] = User.getInstance().owninfos.get(i).getOwn_head();
-                                    arrayOfObject[5] = User.getInstance().owninfos.get(i).getPubTime();
-                                    arrayOfObject[6] = User.getInstance().owninfos.get(i).getLabel1();
-                                    arrayOfObject[7] = User.getInstance().owninfos.get(i).getLabel2();
-                                    arrayOfObject[8] = User.getInstance().owninfos.get(i).getIntroduction();
-                                    writedb.execSQL("insert into ProjectInfo(id,proj_name,own_usr,own_name,own_head,pub_time,label1,label2,introduction) values(?,?,?,?,?,?,?,?,?)", arrayOfObject);
-                                }
-                                writedb.close();
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
+//                            try {
+//                                DataBaseUtil dataBaseUtil = DataBaseUtil.getInstance(getActivity());
+//                                SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
+//                                writedb.execSQL("delete from ProjectInfo");
+//                                for (int i = 0; i < User.getInstance().owninfos.size(); i++) {
+//                                    Object[] arrayOfObject = new Object[9];
+//                                    arrayOfObject[0] = User.getInstance().owninfos.get(i).getProjectId();
+//                                    arrayOfObject[1] = User.getInstance().owninfos.get(i).getProjectName();
+//                                    arrayOfObject[2] = User.getInstance().owninfos.get(i).getOwnUser();
+//                                    arrayOfObject[3] = User.getInstance().owninfos.get(i).getOwnName();
+//                                    arrayOfObject[4] = User.getInstance().owninfos.get(i).getOwn_head();
+//                                    arrayOfObject[5] = User.getInstance().owninfos.get(i).getPubTime();
+//                                    arrayOfObject[6] = User.getInstance().owninfos.get(i).getLabel1();
+//                                    arrayOfObject[7] = User.getInstance().owninfos.get(i).getLabel2();
+//                                    arrayOfObject[8] = User.getInstance().owninfos.get(i).getIntroduction();
+//                                    writedb.execSQL("insert into ProjectInfo(id,proj_name,own_usr,own_name,own_head,pub_time,label1,label2,introduction) values(?,?,?,?,?,?,?,?,?)", arrayOfObject);
+//                                }
+//                                writedb.close();
+//                            } catch (SQLException e) {
+//                                e.printStackTrace();
+//                            }
                         /*for (int i = 0; i < 5; i++) {
                             ProjectInfo projectInfo = new ProjectInfo();
                             projectInfo.setProjectName("ownprojectname" + num);

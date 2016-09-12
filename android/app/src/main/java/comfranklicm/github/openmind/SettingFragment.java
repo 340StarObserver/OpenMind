@@ -116,11 +116,15 @@ public class SettingFragment extends Fragment {
                     if(User.getInstance().getSynchronousResult().equals("true")) {
                         try {
                             OwnProjectsFragment ownProjectsFragment = User.getInstance().getOwnProjectsFragment();
-                            ownProjectsFragment.adapter.notifyDataSetChanged();
-
                             ActiveDegreeFragment activeDegreeFragment = User.getInstance().getActiveDegreeFragment();
-                            activeDegreeFragment.adapter.notifyDataSetChanged();
-
+                            if (activeDegreeFragment.adapter != null && ownProjectsFragment.adapter != null) {
+                                ownProjectsFragment.adapter.notifyDataSetChanged();
+                                activeDegreeFragment.adapter.notifyDataSetChanged();
+                            }
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
                             DataBaseUtil dataBaseUtil=DataBaseUtil.getInstance(getActivity());
                             try {
                                 SQLiteDatabase writedb = dataBaseUtil.getWritableDatabase();
@@ -158,10 +162,6 @@ public class SettingFragment extends Fragment {
                             {
                                 e.printStackTrace();
                             }
-                        }catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
                         Toast.makeText(getActivity(),"同步成功",Toast.LENGTH_LONG).show();
                     }else
                     {

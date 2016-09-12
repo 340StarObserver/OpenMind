@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/username_error"
-                android:text="用户名格式不正确"
+                android:text="用户名格式不正确,请输入3-15位英文字母或数字"
                 android:textColor="#f44336"
                 android:layout_below="@+id/editText"
                 android:layout_alignStart="@+id/editText"/>
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/password_error"
-                android:text="密码格式不正确"
+                android:text="密码格式不正确,请输入6-16位英文字母或数字"
                 android:textColor="#f44336"
                 android:layout_below="@+id/editText2"
                 android:layout_alignStart="@+id/editText2"/>

@@ -210,8 +210,14 @@ public class ProjectDetailFragment extends Fragment {
                             public void onClick(View v) {
                                 Intent intent = new Intent();
                                 intent.setAction("android.intent.action.VIEW");
-                                Uri content_url = Uri.parse(User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
-                                intent.setData(content_url);
+                                if(User.getInstance().getCurrentProject().getLinkList().get(j).getAdress().contains("http")) {
+                                    Uri content_url = Uri.parse(User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
+                                    intent.setData(content_url);
+                                }else
+                                {
+                                    Uri content_url = Uri.parse("http://"+User.getInstance().getCurrentProject().getLinkList().get(j).getAdress());
+                                    intent.setData(content_url);
+                                }
                                 startActivity(intent);
                             }
                         });
