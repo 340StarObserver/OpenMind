@@ -1,0 +1,79 @@
+/* Created by WuXiaobao on Sep.9 2016
+ css for page of messages*/
+
+.title{
+	font-size: 2em;
+}
+
+.message-list-container{
+	margin-top: 50px;
+}
+
+.message-item{
+	padding: 10px;
+}
+
+.author-icon{
+	float: left;
+	width: 4em;
+}
+
+.author-icon img{
+	display: block;
+	width: 100%;
+	border-radius: 100%;
+}
+
+#no-more{
+	display: none;
+	width: 100%;
+	pointer-events: none;
+}
+
+.item-right{
+	margin-left: 80px;
+}
+
+.top-left{
+	float: left;
+}
+
+.right-top{
+	overflow: hidden;
+}
+
+.username{
+	font-size: 1.5em;
+	color: #336699;
+}
+
+.reply-time{
+	float: right;
+}
+
+.right-bottom{
+	margin-top: 10px;
+	padding: 15px 10px;
+	border: 1px solid #eee;
+	background-color: #eee;
+	line-height: 1.6;
+	z-index: 10;
+}
+
+.right-bottom::before{
+	position: relative;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	left: -20px;
+	top: -5px;
+	-webkit-transform: rotateZ(45deg);
+	-ms-transform: rotateZ(45deg);
+	-o-transform: rotateZ(45deg);
+	transform: rotateZ(45deg);
+	content: '.';
+	z-index: 1;
+	background-color: #eee;
+}
+
+

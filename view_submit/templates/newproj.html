@@ -1,0 +1,237 @@
+<!-- Created by WuXiaobao on Sep.3 2016-->
+<!-- html page of adding a new project -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>OpenMind</title>
+
+	<!-- jquery -->
+	<script type="text/javascript" src="static/js/3rd/jquery.js"></script>
+	
+	<!-- bootstrap -->
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- bootstrap-material-design -->
+	<link rel="stylesheet" type="text/css" href="static/css/3rd/bootstrap-material-design.css">
+    <script type="text/javascript" src="static/js/3rd/material.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="static/css/3rd/ripples.min.css">
+  	<script type="text/javascript" src="static/js/3rd/ripples.min.js"></script>
+	
+	
+	<!-- fontawesome -->
+	<link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="static/css/global.css">
+	<script type="text/javascript" src="static/js/cookie.js"></script>
+	<script type="text/javascript" src="static/js/global.js"></script>
+	<script type="text/javascript" src="static/js/post.js"></script>
+	<script type="text/javascript" src="static/js/newproj.js"></script>
+	<link rel="stylesheet" href="static/css/newproj.css">
+
+</head>
+<body>
+	<!-- 导航栏 -->
+	<nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)"><img src="static/res/image/openmind-icon.png" alt="openmind-icon"></a>
+
+            </div>
+
+            <div class="warning-tips">
+                <a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
+            </div>
+
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
+                  <li><a href="/home">首页</a></li>
+                  <li><a href="/ownproj">管理项目</a></li>
+                  <li class="active"><a href="javascript:void(0)">发布项目</a></li>
+                  <li><a href="/message">消息</a></li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                      <div class="form-group is-empty">
+                        <input type="text" class="form-control col-md-8" placeholder="Search">
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" data-target="#" class="dropdown-toggle" id="navbar-username" data-toggle="dropdown" aria-expanded="false"></a>
+                        <ul class="dropdown-menu">
+                            <li id="active-degree-btn"><a href="/activedegree">活跃记录</a></li>
+                            <li id="edit-perinfo-btn"><a href="javascript:void(0)">修改个人信息</a></li>
+                            <li class="divider"></li>
+                            <li id="logout-btn"><a href="javascript:void(0)">注销</a></li>
+                          </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <a href="/login" class="btn btn-raised btn-primary" id="navbar-login-btn">登录</a>
+        </div>
+    </nav>
+
+    <article class="container">
+    	<div class="project-form-container well">
+			<div class="title-wrapper">
+				发布项目
+			</div>
+			<div class="project-form-container">
+	    		<div class="form-group is-empty">
+		            <label class="control-label" for="inputDefault">项目名称</label>
+		            <input type="text" class="form-control" maxlength="40" id="name-input">
+	          	</div>
+				
+				<div class="labels-input-container">
+					<div class="title">添加标签</div>
+					<ul class="labels-container">
+					</ul>
+					<div class="label-input-wrapper form-group is-empty">
+					    <label class="control-label" for="inputDefault">标签</label>
+					    <input id="label-input" type="text" class="form-control" maxlength="16">
+				    </div>
+					<div class="clearfix">
+						<button id="label-confirm-btn" type="submit" class="btn btn-primary">确定
+						</button>
+					</div>
+				    
+				</div>
+
+				<div class="links-input-container">
+					<div class="title">链接</div>
+					<ul class="links-container">
+					</ul>
+					
+
+					<div class="links-input-wrapper clearfix">
+						<div class="form-group is-empty remark-input-wrapper">
+					            	<label class="control-label" for="inputDefault">备注</label>
+					            	<input class="form-control" id="remark-input" type="text" maxlength="16">
+					           </div>
+
+					           <div class="form-group is-empty url-input-wrapper">
+					            	<label class="control-label" for="inputDefault">链接</label>
+					            	<input class="form-control" id="url-input" type="text">
+					           </div>
+
+						<div class="clearfix">
+							<button id="link-confirm-btn" type="submit" class="btn btn-primary">确定
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group is-empty">
+	                <label for="textArea" class="control-label">项目描述</label>
+	                <textarea class="form-control" rows="3" id="intro-input" maxlength="2500"></textarea>
+	                <span class="help-block">不超过2500字</span>
+	            </div>
+
+	            <div class="file-input-container">
+	            	<div class="title">
+	            		上传文件
+	            	</div>
+
+	            	<div class="clearfix">
+		            	<ul class="file-catalog breadcrumb" >
+						</ul>
+					</div>
+					<div class="file-btn-group-container clearfix">
+						<div class="file-btn-group">
+								<button id="new-directory-btn" type="submit" class="btn btn-primary">新增文件夹
+								</button>
+								<button id="new-file-btn" type="submit" class="btn btn-primary">新增文件
+								</button>
+						</div>
+					</div>
+	            	<ul class="file-list">
+	            		<!-- <li class="file-item">
+	            			<span class="filename">123.jpg<span>
+	            		</li>
+	            		<li class="file-item">
+	            			123123.asdf
+	            		</li> -->
+	            	</ul>
+	            </div>
+	            
+	            <div class="publish-btn-wrapper">
+					<a id="publish-btn" href="javascript:void(0)" class="btn btn-raised btn-primary">发布</a>
+				</div>
+			</div>
+
+			
+		</div>
+
+    	<div class="modal new-directory-dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close close-btn" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title">新建文件夹</h4>
+                </div>
+                <div class="modal-body">
+                  	<div class="form-group is-empty">
+					    <label class="control-label" for="inputDefault">文件夹名</label>
+					    <input id="directory-name-input" type="text" class="form-control" maxlength="10">
+				    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default close-btn" data-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-primary confirm-btn">确定</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal new-file-dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close close-btn" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title">上传文件</h4>
+                </div>
+                <div class="modal-body">
+	                <div class="form-group is-empty">
+			            <label class="control-label" for="inputDefault">文件名称</label>
+			            <input type="text" id="file-name-input" class="form-control" maxlength="15">
+		          	</div>
+                  	<div class="form-group is-empty is-fileinput">
+		                <label for="inputFile" class="control-label">文件(文本文件，请上传UTF-8编码格式)</label>
+
+		                <div class="">
+		                  <input type="text" readonly="" class="form-control" placeholder="Browse...">
+		                  <input id="file-input" type="file" multiple="true">
+		                </div>
+              		</div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default close-btn" data-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-primary confirm-btn">确定</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- 低栏部分 -->
+	<footer>
+		<div class="bottom-name">
+		<a href="/index">OpenMind</a></div>
+		<div class="bottom-remark">2016 SouthEast University</div>
+	</footer>
+
+</body>
+<script type="text/javascript">
+   $(function() {
+     $.material.init();
+   });
+</script>
+</html>

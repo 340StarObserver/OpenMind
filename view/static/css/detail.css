@@ -117,6 +117,19 @@
 	background-color: rgba(153,153,153,.8);
 }
 
+.file-item-name::before{
+	font-family: "FontAwesome";
+	margin-right: 5px;
+}
+
+.file-item-name.file::before{
+	content: '\f0c5';
+}
+
+.file-item-name.directory::before{
+	content: '\f07b';
+}
+
 .comment-item{
 	margin-bottom: 20px;
 	padding-bottom: 10px;
@@ -131,7 +144,7 @@
 
 .title-left{
 	float: left;
-	width: 70px;
+	width: 4em;
 }
 
 .title-left>img{

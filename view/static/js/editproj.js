@@ -4,88 +4,6 @@ var pointer = tree.root_node;
 var proj_id,
 	files=[];
 
-var example = {
-	"_id" : 1,
-	"proj_name" : "Bilibili guichu",
-	"own_usr" : "LvYang",
-	"own_name" : "吕神",
-	"own_head" : "0",
-	"pub_time" : 1445599887,
-	"labels" : ['123', '123'],
-	"links" : [
-		{"address": "https://github.com/bobxwu/", "description": "github仓库"},
-		{"address": "https://github.com/bobxwu/", "description": "github仓库"}
-	],
-	'introduction' : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\r\naaaaaaaa",
-	'shares':[{
-		'name': 'docs/a.jpg','time':'1','url':'http://openmind.oss-cn-shanghai.aliyuncs.com/userimages/20160828/14723669411n62i20r.jpg'
-		},
-		{
-			'name': 'docs/new/a.pdf','time':'1','url':'http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/1473056696LvYangshehuishijian.pdf'
-		},{
-			'name': 'a.txt','time':'1','url':'http://openmind.oss-cn-shanghai.aliyuncs.com/sharedfiles/20160905/git-branch.txt'
-		}
-	],
-
-	'comments' :  [
-	{  
-                        "id"        : "akfja3",  
-                        "parent_id" : "0",
-                        "send_usr"  : "seven",  
-                        "send_name" : "LvYang",  
-                        "send_head" : '0',  
-                    
-                        "recv_usr"  : "xxxx",  
-                        "recv_name" : "yyyy",  
-                    
-                        "time"      : 1445599887,  
-                        "content"   : "this is the first comment"  
-    },
-    {  
-                        "id"        : "fa3gad",  
-                        "parent_id" : "akfja3",  
-                    
-                        "send_usr"  : "leo",  
-                        "send_name" : "shangjun",  
-                        "send_head" : '0',  
-                    
-                        "recv_usr"  : "xxxx",  
-                        "recv_name" : "yyyy",  
-                    
-                        "time"      : 1446633221,  
-                        "content"   : "this is the second comment"  
-    },
-    {  
-                        "id"        : "fad",  
-                        "parent_id" : "0",  
-                    
-                        "send_usr"  : "dddd",  
-                        "send_name" : "shangjun",  
-                        "send_head" : '0',  
-                    
-                        "recv_usr"  : "xxxx",  
-                        "recv_name" : "yyyy",  
-                    
-                        "time"      : 1446633221,  
-                        "content"   : "this is a great idea."  
-    }, 
-    {  
-                        "id"        : "faddddd",  
-                        "parent_id" : "fad",  
-                    
-                        "send_usr"  : "dddd",  
-                        "send_name" : "3d",  
-                        "send_head" : '0',  
-                    
-                        "recv_usr"  : "dddd",  
-                        "recv_name" : "shangjun",  
-                    
-                        "time"      : 1446633221,  
-                        "content"   : "ddd hello "  
-    }
-	]
-};
-
 $(document).ready(function() {
 	var params = parseURL( location.href )["params"];
 	proj_id = params["id"];
@@ -115,7 +33,7 @@ $(document).ready(function() {
 	});
 
 	$(document).on('change', '#file-input', function(event) {
-		console.log("file input change");
+		
 		var file = $("#file-input")[0].files[0];
 		if( file == null){
 			$(this).addClass('has-error');
@@ -132,7 +50,7 @@ $(document).ready(function() {
 		var filename = $("#file-name-input").val();
 		//检查文件是否为空
 		var file = $("#file-input")[0].files[0] ;	
-		console.log(file);
+	
 
 		if( file == null){
 			showWarningTips("请选择文件");
@@ -146,7 +64,6 @@ $(document).ready(function() {
 
 		//检查文件名是否合法
 		if( !checkFileName(filename)){
-			console.log( filename );
 			showWarningTips('文件名不合法，只能包含中文，英文数字和_，且不能以.开头或结尾')
 			return false;
 		}
@@ -184,7 +101,6 @@ $(document).ready(function() {
 		
 		var index = $(this).parent().index();
 		var path ='';
-		console.log("index "+index);
 
 		for (var i = 1; i <= index; i++) {
 			path += '/'+ ( $(".file-catalog>li").eq(i).text() );
@@ -196,11 +112,8 @@ $(document).ready(function() {
 
 	$(document).on('click', '.file-item-name', function(event) {
 		var item_name = $(this).text();
-		// console.log("pointer.path" + pointer.path );
 		var path = pointer.path +"/"+ item_name; // /docs/image
 		path = path.substring(1);
-
-		console.log( "path"+path );
 		changeFileConstruct(path);
 
 	});
@@ -221,9 +134,6 @@ $(document).ready(function() {
 
 		files_name_string = files_name_string.substring(0, files_name_string.length-1);
 		
-		console.log( files_name_string );
-		console.log( files_array );
-
 		var token = getCookie("token");
 
 		editProjPost( proj_id, files_name_string, files_array, token);
@@ -268,15 +178,11 @@ function addFile(filename, file){
 	tree.add(path, true, timestamp );
 
 	//添加到内存
-	console.log(files );
 
 	files.push({
 		"name" : path,
 		"file" : file
 	});
-
-	console.log( files );
-	
 
 }
 
@@ -284,7 +190,6 @@ function addDirectory(name){
 
 	//文件夹名字不为空
 	var name = $("#directory-name-input").val() ;
-	console.log(name);
 	if( name == '' ){
 		showWarningTips("请输入文件夹名字");
 		return false;
@@ -312,7 +217,6 @@ function addDirectory(name){
 
 	//更新目录结构
 	showFileList();
-	console.log( tree.root_node );
 	$('.modal').fadeOut('fast');
 }
 
@@ -330,8 +234,7 @@ function showFileList(){
 		else{// 如果是文件
 			html += '<li class="file-item"><span class="file-item-name file">'+ name +'</span><span class="close">×</span></li>'
 		}
-		
-		console.log("add item: "+name);
+
 	}
 
 	$(".file-list").html(html);
@@ -340,22 +243,18 @@ function showFileList(){
 
 function changeFileConstruct(path){
 	var node = tree.find(path);   //   docs/image
-	console.log ( "changeFileConstrut" + path );
 
 	if( node != null){
 		if( node.leaf == true){
 			//是文件
-			console.log("is a file");
 			return;
 		}
 
-		console.log("是文件夹");
 
 		pointer = node;
 
 		changeCatalog(path);
 		showFileList();
-		console.log(pointer);
 
 	}else{
 		showWarningTips("改变目录结构出错");
@@ -375,7 +274,6 @@ function changeCatalog(path){
 		return;
 	}
 
-	console.log("change catalog: "+path);
 	var paths = path.split("/");
 
 	var n = paths.length;

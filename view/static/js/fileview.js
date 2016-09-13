@@ -8,8 +8,6 @@ $(document).ready(function() {
 	fileUrl = params["fileUrl"];
 	filename = decodeURI( params["filename"] );
 	
-	console.log(filename);
-
 	if( fileUrl == null){
 
 		alert("没有找到文件");
@@ -18,14 +16,12 @@ $(document).ready(function() {
 
 	suffix = getSuffix( fileUrl );
 
-	console.log("filename "+filename);
-	console.log("suffix "+suffix);
-
 	$('.file-name-container').text( filename );
 
 	if( suffix== 'jpg' || suffix=='png' ){
 		//图片文件
 		$('.file-container').html('<img src="'+ fileUrl +'" alt="'+ filename +'">');
+
 	}
 	else if( suffix=='pdf'){
 		$('.file-container').html(
@@ -38,16 +34,22 @@ $(document).ready(function() {
 		
 		fileGet(fileUrl);
 	}
+	else{
+		location.href = fileUrl;
+	}
 
 });
 
 function dealFileReturn(data){
 	
+	data = data.replace( /</g, "&lt;");
+	data = data.replace( />/g, "&gt;");
+
 	if( suffix == 'md'){
 		dealMDReturn(data);
 	}
 	else{
-		$(".file-container").html(data);
+		$(".file-container").html( data  );
 	}
 }
 

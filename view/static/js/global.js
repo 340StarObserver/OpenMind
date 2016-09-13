@@ -129,10 +129,12 @@ function parseURL(url) {
 	}; 
 }
 
+//清除input
 function clearInput(selector){
 	$(selector).val('');
 }
 
+//文件前缀树结构
 function Tree(){
 	this.root_node = new Node();
 
@@ -244,6 +246,7 @@ function Tree(){
 	}
 }
 
+//文件前缀树结点
 function Node(){
 	
 	this.child = new Array();
@@ -252,6 +255,7 @@ function Node(){
 	this.url="";
 }
 
+//url获取文件后缀
 function getSuffix(url){
 
 	var urls = url.split('/');
@@ -259,4 +263,36 @@ function getSuffix(url){
 	var names = filename.split('.');
 	var suffix = names[ names.length-1 ];
 	return suffix;
+}
+
+//处理登录请求返回函数
+function dealLoginReturn(data, username){
+
+	if(data["result"] == false){
+		var errorReason;
+		switch( data['reason'] ){
+			case 1:
+				errorReason = "用户名或密码格式错误";
+				break;
+			case 2:
+				errorReason = "用户名或密码错误";
+				break;
+		default:
+			errorReason = "信息错误";
+	    }
+
+		//显示错误信息
+		showWarningTips(errorReason);
+	}
+	else{
+		// 保存cookie, 期限为7天
+		setCookie("username", username, 7);
+		setCookie("realname", data["realname"], 7);
+		setCookie("department", data["department"], 7);
+		setCookie("signup_time", data["signup_time"], 7);
+		setCookie("token", data["token"], 7);
+
+		//跳转页面
+		location.href="/home";
+	}
 }

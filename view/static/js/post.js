@@ -1,3 +1,5 @@
+//all post request
+
 //1. 注册的post请求
 function signupPost(username, password, name, college){
 	
@@ -159,7 +161,7 @@ function editProjPost(id, files_name_string, files, token){
 	    
 	  },
 	  success: function(data, textStatus, xhr) {
-	    dealEditProjReturn();
+	    dealEditProjReturn(data);
 
 	  },
 	  error: function(xhr, textStatus, errorThrown) {

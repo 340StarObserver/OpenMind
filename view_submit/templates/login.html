@@ -1,0 +1,156 @@
+<!-- Created by WuXiaobao on Aug.28 2016-->
+<!-- html page of login -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>OpenMind</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <!-- jquery -->
+	<script type="text/javascript" src="static/js/3rd/jquery.js"></script>
+	
+	<!-- bootstrap-material-design -->
+	<link rel="stylesheet" type="text/css" href="static/css/3rd/bootstrap-material-design.css">
+    <script type="text/javascript" src="static/js/3rd/material.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="static/css/3rd/ripples.min.css">
+  	<script type="text/javascript" src="static/js/3rd/ripples.min.js"></script>
+
+	<link rel="stylesheet" href="static/css/global.css">
+	<link rel="stylesheet" href="static/css/login.css">
+	
+	<script type="text/javascript" src="static/js/md5.js"></script>
+	<script type="text/javascript" src="static/js/cookie.js"></script>
+  	<script type="text/javascript" src="static/js/global.js"></script>
+  	<script type="text/javascript" src="static/js/post.js"></script>
+	<script type="text/javascript" src="static/js/login.js"></script>
+	
+</head>
+
+<body>
+	<!-- 导航栏 -->
+	<nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)"><img src="static/res/image/openmind-icon.png" alt="openmind-icon"></a>
+            </div>
+
+            <div class="warning-tips">
+                <a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
+            </div>
+            
+            <a href="javascript:void(0)" class="btn btn-raised btn-primary" id="signup-toggle-btn">注册</a>
+
+        </div>
+    </nav>
+	
+	<!-- 登录框和注册框部分 -->
+	<article class="container">
+		<div class="login-box well">
+		 	<div class="title">
+				登录 OpenMind
+			</div>
+
+          <form class="form-horizontal">
+          	<div class="form-group label-floating">
+			  <label class="control-label" for="focusedInput1">用户名</label>
+			  <input id="login-username-input" class="form-control" type="text" maxlength="20">
+			</div>
+
+			<div class="form-group label-floating">
+			  <label class="control-label" for="focusedInput1">密码</label>
+			  <input id="login-password-input" class="form-control" type="password" maxlength="20">
+			</div>
+          </form>
+
+          <div class="login-btn-wrapper"><a href="javascript:void(0)" class="btn btn-raised btn-primary" id="login-btn">登录</a>
+          </div>
+        </div>
+
+		<div class="signup-box well">
+			<div class="title">
+				注册 OpenMind
+			</div>
+
+			<form class="form-horizontal signup-form">
+
+          	<div class="form-group label-floating">
+			  <label class="control-label" for="focusedInput1">用户名</label>
+			  <input id="signup-username-input" class="form-control" type="text" maxlength="15">
+			</div>
+
+			<div class="form-group label-floating">
+			  <label class="control-label" for="focusedInput1">密码</label>
+			  <input id="signup-password-input" class="form-control" type="password" maxlength="16">
+			</div>
+
+			<div class="form-group label-floating">
+			  <label class="control-label" for="focusedInput1">确认密码</label>
+			  <input id="signup-confirm-password-input" class="form-control" type="password" maxlength="16">
+			</div>
+			
+			<div class="form-group label-floating">
+			  <label class="control-label" for="focusedInput1">姓名</label>
+			  <input id="signup-name-input" class="form-control" type="text" maxlength="5">
+			</div>
+			<div class="form-group">
+                <label for="select" class="control-label">院系</label>
+	
+                <div>
+                  <select id="signup-college-select" class="form-control">
+                  	<option>建筑学院</option>
+					<option>机械工程学院</option>
+					<option>能源与环境学院</option>
+					<option>信息科学与工程学院</option>
+					<option>土木工程学院</option>
+					<option>电子科学与工程学院</option>
+					<option>数学系</option>
+					<option>自动化学院</option>
+					<option>计算机科学与工程学院</option>
+					<option>物理系</option>
+					<option>生物科学与医学工程学院</option>
+					<option>材料科学与工程学院</option>
+					<option>人文学院</option>
+					<option>经济管理学院</option>
+					<option>电气工程学院</option>
+					<option>外国语学院</option>
+					<option>化学化工学院</option>
+					<option>交通学院</option>
+					<option>仪器科学与工程学院</option>
+					<option>艺术学院</option>
+					<option>法学院</option>
+					<option>医学院</option>
+					<option>公共卫生学院</option>
+					<option>吴健雄学院</option>
+					<option>软件学院</option>
+                  </select>
+                </div>
+             </div>
+			
+          </form>
+
+          <div class="signup-btn-wrapper"><a href="javascript:void(0)" class="btn btn-raised btn-primary" id="signup-btn">注册</a>
+          </div>
+
+		</div>
+	</article>
+
+	
+	<!-- 低栏部分 -->
+	<footer>
+		<div class="bottom-name">
+		<a href="/index">OpenMind</a></div>
+		<div class="bottom-remark">2016 SouthEast University</div>
+	</footer>
+</body>
+<script>
+   $(function() {
+     $.material.init();
+   });
+</script>
+</html>

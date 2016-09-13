@@ -1,0 +1,184 @@
+<!-- Created by WuXiaobao on Aug.27 2016-->
+<!-- html page of the deail infomation about each project -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>OpenMind</title>
+	
+	<!-- jquery -->
+	<script type="text/javascript" src="static/js/3rd/jquery.js"></script>
+	
+	<!-- bootstrap -->
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- bootstrap-material-design -->
+	<link rel="stylesheet" type="text/css" href="static/css/3rd/bootstrap-material-design.css">
+    <script type="text/javascript" src="static/js/3rd/material.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="static/css/3rd/ripples.min.css">
+  	<script type="text/javascript" src="static/js/3rd/ripples.min.js"></script>
+	<link rel="stylesheet" href="static/css/global.css">
+	<link rel="stylesheet" href="static/css/detail.css">
+	
+	<!-- fontawesome -->
+	<link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+	<script type="text/javascript" src="static/js/cookie.js"></script>
+	<script type="text/javascript" src="static/js/global.js"></script>
+	<script type="text/javascript" src="static/js/post.js"></script>
+	<script type="text/javascript" src="static/js/detail.js"></script>
+</head>
+<body>
+	<!-- 导航栏 -->
+	 <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)"><img src="static/res/image/openmind-icon.png" alt="openmind-icon"></a>
+
+            </div>
+
+            <div class="warning-tips">
+                <a href="javascript:void(0)" class="btn btn-raised btn-warning"></a>
+            </div>
+
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="/home">首页</a></li>
+                  <li><a href="/ownproj">管理项目</a></li>
+                  <li><a href="/newproj">发布项目</a></li>
+                  <li><a href="/message">消息</a></li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                      <div class="form-group is-empty">
+                        <input type="text" class="form-control col-md-8" placeholder="Search">
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" data-target="#" class="dropdown-toggle" id="navbar-username" data-toggle="dropdown" aria-expanded="false"></a>
+                        <ul class="dropdown-menu">
+                            <li id="active-degree-btn"><a href="/activedegree">活跃记录</a></li>
+                            <li id="edit-perinfo-btn"><a href="javascript:void(0)">修改个人信息</a></li>
+                            <li class="divider"></li>
+                            <li id="logout-btn"><a href="javascript:void(0)">注销</a></li>
+                          </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <a href="/login" class="btn btn-raised btn-primary" id="navbar-login-btn">登录</a>
+        </div>
+    </nav>
+
+    <article class="container">
+    	<div class="project-container well">
+    		
+	    	<div class="project-title-wrapper  clearfix">
+				<div class="title-top clearfix">
+		    		<div class="project-name-wrapper">
+			    		  <i class="fa fa-th-list"></i>
+			    		  <span class="project-name">
+			    		  </span>
+		    		  </div>
+		    		
+		    		<!-- <div class="vote-wrapper">
+		    		  	<button id="vote-btn btn"><i class="fa fa-thumbs-up" aria-hidden="true">Like</i>
+		    		  	</button>
+		    		  	<span class="vote-number">111</span>
+		    		 </div> -->
+				</div>
+	    		 <div class="title-bottom clearfix">
+	    		 	<div class="project-label-wrapper">
+	    		 	</div>
+					<div class="project-pub-time">
+					</div>
+	    		 </div>
+	    	</div>
+			
+			<div class="project-detail-container">
+				
+		    	<div class="project-intro-wrapper">
+		    		<div class="title-wrapper">
+		    			<span>简介</span>
+		    		</div>
+		    		<div class="project-intro-container">
+		    			
+		    		</div>
+		    	</div>
+
+		    	<div class="project-links-wrapper">
+		    		<div class="title-wrapper">
+		    			<span>链接</span>
+		    		</div>
+
+		    		<div class="project-links-container">
+	    
+	    		 	</div>
+
+		    	</div>
+
+			    <div class="project-files-wrapper">
+			    	<div class="title-wrapper">
+			    			<span>所有文件</span>
+			    	</div>
+
+			    	<div class="project-files-container">
+			            <div class="clearfix">
+				            <ul class="file-catalog breadcrumb" >
+							</ul>
+						</div>
+			            <ul class="file-list">
+			            		
+			            </ul>
+		            </div>
+		    	</div>
+	    	</div>
+	    </div>
+
+		<div class="comment-container well">
+			<div class="title-wrapper">
+				<span>评论</span>
+			</div>
+			<div class="comment-list-container">
+				<ul class="comment-list">
+				</ul>
+			</div>
+			<div class="comment-input-container">
+				<div class="comment-input-wrapper form-group is-empty">
+					<label for="textArea" class="control-label">发表评论
+					</label>
+					<textarea id="comment-input" class="form-control" maxlength="150" rows="3"></textarea>
+					<span class="help-block">不超过150字</span>
+				</div>
+				<div class="comment-btn-wrapper clearfix">
+					<a class="btn btn-raised btn-primary" id="comment-publish-btn">发表<div class="ripple-container"></div></a>
+				</div>
+			</div>
+			<div class="login-comment-btn">
+				<a href="/login" class="btn btn-raised btn-primary">登录后评论</a>
+			</div>
+		</div>
+    </article>
+
+    <!-- 低栏部分 -->
+	<footer>
+		<div class="bottom-name">
+		<a href="/index">OpenMind</a></div>
+		<div class="bottom-remark">2016 SouthEast University</div>
+	</footer>
+
+</body>
+<script type="text/javascript">
+   $(function() {
+     $.material.init();
+   });
+</script>
+</html>

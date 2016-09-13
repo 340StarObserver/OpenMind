@@ -1,0 +1,178 @@
+/* Created by WuXiaobao on Aug.26 2016
+   css for all pages */
+
+body{
+	margin: 0;
+	font-family: 
+		"PingFang SC", "Microsoft YaHei", 
+		Helvetica, Arial, "Hiragino Sans GB", 
+		"Source Han Sans CN", sans-serif;
+	min-width: 300px;
+}
+
+article{
+	margin: 100px auto;
+	max-width: 850px;
+}
+
+nav.navbar.navbar-default{
+	background-color: #263238;
+	padding: 0 15px;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 100;
+	font-size: 1em;
+}
+
+
+.navbar .navbar-brand{
+	padding: 0;
+	margin-right: 20px;
+}
+
+.navbar.shadow-bottom{
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,.50);
+}
+
+.navbar .navbar-form{
+	margin: 0 auto;
+}
+
+.navbar .navbar-nav .dropdown .dropdown-toggle:after{
+	display: none;
+}
+
+#navbar-login-btn{
+	float: right;
+	
+}
+
+.project-name{
+	font-size: 1.5em;
+	color: #336699;
+	cursor: pointer;
+}
+
+.warning-tips{
+	display: none;
+	position: fixed;
+	top: 10px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	z-index: 9999;
+	pointer-events: none;
+}
+
+.clearfix::after{
+	content: "." ; 
+	display: block ;
+	height: 0 ;
+	clear: both ;
+	visibility: hidden;
+}
+
+#newproj-btn>a::before{
+	content: "\f067";
+}
+
+.tooltip{
+	display: none;
+	position: absolute;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: white;
+	background-color: rgba(153,153,153,.8); 
+}
+
+.title-wrapper{
+	font-size: 1.8em;
+	margin-bottom: 10px;
+}
+
+.title-wrapper::before,
+#newproj-btn>a::before{
+	font-family: "FontAwesome";
+}
+
+.modal-dialog{
+	margin-top: 100px;
+}
+
+.file-list>li{
+	padding: 8px;
+	color: #4078c0;
+}
+
+.file-list>li:nth-child(odd){
+	background-color: #deeffa;
+	
+}
+
+.file-list>li:nth-child(even){
+	background-color: #fafafa;
+}
+
+.catalog-root{
+	padding: 5px 10px;
+}
+
+.catalog-root,
+.catalog-item-name,
+.file-item-name.directory{
+	cursor: pointer;
+}
+
+.catalog-root:hover,
+.catalog-item-name:hover,
+.file-item-name.directory:hover{
+	opacity: .5;
+}
+
+a{
+/*a,a:hover{*/
+	text-decoration: none;
+}
+
+li{
+	list-style: none;
+}
+
+ul{
+	padding-left: 0;
+}
+
+footer{
+	width: 100%;
+	margin-top: 300px;
+	font-size: 15px;
+	text-align: center;
+}
+
+.bottom-name{
+	color: teal;
+	margin-bottom: 10px;
+}
+
+@media screen and (max-width: 400px) {
+	body{
+		font-size: 8px;
+	}
+
+	.navbar{
+		padding: 0;
+		margin-bottom: 0;
+	}
+
+	.panel-body{
+		padding: 0;
+	}
+
+	article.container{
+		margin: 50px 0 0;
+		padding: 0;
+		width: 100%;
+	}
+}

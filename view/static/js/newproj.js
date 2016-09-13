@@ -1,8 +1,7 @@
-// var token = getCookie('token');
-// console.log( token );
-// if( token == null){
-// 	location.href = 'home.html';
-// }
+var username = getCookie('username');
+if( username == null){
+	location.href = 'home.html';
+}
 
 var tree = new Tree();
 var pointer = tree.root_node; //指向当前节点
@@ -36,7 +35,6 @@ $(document).ready(function() {
 	});
 
 	$(document).on('change', '#file-input', function(event) {
-		console.log("file input change");
 		var file = $("#file-input")[0].files[0];
 		if( file == null){
 			$(this).addClass('has-error');
@@ -52,9 +50,7 @@ $(document).ready(function() {
 	$(document).on('click', '.modal.new-file-dialog .confirm-btn', function(event) {
 		var filename = $("#file-name-input").val();
 		//检查文件是否为空
-		var file = $("#file-input")[0].files[0] ;	
-		console.log(file);
-
+		var file = $("#file-input")[0].files[0] ;
 		if( file == null){
 			showWarningTips("请选择文件");
 			return false;
@@ -67,7 +63,6 @@ $(document).ready(function() {
 
 		//检查文件名是否合法
 		if( !checkFileName(filename)){
-			console.log( filename );
 			showWarningTips('文件名不合法，只能包含中文，英文数字和_，且不能以.开头或结尾')
 			return false;
 		}
@@ -94,8 +89,6 @@ $(document).ready(function() {
 
 		$('.modal').fadeOut('fast');
 		showFileList();
-		console.log( tree.root_node );
-		console.log( pointer.child );
 	});
 
 	$(document).on('click', '.catalog-root', function(event) {
@@ -106,7 +99,6 @@ $(document).ready(function() {
 		
 		var index = $(this).parent().index();
 		var path ='';
-		console.log("index "+index);
 
 		for (var i = 1; i <= index; i++) {
 			path += '/'+ ( $(".file-catalog>li").eq(i).text() );
@@ -118,11 +110,8 @@ $(document).ready(function() {
 
 	$(document).on('click', '.file-item-name', function(event) {
 		var item_name = $(this).text();
-		// console.log("pointer.path" + pointer.path );
 		var path = pointer.path +"/"+ item_name; // /docs/image
 		path = path.substring(1);
-
-		console.log( "path"+path );
 		changeFileConstruct(path);
 
 	});
@@ -159,7 +148,6 @@ $(document).ready(function() {
 		var linkIndex = parent.index();
 		parent.remove();
 		links.splice(linkIndex, 1);
-		console.log(links);
 	});
 
 	$(document).on('mouseover', '.project-label,.project-link,.file-item', function(event) {
@@ -178,21 +166,17 @@ $(document).ready(function() {
 
 		//从数组中删除
 		labels.splice(labelIndex, 1);
-		console.log(labels);
 
 	});
 
 	
 	$(document).on('click', '.file-item>.close', function(event) {
-		console.log("delete file or directory");
+		
 		var item_name = $(this).siblings('.file-item-name').text();
 		var path = pointer.path +"/"+ item_name; // /docs/image
 		path = path.substring(1, path.length);
 
 		tree.delete(path);
-		console.log( tree.root_node );
-
-		console.log( "path"+path );
 		showFileList();
 
 		return false;
@@ -238,14 +222,6 @@ $(document).ready(function() {
 		}
 
 		var links_jsonstring = JSON.stringify( links );
-		
-		console.log( 'name' + name);
-		console.log('intro' + intro);
-		console.log("links "+links_jsonstring);
-		console.log("labels_string "+labels_string);
-		console.log("files_string "+ files_name_string );
-		console.log("files_array" + files_array );
-
 		newProjectPost(name, files_name_string, files_array, labels_string, links_jsonstring, intro, token);
 
 	});
@@ -256,24 +232,15 @@ function addFile(filename, file){
 	var path = pointer.path+'/'+filename;
 	path = path.substring(1, path.length);
 
-	console.log(path);
-
 	//添加到树结构
 	var timestamp = new Date().getTime();
 	tree.add(path, true, timestamp );
 
-	console.log( file );
-
 	//添加到内存
-	console.log(files );
-
 	files.push({
 		"name" : path,
 		"file" : file
 	});
-
-	console.log( files );
-	console.log( files.length );
 
 }
 
@@ -281,7 +248,6 @@ function addDirectory(name){
 
 	//文件夹名字不为空
 	var name = $("#directory-name-input").val() ;
-	console.log(name);
 	if( name == '' ){
 		showWarningTips("请输入文件夹名字");
 		return false;
@@ -309,7 +275,6 @@ function addDirectory(name){
 
 	//更新目录结构
 	showFileList();
-	console.log( tree.root_node );
 	$('.modal').fadeOut('fast');
 }
 
@@ -328,7 +293,6 @@ function showFileList(){
 			html += '<li class="file-item"><span class="file-item-name file">'+ name +'</span><span class="close">×</span></li>'
 		}
 		
-		console.log("add item: "+name);
 	}
 
 	$(".file-list").html(html);
@@ -337,22 +301,17 @@ function showFileList(){
 
 function changeFileConstruct(path){
 	var node = tree.find(path);   //   docs/image
-	console.log ( "changeFileConstrut" + path );
 
 	if( node != null){
 		if( node.leaf == true){
 			//是文件
-			console.log("is a file");
 			return;
 		}
-
-		console.log("是文件夹");
 
 		pointer = node;
 
 		changeCatalog(path);
 		showFileList();
-		console.log(pointer);
 
 	}else{
 		showWarningTips("改变目录结构出错");
@@ -372,7 +331,6 @@ function changeCatalog(path){
 		return;
 	}
 
-	console.log("change catalog: "+path);
 	var paths = path.split("/");
 
 	var n = paths.length;
@@ -389,11 +347,13 @@ function changeCatalog(path){
 	$(".file-catalog>li:last-child").addClass('active');
 }
 
+//add html item of a label
 function addLabelItem(label){
 	var html = '<li class="project-label">'+ label +'<span class="close">×</span></li>';
 	$('.labels-container').append(html);
 }
 
+// add html item of a link
 function addLinkItem(remark, url){
 	var html = '<li class="project-link">'+
 							'<span class="link-remark">'+ remark +'</span>'+
@@ -403,10 +363,11 @@ function addLinkItem(remark, url){
 	$('.links-container').append(html);
 }
 
+//deal return of new project post
 function dealNewProjectReturn(data){
 	if( data['result'] == true ){
 		setCookie("token", data['token'], 7);
-
+		location.href = '/home';
 	}else{
 		var errorReason;
 		switch( data['reason'] ){
@@ -425,6 +386,7 @@ function dealNewProjectReturn(data){
 	}
 }
 
+// add labels function
 function addLabel(){
 	var label = $("#label-input").val();
 		
@@ -450,6 +412,7 @@ function addLabel(){
 		$('#label-input').focus();
 }
 
+//add links function
 function addLink(){
 
 	var remark = $("#remark-input").val();
@@ -481,6 +444,5 @@ function addLink(){
 	});
 
 	addLinkItem(remark, url);
-	console.log( links.length );
 	$('#remark-input').focus();
 }

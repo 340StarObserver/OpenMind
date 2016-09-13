@@ -1,0 +1,18 @@
+/* Created by WuXiaobao on Sep.9 2016
+   css for page of browsering some files */
+
+img{
+	display: block;
+	margin: auto;
+	max-width: 690px;
+}
+
+iframe{
+	width: 100%;
+	min-height: 800px;
+}
+
+.file-container{
+	word-break: break-all;
+	white-space: pre-wrap;
+}

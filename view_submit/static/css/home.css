@@ -1,0 +1,116 @@
+/* Created by WuXiaobao on Aug.28 2016
+   css for pages of home and voting projects*/
+
+.nav-list-item{
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.browse-title{
+	font-size: 2em;
+}
+
+.voting-project-toggle{
+	margin-left: 10px;
+}
+
+.voting-project-toggle>label{
+	font-size: 1em;
+}
+
+.project-list{
+	margin-top: 40px;
+}
+
+.project-list-item{
+	padding: 10px 5px;
+	margin-top: 40px;
+}
+
+.item-title-left{
+	float: left;
+}
+
+i.fa{
+	font-size: 1.8em;
+}
+
+.item-title-left>.fa{
+	margin-right: 5px;
+}
+
+.project-label{
+	margin-left: 5px;
+	background-color: #99cccc;
+	padding: 0 5px;
+	color: white;
+	font-size: 1em;
+}
+
+.item-title-right{
+	float: right;
+	color: #c2c2c2;
+}
+
+.brief-intro-wrapper{
+	margin-top: 10px;
+	padding: 5px 0;
+	border-top: .5px solid rgba(0,0,0,.5);
+	font-size: 1.2em;
+	font-weight: 400;
+}
+
+.brief-intro{
+	word-break: break-all;
+	white-space: pre-wrap;
+}
+
+.author-info{
+	float: left;
+	width: 4em;
+	color: #666;
+}
+
+.author-icon{
+	display: block;
+	width: 100%;
+	border-radius: 100%;
+}
+
+.author-name{
+	text-align: center;
+	font-size: .5em;
+}
+
+.brief-intro{
+	margin-left: 75px;
+}
+
+.vote-btn.btn.btn-default{
+	margin: 0;
+	font-size: 1.2em;
+	padding: 0 10px;
+	color: #336699;
+}
+
+.vote-btn::before{
+	font-family: "FontAwesome";
+	content: "\f087";
+}
+
+.vote-btn.disabled{
+	opacity: .3;
+}
+
+.vote-btn.voted::before{
+	content: "\f164";
+}
+
+.vote-number{
+	color: #336699;
+}
+
+.vote-number::after{
+	font-family: 'FontAwesome';
+	content: attr(data-unit);
+}

@@ -1,0 +1,54 @@
+/*Created by WuXiaobao on Aug.28 2016
+  css for page of login */
+
+.navbar{
+	/*padding: 5px 10px;*/
+}
+
+
+.nav-list{
+	float: left;
+}
+
+#signup-toggle-btn{
+	float: right;
+
+}
+
+.navbar-header img{
+	float: left;
+	display: block;
+}
+
+.navbar-header{
+	float: left;
+}
+
+article{
+	max-width:710px; 
+}
+
+.container .login-box.well,
+.container .signup-box.well{
+	padding: 15px 60px 80px;
+}
+
+.signup-box{
+	display: none;
+}
+
+.login-box>.title,
+.signup-box>.title{
+	font-size: 30px;
+	margin: 10px auto;
+}
+
+.form-group .form-control{
+	width: 80%;
+	max-width: 300px;
+}
+
+.login-btn-wrapper,
+.signup-btn-wrapper{
+	margin-top: 30px;
+}

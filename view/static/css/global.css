@@ -124,7 +124,7 @@ nav.navbar.navbar-default{
 
 .catalog-root:hover,
 .catalog-item-name:hover,
-.file-item-name.directory:hover{
+.file-item-name:hover{
 	opacity: .5;
 }
 
